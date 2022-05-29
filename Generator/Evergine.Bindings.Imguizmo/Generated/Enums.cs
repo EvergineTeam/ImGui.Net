@@ -1,3 +1,5 @@
+using Evergine.Mathematics;
+using Evergine.Bindings.Imgui;
 using System;
 
 namespace Evergine.Bindings.Imguizmo

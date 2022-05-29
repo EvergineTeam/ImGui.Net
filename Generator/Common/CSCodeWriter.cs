@@ -13,6 +13,8 @@ namespace Common
             {
                 using (StreamWriter file = File.CreateText(Path.Combine(outputPath, "Enums.cs")))
                 {
+                    file.WriteLine("using Evergine.Mathematics;");
+                    file.WriteLine("using Evergine.Bindings.Imgui;");
                     file.WriteLine("using System;\n");
                     file.WriteLine($"namespace Evergine.Bindings.{@namespace}");
                     file.WriteLine("{");
@@ -22,7 +24,7 @@ namespace Common
                         if (e.Type == EnumType.Bitmask)
                             file.WriteLine("\t[Flags]");
 
-                        file.WriteLine($"\tpublic enum {e.Name}");
+                        file.WriteLine($"\tpublic enum {e.FrienlyName}");
                         file.WriteLine("\t{");
 
                         if (!(e.Values.Exists(v => v.Value == 0)))
@@ -32,7 +34,7 @@ namespace Common
 
                         foreach (var member in e.Values)
                         {
-                            file.WriteLine($"\t\t{member.Name} = {member.Value},");
+                            file.WriteLine($"\t\t{member.FriendlyName} = {member.Value},");
                         }
 
                         file.WriteLine("\t}\n");
@@ -49,10 +51,44 @@ namespace Common
             {
                 using (StreamWriter file = File.CreateText(Path.Combine(outputPath, "Structs.cs")))
                 {
+                    file.WriteLine("using Evergine.Mathematics;");
+                    file.WriteLine("using Evergine.Bindings.Imgui;");
                     file.WriteLine("using System;");
                     file.WriteLine("using System.Runtime.InteropServices;\n");
                     file.WriteLine($"namespace Evergine.Bindings.{@namespace}");
                     file.WriteLine("{");
+
+                    foreach (var structure in spec.Structs)
+                    {
+                        file.WriteLine($"\tpublic unsafe partial struct {structure.Name}");
+                        file.WriteLine("\t{");
+
+                        foreach (var member in structure.Members)
+                        {
+                            string csType = Helpers.ConvertToCSharpType(member.Type, spec);
+
+                            if (member.Count > 0)
+                            {
+                                if (Helpers.SupportFixed(csType))
+                                {
+                                    file.WriteLine($"\t\tpublic fixed {csType} {member.Name}[{member.Count}];");
+                                }
+                                else
+                                {
+                                    for (int i = 0; i < member.Count; i++)
+                                    {
+                                        file.WriteLine($"\t\tpublic {csType} {member.Name}_{i};");
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                file.WriteLine($"\t\tpublic {csType} {member.Name};");
+                            }
+                        }
+
+                        file.WriteLine("\t}\n");
+                    }
 
                     file.WriteLine("}\n");
                 }
@@ -66,6 +102,7 @@ namespace Common
                 using (StreamWriter file = File.CreateText(Path.Combine(outputPath, "Funtions.cs")))
                 {
                     file.WriteLine("using Evergine.Mathematics;");
+                    file.WriteLine("using Evergine.Bindings.Imgui;");
                     file.WriteLine("using System;");
                     file.WriteLine("using System.Runtime.InteropServices;\n");
                     file.WriteLine($"namespace Evergine.Bindings.{@namespace}");

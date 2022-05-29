@@ -22,12 +22,12 @@ namespace Common
         {
             EnumDefinition newEnum = new EnumDefinition();
             newEnum.Name = t.Name;
+            newEnum.Type = t.Name.Contains("Flags") ? EnumType.Bitmask : EnumType.Enum;
             newEnum.FrienlyName = t.Name.EndsWith("_") ? t.Name.Substring(0, t.Name.Length - 1) : t.Name;
-            newEnum.Type = t.Name.Contains("flags") ? EnumType.Bitmask : EnumType.Enum;
 
             foreach (var v in t.Values())
             {
-                newEnum.Values.Add(EnumValue.FromJson(v));
+                newEnum.Values.Add(EnumValue.FromJson(v, t.Name));
             }
             
             return newEnum;
@@ -37,15 +37,25 @@ namespace Common
     public class EnumValue
     {
         public string Name;
-        public string Alias;
+        public string FriendlyName;
         public int Value;
 
-        internal static EnumValue FromJson(JToken v)
+        internal static EnumValue FromJson(JToken v, string enumName)
         {
-            EnumValue newValue= new EnumValue();
+            EnumValue newValue = new EnumValue();
             newValue.Name = v["name"].ToString();
+
             string stringValue = v["calc_value"].ToString();
             newValue.Value = int.Parse(stringValue);
+
+            if (newValue.Name.Contains(enumName))
+            {
+                newValue.FriendlyName = newValue.Name.Split('_')[1];
+            }
+            else
+            {
+                newValue.FriendlyName = newValue.Name;
+            }
 
             return newValue;
         }
