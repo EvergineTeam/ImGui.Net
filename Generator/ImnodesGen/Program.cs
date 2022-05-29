@@ -1,4 +1,5 @@
 ﻿using System;
+using Common;
 
 namespace ImnodesGen
 {
@@ -6,7 +7,26 @@ namespace ImnodesGen
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            string outputPath = "..\\..\\..\\..\\Evergine.Bindings.Imnodes\\Generated";
+
+            string structs_and_enums_json = "Jsons/structs_and_enums.json";
+            string definitions_json = "Jsons/definitions.json";
+            string @namespace = "Imnodes";
+            string libraryName = "cimnodes";
+
+            var imnodesVersion = Specification.FromFiles(structs_and_enums_json, definitions_json);
+
+            if (imnodesVersion != null)
+            {
+                // Enums
+                CSCodeWriter.WriteEnums(outputPath, @namespace, imnodesVersion);
+
+                // Structs
+                CSCodeWriter.WriteStructs(outputPath, @namespace, imnodesVersion);
+
+                // Functions
+                CSCodeWriter.WriteFuntions(outputPath, @namespace, libraryName, imnodesVersion);
+            }
         }
     }
 }
