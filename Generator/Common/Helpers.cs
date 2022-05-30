@@ -26,9 +26,11 @@ namespace Common
             {
                 case "bool":
                 case "char":
+                case "unsigned char":
                     return "byte";
                 case "bool*":
                 case "char*":
+                case "unsigned char*":
                     return "byte*";
                 case "size_t":
                     return "uint";
@@ -56,15 +58,20 @@ namespace Common
                     return "sbyte*";
                 case "ImU16":
                 case "ImWchar16":
+                case "unsigned short":
+                case "ImWchar":
                     return "ushort";
                 case "ImU16*":
+                case "ImDrawIdx*":
+                case "ImWchar*":
                     return "ushort*";
                 case "ImS16":
                     return "short";
                 case "ImS16*":
                     return "short*";
-                case "unsigned int":
                 case "ImU32":
+                case "unsigned int":
+                case "ImGuiID":
                     return "uint";
                 case "unsigned int*":
                 case "ImU32*":
@@ -81,6 +88,24 @@ namespace Common
                     return "long";
                 case "ImS64*":
                     return "long*";
+                case "ImVector_ImDrawCmd":
+                case "ImVector_ImDrawIdx":
+                case "ImVector_ImDrawVert":
+                case "ImVector_ImVec4":
+                case "ImVector_ImTextureID":
+                case "ImVector_ImVec2":
+                case "ImVector_ImDrawChannel":
+                case "ImVector_ImFontPtr":
+                case "ImVector_ImFontAtlasCustomRect":
+                case "ImVector_ImFontConfig":
+                case "ImVector_ImWchar":
+                case "ImVector_ImGuiStoragePair":
+                case "ImVector_ImGuiTextRange":
+                case "ImVector_char":
+                case "ImVector_float":
+                case "ImVector_ImFontGlyph":
+                case "ImVector_ImU32":
+                    return "ImVector";
                 default:
                     return type;
             }
@@ -97,6 +122,10 @@ namespace Common
                 case "ImNodesEditorContext*":
                 case "ImNodesMiniMapNodeHoveringCallback":
                 case "ImNodesMiniMapNodeHoveringCallbackUserData":
+                case "ImDrawListSharedData*":
+                case "ImTextureID":
+                case "ImFontBuilderIO*":
+                case "ImDrawCallback":
                     return true;
                 default:
                     return false;

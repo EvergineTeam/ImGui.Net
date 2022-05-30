@@ -1,3 +1,5 @@
+using Evergine.Mathematics;
+using Evergine.Bindings.Imgui;
 using System;
 
 namespace Evergine.Bindings.Imgui
@@ -321,16 +323,16 @@ namespace Evergine.Bindings.Imgui
 		RightAlt = 533,
 		RightSuper = 534,
 		Menu = 535,
-		_0 = 536,
-		_1 = 537,
-		_2 = 538,
-		_3 = 539,
-		_4 = 540,
-		_5 = 541,
-		_6 = 542,
-		_7 = 543,
-		_8 = 544,
-		_9 = 545,
+		0 = 536,
+		1 = 537,
+		2 = 538,
+		3 = 539,
+		4 = 540,
+		5 = 541,
+		6 = 542,
+		7 = 543,
+		8 = 544,
+		9 = 545,
 		A = 546,
 		B = 547,
 		C = 548,
@@ -431,11 +433,11 @@ namespace Evergine.Bindings.Imgui
 		ModAlt = 643,
 		ModSuper = 644,
 		COUNT = 645,
-		NamedKey_BEGIN = 512,
-		NamedKey_END = 645,
-		NamedKey_COUNT = 133,
-		KeysData_SIZE = 645,
-		KeysData_OFFSET = 0,
+		NamedKey = 512,
+		NamedKey = 645,
+		NamedKey = 133,
+		KeysData = 645,
+		KeysData = 0,
 	}
 
 	public enum ImGuiMouseButton
