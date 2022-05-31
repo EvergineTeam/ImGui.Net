@@ -17,7 +17,7 @@ namespace EvergineImGUITest.Managers
     /// <summary>
     /// The ImGui integration service.
     /// </summary>
-    public class ImGuiManager : UpdatableSceneManager
+    public unsafe class ImGuiManager : UpdatableSceneManager
     {
         [BindService]
         protected GraphicsPresenter graphicsPresenter;
@@ -132,9 +132,9 @@ namespace EvergineImGUITest.Managers
 
             // Read keyboard modifiers input
             var keyboardDispatcher = this.surface.KeyboardDispatcher;
-            this.io.KeyCtrl = Convert.ToByte(keyboardDispatcher.IsKeyDown(Keys.LeftControl));
-            this.io.KeyShift = Convert.ToByte(keyboardDispatcher.IsKeyDown(Keys.LeftShift));
-            this.io.KeyAlt =  Convert.ToByte(keyboardDispatcher.IsKeyDown(Keys.LeftAlt));
+            this.io.KeyCtrl = keyboardDispatcher.IsKeyDown(Keys.LeftControl) ? (byte)1 : (byte)0;
+            this.io.KeyShift = keyboardDispatcher.IsKeyDown(Keys.LeftShift) ? (byte)1 : (byte)0;
+            this.io.KeyAlt =  keyboardDispatcher.IsKeyDown(Keys.LeftAlt) ? (byte)1 : (byte)0;
 
             // Set orthographics projection matrix
             this.mvp = Matrix4x4.CreateOrthographicOffCenter(
@@ -150,17 +150,17 @@ namespace EvergineImGUITest.Managers
             {
                 this.mvp.M22 *= -1;
             }
-            
-            ImGui.NewFrame();
+
+            ImguiNative.igNewFrame();            
         }
 
         private unsafe void InitializeImGui()
         {
             // Create imgui context            
-            IntPtr imGuiContext = ImGuiNET.ImGui.CreateContext();
-            ImGuiNET.ImGui.SetCurrentContext(imGuiContext);           
+            IntPtr imGuiContext = ImguiNative.igCreateContext(null);
+            ImguiNative.igSetCurrentContext(imGuiContext);
 
-            this.io = ImGuiNET.ImGui.GetIO();
+            this.io = *ImguiNative.igGetIO();
             this.io.Fonts.AddFontDefault();
 
             // Compile shaders.
@@ -293,33 +293,33 @@ namespace EvergineImGUITest.Managers
             this.io.Fonts.ClearTexData();
 
             // Keyboard mapping. ImGui will use those indices to peek into the io.KeyDown[] array that we will update during the application lifetime.
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.Tab] = (int)Keys.Tab;
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.LeftArrow] = (int)Keys.Left;
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.RightArrow] = (int)Keys.Right;
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.UpArrow] = (int)Keys.Up;
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.DownArrow] = (int)Keys.Down;
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.PageUp] = (int)Keys.PageUp;
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.PageDown] = (int)Keys.PageDown;
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.Home] = (int)Keys.Home;
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.End] = (int)Keys.End;
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.Delete] = (int)Keys.Delete;
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.Backspace] = (int)Keys.Back;
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.Enter] = (int)Keys.Enter;
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.Escape] = (int)Keys.Escape;
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.A] = (int)Keys.A;
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.C] = (int)Keys.C;
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.V] = (int)Keys.V;
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.X] = (int)Keys.X;
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.Y] = (int)Keys.Y;
-            this.io.KeyMap[(int)ImGuiNET.ImGuiKey.Z] = (int)Keys.Z;
+            this.io.KeyMap[(int)ImGuiKey.Tab] = (int)Keys.Tab;
+            this.io.KeyMap[(int)ImGuiKey.LeftArrow] = (int)Keys.Left;
+            this.io.KeyMap[(int)ImGuiKey.RightArrow] = (int)Keys.Right;
+            this.io.KeyMap[(int)ImGuiKey.UpArrow] = (int)Keys.Up;
+            this.io.KeyMap[(int)ImGuiKey.DownArrow] = (int)Keys.Down;
+            this.io.KeyMap[(int)ImGuiKey.PageUp] = (int)Keys.PageUp;
+            this.io.KeyMap[(int)ImGuiKey.PageDown] = (int)Keys.PageDown;
+            this.io.KeyMap[(int)ImGuiKey.Home] = (int)Keys.Home;
+            this.io.KeyMap[(int)ImGuiKey.End] = (int)Keys.End;
+            this.io.KeyMap[(int)ImGuiKey.Delete] = (int)Keys.Delete;
+            this.io.KeyMap[(int)ImGuiKey.Backspace] = (int)Keys.Back;
+            this.io.KeyMap[(int)ImGuiKey.Enter] = (int)Keys.Enter;
+            this.io.KeyMap[(int)ImGuiKey.Escape] = (int)Keys.Escape;
+            this.io.KeyMap[(int)ImGuiKey.A] = (int)Keys.A;
+            this.io.KeyMap[(int)ImGuiKey.C] = (int)Keys.C;
+            this.io.KeyMap[(int)ImGuiKey.V] = (int)Keys.V;
+            this.io.KeyMap[(int)ImGuiKey.X] = (int)Keys.X;
+            this.io.KeyMap[(int)ImGuiKey.Y] = (int)Keys.Y;
+            this.io.KeyMap[(int)ImGuiKey.Z] = (int)Keys.Z;
 
             // Register input events
             var mouseDispatcher = this.surface.MouseDispatcher;
             mouseDispatcher.MouseButtonDown += (s, e) =>
-            {
+            {                
                 switch (e.Button)
                 {
-                    case MouseButtons.Left:
+                    case MouseButtons.Left:                        
                         this.io.MouseDown[0] = true;
                         break;
                     case MouseButtons.Right:
@@ -477,12 +477,12 @@ namespace EvergineImGUITest.Managers
         /// <param name="commandBuffer">The commandbuffer to draw.</param>
         private unsafe void DrawContext_OnPostRender(Evergine.Framework.Graphics.DrawContext drawContext, CommandBuffer commandBuffer)
         {            
-            ImGuiNET.ImGui.Render();
+            ImguiNative.igRender();
 
             uint vertexOffsetInVertices = 0;
             uint indexOffsetInElements = 0;
 
-            ImGuiNET.ImDrawDataPtr drawData = ImGuiNET.ImGui.GetDrawData();
+            ImDrawData drawData = *ImguiNative.igGetDrawData();
 
             if (drawData.CmdListsCount == 0)
             {
@@ -490,7 +490,7 @@ namespace EvergineImGUITest.Managers
             }
 
             // Resize index and vertex buffers.
-            int vertexBufferSize = drawData.TotalVtxCount * sizeof(ImGuiNET.ImDrawVert);
+            int vertexBufferSize = drawData.TotalVtxCount * sizeof(ImDrawVert);
             if (vertexBufferSize > this.vertexBuffers[0].Description.SizeInBytes)
             {
                 this.vertexBuffers[0].Dispose();
@@ -524,7 +524,7 @@ namespace EvergineImGUITest.Managers
 
             for (int i = 0; i < drawData.CmdListsCount; i++)
             {
-                ImGuiNET.ImDrawListPtr cmdList = drawData.CmdListsRange[i];
+                ImDrawList cmdList = drawData.CmdListsRange[i];
 
                 // Copy vertex
                 var vOffset = vertexOffsetInVertices * (uint)sizeof(ImGuiNET.ImDrawVert);
