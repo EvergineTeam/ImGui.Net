@@ -114,6 +114,10 @@ namespace Common
                     {
                         foreach (var o in c.Overloads)
                         {
+                            // Remove var_list functions
+                            if (o.Signature.Contains("va_list"))
+                                continue;
+
                             string csType = Helpers.ConvertToCSharpType(o.ReturnType, spec);
 
                             file.WriteLine($"\t\t[DllImport(\"{libraryName}\", CallingConvention = CallingConvention.Cdecl)]");

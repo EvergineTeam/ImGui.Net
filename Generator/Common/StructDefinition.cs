@@ -44,8 +44,16 @@ namespace Common
             {
                 m.Name = m.Name.Substring(0, startBracket);
             }
-            
-            m.Type = elem["type"].ToString();
+
+            if (label.EndsWith("Fn"))
+            {
+                m.Type = "IntPtr";
+            }
+            else
+            {
+                m.Type = elem["type"].ToString();
+            }
+
             m.TemplateType = elem["template_type"]?.ToString();
             m.Size = elem["size"]?.ToString();
             m.Count = string.IsNullOrEmpty(m.Size) ? 0 : int.Parse(m.Size);

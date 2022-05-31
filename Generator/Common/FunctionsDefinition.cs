@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Text;
@@ -9,16 +10,30 @@ namespace Common
     {
         public List<OverloadDefinition> Overloads = new List<OverloadDefinition>();
 
-        public static FunctionsDefinition FromJson(JToken f)
+        public static FunctionsDefinition FromJson(JToken f, Specification spec)
         {
             FunctionsDefinition func = new FunctionsDefinition();
 
             foreach (var o in f.Values())
             {
+                // Skip internal functions
+                string location = o["location"]?.ToString();
+                string funcname = o["funcname"]?.ToString();
+                if (!string.IsNullOrEmpty(location) && location.Contains("internal")
+                    || string.IsNullOrEmpty(funcname))
+                    continue;
+
+                string typename = o["stname"]?.ToString();
+                if (!string.IsNullOrEmpty(typename))
+                {
+                    if (!spec.Structs.Any(x => x.Name == typename))
+                        return null;
+                }
+
                 func.Overloads.Add(OverloadDefinition.FromJson(o));
             }
 
-            return func;
+            return func.Overloads.Count == 0 ? null : func;
         }
     }
 
@@ -26,6 +41,7 @@ namespace Common
     {
         public string FuncName;
         public string ReturnType;
+        public string Signature;
         public List<Param> Params = new List<Param>();
 
         public static OverloadDefinition FromJson(JToken f)
@@ -33,6 +49,7 @@ namespace Common
             OverloadDefinition overload = new OverloadDefinition();
             overload.FuncName = f["ov_cimguiname"].ToString();
             overload.ReturnType = f["ret"]?.ToString() ?? "void";
+            overload.Signature = f["signature"]?.ToString();
 
             foreach (var a in f["argsT"])
             {
@@ -47,6 +64,9 @@ namespace Common
             StringBuilder signature = new StringBuilder();
             foreach (var p in Params)
             {
+                if (p.Name == "...")
+                    continue;
+
                 string csType = Helpers.ConvertToCSharpType(p.Type, spec);
                 signature.Append($"{csType} ");
                 signature.Append($"{p.Name}, ");
@@ -68,6 +88,12 @@ namespace Common
         {
             Param p = new Param();
             p.Name = elem["name"].ToString();
+
+            if (p.Name == "out" ||
+                p.Name == "in" ||
+                p.Name == "ref")
+                p.Name = "@" + p.Name;
+
             p.Type = elem["type"].ToString();
 
             return p;

@@ -19,8 +19,8 @@ namespace Evergine.Bindings.Imgui
 		RoundCornersLeft = 80,
 		RoundCornersRight = 160,
 		RoundCornersAll = 240,
-		RoundCornersDefault = 240,
-		RoundCornersMask = 496,
+		RoundCornersDefault_ = 240,
+		RoundCornersMask_ = 496,
 	}
 
 	[Flags]
@@ -59,8 +59,8 @@ namespace Evergine.Bindings.Imgui
 		MouseButtonLeft = 1,
 		MouseButtonRight = 2,
 		MouseButtonMiddle = 4,
-		MouseButtonMask = 7,
-		MouseButtonDefault = 1,
+		MouseButtonMask_ = 7,
+		MouseButtonDefault_ = 1,
 	}
 
 	public enum ImGuiCol
@@ -148,11 +148,11 @@ namespace Evergine.Bindings.Imgui
 		PickerHueWheel = 67108864,
 		InputRGB = 134217728,
 		InputHSV = 268435456,
-		DefaultOptions = 177209344,
-		DisplayMask = 7340032,
-		DataTypeMask = 25165824,
-		PickerMask = 100663296,
-		InputMask = 402653184,
+		DefaultOptions_ = 177209344,
+		DisplayMask_ = 7340032,
+		DataTypeMask_ = 25165824,
+		PickerMask_ = 100663296,
+		InputMask_ = 402653184,
 	}
 
 	[Flags]
@@ -166,7 +166,7 @@ namespace Evergine.Bindings.Imgui
 		HeightLargest = 16,
 		NoArrowButton = 32,
 		NoPreview = 64,
-		HeightMask = 30,
+		HeightMask_ = 30,
 	}
 
 	public enum ImGuiCond
@@ -323,16 +323,16 @@ namespace Evergine.Bindings.Imgui
 		RightAlt = 533,
 		RightSuper = 534,
 		Menu = 535,
-		0 = 536,
-		1 = 537,
-		2 = 538,
-		3 = 539,
-		4 = 540,
-		5 = 541,
-		6 = 542,
-		7 = 543,
-		8 = 544,
-		9 = 545,
+		_0 = 536,
+		_1 = 537,
+		_2 = 538,
+		_3 = 539,
+		_4 = 540,
+		_5 = 541,
+		_6 = 542,
+		_7 = 543,
+		_8 = 544,
+		_9 = 545,
 		A = 546,
 		B = 547,
 		C = 548,
@@ -433,11 +433,11 @@ namespace Evergine.Bindings.Imgui
 		ModAlt = 643,
 		ModSuper = 644,
 		COUNT = 645,
-		NamedKey = 512,
-		NamedKey = 645,
-		NamedKey = 133,
-		KeysData = 645,
-		KeysData = 0,
+		NamedKey_BEGIN = 512,
+		NamedKey_END = 645,
+		NamedKey_COUNT = 133,
+		KeysData_SIZE = 645,
+		KeysData_OFFSET = 0,
 	}
 
 	public enum ImGuiMouseButton
@@ -481,10 +481,10 @@ namespace Evergine.Bindings.Imgui
 		FocusNext = 13,
 		TweakSlow = 14,
 		TweakFast = 15,
-		KeyLeft = 16,
-		KeyRight = 17,
-		KeyUp = 18,
-		KeyDown = 19,
+		KeyLeft_ = 16,
+		KeyRight_ = 17,
+		KeyUp_ = 18,
+		KeyDown_ = 19,
 		COUNT = 20,
 	}
 
@@ -495,8 +495,8 @@ namespace Evergine.Bindings.Imgui
 		MouseButtonLeft = 0,
 		MouseButtonRight = 1,
 		MouseButtonMiddle = 2,
-		MouseButtonMask = 31,
-		MouseButtonDefault = 1,
+		MouseButtonMask_ = 31,
+		MouseButtonDefault_ = 1,
 		NoOpenOverExistingPopup = 32,
 		NoOpenOverItems = 64,
 		AnyPopupId = 128,
@@ -523,7 +523,7 @@ namespace Evergine.Bindings.Imgui
 		Logarithmic = 32,
 		NoRoundToFormat = 64,
 		NoInput = 128,
-		InvalidMask = 1879048207,
+		InvalidMask_ = 1879048207,
 	}
 
 	public enum ImGuiSortDirection
@@ -575,8 +575,8 @@ namespace Evergine.Bindings.Imgui
 		NoTooltip = 32,
 		FittingPolicyResizeDown = 64,
 		FittingPolicyScroll = 128,
-		FittingPolicyMask = 192,
-		FittingPolicyDefault = 64,
+		FittingPolicyMask_ = 192,
+		FittingPolicyDefault_ = 64,
 	}
 
 	[Flags]
@@ -627,10 +627,10 @@ namespace Evergine.Bindings.Imgui
 		IsVisible = 33554432,
 		IsSorted = 67108864,
 		IsHovered = 134217728,
-		WidthMask = 24,
-		IndentMask = 196608,
-		StatusMask = 251658240,
-		NoDirectResize = 1073741824,
+		WidthMask_ = 24,
+		IndentMask_ = 196608,
+		StatusMask_ = 251658240,
+		NoDirectResize_ = 1073741824,
 	}
 
 	[Flags]
@@ -671,7 +671,7 @@ namespace Evergine.Bindings.Imgui
 		ScrollY = 33554432,
 		SortMulti = 67108864,
 		SortTristate = 134217728,
-		SizingMask = 57344,
+		SizingMask_ = 57344,
 	}
 
 	[Flags]

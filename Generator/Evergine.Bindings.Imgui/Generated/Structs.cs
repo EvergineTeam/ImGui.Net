@@ -278,10 +278,10 @@ namespace Evergine.Bindings.Imgui
 		public void* BackendPlatformUserData;
 		public void* BackendRendererUserData;
 		public void* BackendLanguageUserData;
-		public char*(*)(void* user_data) GetClipboardTextFn;
-		public void(*)(void* user_data,char* text) SetClipboardTextFn;
+		public IntPtr GetClipboardTextFn;
+		public IntPtr SetClipboardTextFn;
 		public void* ClipboardUserData;
-		public void(*)(ImGuiViewport* viewport,ImGuiPlatformImeData* data) SetPlatformImeDataFn;
+		public IntPtr SetPlatformImeDataFn;
 		public void* _UnusedPadding;
 		public byte WantCaptureMouse;
 		public byte WantCaptureKeyboard;
@@ -1052,12 +1052,6 @@ namespace Evergine.Bindings.Imgui
 	public unsafe partial struct ImGuiStorage
 	{
 		public ImVector Data;
-	}
-
-	public unsafe partial struct ImGuiStoragePair
-	{
-		public uint key;
-		public union { int val_i; float val_f; void* val_p;} ;
 	}
 
 	public unsafe partial struct ImGuiStyle

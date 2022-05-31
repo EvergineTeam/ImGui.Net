@@ -10,11 +10,6 @@ namespace Common
         {
             string result = type.Replace("const ", "");
 
-            if (IsInPtr(result))
-            {
-                return "IntPtr";
-            }
-
             result = ConvertToBasicTypes(result);
 
             return result;
@@ -22,6 +17,11 @@ namespace Common
 
         private static string ConvertToBasicTypes(string type)
         {
+            if (type.StartsWith("bool(*)"))
+                return "bool*";
+            if (type.StartsWith("float(*)"))
+                return "float*";
+
             switch (type)
             {
                 case "bool":
@@ -60,6 +60,7 @@ namespace Common
                 case "ImWchar16":
                 case "unsigned short":
                 case "ImWchar":
+                case "ImDrawIdx":
                     return "ushort";
                 case "ImU16*":
                 case "ImDrawIdx*":
@@ -88,6 +89,9 @@ namespace Common
                     return "long";
                 case "ImS64*":
                     return "long*";
+                case "unsigned char**":
+                case "char* const[]":
+                    return "byte**";
                 case "ImVector_ImDrawCmd":
                 case "ImVector_ImDrawIdx":
                 case "ImVector_ImDrawVert":
@@ -106,15 +110,9 @@ namespace Common
                 case "ImVector_ImFontGlyph":
                 case "ImVector_ImU32":
                     return "ImVector";
-                default:
-                    return type;
-            }
-        }
-
-        public static bool IsInPtr(string type)
-        {
-            switch (type)
-            {
+                case "ImVector_ImWchar*":
+                case "ImVector_ImGuiTextRange*":
+                    return "ImVector*";
                 case "ImGuiContext*":
                 case "ImNodesContext*":
                 case "ImPlotContext*":
@@ -126,9 +124,30 @@ namespace Common
                 case "ImTextureID":
                 case "ImFontBuilderIO*":
                 case "ImDrawCallback":
-                    return true;
+                case "ImGuiWindow*":
+                case "ImGuiMemAllocFunc":
+                case "ImGuiMemFreeFunc":
+                    return "IntPtr";
+                case "ImGuiMemAllocFunc*":
+                case "ImGuiMemFreeFunc*":
+                    return "IntPtr*";
+                case "float[2]":
+                case "ImVec2[2]":
+                    return "Vector2*";
+                case "float[3]":
+                    return "Vector3*";
+                case "float[4]":
+                    return "Vector4*";
+                case "int[2]":
+                case "int[3]":
+                case "int[4]":
+                    return "int*";
+                case "ImPlotFormatter":
+                    return "void*";
+                case "ImPlotGetter":
+                    return "ImPlotPoint*";
                 default:
-                    return false;
+                    return type;
             }
         }
 

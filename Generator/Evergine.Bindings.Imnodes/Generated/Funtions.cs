@@ -11,25 +11,13 @@ namespace Evergine.Bindings.Imnodes
 		public static extern void EmulateThreeButtonMouse_EmulateThreeButtonMouse();
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void EmulateThreeButtonMouse_destroy(EmulateThreeButtonMouse* self);
-
-		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImNodesIO_ImNodesIO();
-
-		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImNodesIO_destroy(ImNodesIO* self);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImNodesStyle_ImNodesStyle();
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImNodesStyle_destroy(ImNodesStyle* self);
-
-		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void LinkDetachWithModifierClick_LinkDetachWithModifierClick();
-
-		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void LinkDetachWithModifierClick_destroy(LinkDetachWithModifierClick* self);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void imnodes_BeginInputAttribute(int id, ImNodesPinShape shape);

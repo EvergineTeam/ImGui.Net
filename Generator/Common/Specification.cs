@@ -33,6 +33,7 @@ namespace Common
             Specification spec = new Specification();
 
             var locations = typesJson["locations"];
+            var customDefinedTypes = new[] { "ImGuiStoragePair" };
 
             // Enums
             spec.Enums = typesJson["enums"].Select(t =>
@@ -49,17 +50,16 @@ namespace Common
                 if (locations?[((JProperty)s).Name]?.Value<string>().Contains("internal") ?? false)
                     return null;
 
+                if (customDefinedTypes.Contains(((JProperty)s).Name))
+                    return null;
+
                 return StructDefinition.FromJson((JProperty)s);
             }).Where(x => x != null).ToList();
 
             // Functions
             spec.Funtions = functionsJson.Children().Select(f =>
             {
-                if (locations?[((JProperty)f).Name]?.Value<string>().Contains("internal") ?? false)
-                    return null;
-
-                return FunctionsDefinition.FromJson(f);
-
+                return FunctionsDefinition.FromJson(f, spec);
             }).Where(x => x != null).ToList();
 
             return spec;

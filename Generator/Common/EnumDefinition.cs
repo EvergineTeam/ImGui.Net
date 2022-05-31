@@ -50,7 +50,12 @@ namespace Common
 
             if (newValue.Name.Contains(enumName))
             {
-                newValue.FriendlyName = newValue.Name.Split('_')[1];
+                int index = newValue.Name.IndexOf('_');
+                newValue.FriendlyName = newValue.Name.Substring(index + 1);
+
+                // Corner case in ImGuiKey enum
+                if (int.TryParse(newValue.FriendlyName, out _))
+                    newValue.FriendlyName = $"_{newValue.FriendlyName}";
             }
             else
             {
