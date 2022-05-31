@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Evergine.Common" Version="2022.2.16.6" />
+    <PackageReference Include="Evergine.Components" Version="2022.2.16.6" />
+    <PackageReference Include="Evergine.Framework" Version="2022.2.16.6" />
+    <PackageReference Include="Evergine.Editor.Extension" Version="2022.2.16.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EvergineImGUITest\EvergineImGUITest.csproj" />
+  </ItemGroup>
+
+</Project>

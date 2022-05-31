@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Evergine.DirectX11" Version="2022.2.16.6" />
+    <PackageReference Include="Evergine.HLSLEverywhere" Version="2022.2.16.6" />
+    <PackageReference Include="Evergine.XAudio2" Version="2022.2.16.6" />
+    <PackageReference Include="Evergine.Forms" Version="2022.2.16.6" />
+    <PackageReference Include="Evergine.Targets" Version="2022.2.16.6" />
+    <PackageReference Include="Evergine.Targets.Windows" Version="2022.2.16.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EvergineImGUITest\EvergineImGUITest.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(DefineConstants.Contains('EVERGINE_EDITOR'))">
+    <ProjectReference Include="..\EvergineImGUITest.Editor\EvergineImGUITest.Editor.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="cimgui.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

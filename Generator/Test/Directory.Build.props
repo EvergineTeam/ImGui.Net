@@ -1,0 +1,6 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<!-- The property AdditionalDefineConstants is used by Evergine Editor to add 'EVERGINE_EDITOR' build constant. -->
+		<DefineConstants Condition="'$(AdditionalDefineConstants)' != ''">$(DefineConstants);$(AdditionalDefineConstants)</DefineConstants>
+	</PropertyGroup>
+</Project>
