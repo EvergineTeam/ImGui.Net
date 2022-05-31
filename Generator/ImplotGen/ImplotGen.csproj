@@ -10,6 +10,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Evergine.Bindings.Imgui\Evergine.Bindings.Imgui.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Update="Jsons\definitions.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
