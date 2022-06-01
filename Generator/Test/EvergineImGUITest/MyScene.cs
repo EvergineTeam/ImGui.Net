@@ -1,4 +1,6 @@
 using Evergine.Framework;
+using Evergine.Framework.Graphics;
+using EvergineImGUITest.Components;
 using EvergineImGUITest.Managers;
 
 namespace EvergineImGUITest
@@ -14,6 +16,11 @@ namespace EvergineImGUITest
 
         protected override void CreateScene()
         {
+            Entity e = new Entity()
+                    .AddComponent(new Transform3D())
+                    .AddComponent(new ImguiDemo());
+
+            this.Managers.EntityManager.Add(e);
         }
     }
 }
