@@ -571,41 +571,41 @@ namespace EvergineImGUITest.Managers
 
             for (int n = 0; n < drawData.CmdListsCount; n++)
             {
-                ImDrawList cmdList = *drawData.CmdLists[n];
+                ImDrawList* cmdList = drawData.CmdLists[n];
                 //ImGuiNET.ImDrawListPtr cmdList = drawData.CmdListsRange[n];
-                for (int i = 0; i < cmdList.CmdBuffer.Size; i++)
+                for (int i = 0; i < cmdList->CmdBuffer.Size; i++)
                 {
-                    ImDrawCmd cmd = &cmdList->CmdBuffer[i];
+                    ImDrawCmd* cmd = (ImDrawCmd*)((long)cmdList->CmdBuffer.Data + i*(sizeof(ImDrawCmd)));
                     //ImGuiNET.ImDrawCmdPtr cmd = cmdList.CmdBuffer[i];
-                    if (cmd.TextureId != IntPtr.Zero)
+                    if (cmd->TextureId != IntPtr.Zero)
                     {
-                        if (cmd.TextureId == this.fontAtlasID)
+                        if (cmd->TextureId == this.fontAtlasID)
                         {
                             commandBuffer.SetResourceSet(this.resourceSet);
                         }
                         else
                         {
-                            commandBuffer.SetResourceSet(this.GetImageResourceSet(cmd.TextureId), 1);
+                            commandBuffer.SetResourceSet(this.GetImageResourceSet(cmd->TextureId), 1);
                         }
                     }
 
                     var scissors = new Rectangle[1]
                     {
                         new Rectangle(
-                        (int)cmd.ClipRect.X,
-                        (int)cmd.ClipRect.Y,
-                        (int)(cmd.ClipRect.Z - cmd.ClipRect.X),
-                        (int)(cmd.ClipRect.W - cmd.ClipRect.Y)),
+                        (int)cmd->ClipRect.X,
+                        (int)cmd->ClipRect.Y,
+                        (int)(cmd->ClipRect.Z - cmd->ClipRect.X),
+                        (int)(cmd->ClipRect.W - cmd->ClipRect.Y)),
                     };
 
                     commandBuffer.SetScissorRectangles(scissors);
 
-                    commandBuffer.DrawIndexedInstanced(cmd.ElemCount, 1, idx_offset, vtx_offset, 0);
+                    commandBuffer.DrawIndexedInstanced(cmd->ElemCount, 1, idx_offset, vtx_offset, 0);
 
-                    idx_offset += cmd.ElemCount;
+                    idx_offset += cmd->ElemCount;
                 }
 
-                vtx_offset += (uint)cmdList.VtxBuffer.Size;
+                vtx_offset += (uint)cmdList->VtxBuffer.Size;
             }
 
             commandBuffer.EndDebugMarker();
