@@ -533,7 +533,8 @@ namespace EvergineImGUITest.Managers
 
             for (int i = 0; i < drawData.CmdListsCount; i++)
             {
-                ImDrawList cmdList = drawData.CmdListsRange[i];
+                //ImDrawList cmdList = drawData.CmdListsRange[i];
+                ImDrawList cmdList = *drawData.CmdLists[i];
 
                 // Copy vertex
                 var vOffset = vertexOffsetInVertices * (uint)sizeof(ImDrawVert);
@@ -562,7 +563,7 @@ namespace EvergineImGUITest.Managers
             commandBuffer.SetIndexBuffer(this.indexBuffer, IndexFormat.UInt16);
 
             ////drawData.ScaleClipRects(this.io.DisplayFramebufferScale);
-            ImguiNative.ImDrawData_ScaleClipRects(this.io, )
+            ImguiNative.ImDrawData_ScaleClipRects(&drawData, this.io->DisplayFramebufferScale);
 
             // Render command lists
             uint vtx_offset = 0;
@@ -570,10 +571,12 @@ namespace EvergineImGUITest.Managers
 
             for (int n = 0; n < drawData.CmdListsCount; n++)
             {
-                ImGuiNET.ImDrawListPtr cmdList = drawData.CmdListsRange[n];
+                ImDrawList cmdList = *drawData.CmdLists[n];
+                //ImGuiNET.ImDrawListPtr cmdList = drawData.CmdListsRange[n];
                 for (int i = 0; i < cmdList.CmdBuffer.Size; i++)
                 {
-                    ImGuiNET.ImDrawCmdPtr cmd = cmdList.CmdBuffer[i];
+                    ImDrawCmd cmd = &cmdList->CmdBuffer[i];
+                    //ImGuiNET.ImDrawCmdPtr cmd = cmdList.CmdBuffer[i];
                     if (cmd.TextureId != IntPtr.Zero)
                     {
                         if (cmd.TextureId == this.fontAtlasID)
