@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Evergine.Bindings.Imguizmo\Evergine.Bindings.Imguizmo.csproj" />
     <ProjectReference Include="..\..\Evergine.Bindings.Imgui\Evergine.Bindings.Imgui.csproj" />
   </ItemGroup>
 

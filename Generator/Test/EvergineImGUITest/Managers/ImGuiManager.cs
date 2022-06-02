@@ -1,4 +1,5 @@
 ﻿using Evergine.Bindings.Imgui;
+using Evergine.Bindings.Imguizmo;
 using Evergine.Common.Graphics;
 using Evergine.Common.Input.Keyboard;
 using Evergine.Common.Input.Mouse;
@@ -150,7 +151,8 @@ namespace EvergineImGUITest.Managers
                 this.mvp.M22 *= -1;
             }
 
-            ImguiNative.igNewFrame();            
+            ImguiNative.igNewFrame();
+            ImguizmoNative.ImGuizmo_BeginFrame();
         }
 
         private unsafe void InitializeImGui()
@@ -159,6 +161,9 @@ namespace EvergineImGUITest.Managers
             ImFontAtlas* shared_font_atlas = null;
             IntPtr imGuiContext = ImguiNative.igCreateContext(shared_font_atlas);
             ImguiNative.igSetCurrentContext(imGuiContext);
+
+            // Create imguizmo context
+            ImguizmoNative.ImGuizmo_SetImGuiContext(imGuiContext);
 
             this.io = ImguiNative.igGetIO();
             ImguiNative.ImFontAtlas_AddFontDefault(io->Fonts, null); 
