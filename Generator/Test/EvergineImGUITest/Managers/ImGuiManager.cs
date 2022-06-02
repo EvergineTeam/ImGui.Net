@@ -157,7 +157,8 @@ namespace EvergineImGUITest.Managers
         private unsafe void InitializeImGui()
         {
             // Create imgui context            
-            IntPtr imGuiContext = ImguiNative.igCreateContext(null);
+            ImFontAtlas* shared_font_atlas = null;
+            IntPtr imGuiContext = ImguiNative.igCreateContext(shared_font_atlas);
             ImguiNative.igSetCurrentContext(imGuiContext);
 
             this.io = ImguiNative.igGetIO();
@@ -491,15 +492,15 @@ namespace EvergineImGUITest.Managers
             uint vertexOffsetInVertices = 0;
             uint indexOffsetInElements = 0;
 
-            ImDrawData drawData = *ImguiNative.igGetDrawData();
+            ImDrawData* drawData = ImguiNative.igGetDrawData();
 
-            if (drawData.CmdListsCount == 0)
+            if (drawData->CmdListsCount == 0)
             {
                 return;
             }
 
             // Resize index and vertex buffers.
-            int vertexBufferSize = drawData.TotalVtxCount * sizeof(ImDrawVert);
+            int vertexBufferSize = drawData->TotalVtxCount * sizeof(ImDrawVert);
             if (vertexBufferSize > this.vertexBuffers[0].Description.SizeInBytes)
             {
                 this.vertexBuffers[0].Dispose();
@@ -513,7 +514,7 @@ namespace EvergineImGUITest.Managers
                 this.vertexBuffers[0] = this.graphicsContext.Factory.CreateBuffer(ref vertexBufferDescription);
             }
 
-            int indexBufferSize = drawData.TotalIdxCount * sizeof(ushort);
+            int indexBufferSize = drawData->TotalIdxCount * sizeof(ushort);
             if (indexBufferSize > this.indexBuffer.Description.SizeInBytes)
             {
                 this.indexBuffer.Dispose();
@@ -531,21 +532,21 @@ namespace EvergineImGUITest.Managers
             var vResource = this.graphicsContext.MapMemory(this.vertexBuffers[0], MapMode.Write);
             var iResource = this.graphicsContext.MapMemory(this.indexBuffer, MapMode.Write);
 
-            for (int i = 0; i < drawData.CmdListsCount; i++)
+            for (int i = 0; i < drawData->CmdListsCount; i++)
             {
                 //ImDrawList cmdList = drawData.CmdListsRange[i];
-                ImDrawList cmdList = *drawData.CmdLists[i];
+                ImDrawList* cmdList = drawData->CmdLists[i];
 
                 // Copy vertex
                 var vOffset = vertexOffsetInVertices * (uint)sizeof(ImDrawVert);
-                Unsafe.CopyBlock((void*)((long)vResource.Data + vOffset), (void*)cmdList.VtxBuffer.Data, (uint)(cmdList.VtxBuffer.Size * sizeof(ImDrawVert)));
+                Unsafe.CopyBlock((void*)((long)vResource.Data + vOffset), (void*)cmdList->VtxBuffer.Data, (uint)(cmdList->VtxBuffer.Size * sizeof(ImDrawVert)));
 
                 // Copy index
                 var iOffset = indexOffsetInElements * sizeof(ushort);
-                Unsafe.CopyBlock((void*)((long)iResource.Data + iOffset), (void*)cmdList.IdxBuffer.Data, (uint)(cmdList.IdxBuffer.Size * sizeof(ushort)));
+                Unsafe.CopyBlock((void*)((long)iResource.Data + iOffset), (void*)cmdList->IdxBuffer.Data, (uint)(cmdList->IdxBuffer.Size * sizeof(ushort)));
 
-                vertexOffsetInVertices += (uint)cmdList.VtxBuffer.Size;
-                indexOffsetInElements += (uint)cmdList.IdxBuffer.Size;
+                vertexOffsetInVertices += (uint)cmdList->VtxBuffer.Size;
+                indexOffsetInElements += (uint)cmdList->IdxBuffer.Size;
             }
 
             this.graphicsContext.UnmapMemory(this.vertexBuffers[0]);
@@ -563,15 +564,15 @@ namespace EvergineImGUITest.Managers
             commandBuffer.SetIndexBuffer(this.indexBuffer, IndexFormat.UInt16);
 
             ////drawData.ScaleClipRects(this.io.DisplayFramebufferScale);
-            ImguiNative.ImDrawData_ScaleClipRects(&drawData, this.io->DisplayFramebufferScale);
+            ImguiNative.ImDrawData_ScaleClipRects(drawData, this.io->DisplayFramebufferScale);
 
             // Render command lists
             uint vtx_offset = 0;
             uint idx_offset = 0;
 
-            for (int n = 0; n < drawData.CmdListsCount; n++)
+            for (int n = 0; n < drawData->CmdListsCount; n++)
             {
-                ImDrawList* cmdList = drawData.CmdLists[n];
+                ImDrawList* cmdList = drawData->CmdLists[n];
                 //ImGuiNET.ImDrawListPtr cmdList = drawData.CmdListsRange[n];
                 for (int i = 0; i < cmdList->CmdBuffer.Size; i++)
                 {
@@ -598,10 +599,10 @@ namespace EvergineImGUITest.Managers
                         (int)(cmd->ClipRect.W - cmd->ClipRect.Y)),
                     };
 
-                    commandBuffer.SetScissorRectangles(scissors);
+                    commandBuffer.SetScissorRectangles(scissors);                    
 
                     commandBuffer.DrawIndexedInstanced(cmd->ElemCount, 1, idx_offset, vtx_offset, 0);
-
+                    
                     idx_offset += cmd->ElemCount;
                 }
 
