@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Evergine.Bindings.Imgui;
+﻿using Evergine.Bindings.Imgui;
 using Evergine.Common.Graphics;
 using Evergine.Common.Input.Keyboard;
 using Evergine.Common.Input.Mouse;
 using Evergine.Framework;
-using Evergine.Framework.Graphics;
 using Evergine.Framework.Managers;
 using Evergine.Framework.Services;
 using Evergine.Mathematics;
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Buffer = Evergine.Common.Graphics.Buffer;
 
 namespace EvergineImGUITest.Managers
@@ -162,7 +161,6 @@ namespace EvergineImGUITest.Managers
             ImguiNative.igSetCurrentContext(imGuiContext);
 
             this.io = ImguiNative.igGetIO();
-            ////this.io.Fonts.AddFontDefault();
             ImguiNative.ImFontAtlas_AddFontDefault(io->Fonts, null); 
 
             // Compile shaders.
@@ -251,14 +249,12 @@ namespace EvergineImGUITest.Managers
             this.constantBuffer = this.graphicsContext.Factory.CreateBuffer(ref constantBufferDescription);
 
             // Create Font Texture
-            ////this.io.Fonts.GetTexDataAsRGBA32(out byte* pixels, out int width, out int height, out int bytesPerPixel);
             int width;
             int height;
             int bytesPerPixel;
             byte* pixels = null;
             ImguiNative.ImFontAtlas_GetTexDataAsRGBA32(io->Fonts, &pixels, &width, &height, &bytesPerPixel);
 
-            ////this.io.Fonts.SetTexID(this.fontAtlasID);
             ImguiNative.ImFontAtlas_SetTexID(io->Fonts, this.fontAtlasID);
 
             var fontTextureDescription = new TextureDescription()
@@ -298,7 +294,6 @@ namespace EvergineImGUITest.Managers
             var resourceSetDescription = new ResourceSetDescription(this.layout, this.constantBuffer, this.fontTexture, this.sampler);
             this.resourceSet = this.graphicsContext.Factory.CreateResourceSet(ref resourceSetDescription);
 
-            ////this.io.Fonts.ClearTexData();
             ImguiNative.ImFontAtlas_ClearTexData(io->Fonts);
 
             // Keyboard mapping. ImGui will use those indices to peek into the io.KeyDown[] array that we will update during the application lifetime.
@@ -382,7 +377,6 @@ namespace EvergineImGUITest.Managers
 
             keyboardDispatcher.KeyChar += (s, e) =>
             {
-                ////this.io.AddInputCharacter(e.Character);
                 ImguiNative.ImGuiIO_AddInputCharacter(this.io, e.Character);
             };
         }
@@ -534,7 +528,6 @@ namespace EvergineImGUITest.Managers
 
             for (int i = 0; i < drawData->CmdListsCount; i++)
             {
-                //ImDrawList cmdList = drawData.CmdListsRange[i];
                 ImDrawList* cmdList = drawData->CmdLists[i];
 
                 // Copy vertex
@@ -563,7 +556,6 @@ namespace EvergineImGUITest.Managers
             commandBuffer.SetVertexBuffers(this.vertexBuffers);
             commandBuffer.SetIndexBuffer(this.indexBuffer, IndexFormat.UInt16);
 
-            ////drawData.ScaleClipRects(this.io.DisplayFramebufferScale);
             ImguiNative.ImDrawData_ScaleClipRects(drawData, this.io->DisplayFramebufferScale);
 
             // Render command lists
@@ -573,11 +565,11 @@ namespace EvergineImGUITest.Managers
             for (int n = 0; n < drawData->CmdListsCount; n++)
             {
                 ImDrawList* cmdList = drawData->CmdLists[n];
-                //ImGuiNET.ImDrawListPtr cmdList = drawData.CmdListsRange[n];
+
                 for (int i = 0; i < cmdList->CmdBuffer.Size; i++)
                 {
                     ImDrawCmd* cmd = (ImDrawCmd*)((long)cmdList->CmdBuffer.Data + i*(sizeof(ImDrawCmd)));
-                    //ImGuiNET.ImDrawCmdPtr cmd = cmdList.CmdBuffer[i];
+
                     if (cmd->TextureId != IntPtr.Zero)
                     {
                         if (cmd->TextureId == this.fontAtlasID)
@@ -626,7 +618,6 @@ namespace EvergineImGUITest.Managers
             this.resourceByTexture.Clear();
             this.resourceById.Clear();
 
-            ////ImGuiNET.ImGui.DestroyContext();
             ImguiNative.igDestroyContext(IntPtr.Zero);
             this.vertexBuffers[0].Dispose();
             this.vertexBuffers = null;
