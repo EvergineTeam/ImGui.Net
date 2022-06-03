@@ -68,10 +68,6 @@ namespace Common
                         default:
                             return "byte*";
                     }
-                case "size_t":
-                    return "uint";
-                case "size_t*":
-                    return "UIntPtr";
                 case "ImVec2":
                     return "Vector2";
                 case "ImVec2*":
@@ -109,9 +105,11 @@ namespace Common
                 case "ImU32":
                 case "unsigned int":
                 case "ImGuiID":
+                case "size_t":
                     return "uint";
                 case "unsigned int*":
                 case "ImU32*":
+                case "size_t*":
                     return "uint*";
                 case "ImS32":
                     return "int";
@@ -185,6 +183,26 @@ namespace Common
                 default:
                     return type;
             }
+        }
+
+        public static string ConvertDefault(string value, string type, Specification spec)
+        {
+            if (type.EndsWith("bool"))
+                return value == "NULL" ? "false" : "true";
+
+            if (spec.Enums.Exists(e => e.FrienlyName == type) && value != "0")
+                return $"({type}) {value}";
+
+            if (type == "ImGuiContext*" || type == "ImPlotContext" || type == "EditorContext*")
+                return "IntPtr.Zero";
+
+            if (value == "NULL")
+                return "null";
+
+            if (value.StartsWith("ImVec"))
+                return null;
+
+            return value;
         }
 
         public static string GetReturnTypeHeader(string csType)

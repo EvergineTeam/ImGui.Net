@@ -125,7 +125,7 @@ namespace Common
                             if(!string.IsNullOrEmpty(returnHeader))
                                 file.WriteLine($"\t\t{returnHeader}");
 
-                            file.WriteLine($"\t\tpublic static extern {csType} {o.FuncName}({o.GetParametersSignature()});\n");
+                            file.WriteLine($"\t\tpublic static extern {csType} {o.FuncName}({o.GetParametersSignature(spec)});\n");
                         }
                     }
 

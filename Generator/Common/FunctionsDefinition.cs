@@ -43,6 +43,7 @@ namespace Common
         public string ReturnType;
         public string Signature;
         public List<Param> Params = new List<Param>();
+        public Dictionary<string, string> Defaults = new Dictionary<string, string>();
 
         public static OverloadDefinition FromJson(JToken f)
         {
@@ -56,10 +57,15 @@ namespace Common
                 overload.Params.Add(Param.FromJson(a));
             }
 
+            foreach (var d in f["defaults"])
+            {
+                overload.Defaults.Add(((JProperty)d).Name.ToString(), ((JProperty)d).Value.ToString());
+            }
+
             return overload;
         }
 
-        public string GetParametersSignature()
+        public string GetParametersSignature(Specification spec)
         {
             StringBuilder signature = new StringBuilder();
             foreach (var p in Params)
@@ -69,7 +75,17 @@ namespace Common
 
                 string csType = Helpers.ConvertToCSharpType(p.Type, Helpers.Family.param);
                 signature.Append($"{csType} ");
-                signature.Append($"{p.Name}, ");
+                signature.Append($"{p.Name}");
+
+                ////Defaults.TryGetValue(p.Name, out string value);
+                ////if (!string.IsNullOrEmpty(value))
+                ////{
+                ////    string defaultValue = Helpers.ConvertDefault(value, csType, spec);
+                ////    if(!string.IsNullOrEmpty(defaultValue))
+                ////        signature.Append($" = {defaultValue}");
+                ////}
+
+                signature.Append($", ");
             }
 
             if(signature.Length > 0)

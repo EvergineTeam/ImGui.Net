@@ -1544,7 +1544,7 @@ namespace Evergine.Bindings.Imgui
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.LPStr)]
-		public static extern string igSaveIniSettingsToMemory(UIntPtr out_ini_size);
+		public static extern string igSaveIniSettingsToMemory(uint* out_ini_size);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]

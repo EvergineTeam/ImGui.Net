@@ -579,7 +579,9 @@ namespace EvergineImGUITest.Managers
 
                 for (int i = 0; i < cmdList->CmdBuffer.Size; i++)
                 {
-                    ImDrawCmd* cmd = (ImDrawCmd*)((long)cmdList->CmdBuffer.Data + i*(sizeof(ImDrawCmd)));
+                    /////ImDrawCmd* cmd = (ImDrawCmd*)((long)cmdList->CmdBuffer.Data + i*(sizeof(ImDrawCmd)));
+                    ImDrawCmd* cmd = cmdList->GetDrawCmdAt(i);
+                    ////ImDrawCmd* cmd = (*cmdList)[i];
 
                     if (cmd->TextureId != IntPtr.Zero)
                     {
