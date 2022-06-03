@@ -6,16 +6,23 @@ namespace Common
 {
     public static class Helpers
     {
-        public static string ConvertToCSharpType(string type, bool isParam = false)
+        public static string ConvertToCSharpType(string type, Family family = Family.field)
         {
             string result = type.Replace("const ", "");
 
-            result = ConvertToBasicTypes(result, isParam);
+            result = ConvertToBasicTypes(result, family);
 
             return result;
         }
 
-        private static string ConvertToBasicTypes(string type, bool isParam = false)
+        public enum Family
+        {
+            param,
+            field,
+            ret,
+        }
+
+        private static string ConvertToBasicTypes(string type, Family family)
         {
             if (type.StartsWith("bool(*)"))
                 return "bool*";
@@ -28,12 +35,39 @@ namespace Common
                 case "unsigned char":
                     return "byte";
                 case "bool":
-                    return isParam ? "[MarshalAs(UnmanagedType.Bool)] bool" : "byte";
+                    switch (family)
+                    {
+                        case Family.param:
+                            return "[MarshalAs(UnmanagedType.Bool)] bool";
+                        case Family.ret:
+                            return "bool";
+                        case Family.field:
+                        default:
+                            return "byte";
+                    }
                 case "bool*":
-                    return isParam ? "[MarshalAs(UnmanagedType.Bool)] bool" : "byte*";
+                    switch (family)
+                    {
+                        case Family.param:
+                            return "[MarshalAs(UnmanagedType.Bool)] bool";
+                        case Family.ret:
+                            return "bool";
+                        case Family.field:
+                        default:
+                            return "byte*";
+                    }
                 case "char*":
                 case "unsigned char*":
-                    return isParam ? "[MarshalAs(UnmanagedType.LPStr)] string" : "byte*";
+                    switch (family)
+                    {
+                        case Family.param:
+                            return "[MarshalAs(UnmanagedType.LPStr)] string";
+                        case Family.ret:
+                            return "string";
+                        case Family.field:
+                        default:
+                            return "byte*";
+                    }
                 case "size_t":
                     return "uint";
                 case "size_t*":
@@ -150,6 +184,19 @@ namespace Common
                     return "ImPlotPoint*";
                 default:
                     return type;
+            }
+        }
+
+        public static string GetReturnTypeHeader(string csType)
+        {
+            switch (csType)
+            {
+                case "string":
+                    return "[return:MarshalAs(UnmanagedType.LPStr)]";
+                case "bool":
+                    return "[return:MarshalAs(UnmanagedType.Bool)]";
+                default:
+                    return null;
             }
         }
 

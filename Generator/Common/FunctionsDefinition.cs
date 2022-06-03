@@ -59,7 +59,7 @@ namespace Common
             return overload;
         }
 
-        public string GetParametersSignature(Specification spec)
+        public string GetParametersSignature()
         {
             StringBuilder signature = new StringBuilder();
             foreach (var p in Params)
@@ -67,7 +67,7 @@ namespace Common
                 if (p.Name == "...")
                     continue;
 
-                string csType = Helpers.ConvertToCSharpType(p.Type, true);
+                string csType = Helpers.ConvertToCSharpType(p.Type, Helpers.Family.param);
                 signature.Append($"{csType} ");
                 signature.Append($"{p.Name}, ");
             }

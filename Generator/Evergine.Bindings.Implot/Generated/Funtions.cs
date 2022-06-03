@@ -23,7 +23,8 @@ namespace Evergine.Bindings.Implot
 		public static extern double ImPlotRange_Clamp(ImPlotRange* self, double value);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlotRange_Contains(ImPlotRange* self, double value);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlotRange_Contains(ImPlotRange* self, double value);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlotRange_ImPlotRange_Nil();
@@ -41,10 +42,12 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlotRect_Clamp_double(ImPlotPoint* pOut, ImPlotRect* self, double x, double y);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlotRect_Contains_PlotPoInt(ImPlotRect* self, ImPlotPoint p);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlotRect_Contains_PlotPoInt(ImPlotRect* self, ImPlotPoint p);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlotRect_Contains_double(ImPlotRect* self, double x, double y);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlotRect_Contains_double(ImPlotRect* self, double x, double y);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlotRect_ImPlotRect_Nil();
@@ -77,34 +80,44 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_Annotation_Str(double x, double y, Vector4 color, Vector2 pix_offset, [MarshalAs(UnmanagedType.Bool)] bool clamp, [MarshalAs(UnmanagedType.LPStr)] string fmt);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_BeginAlignedPlots([MarshalAs(UnmanagedType.LPStr)] string group_id, [MarshalAs(UnmanagedType.Bool)] bool vertical);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_BeginAlignedPlots([MarshalAs(UnmanagedType.LPStr)] string group_id, [MarshalAs(UnmanagedType.Bool)] bool vertical);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_BeginDragDropSourceAxis(ImAxis axis, ImGuiDragDropFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_BeginDragDropSourceAxis(ImAxis axis, ImGuiDragDropFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_BeginDragDropSourceItem([MarshalAs(UnmanagedType.LPStr)] string label_id, ImGuiDragDropFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_BeginDragDropSourceItem([MarshalAs(UnmanagedType.LPStr)] string label_id, ImGuiDragDropFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_BeginDragDropSourcePlot(ImGuiDragDropFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_BeginDragDropSourcePlot(ImGuiDragDropFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_BeginDragDropTargetAxis(ImAxis axis);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_BeginDragDropTargetAxis(ImAxis axis);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_BeginDragDropTargetLegend();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_BeginDragDropTargetLegend();
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_BeginDragDropTargetPlot();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_BeginDragDropTargetPlot();
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_BeginLegendPopup([MarshalAs(UnmanagedType.LPStr)] string label_id, ImGuiMouseButton mouse_button);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_BeginLegendPopup([MarshalAs(UnmanagedType.LPStr)] string label_id, ImGuiMouseButton mouse_button);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_BeginPlot([MarshalAs(UnmanagedType.LPStr)] string title_id, Vector2 size, ImPlotFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_BeginPlot([MarshalAs(UnmanagedType.LPStr)] string title_id, Vector2 size, ImPlotFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_BeginSubplots([MarshalAs(UnmanagedType.LPStr)] string title_id, int rows, int cols, Vector2 size, ImPlotSubplotFlags flags, float* row_ratios, float* col_ratios);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_BeginSubplots([MarshalAs(UnmanagedType.LPStr)] string title_id, int rows, int cols, Vector2 size, ImPlotSubplotFlags flags, float* row_ratios, float* col_ratios);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_BustColorCache([MarshalAs(UnmanagedType.LPStr)] string plot_title_id);
@@ -113,7 +126,8 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_CancelPlotSelection();
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_ColormapButton([MarshalAs(UnmanagedType.LPStr)] string label, Vector2 size, ImPlotColormap cmap);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_ColormapButton([MarshalAs(UnmanagedType.LPStr)] string label, Vector2 size, ImPlotColormap cmap);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_ColormapIcon(ImPlotColormap cmap);
@@ -122,7 +136,8 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_ColormapScale([MarshalAs(UnmanagedType.LPStr)] string label, double scale_min, double scale_max, Vector2 size, ImPlotColormap cmap, [MarshalAs(UnmanagedType.LPStr)] string format);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_ColormapSlider([MarshalAs(UnmanagedType.LPStr)] string label, float* t, Vector4* @out, [MarshalAs(UnmanagedType.LPStr)] string format, ImPlotColormap cmap);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_ColormapSlider([MarshalAs(UnmanagedType.LPStr)] string label, float* t, Vector4* @out, [MarshalAs(UnmanagedType.LPStr)] string format, ImPlotColormap cmap);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern IntPtr ImPlot_CreateContext();
@@ -131,16 +146,20 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_DestroyContext(IntPtr ctx);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_DragLineX(int id, double* x, Vector4 col, float thickness, ImPlotDragToolFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_DragLineX(int id, double* x, Vector4 col, float thickness, ImPlotDragToolFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_DragLineY(int id, double* y, Vector4 col, float thickness, ImPlotDragToolFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_DragLineY(int id, double* y, Vector4 col, float thickness, ImPlotDragToolFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_DragPoint(int id, double* x, double* y, Vector4 col, float size, ImPlotDragToolFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_DragPoint(int id, double* x, double* y, Vector4 col, float size, ImPlotDragToolFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_DragRect(int id, double* x_min, double* y_min, double* x_max, double* y_max, Vector4 col, ImPlotDragToolFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_DragRect(int id, double* x_min, double* y_min, double* x_max, double* y_max, Vector4 col, ImPlotDragToolFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_EndAlignedPlots();
@@ -170,7 +189,8 @@ namespace Evergine.Bindings.Implot
 		public static extern ImPlotColormap ImPlot_GetColormapIndex([MarshalAs(UnmanagedType.LPStr)] string name);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte* ImPlot_GetColormapName(ImPlotColormap cmap);
+		[return:MarshalAs(UnmanagedType.LPStr)]
+		public static extern string ImPlot_GetColormapName(ImPlotColormap cmap);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int ImPlot_GetColormapSize(ImPlotColormap cmap);
@@ -185,7 +205,8 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_GetLastItemColor(Vector4* pOut);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte* ImPlot_GetMarkerName(ImPlotMarker idx);
+		[return:MarshalAs(UnmanagedType.LPStr)]
+		public static extern string ImPlot_GetMarkerName(ImPlotMarker idx);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern ImDrawList* ImPlot_GetPlotDrawList();
@@ -209,25 +230,31 @@ namespace Evergine.Bindings.Implot
 		public static extern ImPlotStyle* ImPlot_GetStyle();
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte* ImPlot_GetStyleColorName(ImPlotCol idx);
+		[return:MarshalAs(UnmanagedType.LPStr)]
+		public static extern string ImPlot_GetStyleColorName(ImPlotCol idx);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_HideNextItem([MarshalAs(UnmanagedType.Bool)] bool hidden, ImPlotCond cond);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_IsAxisHovered(ImAxis axis);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_IsAxisHovered(ImAxis axis);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_IsLegendEntryHovered([MarshalAs(UnmanagedType.LPStr)] string label_id);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_IsLegendEntryHovered([MarshalAs(UnmanagedType.LPStr)] string label_id);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_IsPlotHovered();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_IsPlotHovered();
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_IsPlotSelected();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_IsPlotSelected();
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_IsSubplotsHovered();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_IsSubplotsHovered();
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_ItemIcon_Vec4(Vector4 col);
@@ -1241,13 +1268,15 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_SetupMouseText(ImPlotLocation location, ImPlotMouseTextFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_ShowColormapSelector([MarshalAs(UnmanagedType.LPStr)] string label);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_ShowColormapSelector([MarshalAs(UnmanagedType.LPStr)] string label);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_ShowDemoWindow([MarshalAs(UnmanagedType.Bool)] bool p_open);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_ShowInputMapSelector([MarshalAs(UnmanagedType.LPStr)] string label);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_ShowInputMapSelector([MarshalAs(UnmanagedType.LPStr)] string label);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_ShowMetricsWindow([MarshalAs(UnmanagedType.Bool)] bool p_popen);
@@ -1256,7 +1285,8 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_ShowStyleEditor(ImPlotStyle* @ref);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImPlot_ShowStyleSelector([MarshalAs(UnmanagedType.LPStr)] string label);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImPlot_ShowStyleSelector([MarshalAs(UnmanagedType.LPStr)] string label);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_ShowUserGuide();

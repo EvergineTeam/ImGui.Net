@@ -257,7 +257,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImFontAtlasCustomRect_ImFontAtlasCustomRect();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImFontAtlasCustomRect_IsPacked(ImFontAtlasCustomRect* self);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImFontAtlasCustomRect_IsPacked(ImFontAtlasCustomRect* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int ImFontAtlas_AddCustomRectFontGlyph(ImFontAtlas* self, ImFont* font, ushort id, int width, int height, float advance_x, Vector2 offset);
@@ -284,7 +285,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern ImFont* ImFontAtlas_AddFontFromMemoryTTF(ImFontAtlas* self, void* font_data, int font_size, float size_pixels, ImFontConfig* font_cfg, ushort* glyph_ranges);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImFontAtlas_Build(ImFontAtlas* self);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImFontAtlas_Build(ImFontAtlas* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImFontAtlas_CalcCustomRectUV(ImFontAtlas* self, ImFontAtlasCustomRect* rect, Vector2* out_uv_min, Vector2* out_uv_max);
@@ -329,7 +331,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern ushort* ImFontAtlas_GetGlyphRangesVietnamese(ImFontAtlas* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImFontAtlas_GetMouseCursorTexData(ImFontAtlas* self, ImGuiMouseCursor cursor, Vector2* out_offset, Vector2* out_size, Vector2* out_uv_border, Vector2* out_uv_fill);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImFontAtlas_GetMouseCursorTexData(ImFontAtlas* self, ImGuiMouseCursor cursor, Vector2* out_offset, Vector2* out_size, Vector2* out_uv_border, Vector2* out_uv_fill);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImFontAtlas_GetTexDataAsAlpha8(ImFontAtlas* self, byte** out_pixels, int* out_width, int* out_height, int* out_bytes_per_pixel);
@@ -341,7 +344,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImFontAtlas_ImFontAtlas();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImFontAtlas_IsBuilt(ImFontAtlas* self);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImFontAtlas_IsBuilt(ImFontAtlas* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImFontAtlas_SetTexID(ImFontAtlas* self, IntPtr id);
@@ -365,7 +369,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImFontGlyphRangesBuilder_Clear(ImFontGlyphRangesBuilder* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImFontGlyphRangesBuilder_GetBit(ImFontGlyphRangesBuilder* self, uint n);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImFontGlyphRangesBuilder_GetBit(ImFontGlyphRangesBuilder* self, uint n);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImFontGlyphRangesBuilder_ImFontGlyphRangesBuilder();
@@ -386,7 +391,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImFont_CalcTextSizeA(Vector2* pOut, ImFont* self, float size, float max_width, float wrap_width, [MarshalAs(UnmanagedType.LPStr)] string text_begin, [MarshalAs(UnmanagedType.LPStr)] string text_end, char** remaining);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte* ImFont_CalcWordWrapPositionA(ImFont* self, float scale, [MarshalAs(UnmanagedType.LPStr)] string text, [MarshalAs(UnmanagedType.LPStr)] string text_end, float wrap_width);
+		[return:MarshalAs(UnmanagedType.LPStr)]
+		public static extern string ImFont_CalcWordWrapPositionA(ImFont* self, float scale, [MarshalAs(UnmanagedType.LPStr)] string text, [MarshalAs(UnmanagedType.LPStr)] string text_end, float wrap_width);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImFont_ClearOutputData(ImFont* self);
@@ -401,7 +407,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern float ImFont_GetCharAdvance(ImFont* self, ushort c);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte* ImFont_GetDebugName(ImFont* self);
+		[return:MarshalAs(UnmanagedType.LPStr)]
+		public static extern string ImFont_GetDebugName(ImFont* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImFont_GrowIndex(ImFont* self, int new_size);
@@ -410,10 +417,12 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImFont_ImFont();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImFont_IsGlyphRangeUnused(ImFont* self, uint c_begin, uint c_last);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImFont_IsGlyphRangeUnused(ImFont* self, uint c_begin, uint c_last);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImFont_IsLoaded(ImFont* self);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImFont_IsLoaded(ImFont* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImFont_RenderChar(ImFont* self, ImDrawList* draw_list, float size, Vector2 pos, uint col, ushort c);
@@ -470,7 +479,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImGuiInputTextCallbackData_DeleteChars(ImGuiInputTextCallbackData* self, int pos, int bytes_count);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImGuiInputTextCallbackData_HasSelection(ImGuiInputTextCallbackData* self);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImGuiInputTextCallbackData_HasSelection(ImGuiInputTextCallbackData* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuiInputTextCallbackData_ImGuiInputTextCallbackData();
@@ -494,7 +504,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImGuiListClipper_ImGuiListClipper();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImGuiListClipper_Step(ImGuiListClipper* self);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImGuiListClipper_Step(ImGuiListClipper* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuiOnceUponAFrame_ImGuiOnceUponAFrame();
@@ -506,13 +517,16 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImGuiPayload_ImGuiPayload();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImGuiPayload_IsDataType(ImGuiPayload* self, [MarshalAs(UnmanagedType.LPStr)] string type);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImGuiPayload_IsDataType(ImGuiPayload* self, [MarshalAs(UnmanagedType.LPStr)] string type);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImGuiPayload_IsDelivery(ImGuiPayload* self);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImGuiPayload_IsDelivery(ImGuiPayload* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImGuiPayload_IsPreview(ImGuiPayload* self);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImGuiPayload_IsPreview(ImGuiPayload* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuiPlatformImeData_ImGuiPlatformImeData();
@@ -524,10 +538,12 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImGuiStorage_Clear(ImGuiStorage* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImGuiStorage_GetBool(ImGuiStorage* self, uint key, [MarshalAs(UnmanagedType.Bool)] bool default_val);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImGuiStorage_GetBool(ImGuiStorage* self, uint key, [MarshalAs(UnmanagedType.Bool)] bool default_val);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte* ImGuiStorage_GetBoolRef(ImGuiStorage* self, uint key, [MarshalAs(UnmanagedType.Bool)] bool default_val);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImGuiStorage_GetBoolRef(ImGuiStorage* self, uint key, [MarshalAs(UnmanagedType.Bool)] bool default_val);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern float ImGuiStorage_GetFloat(ImGuiStorage* self, uint key, float default_val);
@@ -584,19 +600,23 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImGuiTextBuffer_appendf(ImGuiTextBuffer* self, [MarshalAs(UnmanagedType.LPStr)] string fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte* ImGuiTextBuffer_begin(ImGuiTextBuffer* self);
+		[return:MarshalAs(UnmanagedType.LPStr)]
+		public static extern string ImGuiTextBuffer_begin(ImGuiTextBuffer* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte* ImGuiTextBuffer_c_str(ImGuiTextBuffer* self);
+		[return:MarshalAs(UnmanagedType.LPStr)]
+		public static extern string ImGuiTextBuffer_c_str(ImGuiTextBuffer* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuiTextBuffer_clear(ImGuiTextBuffer* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImGuiTextBuffer_empty(ImGuiTextBuffer* self);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImGuiTextBuffer_empty(ImGuiTextBuffer* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte* ImGuiTextBuffer_end(ImGuiTextBuffer* self);
+		[return:MarshalAs(UnmanagedType.LPStr)]
+		public static extern string ImGuiTextBuffer_end(ImGuiTextBuffer* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuiTextBuffer_reserve(ImGuiTextBuffer* self, int capacity);
@@ -611,16 +631,19 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImGuiTextFilter_Clear(ImGuiTextFilter* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImGuiTextFilter_Draw(ImGuiTextFilter* self, [MarshalAs(UnmanagedType.LPStr)] string label, float width);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImGuiTextFilter_Draw(ImGuiTextFilter* self, [MarshalAs(UnmanagedType.LPStr)] string label, float width);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuiTextFilter_ImGuiTextFilter([MarshalAs(UnmanagedType.LPStr)] string default_filter);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImGuiTextFilter_IsActive(ImGuiTextFilter* self);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImGuiTextFilter_IsActive(ImGuiTextFilter* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImGuiTextFilter_PassFilter(ImGuiTextFilter* self, [MarshalAs(UnmanagedType.LPStr)] string text, [MarshalAs(UnmanagedType.LPStr)] string text_end);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImGuiTextFilter_PassFilter(ImGuiTextFilter* self, [MarshalAs(UnmanagedType.LPStr)] string text, [MarshalAs(UnmanagedType.LPStr)] string text_end);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuiTextRange_ImGuiTextRange_Nil();
@@ -629,7 +652,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImGuiTextRange_ImGuiTextRange_Str([MarshalAs(UnmanagedType.LPStr)] string _b, [MarshalAs(UnmanagedType.LPStr)] string _e);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImGuiTextRange_empty(ImGuiTextRange* self);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImGuiTextRange_empty(ImGuiTextRange* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuiTextRange_split(ImGuiTextRange* self, byte separator, ImVector* @out);
@@ -662,70 +686,90 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igAlignTextToFramePadding();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igArrowButton([MarshalAs(UnmanagedType.LPStr)] string str_id, ImGuiDir dir);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igArrowButton([MarshalAs(UnmanagedType.LPStr)] string str_id, ImGuiDir dir);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBegin([MarshalAs(UnmanagedType.LPStr)] string name, [MarshalAs(UnmanagedType.Bool)] bool p_open, ImGuiWindowFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBegin([MarshalAs(UnmanagedType.LPStr)] string name, [MarshalAs(UnmanagedType.Bool)] bool p_open, ImGuiWindowFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBeginChild_Str([MarshalAs(UnmanagedType.LPStr)] string str_id, Vector2 size, [MarshalAs(UnmanagedType.Bool)] bool border, ImGuiWindowFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBeginChild_Str([MarshalAs(UnmanagedType.LPStr)] string str_id, Vector2 size, [MarshalAs(UnmanagedType.Bool)] bool border, ImGuiWindowFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBeginChild_ID(uint id, Vector2 size, [MarshalAs(UnmanagedType.Bool)] bool border, ImGuiWindowFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBeginChild_ID(uint id, Vector2 size, [MarshalAs(UnmanagedType.Bool)] bool border, ImGuiWindowFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBeginChildFrame(uint id, Vector2 size, ImGuiWindowFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBeginChildFrame(uint id, Vector2 size, ImGuiWindowFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBeginCombo([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.LPStr)] string preview_value, ImGuiComboFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBeginCombo([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.LPStr)] string preview_value, ImGuiComboFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igBeginDisabled([MarshalAs(UnmanagedType.Bool)] bool disabled);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBeginDragDropSource(ImGuiDragDropFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBeginDragDropSource(ImGuiDragDropFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBeginDragDropTarget();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBeginDragDropTarget();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igBeginGroup();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBeginListBox([MarshalAs(UnmanagedType.LPStr)] string label, Vector2 size);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBeginListBox([MarshalAs(UnmanagedType.LPStr)] string label, Vector2 size);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBeginMainMenuBar();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBeginMainMenuBar();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBeginMenu([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.Bool)] bool enabled);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBeginMenu([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.Bool)] bool enabled);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBeginMenuBar();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBeginMenuBar();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBeginPopup([MarshalAs(UnmanagedType.LPStr)] string str_id, ImGuiWindowFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBeginPopup([MarshalAs(UnmanagedType.LPStr)] string str_id, ImGuiWindowFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBeginPopupContextItem([MarshalAs(UnmanagedType.LPStr)] string str_id, ImGuiPopupFlags popup_flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBeginPopupContextItem([MarshalAs(UnmanagedType.LPStr)] string str_id, ImGuiPopupFlags popup_flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBeginPopupContextVoid([MarshalAs(UnmanagedType.LPStr)] string str_id, ImGuiPopupFlags popup_flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBeginPopupContextVoid([MarshalAs(UnmanagedType.LPStr)] string str_id, ImGuiPopupFlags popup_flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBeginPopupContextWindow([MarshalAs(UnmanagedType.LPStr)] string str_id, ImGuiPopupFlags popup_flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBeginPopupContextWindow([MarshalAs(UnmanagedType.LPStr)] string str_id, ImGuiPopupFlags popup_flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBeginPopupModal([MarshalAs(UnmanagedType.LPStr)] string name, [MarshalAs(UnmanagedType.Bool)] bool p_open, ImGuiWindowFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBeginPopupModal([MarshalAs(UnmanagedType.LPStr)] string name, [MarshalAs(UnmanagedType.Bool)] bool p_open, ImGuiWindowFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBeginTabBar([MarshalAs(UnmanagedType.LPStr)] string str_id, ImGuiTabBarFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBeginTabBar([MarshalAs(UnmanagedType.LPStr)] string str_id, ImGuiTabBarFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBeginTabItem([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.Bool)] bool p_open, ImGuiTabItemFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBeginTabItem([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.Bool)] bool p_open, ImGuiTabItemFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igBeginTable([MarshalAs(UnmanagedType.LPStr)] string str_id, int column, ImGuiTableFlags flags, Vector2 outer_size, float inner_width);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igBeginTable([MarshalAs(UnmanagedType.LPStr)] string str_id, int column, ImGuiTableFlags flags, Vector2 outer_size, float inner_width);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igBeginTooltip();
@@ -737,7 +781,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igBulletText([MarshalAs(UnmanagedType.LPStr)] string fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igButton([MarshalAs(UnmanagedType.LPStr)] string label, Vector2 size);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igButton([MarshalAs(UnmanagedType.LPStr)] string label, Vector2 size);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern float igCalcItemWidth();
@@ -752,25 +797,31 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igCaptureMouseFromApp([MarshalAs(UnmanagedType.Bool)] bool want_capture_mouse_value);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igCheckbox([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.Bool)] bool v);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igCheckbox([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.Bool)] bool v);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igCheckboxFlags_IntPtr([MarshalAs(UnmanagedType.LPStr)] string label, int* flags, int flags_value);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igCheckboxFlags_IntPtr([MarshalAs(UnmanagedType.LPStr)] string label, int* flags, int flags_value);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igCheckboxFlags_UintPtr([MarshalAs(UnmanagedType.LPStr)] string label, uint* flags, uint flags_value);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igCheckboxFlags_UintPtr([MarshalAs(UnmanagedType.LPStr)] string label, uint* flags, uint flags_value);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igCloseCurrentPopup();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igCollapsingHeader_TreeNodeFlags([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiTreeNodeFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igCollapsingHeader_TreeNodeFlags([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiTreeNodeFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igCollapsingHeader_BoolPtr([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.Bool)] bool p_visible, ImGuiTreeNodeFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igCollapsingHeader_BoolPtr([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.Bool)] bool p_visible, ImGuiTreeNodeFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igColorButton([MarshalAs(UnmanagedType.LPStr)] string desc_id, Vector4 col, ImGuiColorEditFlags flags, Vector2 size);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igColorButton([MarshalAs(UnmanagedType.LPStr)] string desc_id, Vector4 col, ImGuiColorEditFlags flags, Vector2 size);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern uint igColorConvertFloat4ToU32(Vector4 @in);
@@ -785,73 +836,93 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igColorConvertU32ToFloat4(Vector4* pOut, uint @in);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igColorEdit3([MarshalAs(UnmanagedType.LPStr)] string label, Vector3* col, ImGuiColorEditFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igColorEdit3([MarshalAs(UnmanagedType.LPStr)] string label, Vector3* col, ImGuiColorEditFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igColorEdit4([MarshalAs(UnmanagedType.LPStr)] string label, Vector4* col, ImGuiColorEditFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igColorEdit4([MarshalAs(UnmanagedType.LPStr)] string label, Vector4* col, ImGuiColorEditFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igColorPicker3([MarshalAs(UnmanagedType.LPStr)] string label, Vector3* col, ImGuiColorEditFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igColorPicker3([MarshalAs(UnmanagedType.LPStr)] string label, Vector3* col, ImGuiColorEditFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igColorPicker4([MarshalAs(UnmanagedType.LPStr)] string label, Vector4* col, ImGuiColorEditFlags flags, float* ref_col);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igColorPicker4([MarshalAs(UnmanagedType.LPStr)] string label, Vector4* col, ImGuiColorEditFlags flags, float* ref_col);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igColumns(int count, [MarshalAs(UnmanagedType.LPStr)] string id, [MarshalAs(UnmanagedType.Bool)] bool border);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igCombo_Str_arr([MarshalAs(UnmanagedType.LPStr)] string label, int* current_item, byte** items, int items_count, int popup_max_height_in_items);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igCombo_Str_arr([MarshalAs(UnmanagedType.LPStr)] string label, int* current_item, byte** items, int items_count, int popup_max_height_in_items);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igCombo_Str([MarshalAs(UnmanagedType.LPStr)] string label, int* current_item, [MarshalAs(UnmanagedType.LPStr)] string items_separated_by_zeros, int popup_max_height_in_items);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igCombo_Str([MarshalAs(UnmanagedType.LPStr)] string label, int* current_item, [MarshalAs(UnmanagedType.LPStr)] string items_separated_by_zeros, int popup_max_height_in_items);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igCombo_FnBoolPtr([MarshalAs(UnmanagedType.LPStr)] string label, int* current_item, bool* items_getter, void* data, int items_count, int popup_max_height_in_items);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igCombo_FnBoolPtr([MarshalAs(UnmanagedType.LPStr)] string label, int* current_item, bool* items_getter, void* data, int items_count, int popup_max_height_in_items);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern IntPtr igCreateContext(ImFontAtlas* shared_font_atlas);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igDebugCheckVersionAndDataLayout([MarshalAs(UnmanagedType.LPStr)] string version_str, uint sz_io, uint sz_style, uint sz_vec2, uint sz_vec4, uint sz_drawvert, uint sz_drawidx);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igDebugCheckVersionAndDataLayout([MarshalAs(UnmanagedType.LPStr)] string version_str, uint sz_io, uint sz_style, uint sz_vec2, uint sz_vec4, uint sz_drawvert, uint sz_drawidx);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igDestroyContext(IntPtr ctx);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igDragFloat([MarshalAs(UnmanagedType.LPStr)] string label, float* v, float v_speed, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igDragFloat([MarshalAs(UnmanagedType.LPStr)] string label, float* v, float v_speed, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igDragFloat2([MarshalAs(UnmanagedType.LPStr)] string label, Vector2* v, float v_speed, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igDragFloat2([MarshalAs(UnmanagedType.LPStr)] string label, Vector2* v, float v_speed, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igDragFloat3([MarshalAs(UnmanagedType.LPStr)] string label, Vector3* v, float v_speed, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igDragFloat3([MarshalAs(UnmanagedType.LPStr)] string label, Vector3* v, float v_speed, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igDragFloat4([MarshalAs(UnmanagedType.LPStr)] string label, Vector4* v, float v_speed, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igDragFloat4([MarshalAs(UnmanagedType.LPStr)] string label, Vector4* v, float v_speed, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igDragFloatRange2([MarshalAs(UnmanagedType.LPStr)] string label, float* v_current_min, float* v_current_max, float v_speed, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, [MarshalAs(UnmanagedType.LPStr)] string format_max, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igDragFloatRange2([MarshalAs(UnmanagedType.LPStr)] string label, float* v_current_min, float* v_current_max, float v_speed, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, [MarshalAs(UnmanagedType.LPStr)] string format_max, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igDragInt([MarshalAs(UnmanagedType.LPStr)] string label, int* v, float v_speed, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igDragInt([MarshalAs(UnmanagedType.LPStr)] string label, int* v, float v_speed, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igDragInt2([MarshalAs(UnmanagedType.LPStr)] string label, int* v, float v_speed, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igDragInt2([MarshalAs(UnmanagedType.LPStr)] string label, int* v, float v_speed, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igDragInt3([MarshalAs(UnmanagedType.LPStr)] string label, int* v, float v_speed, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igDragInt3([MarshalAs(UnmanagedType.LPStr)] string label, int* v, float v_speed, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igDragInt4([MarshalAs(UnmanagedType.LPStr)] string label, int* v, float v_speed, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igDragInt4([MarshalAs(UnmanagedType.LPStr)] string label, int* v, float v_speed, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igDragIntRange2([MarshalAs(UnmanagedType.LPStr)] string label, int* v_current_min, int* v_current_max, float v_speed, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, [MarshalAs(UnmanagedType.LPStr)] string format_max, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igDragIntRange2([MarshalAs(UnmanagedType.LPStr)] string label, int* v_current_min, int* v_current_max, float v_speed, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, [MarshalAs(UnmanagedType.LPStr)] string format_max, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igDragScalar([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiDataType data_type, void* p_data, float v_speed, void* p_min, void* p_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igDragScalar([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiDataType data_type, void* p_data, float v_speed, void* p_min, void* p_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igDragScalarN([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiDataType data_type, void* p_data, int components, float v_speed, void* p_min, void* p_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igDragScalarN([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiDataType data_type, void* p_data, int components, float v_speed, void* p_min, void* p_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igDummy(Vector2 size);
@@ -917,7 +988,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern ImDrawList* igGetBackgroundDrawList_Nil();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte* igGetClipboardText();
+		[return:MarshalAs(UnmanagedType.LPStr)]
+		public static extern string igGetClipboardText();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern uint igGetColorU32_Col(ImGuiCol idx, float alpha_mul);
@@ -1019,7 +1091,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern int igGetKeyIndex(ImGuiKey key);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte* igGetKeyName(ImGuiKey key);
+		[return:MarshalAs(UnmanagedType.LPStr)]
+		public static extern string igGetKeyName(ImGuiKey key);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int igGetKeyPressedAmount(ImGuiKey key, float repeat_delay, float rate);
@@ -1061,7 +1134,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern ImGuiStyle* igGetStyle();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte* igGetStyleColorName(ImGuiCol idx);
+		[return:MarshalAs(UnmanagedType.LPStr)]
+		public static extern string igGetStyleColorName(ImGuiCol idx);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern Vector4* igGetStyleColorVec4(ImGuiCol idx);
@@ -1079,7 +1153,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern float igGetTreeNodeToLabelSpacing();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte* igGetVersion();
+		[return:MarshalAs(UnmanagedType.LPStr)]
+		public static extern string igGetVersion();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igGetWindowContentRegionMax(Vector2* pOut);
@@ -1106,157 +1181,206 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igImage(IntPtr user_texture_id, Vector2 size, Vector2 uv0, Vector2 uv1, Vector4 tint_col, Vector4 border_col);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igImageButton(IntPtr user_texture_id, Vector2 size, Vector2 uv0, Vector2 uv1, int frame_padding, Vector4 bg_col, Vector4 tint_col);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igImageButton(IntPtr user_texture_id, Vector2 size, Vector2 uv0, Vector2 uv1, int frame_padding, Vector4 bg_col, Vector4 tint_col);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igIndent(float indent_w);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igInputDouble([MarshalAs(UnmanagedType.LPStr)] string label, double* v, double step, double step_fast, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiInputTextFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igInputDouble([MarshalAs(UnmanagedType.LPStr)] string label, double* v, double step, double step_fast, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiInputTextFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igInputFloat([MarshalAs(UnmanagedType.LPStr)] string label, float* v, float step, float step_fast, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiInputTextFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igInputFloat([MarshalAs(UnmanagedType.LPStr)] string label, float* v, float step, float step_fast, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiInputTextFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igInputFloat2([MarshalAs(UnmanagedType.LPStr)] string label, Vector2* v, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiInputTextFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igInputFloat2([MarshalAs(UnmanagedType.LPStr)] string label, Vector2* v, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiInputTextFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igInputFloat3([MarshalAs(UnmanagedType.LPStr)] string label, Vector3* v, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiInputTextFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igInputFloat3([MarshalAs(UnmanagedType.LPStr)] string label, Vector3* v, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiInputTextFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igInputFloat4([MarshalAs(UnmanagedType.LPStr)] string label, Vector4* v, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiInputTextFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igInputFloat4([MarshalAs(UnmanagedType.LPStr)] string label, Vector4* v, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiInputTextFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igInputInt([MarshalAs(UnmanagedType.LPStr)] string label, int* v, int step, int step_fast, ImGuiInputTextFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igInputInt([MarshalAs(UnmanagedType.LPStr)] string label, int* v, int step, int step_fast, ImGuiInputTextFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igInputInt2([MarshalAs(UnmanagedType.LPStr)] string label, int* v, ImGuiInputTextFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igInputInt2([MarshalAs(UnmanagedType.LPStr)] string label, int* v, ImGuiInputTextFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igInputInt3([MarshalAs(UnmanagedType.LPStr)] string label, int* v, ImGuiInputTextFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igInputInt3([MarshalAs(UnmanagedType.LPStr)] string label, int* v, ImGuiInputTextFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igInputInt4([MarshalAs(UnmanagedType.LPStr)] string label, int* v, ImGuiInputTextFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igInputInt4([MarshalAs(UnmanagedType.LPStr)] string label, int* v, ImGuiInputTextFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igInputScalar([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiDataType data_type, void* p_data, void* p_step, void* p_step_fast, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiInputTextFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igInputScalar([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiDataType data_type, void* p_data, void* p_step, void* p_step_fast, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiInputTextFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igInputScalarN([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiDataType data_type, void* p_data, int components, void* p_step, void* p_step_fast, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiInputTextFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igInputScalarN([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiDataType data_type, void* p_data, int components, void* p_step, void* p_step_fast, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiInputTextFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igInputText([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.LPStr)] string buf, uint buf_size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* user_data);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igInputText([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.LPStr)] string buf, uint buf_size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* user_data);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igInputTextMultiline([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.LPStr)] string buf, uint buf_size, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* user_data);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igInputTextMultiline([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.LPStr)] string buf, uint buf_size, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* user_data);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igInputTextWithHint([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.LPStr)] string hint, [MarshalAs(UnmanagedType.LPStr)] string buf, uint buf_size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* user_data);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igInputTextWithHint([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.LPStr)] string hint, [MarshalAs(UnmanagedType.LPStr)] string buf, uint buf_size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* user_data);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igInvisibleButton([MarshalAs(UnmanagedType.LPStr)] string str_id, Vector2 size, ImGuiButtonFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igInvisibleButton([MarshalAs(UnmanagedType.LPStr)] string str_id, Vector2 size, ImGuiButtonFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsAnyItemActive();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsAnyItemActive();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsAnyItemFocused();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsAnyItemFocused();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsAnyItemHovered();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsAnyItemHovered();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsAnyMouseDown();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsAnyMouseDown();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsItemActivated();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsItemActivated();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsItemActive();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsItemActive();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsItemClicked(ImGuiMouseButton mouse_button);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsItemClicked(ImGuiMouseButton mouse_button);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsItemDeactivated();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsItemDeactivated();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsItemDeactivatedAfterEdit();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsItemDeactivatedAfterEdit();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsItemEdited();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsItemEdited();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsItemFocused();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsItemFocused();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsItemHovered(ImGuiHoveredFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsItemHovered(ImGuiHoveredFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsItemToggledOpen();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsItemToggledOpen();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsItemVisible();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsItemVisible();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsKeyDown(ImGuiKey key);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsKeyDown(ImGuiKey key);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsKeyPressed(ImGuiKey key, [MarshalAs(UnmanagedType.Bool)] bool repeat);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsKeyPressed(ImGuiKey key, [MarshalAs(UnmanagedType.Bool)] bool repeat);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsKeyReleased(ImGuiKey key);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsKeyReleased(ImGuiKey key);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsMouseClicked(ImGuiMouseButton button, [MarshalAs(UnmanagedType.Bool)] bool repeat);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsMouseClicked(ImGuiMouseButton button, [MarshalAs(UnmanagedType.Bool)] bool repeat);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsMouseDoubleClicked(ImGuiMouseButton button);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsMouseDoubleClicked(ImGuiMouseButton button);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsMouseDown(ImGuiMouseButton button);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsMouseDown(ImGuiMouseButton button);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsMouseDragging(ImGuiMouseButton button, float lock_threshold);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsMouseDragging(ImGuiMouseButton button, float lock_threshold);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsMouseHoveringRect(Vector2 r_min, Vector2 r_max, [MarshalAs(UnmanagedType.Bool)] bool clip);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsMouseHoveringRect(Vector2 r_min, Vector2 r_max, [MarshalAs(UnmanagedType.Bool)] bool clip);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsMousePosValid(Vector2* mouse_pos);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsMousePosValid(Vector2* mouse_pos);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsMouseReleased(ImGuiMouseButton button);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsMouseReleased(ImGuiMouseButton button);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsPopupOpen_Str([MarshalAs(UnmanagedType.LPStr)] string str_id, ImGuiPopupFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsPopupOpen_Str([MarshalAs(UnmanagedType.LPStr)] string str_id, ImGuiPopupFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsRectVisible_Nil(Vector2 size);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsRectVisible_Nil(Vector2 size);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsRectVisible_Vec2(Vector2 rect_min, Vector2 rect_max);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsRectVisible_Vec2(Vector2 rect_min, Vector2 rect_max);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsWindowAppearing();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsWindowAppearing();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsWindowCollapsed();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsWindowCollapsed();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsWindowFocused(ImGuiFocusedFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsWindowFocused(ImGuiFocusedFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igIsWindowHovered(ImGuiHoveredFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igIsWindowHovered(ImGuiHoveredFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igLabelText([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.LPStr)] string fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igListBox_Str_arr([MarshalAs(UnmanagedType.LPStr)] string label, int* current_item, byte** items, int items_count, int height_in_items);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igListBox_Str_arr([MarshalAs(UnmanagedType.LPStr)] string label, int* current_item, byte** items, int items_count, int height_in_items);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igListBox_FnBoolPtr([MarshalAs(UnmanagedType.LPStr)] string label, int* current_item, bool* items_getter, void* data, int items_count, int height_in_items);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igListBox_FnBoolPtr([MarshalAs(UnmanagedType.LPStr)] string label, int* current_item, bool* items_getter, void* data, int items_count, int height_in_items);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igLoadIniSettingsFromDisk([MarshalAs(UnmanagedType.LPStr)] string ini_filename);
@@ -1289,10 +1413,12 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igMemFree(void* ptr);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igMenuItem_Bool([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.LPStr)] string shortcut, [MarshalAs(UnmanagedType.Bool)] bool selected, [MarshalAs(UnmanagedType.Bool)] bool enabled);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igMenuItem_Bool([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.LPStr)] string shortcut, [MarshalAs(UnmanagedType.Bool)] bool selected, [MarshalAs(UnmanagedType.Bool)] bool enabled);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igMenuItem_BoolPtr([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.LPStr)] string shortcut, [MarshalAs(UnmanagedType.Bool)] bool p_selected, [MarshalAs(UnmanagedType.Bool)] bool enabled);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igMenuItem_BoolPtr([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.LPStr)] string shortcut, [MarshalAs(UnmanagedType.Bool)] bool p_selected, [MarshalAs(UnmanagedType.Bool)] bool enabled);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igNewFrame();
@@ -1397,10 +1523,12 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igPushTextWrapPos(float wrap_local_pos_x);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igRadioButton_Bool([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.Bool)] bool active);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igRadioButton_Bool([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.Bool)] bool active);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igRadioButton_IntPtr([MarshalAs(UnmanagedType.LPStr)] string label, int* v, int v_button);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igRadioButton_IntPtr([MarshalAs(UnmanagedType.LPStr)] string label, int* v, int v_button);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igRender();
@@ -1415,13 +1543,16 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igSaveIniSettingsToDisk([MarshalAs(UnmanagedType.LPStr)] string ini_filename);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte* igSaveIniSettingsToMemory(UIntPtr out_ini_size);
+		[return:MarshalAs(UnmanagedType.LPStr)]
+		public static extern string igSaveIniSettingsToMemory(UIntPtr out_ini_size);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igSelectable_Bool([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.Bool)] bool selected, ImGuiSelectableFlags flags, Vector2 size);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igSelectable_Bool([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.Bool)] bool selected, ImGuiSelectableFlags flags, Vector2 size);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igSelectable_BoolPtr([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.Bool)] bool p_selected, ImGuiSelectableFlags flags, Vector2 size);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igSelectable_BoolPtr([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.Bool)] bool p_selected, ImGuiSelectableFlags flags, Vector2 size);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igSeparator();
@@ -1457,7 +1588,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igSetCursorScreenPos(Vector2 pos);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igSetDragDropPayload([MarshalAs(UnmanagedType.LPStr)] string type, void* data, uint sz, ImGuiCond cond);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igSetDragDropPayload([MarshalAs(UnmanagedType.LPStr)] string type, void* data, uint sz, ImGuiCond cond);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igSetItemAllowOverlap();
@@ -1571,46 +1703,59 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igShowStyleEditor(ImGuiStyle* @ref);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igShowStyleSelector([MarshalAs(UnmanagedType.LPStr)] string label);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igShowStyleSelector([MarshalAs(UnmanagedType.LPStr)] string label);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igShowUserGuide();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igSliderAngle([MarshalAs(UnmanagedType.LPStr)] string label, float* v_rad, float v_degrees_min, float v_degrees_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igSliderAngle([MarshalAs(UnmanagedType.LPStr)] string label, float* v_rad, float v_degrees_min, float v_degrees_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igSliderFloat([MarshalAs(UnmanagedType.LPStr)] string label, float* v, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igSliderFloat([MarshalAs(UnmanagedType.LPStr)] string label, float* v, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igSliderFloat2([MarshalAs(UnmanagedType.LPStr)] string label, Vector2* v, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igSliderFloat2([MarshalAs(UnmanagedType.LPStr)] string label, Vector2* v, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igSliderFloat3([MarshalAs(UnmanagedType.LPStr)] string label, Vector3* v, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igSliderFloat3([MarshalAs(UnmanagedType.LPStr)] string label, Vector3* v, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igSliderFloat4([MarshalAs(UnmanagedType.LPStr)] string label, Vector4* v, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igSliderFloat4([MarshalAs(UnmanagedType.LPStr)] string label, Vector4* v, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igSliderInt([MarshalAs(UnmanagedType.LPStr)] string label, int* v, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igSliderInt([MarshalAs(UnmanagedType.LPStr)] string label, int* v, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igSliderInt2([MarshalAs(UnmanagedType.LPStr)] string label, int* v, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igSliderInt2([MarshalAs(UnmanagedType.LPStr)] string label, int* v, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igSliderInt3([MarshalAs(UnmanagedType.LPStr)] string label, int* v, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igSliderInt3([MarshalAs(UnmanagedType.LPStr)] string label, int* v, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igSliderInt4([MarshalAs(UnmanagedType.LPStr)] string label, int* v, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igSliderInt4([MarshalAs(UnmanagedType.LPStr)] string label, int* v, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igSliderScalar([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiDataType data_type, void* p_data, void* p_min, void* p_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igSliderScalar([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiDataType data_type, void* p_data, void* p_min, void* p_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igSliderScalarN([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiDataType data_type, void* p_data, int components, void* p_min, void* p_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igSliderScalarN([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiDataType data_type, void* p_data, int components, void* p_min, void* p_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igSmallButton([MarshalAs(UnmanagedType.LPStr)] string label);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igSmallButton([MarshalAs(UnmanagedType.LPStr)] string label);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igSpacing();
@@ -1625,7 +1770,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igStyleColorsLight(ImGuiStyle* dst);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igTabItemButton([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiTabItemFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igTabItemButton([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiTabItemFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int igTableGetColumnCount();
@@ -1637,7 +1783,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern int igTableGetColumnIndex();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte* igTableGetColumnName_Int(int column_n);
+		[return:MarshalAs(UnmanagedType.LPStr)]
+		public static extern string igTableGetColumnName_Int(int column_n);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int igTableGetRowIndex();
@@ -1652,7 +1799,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igTableHeadersRow();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igTableNextColumn();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igTableNextColumn();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igTableNextRow(ImGuiTableRowFlags row_flags, float min_row_height);
@@ -1664,7 +1812,8 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igTableSetColumnEnabled(int column_n, [MarshalAs(UnmanagedType.Bool)] bool v);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igTableSetColumnIndex(int column_n);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igTableSetColumnIndex(int column_n);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igTableSetupColumn([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiTableColumnFlags flags, float init_width_or_weight, uint user_id);
@@ -1688,22 +1837,28 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igTextWrapped([MarshalAs(UnmanagedType.LPStr)] string fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igTreeNode_Str([MarshalAs(UnmanagedType.LPStr)] string label);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igTreeNode_Str([MarshalAs(UnmanagedType.LPStr)] string label);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igTreeNode_StrStr([MarshalAs(UnmanagedType.LPStr)] string str_id, [MarshalAs(UnmanagedType.LPStr)] string fmt);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igTreeNode_StrStr([MarshalAs(UnmanagedType.LPStr)] string str_id, [MarshalAs(UnmanagedType.LPStr)] string fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igTreeNode_Ptr(void* ptr_id, [MarshalAs(UnmanagedType.LPStr)] string fmt);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igTreeNode_Ptr(void* ptr_id, [MarshalAs(UnmanagedType.LPStr)] string fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igTreeNodeEx_Str([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiTreeNodeFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igTreeNodeEx_Str([MarshalAs(UnmanagedType.LPStr)] string label, ImGuiTreeNodeFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igTreeNodeEx_StrStr([MarshalAs(UnmanagedType.LPStr)] string str_id, ImGuiTreeNodeFlags flags, [MarshalAs(UnmanagedType.LPStr)] string fmt);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igTreeNodeEx_StrStr([MarshalAs(UnmanagedType.LPStr)] string str_id, ImGuiTreeNodeFlags flags, [MarshalAs(UnmanagedType.LPStr)] string fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igTreeNodeEx_Ptr(void* ptr_id, ImGuiTreeNodeFlags flags, [MarshalAs(UnmanagedType.LPStr)] string fmt);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igTreeNodeEx_Ptr(void* ptr_id, ImGuiTreeNodeFlags flags, [MarshalAs(UnmanagedType.LPStr)] string fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igTreePop();
@@ -1718,13 +1873,16 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igUnindent(float indent_w);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igVSliderFloat([MarshalAs(UnmanagedType.LPStr)] string label, Vector2 size, float* v, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igVSliderFloat([MarshalAs(UnmanagedType.LPStr)] string label, Vector2 size, float* v, float v_min, float v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igVSliderInt([MarshalAs(UnmanagedType.LPStr)] string label, Vector2 size, int* v, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igVSliderInt([MarshalAs(UnmanagedType.LPStr)] string label, Vector2 size, int* v, int v_min, int v_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte igVSliderScalar([MarshalAs(UnmanagedType.LPStr)] string label, Vector2 size, ImGuiDataType data_type, void* p_data, void* p_min, void* p_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool igVSliderScalar([MarshalAs(UnmanagedType.LPStr)] string label, Vector2 size, ImGuiDataType data_type, void* p_data, void* p_min, void* p_max, [MarshalAs(UnmanagedType.LPStr)] string format, ImGuiSliderFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igValue_Bool([MarshalAs(UnmanagedType.LPStr)] string prefix, [MarshalAs(UnmanagedType.Bool)] bool b);

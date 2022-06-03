@@ -118,10 +118,14 @@ namespace Common
                             if (o.Signature.Contains("va_list"))
                                 continue;
 
-                            string csType = Helpers.ConvertToCSharpType(o.ReturnType);
-
                             file.WriteLine($"\t\t[DllImport(\"{libraryName}\", CallingConvention = CallingConvention.Cdecl)]");
-                            file.WriteLine($"\t\tpublic static extern {csType} {o.FuncName}({o.GetParametersSignature(spec)});\n");
+
+                            string csType = Helpers.ConvertToCSharpType(o.ReturnType, Helpers.Family.ret);
+                            string returnHeader = Helpers.GetReturnTypeHeader(csType);
+                            if(!string.IsNullOrEmpty(returnHeader))
+                                file.WriteLine($"\t\t{returnHeader}");
+
+                            file.WriteLine($"\t\tpublic static extern {csType} {o.FuncName}({o.GetParametersSignature()});\n");
                         }
                     }
 

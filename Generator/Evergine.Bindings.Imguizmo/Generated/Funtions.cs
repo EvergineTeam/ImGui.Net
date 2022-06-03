@@ -26,16 +26,20 @@ namespace Evergine.Bindings.Imguizmo
 		public static extern void ImGuizmo_Enable([MarshalAs(UnmanagedType.Bool)] bool enable);
 
 		[DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImGuizmo_IsOver_Nil();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImGuizmo_IsOver_Nil();
 
 		[DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImGuizmo_IsOver_OPERATION(OPERATION op);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImGuizmo_IsOver_OPERATION(OPERATION op);
 
 		[DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImGuizmo_IsUsing();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImGuizmo_IsUsing();
 
 		[DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImGuizmo_Manipulate(float* view, float* projection, OPERATION operation, MODE mode, float* matrix, float* deltaMatrix = null, float* snap = null, float* localBounds = null, float* boundsSnap = null);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool ImGuizmo_Manipulate(float* view, float* projection, OPERATION operation, MODE mode, float* matrix, float* deltaMatrix, float* snap, float* localBounds, float* boundsSnap);
 
 		[DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuizmo_RecomposeMatrixFromComponents(float* translation, float* rotation, float* scale, float* matrix);

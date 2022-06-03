@@ -119,43 +119,56 @@ namespace Evergine.Bindings.Imnodes
 		public static extern ImNodesStyle* imnodes_GetStyle();
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte imnodes_IsAnyAttributeActive(int* attribute_id);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool imnodes_IsAnyAttributeActive(int* attribute_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte imnodes_IsAttributeActive();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool imnodes_IsAttributeActive();
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte imnodes_IsEditorHovered();
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool imnodes_IsEditorHovered();
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte imnodes_IsLinkCreated_BoolPtr(int* started_at_attribute_id, int* ended_at_attribute_id, [MarshalAs(UnmanagedType.Bool)] bool created_from_snap);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool imnodes_IsLinkCreated_BoolPtr(int* started_at_attribute_id, int* ended_at_attribute_id, [MarshalAs(UnmanagedType.Bool)] bool created_from_snap);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte imnodes_IsLinkCreated_IntPtr(int* started_at_node_id, int* started_at_attribute_id, int* ended_at_node_id, int* ended_at_attribute_id, [MarshalAs(UnmanagedType.Bool)] bool created_from_snap);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool imnodes_IsLinkCreated_IntPtr(int* started_at_node_id, int* started_at_attribute_id, int* ended_at_node_id, int* ended_at_attribute_id, [MarshalAs(UnmanagedType.Bool)] bool created_from_snap);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte imnodes_IsLinkDestroyed(int* link_id);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool imnodes_IsLinkDestroyed(int* link_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte imnodes_IsLinkDropped(int* started_at_attribute_id, [MarshalAs(UnmanagedType.Bool)] bool including_detached_links);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool imnodes_IsLinkDropped(int* started_at_attribute_id, [MarshalAs(UnmanagedType.Bool)] bool including_detached_links);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte imnodes_IsLinkHovered(int* link_id);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool imnodes_IsLinkHovered(int* link_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte imnodes_IsLinkSelected(int link_id);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool imnodes_IsLinkSelected(int link_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte imnodes_IsLinkStarted(int* started_at_attribute_id);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool imnodes_IsLinkStarted(int* started_at_attribute_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte imnodes_IsNodeHovered(int* node_id);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool imnodes_IsNodeHovered(int* node_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte imnodes_IsNodeSelected(int node_id);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool imnodes_IsNodeSelected(int node_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte imnodes_IsPinHovered(int* attribute_id);
+		[return:MarshalAs(UnmanagedType.Bool)]
+		public static extern bool imnodes_IsPinHovered(int* attribute_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void imnodes_Link(int id, int start_attribute_id, int end_attribute_id);
@@ -206,13 +219,15 @@ namespace Evergine.Bindings.Imnodes
 		public static extern void imnodes_SaveCurrentEditorStateToIniFile([MarshalAs(UnmanagedType.LPStr)] string file_name);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte* imnodes_SaveCurrentEditorStateToIniString(UIntPtr data_size);
+		[return:MarshalAs(UnmanagedType.LPStr)]
+		public static extern string imnodes_SaveCurrentEditorStateToIniString(UIntPtr data_size);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void imnodes_SaveEditorStateToIniFile(IntPtr editor, [MarshalAs(UnmanagedType.LPStr)] string file_name);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte* imnodes_SaveEditorStateToIniString(IntPtr editor, UIntPtr data_size);
+		[return:MarshalAs(UnmanagedType.LPStr)]
+		public static extern string imnodes_SaveEditorStateToIniString(IntPtr editor, UIntPtr data_size);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void imnodes_SelectLink(int link_id);
