@@ -11,15 +11,15 @@ namespace EvergineImGUITest.Components
     {
         protected override void Update(TimeSpan gameTime)
         {
-            //ImguiNative.igShowDemoWindow(&open);
+            ImguiNative.igShowDemoWindow(true);
 
-            ImguiNative.igSetNextWindowSize(new Vector2(200, 200), ImGuiCond.Appearing);
-            ImguiNative.igBegin("MyWindow", true, ImGuiWindowFlags.None);
+            //ImguiNative.igSetNextWindowSize(new Vector2(200, 200), ImGuiCond.Appearing);
+            //ImguiNative.igBegin("MyWindow", true, ImGuiWindowFlags.None);
 
-            ImguiNative.igProgressBar(0, new Vector2(-1, 0), "0%");
-            ImguiNative.igProgressBar(0.5f, new Vector2(-1, 0), "50%");
-            ImguiNative.igProgressBar(1.0f, new Vector2(-1, 0), "100%");
-            ImguiNative.igEnd();
+            //ImguiNative.igProgressBar(0, new Vector2(-1, 0), "0%");
+            //ImguiNative.igProgressBar(0.5f, new Vector2(-1, 0), "50%");
+            //ImguiNative.igProgressBar(1.0f, new Vector2(-1, 0), "100%");
+            //ImguiNative.igEnd();
         }
     }
 }
