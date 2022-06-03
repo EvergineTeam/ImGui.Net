@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Evergine.Bindings.Imguizmo\Evergine.Bindings.Imguizmo.csproj" />
     <ProjectReference Include="..\..\Evergine.Bindings.Imgui\Evergine.Bindings.Imgui.csproj" />
+    <ProjectReference Include="..\..\Evergine.Bindings.Implot\Evergine.Bindings.Implot.csproj" />
   </ItemGroup>
 
 </Project>

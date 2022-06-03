@@ -1,4 +1,5 @@
-﻿using Evergine.Bindings.Imguizmo;
+﻿using Evergine.Bindings.Imgui;
+using Evergine.Bindings.Imguizmo;
 using Evergine.Common.Input;
 using Evergine.Common.Input.Keyboard;
 using Evergine.Framework;
@@ -30,6 +31,7 @@ namespace EvergineImGUITest.Components
         private bool enableGuizmo = true;
 
         private float[] bounds;
+        private ImGuiIO* io;
 
         protected override bool OnAttached()
         {
@@ -42,6 +44,8 @@ namespace EvergineImGUITest.Components
             this.currentOperation = OPERATION.TRANSLATE;
 
             this.bounds = new[] { -0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f };
+
+            this.io = ImguiNative.igGetIO();
 
             return result;
         }
@@ -76,14 +80,15 @@ namespace EvergineImGUITest.Components
         }
 
         private void ImGuizmoDemo()
-        {
-            //ImGuizmoNET.ImGuizmo.SetOrthographic(this.showGuizmo);
-            ImguizmoNative.ImGuizmo_SetRect(0, 0, 1280, 720);
+        {            
+            //ImguizmoNative.ImGuizmo_SetOrthographic(true);
+            ImguizmoNative.ImGuizmo_SetRect(0, 0, this.io->DisplaySize.X, this.io->DisplaySize.Y);
 
             Matrix4x4 view = this.camera.View;
             Matrix4x4 projection = this.camera.Projection;
             Matrix4x4 world = this.transform.WorldTransform;
 
+            ImguizmoNative.ImGuizmo_Enable(true);
             //ImguizmoNative.ImGuizmo_Enable(this.enableGuizmo);
             //ImGuizmoNET.ImGuizmo.IsUsing();
             ImguizmoNative.ImGuizmo_SetGizmoSizeClipSpace(0.15f);
@@ -93,23 +98,17 @@ namespace EvergineImGUITest.Components
             ImguizmoNative.ImGuizmo_ViewManipulate(&view.M11, 2, Vector2.Zero, new Vector2(128, 128), 0x10101010);
 
             //ImGuizmoNET.ImGuizmo.DrawCubes(ref view.M11, ref projection.M11, ref world.M11, 1); //(Debug)
-
-            float* snap = null;
-            var deltaMatrix = Matrix4x4.Identity;
+                        
             fixed (float* f = &bounds[0])
             {
-                ImguizmoNative.ImGuizmo_Manipulate(&view.M11, &projection.M11, this.currentOperation, MODE.WORLD, &world.M11, &deltaMatrix.M11, snap, f, snap);
+                ImguizmoNative.ImGuizmo_Manipulate(&view.M11, &projection.M11, this.currentOperation, MODE.WORLD, &world.M11, null, null, f, null);
             }
 
             this.transform.WorldTransform = world;
 
             var iview = Matrix4x4.Invert(view);
-            var translation = iview.Translation;
-            var rotation = iview.Rotation;
-
-            Vector3* r = &rotation;
-            this.camera.Transform.LocalRotation = *r;  //new Vector3(rotation.X, rotation.Y, rotation.Z); //*r; 
-            this.camera.Transform.LocalPosition = new Vector3(translation.X, translation.Y, translation.Z);
+            this.camera.Transform.LocalRotation = iview.Rotation; 
+            this.camera.Transform.LocalPosition = iview.Translation;
         }
     }
 }

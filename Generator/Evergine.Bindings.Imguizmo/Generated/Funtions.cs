@@ -35,7 +35,7 @@ namespace Evergine.Bindings.Imguizmo
 		public static extern byte ImGuizmo_IsUsing();
 
 		[DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte ImGuizmo_Manipulate(float* view, float* projection, OPERATION operation, MODE mode, float* matrix, float* deltaMatrix, float* snap, float* localBounds, float* boundsSnap);
+		public static extern byte ImGuizmo_Manipulate(float* view, float* projection, OPERATION operation, MODE mode, float* matrix, float* deltaMatrix = null, float* snap = null, float* localBounds = null, float* boundsSnap = null);
 
 		[DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuizmo_RecomposeMatrixFromComponents(float* translation, float* rotation, float* scale, float* matrix);
