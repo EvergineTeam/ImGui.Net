@@ -24,10 +24,11 @@ namespace Common
 
             switch (type)
             {
-                case "bool":
                 case "char":
                 case "unsigned char":
                     return "byte";
+                case "bool":
+                    return isParam ? "[MarshalAs(UnmanagedType.Bool)] bool" : "byte";
                 case "bool*":
                     return isParam ? "[MarshalAs(UnmanagedType.Bool)] bool" : "byte*";
                 case "char*":

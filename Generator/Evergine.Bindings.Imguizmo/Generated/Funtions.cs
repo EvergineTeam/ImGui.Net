@@ -8,7 +8,7 @@ namespace Evergine.Bindings.Imguizmo
 	public static unsafe partial class ImguizmoNative
 	{
 		[DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuizmo_AllowAxisFlip(byte value);
+		public static extern void ImGuizmo_AllowAxisFlip([MarshalAs(UnmanagedType.Bool)] bool value);
 
 		[DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuizmo_BeginFrame();
@@ -23,7 +23,7 @@ namespace Evergine.Bindings.Imguizmo
 		public static extern void ImGuizmo_DrawGrid(float* view, float* projection, float* matrix, float gridSize);
 
 		[DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuizmo_Enable(byte enable);
+		public static extern void ImGuizmo_Enable([MarshalAs(UnmanagedType.Bool)] bool enable);
 
 		[DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
 		public static extern byte ImGuizmo_IsOver_Nil();
@@ -53,7 +53,7 @@ namespace Evergine.Bindings.Imguizmo
 		public static extern void ImGuizmo_SetImGuiContext(IntPtr ctx);
 
 		[DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuizmo_SetOrthographic(byte isOrthographic);
+		public static extern void ImGuizmo_SetOrthographic([MarshalAs(UnmanagedType.Bool)] bool isOrthographic);
 
 		[DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuizmo_SetRect(float x, float y, float width, float height);

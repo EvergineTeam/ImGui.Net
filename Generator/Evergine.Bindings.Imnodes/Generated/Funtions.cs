@@ -128,16 +128,16 @@ namespace Evergine.Bindings.Imnodes
 		public static extern byte imnodes_IsEditorHovered();
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte imnodes_IsLinkCreated_BoolPtr(int* started_at_attribute_id, int* ended_at_attribute_id, byte* created_from_snap);
+		public static extern byte imnodes_IsLinkCreated_BoolPtr(int* started_at_attribute_id, int* ended_at_attribute_id, [MarshalAs(UnmanagedType.Bool)] bool created_from_snap);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte imnodes_IsLinkCreated_IntPtr(int* started_at_node_id, int* started_at_attribute_id, int* ended_at_node_id, int* ended_at_attribute_id, byte* created_from_snap);
+		public static extern byte imnodes_IsLinkCreated_IntPtr(int* started_at_node_id, int* started_at_attribute_id, int* ended_at_node_id, int* ended_at_attribute_id, [MarshalAs(UnmanagedType.Bool)] bool created_from_snap);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		public static extern byte imnodes_IsLinkDestroyed(int* link_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte imnodes_IsLinkDropped(int* started_at_attribute_id, byte including_detached_links);
+		public static extern byte imnodes_IsLinkDropped(int* started_at_attribute_id, [MarshalAs(UnmanagedType.Bool)] bool including_detached_links);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		public static extern byte imnodes_IsLinkHovered(int* link_id);
@@ -161,16 +161,16 @@ namespace Evergine.Bindings.Imnodes
 		public static extern void imnodes_Link(int id, int start_attribute_id, int end_attribute_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void imnodes_LoadCurrentEditorStateFromIniFile(byte* file_name);
+		public static extern void imnodes_LoadCurrentEditorStateFromIniFile([MarshalAs(UnmanagedType.LPStr)] string file_name);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void imnodes_LoadCurrentEditorStateFromIniString(byte* data, uint data_size);
+		public static extern void imnodes_LoadCurrentEditorStateFromIniString([MarshalAs(UnmanagedType.LPStr)] string data, uint data_size);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void imnodes_LoadEditorStateFromIniFile(IntPtr editor, byte* file_name);
+		public static extern void imnodes_LoadEditorStateFromIniFile(IntPtr editor, [MarshalAs(UnmanagedType.LPStr)] string file_name);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void imnodes_LoadEditorStateFromIniString(IntPtr editor, byte* data, uint data_size);
+		public static extern void imnodes_LoadEditorStateFromIniString(IntPtr editor, [MarshalAs(UnmanagedType.LPStr)] string data, uint data_size);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void imnodes_MiniMap(float minimap_size_fraction, ImNodesMiniMapLocation location, IntPtr node_hovering_callback, IntPtr node_hovering_callback_data);
@@ -203,13 +203,13 @@ namespace Evergine.Bindings.Imnodes
 		public static extern void imnodes_PushStyleVar_Vec2(ImNodesStyleVar style_item, Vector2 value);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void imnodes_SaveCurrentEditorStateToIniFile(byte* file_name);
+		public static extern void imnodes_SaveCurrentEditorStateToIniFile([MarshalAs(UnmanagedType.LPStr)] string file_name);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		public static extern byte* imnodes_SaveCurrentEditorStateToIniString(UIntPtr data_size);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void imnodes_SaveEditorStateToIniFile(IntPtr editor, byte* file_name);
+		public static extern void imnodes_SaveEditorStateToIniFile(IntPtr editor, [MarshalAs(UnmanagedType.LPStr)] string file_name);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		public static extern byte* imnodes_SaveEditorStateToIniString(IntPtr editor, UIntPtr data_size);
@@ -227,7 +227,7 @@ namespace Evergine.Bindings.Imnodes
 		public static extern void imnodes_SetImGuiContext(IntPtr ctx);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void imnodes_SetNodeDraggable(int node_id, byte draggable);
+		public static extern void imnodes_SetNodeDraggable(int node_id, [MarshalAs(UnmanagedType.Bool)] bool draggable);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void imnodes_SetNodeEditorSpacePos(int node_id, Vector2 editor_space_pos);
