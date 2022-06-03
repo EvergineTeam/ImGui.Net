@@ -1,4 +1,5 @@
 ﻿using Evergine.Bindings.Imgui;
+using Evergine.Bindings.Implot;
 using Evergine.Framework;
 using Evergine.Framework.Graphics;
 using Evergine.Mathematics;
@@ -12,6 +13,8 @@ namespace EvergineImGUITest.Components
         protected override void Update(TimeSpan gameTime)
         {
             ImguiNative.igShowDemoWindow(true);
+
+            ImplotNative.ImPlot_ShowDemoWindow(true);
 
             //ImguiNative.igSetNextWindowSize(new Vector2(200, 200), ImGuiCond.Appearing);
             //ImguiNative.igBegin("MyWindow", true, ImGuiWindowFlags.None);
