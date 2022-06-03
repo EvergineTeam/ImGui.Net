@@ -67,7 +67,7 @@ namespace Common
                 if (p.Name == "...")
                     continue;
 
-                string csType = Helpers.ConvertToCSharpType(p.Type, spec);
+                string csType = Helpers.ConvertToCSharpType(p.Type, true);
                 signature.Append($"{csType} ");
                 signature.Append($"{p.Name}, ");
             }

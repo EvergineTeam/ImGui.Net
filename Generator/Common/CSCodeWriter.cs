@@ -65,7 +65,7 @@ namespace Common
 
                         foreach (var member in structure.Members)
                         {
-                            string csType = Helpers.ConvertToCSharpType(member.Type, spec);
+                            string csType = Helpers.ConvertToCSharpType(member.Type);
 
                             if (member.Count > 0)
                             {
@@ -118,7 +118,7 @@ namespace Common
                             if (o.Signature.Contains("va_list"))
                                 continue;
 
-                            string csType = Helpers.ConvertToCSharpType(o.ReturnType, spec);
+                            string csType = Helpers.ConvertToCSharpType(o.ReturnType);
 
                             file.WriteLine($"\t\t[DllImport(\"{libraryName}\", CallingConvention = CallingConvention.Cdecl)]");
                             file.WriteLine($"\t\tpublic static extern {csType} {o.FuncName}({o.GetParametersSignature(spec)});\n");

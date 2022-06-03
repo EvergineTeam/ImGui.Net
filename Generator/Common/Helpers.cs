@@ -6,16 +6,16 @@ namespace Common
 {
     public static class Helpers
     {
-        public static string ConvertToCSharpType(string type, Specification spec)
+        public static string ConvertToCSharpType(string type, bool isParam = false)
         {
             string result = type.Replace("const ", "");
 
-            result = ConvertToBasicTypes(result);
+            result = ConvertToBasicTypes(result, isParam);
 
             return result;
         }
 
-        private static string ConvertToBasicTypes(string type)
+        private static string ConvertToBasicTypes(string type, bool isParam = false)
         {
             if (type.StartsWith("bool(*)"))
                 return "bool*";
@@ -29,9 +29,10 @@ namespace Common
                 case "unsigned char":
                     return "byte";
                 case "bool*":
+                    return isParam ? "[MarshalAs(UnmanagedType.Bool)] bool" : "byte*";
                 case "char*":
                 case "unsigned char*":
-                    return "byte*";
+                    return isParam ? "[MarshalAs(UnmanagedType.LPStr)] string" : "byte*";
                 case "size_t":
                     return "uint";
                 case "size_t*":
