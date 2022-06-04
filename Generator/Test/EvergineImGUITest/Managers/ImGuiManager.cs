@@ -159,8 +159,7 @@ namespace EvergineImGUITest.Managers
         private unsafe void InitializeImGui()
         {
             // Create imgui context            
-            ImFontAtlas* shared_font_atlas = null;
-            IntPtr imGuiContext = ImguiNative.igCreateContext(shared_font_atlas);
+            IntPtr imGuiContext = ImguiNative.igCreateContext((ImFontAtlas*)null);
             ImguiNative.igSetCurrentContext(imGuiContext);
 
             // Create implot context

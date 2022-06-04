@@ -45,7 +45,6 @@ namespace Common
         public bool IsConstructor;
         public bool IsDestructor;
         public List<Param> Params = new List<Param>();
-        public Dictionary<string, string> Defaults = new Dictionary<string, string>();
 
         public static OverloadDefinition FromJson(JToken f)
         {
@@ -63,23 +62,41 @@ namespace Common
 
             foreach (var d in f["defaults"])
             {
-                overload.Defaults.Add(((JProperty)d).Name.ToString(), ((JProperty)d).Value.ToString());
+                string pName = ((JProperty)d).Name.ToString();
+                var param = overload.Params.Find(p => p.Name == pName);
+
+                if(param != null)
+                    param.DefaultValue = ((JProperty)d).Value.ToString();
             }
 
             return overload;
         }
 
-        public string GetParametersSignature(bool writeType = true, bool avoidSelfpOut = false, bool pOutAddress = false)
+        [Flags]
+        public enum ParametersSet
+        {
+            None = 0,
+            Clean = 1,
+            Defaults = 2,
+            All = 3,
+        }
+
+        public string GetParametersSignature(Specification spec, bool writeType = true, bool avoidSelfpOut = false, bool pOutAddress = false, ParametersSet writeParamTypes = ParametersSet.All)
         {
             StringBuilder signature = new StringBuilder();
             foreach (var p in Params)
             {
+                if (!writeParamTypes.HasFlag(ParametersSet.Defaults) && p.HasDefault)
+                    continue;
+
+                if (!writeParamTypes.HasFlag(ParametersSet.Clean) && !p.HasDefault)
+                    continue;
+
                 if (p.Name == "...")
                     continue;
 
                 if (avoidSelfpOut && (p.Name == "self" || p.Name == "pOut"))
                     continue;
-
 
                 if (writeType)
                 {
@@ -88,10 +105,21 @@ namespace Common
                 }
 
                 string address = pOutAddress && p.Name == "pOut" ? "&" : "";
-                signature.Append($"{address}{p.Name}, ");
+                signature.Append($"{address}{p.Name}");
+
+                if (!writeParamTypes.HasFlag(ParametersSet.Clean)
+                    && writeParamTypes.HasFlag(ParametersSet.Defaults))
+                {
+                    string defaultValue = Helpers.ConvertDefault(p.DefaultValue, p.Type, spec);
+                    if (!string.IsNullOrEmpty(defaultValue))
+                        signature.Append($" = {defaultValue}");
+                }
+
+                signature.Append(", ");
             }
 
-            if(signature.Length > 0)
+            if(signature.Length > 0
+                && !(!writeParamTypes.HasFlag(ParametersSet.Defaults) && Params.Any(p => p.HasDefault)))
                 signature.Length -= 2;
 
             return signature.ToString();
@@ -107,6 +135,12 @@ namespace Common
     {
         public string Name;
         public string Type;
+        public string DefaultValue;
+
+        public bool HasDefault
+        {
+            get => !string.IsNullOrEmpty(DefaultValue);
+        }
 
         public static Param FromJson(JToken elem)
         {

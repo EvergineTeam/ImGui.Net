@@ -121,12 +121,13 @@ namespace Common
                                         csType = Helpers.ConvertToCSharpType(param.Type.Trim('*'), Helpers.Family.ret);
                                     }
 
-                                    file.WriteLine($"\t\tpublic {csType} {simpleFuncName}({o.GetParametersSignature(true, true)})");
+                                    file.WriteLine($"\t\tpublic {csType} {simpleFuncName}({o.GetParametersSignature(spec, true, true, false, OverloadDefinition.ParametersSet.Clean)}" +
+                                        $"{o.GetParametersSignature(spec, true, true, false, OverloadDefinition.ParametersSet.Defaults)})");
                                     file.WriteLine("\t\t{");
 
                                     if (param != null) file.WriteLine($"\t\t\t{csType} pOut;");
 
-                                    file.WriteLine($"\t\t\t{returncall}{@namespace}Native.{o.FuncName}({o.GetParametersSignature(false, false, true)});");
+                                    file.WriteLine($"\t\t\t{returncall}{@namespace}Native.{o.FuncName}({o.GetParametersSignature(spec, false, false, true)});");
 
                                     if (param != null) file.WriteLine("\n\t\t\treturn pOut;");
 
@@ -177,7 +178,7 @@ namespace Common
                             if(!string.IsNullOrEmpty(returnHeader))
                                 file.WriteLine($"\t\t{returnHeader}");
 
-                            file.WriteLine($"\t\tpublic static extern {csType} {o.FuncName}({o.GetParametersSignature()});\n");
+                            file.WriteLine($"\t\tpublic static extern {csType} {o.FuncName}({o.GetParametersSignature(spec)});\n");
                         }
                     }
 

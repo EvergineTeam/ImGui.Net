@@ -13,7 +13,7 @@ namespace Evergine.Bindings.Imgui
 		public ImColor* self => (ImColor*)Unsafe.AsPointer(ref this);
 
 
-		public ImColor HSV(float h, float s, float v, float a)
+		public ImColor HSV(float h, float s, float v, float a = 1.0f)
 		{
 			ImColor pOut;
 			ImguiNative.ImColor_HSV(&pOut, h, s, v, a);
@@ -21,7 +21,7 @@ namespace Evergine.Bindings.Imgui
 			return pOut;
 		}
 
-		public void SetHSV(float h, float s, float v, float a)
+		public void SetHSV(float h, float s, float v, float a = 1.0f)
 		{
 			ImguiNative.ImColor_SetHSV(self, h, s, v, a);
 		}
@@ -116,12 +116,12 @@ namespace Evergine.Bindings.Imgui
 		public ImDrawList* self => (ImDrawList*)Unsafe.AsPointer(ref this);
 
 
-		public void AddBezierCubic(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, uint col, float thickness, int num_segments)
+		public void AddBezierCubic(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, uint col, float thickness, int num_segments = 0)
 		{
 			ImguiNative.ImDrawList_AddBezierCubic(self, p1, p2, p3, p4, col, thickness, num_segments);
 		}
 
-		public void AddBezierQuadratic(Vector2 p1, Vector2 p2, Vector2 p3, uint col, float thickness, int num_segments)
+		public void AddBezierQuadratic(Vector2 p1, Vector2 p2, Vector2 p3, uint col, float thickness, int num_segments = 0)
 		{
 			ImguiNative.ImDrawList_AddBezierQuadratic(self, p1, p2, p3, col, thickness, num_segments);
 		}
@@ -131,12 +131,12 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddCallback(self, callback, callback_data);
 		}
 
-		public void AddCircle(Vector2 center, float radius, uint col, int num_segments, float thickness)
+		public void AddCircle(Vector2 center, float radius, uint col, int num_segments = 0, float thickness = 1.0f)
 		{
 			ImguiNative.ImDrawList_AddCircle(self, center, radius, col, num_segments, thickness);
 		}
 
-		public void AddCircleFilled(Vector2 center, float radius, uint col, int num_segments)
+		public void AddCircleFilled(Vector2 center, float radius, uint col, int num_segments = 0)
 		{
 			ImguiNative.ImDrawList_AddCircleFilled(self, center, radius, col, num_segments);
 		}
@@ -151,27 +151,27 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddDrawCmd(self);
 		}
 
-		public void AddImage(IntPtr user_texture_id, Vector2 p_min, Vector2 p_max, Vector2 uv_min, Vector2 uv_max, uint col)
+		public void AddImage(IntPtr user_texture_id, Vector2 p_min, Vector2 p_max, Vector2 uv_min, Vector2 uv_max, uint col = 4294967295)
 		{
 			ImguiNative.ImDrawList_AddImage(self, user_texture_id, p_min, p_max, uv_min, uv_max, col);
 		}
 
-		public void AddImageQuad(IntPtr user_texture_id, Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 uv1, Vector2 uv2, Vector2 uv3, Vector2 uv4, uint col)
+		public void AddImageQuad(IntPtr user_texture_id, Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 uv1, Vector2 uv2, Vector2 uv3, Vector2 uv4, uint col = 4294967295)
 		{
 			ImguiNative.ImDrawList_AddImageQuad(self, user_texture_id, p1, p2, p3, p4, uv1, uv2, uv3, uv4, col);
 		}
 
-		public void AddImageRounded(IntPtr user_texture_id, Vector2 p_min, Vector2 p_max, Vector2 uv_min, Vector2 uv_max, uint col, float rounding, ImDrawFlags flags)
+		public void AddImageRounded(IntPtr user_texture_id, Vector2 p_min, Vector2 p_max, Vector2 uv_min, Vector2 uv_max, uint col, float rounding, ImDrawFlags flags = 0)
 		{
 			ImguiNative.ImDrawList_AddImageRounded(self, user_texture_id, p_min, p_max, uv_min, uv_max, col, rounding, flags);
 		}
 
-		public void AddLine(Vector2 p1, Vector2 p2, uint col, float thickness)
+		public void AddLine(Vector2 p1, Vector2 p2, uint col, float thickness = 1.0f)
 		{
 			ImguiNative.ImDrawList_AddLine(self, p1, p2, col, thickness);
 		}
 
-		public void AddNgon(Vector2 center, float radius, uint col, int num_segments, float thickness)
+		public void AddNgon(Vector2 center, float radius, uint col, int num_segments, float thickness = 1.0f)
 		{
 			ImguiNative.ImDrawList_AddNgon(self, center, radius, col, num_segments, thickness);
 		}
@@ -186,7 +186,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddPolyline(self, points, num_points, col, flags, thickness);
 		}
 
-		public void AddQuad(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, uint col, float thickness)
+		public void AddQuad(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, uint col, float thickness = 1.0f)
 		{
 			ImguiNative.ImDrawList_AddQuad(self, p1, p2, p3, p4, col, thickness);
 		}
@@ -196,12 +196,12 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddQuadFilled(self, p1, p2, p3, p4, col);
 		}
 
-		public void AddRect(Vector2 p_min, Vector2 p_max, uint col, float rounding, ImDrawFlags flags, float thickness)
+		public void AddRect(Vector2 p_min, Vector2 p_max, uint col, float rounding = 0.0f, ImDrawFlags flags = 0, float thickness = 1.0f)
 		{
 			ImguiNative.ImDrawList_AddRect(self, p_min, p_max, col, rounding, flags, thickness);
 		}
 
-		public void AddRectFilled(Vector2 p_min, Vector2 p_max, uint col, float rounding, ImDrawFlags flags)
+		public void AddRectFilled(Vector2 p_min, Vector2 p_max, uint col, float rounding = 0.0f, ImDrawFlags flags = 0)
 		{
 			ImguiNative.ImDrawList_AddRectFilled(self, p_min, p_max, col, rounding, flags);
 		}
@@ -211,17 +211,17 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddRectFilledMultiColor(self, p_min, p_max, col_upr_left, col_upr_right, col_bot_right, col_bot_left);
 		}
 
-		public void AddText_Vec2(Vector2 pos, uint col, [MarshalAs(UnmanagedType.LPStr)] string text_begin, [MarshalAs(UnmanagedType.LPStr)] string text_end)
+		public void AddText_Vec2(Vector2 pos, uint col, [MarshalAs(UnmanagedType.LPStr)] string text_begin, [MarshalAs(UnmanagedType.LPStr)] string text_end = null)
 		{
 			ImguiNative.ImDrawList_AddText_Vec2(self, pos, col, text_begin, text_end);
 		}
 
-		public void AddText_FontPtr(ImFont* font, float font_size, Vector2 pos, uint col, [MarshalAs(UnmanagedType.LPStr)] string text_begin, [MarshalAs(UnmanagedType.LPStr)] string text_end, float wrap_width, Vector4* cpu_fine_clip_rect)
+		public void AddText_FontPtr(ImFont* font, float font_size, Vector2 pos, uint col, [MarshalAs(UnmanagedType.LPStr)] string text_begin, [MarshalAs(UnmanagedType.LPStr)] string text_end = null, float wrap_width = 0.0f, Vector4* cpu_fine_clip_rect = null)
 		{
 			ImguiNative.ImDrawList_AddText_FontPtr(self, font, font_size, pos, col, text_begin, text_end, wrap_width, cpu_fine_clip_rect);
 		}
 
-		public void AddTriangle(Vector2 p1, Vector2 p2, Vector2 p3, uint col, float thickness)
+		public void AddTriangle(Vector2 p1, Vector2 p2, Vector2 p3, uint col, float thickness = 1.0f)
 		{
 			ImguiNative.ImDrawList_AddTriangle(self, p1, p2, p3, col, thickness);
 		}
@@ -267,7 +267,7 @@ namespace Evergine.Bindings.Imgui
 			return pOut;
 		}
 
-		public void PathArcTo(Vector2 center, float radius, float a_min, float a_max, int num_segments)
+		public void PathArcTo(Vector2 center, float radius, float a_min, float a_max, int num_segments = 0)
 		{
 			ImguiNative.ImDrawList_PathArcTo(self, center, radius, a_min, a_max, num_segments);
 		}
@@ -277,12 +277,12 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_PathArcToFast(self, center, radius, a_min_of_12, a_max_of_12);
 		}
 
-		public void PathBezierCubicCurveTo(Vector2 p2, Vector2 p3, Vector2 p4, int num_segments)
+		public void PathBezierCubicCurveTo(Vector2 p2, Vector2 p3, Vector2 p4, int num_segments = 0)
 		{
 			ImguiNative.ImDrawList_PathBezierCubicCurveTo(self, p2, p3, p4, num_segments);
 		}
 
-		public void PathBezierQuadraticCurveTo(Vector2 p2, Vector2 p3, int num_segments)
+		public void PathBezierQuadraticCurveTo(Vector2 p2, Vector2 p3, int num_segments = 0)
 		{
 			ImguiNative.ImDrawList_PathBezierQuadraticCurveTo(self, p2, p3, num_segments);
 		}
@@ -307,12 +307,12 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_PathLineToMergeDuplicate(self, pos);
 		}
 
-		public void PathRect(Vector2 rect_min, Vector2 rect_max, float rounding, ImDrawFlags flags)
+		public void PathRect(Vector2 rect_min, Vector2 rect_max, float rounding = 0.0f, ImDrawFlags flags = 0)
 		{
 			ImguiNative.ImDrawList_PathRect(self, rect_min, rect_max, rounding, flags);
 		}
 
-		public void PathStroke(uint col, ImDrawFlags flags, float thickness)
+		public void PathStroke(uint col, ImDrawFlags flags = 0, float thickness = 1.0f)
 		{
 			ImguiNative.ImDrawList_PathStroke(self, col, flags, thickness);
 		}
@@ -367,7 +367,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_PrimWriteVtx(self, pos, uv, col);
 		}
 
-		public void PushClipRect(Vector2 clip_rect_min, Vector2 clip_rect_max, [MarshalAs(UnmanagedType.Bool)] bool intersect_with_current_clip_rect)
+		public void PushClipRect(Vector2 clip_rect_min, Vector2 clip_rect_max, [MarshalAs(UnmanagedType.Bool)] bool intersect_with_current_clip_rect = true)
 		{
 			ImguiNative.ImDrawList_PushClipRect(self, clip_rect_min, clip_rect_max, intersect_with_current_clip_rect);
 		}
@@ -507,7 +507,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImFont_AddGlyph(self, src_cfg, c, x0, y0, x1, y1, u0, v0, u1, v1, advance_x);
 		}
 
-		public void AddRemapChar(ushort dst, ushort src, [MarshalAs(UnmanagedType.Bool)] bool overwrite_dst)
+		public void AddRemapChar(ushort dst, ushort src, [MarshalAs(UnmanagedType.Bool)] bool overwrite_dst = true)
 		{
 			ImguiNative.ImFont_AddRemapChar(self, dst, src, overwrite_dst);
 		}
@@ -517,7 +517,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImFont_BuildLookupTable(self);
 		}
 
-		public Vector2 CalcTextSizeA(float size, float max_width, float wrap_width, [MarshalAs(UnmanagedType.LPStr)] string text_begin, [MarshalAs(UnmanagedType.LPStr)] string text_end, char** remaining)
+		public Vector2 CalcTextSizeA(float size, float max_width, float wrap_width, [MarshalAs(UnmanagedType.LPStr)] string text_begin, [MarshalAs(UnmanagedType.LPStr)] string text_end = null, char** remaining = null)
 		{
 			Vector2 pOut;
 			ImguiNative.ImFont_CalcTextSizeA(&pOut, self, size, max_width, wrap_width, text_begin, text_end, remaining);
@@ -575,7 +575,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImFont_RenderChar(self, draw_list, size, pos, col, c);
 		}
 
-		public void RenderText(ImDrawList* draw_list, float size, Vector2 pos, uint col, Vector4 clip_rect, [MarshalAs(UnmanagedType.LPStr)] string text_begin, [MarshalAs(UnmanagedType.LPStr)] string text_end, float wrap_width, [MarshalAs(UnmanagedType.Bool)] bool cpu_fine_clip)
+		public void RenderText(ImDrawList* draw_list, float size, Vector2 pos, uint col, Vector4 clip_rect, [MarshalAs(UnmanagedType.LPStr)] string text_begin, [MarshalAs(UnmanagedType.LPStr)] string text_end, float wrap_width = 0.0f, [MarshalAs(UnmanagedType.Bool)] bool cpu_fine_clip = true)
 		{
 			ImguiNative.ImFont_RenderText(self, draw_list, size, pos, col, clip_rect, text_begin, text_end, wrap_width, cpu_fine_clip);
 		}
@@ -691,27 +691,27 @@ namespace Evergine.Bindings.Imgui
 			return ImguiNative.ImFontAtlas_AddFont(self, font_cfg);
 		}
 
-		public ImFont* AddFontDefault(ImFontConfig* font_cfg)
+		public ImFont* AddFontDefault(ImFontConfig* font_cfg = null)
 		{
 			return ImguiNative.ImFontAtlas_AddFontDefault(self, font_cfg);
 		}
 
-		public ImFont* AddFontFromFileTTF([MarshalAs(UnmanagedType.LPStr)] string filename, float size_pixels, ImFontConfig* font_cfg, ushort* glyph_ranges)
+		public ImFont* AddFontFromFileTTF([MarshalAs(UnmanagedType.LPStr)] string filename, float size_pixels, ImFontConfig* font_cfg = null, ushort* glyph_ranges = null)
 		{
 			return ImguiNative.ImFontAtlas_AddFontFromFileTTF(self, filename, size_pixels, font_cfg, glyph_ranges);
 		}
 
-		public ImFont* AddFontFromMemoryCompressedBase85TTF([MarshalAs(UnmanagedType.LPStr)] string compressed_font_data_base85, float size_pixels, ImFontConfig* font_cfg, ushort* glyph_ranges)
+		public ImFont* AddFontFromMemoryCompressedBase85TTF([MarshalAs(UnmanagedType.LPStr)] string compressed_font_data_base85, float size_pixels, ImFontConfig* font_cfg = null, ushort* glyph_ranges = null)
 		{
 			return ImguiNative.ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(self, compressed_font_data_base85, size_pixels, font_cfg, glyph_ranges);
 		}
 
-		public ImFont* AddFontFromMemoryCompressedTTF(void* compressed_font_data, int compressed_font_size, float size_pixels, ImFontConfig* font_cfg, ushort* glyph_ranges)
+		public ImFont* AddFontFromMemoryCompressedTTF(void* compressed_font_data, int compressed_font_size, float size_pixels, ImFontConfig* font_cfg = null, ushort* glyph_ranges = null)
 		{
 			return ImguiNative.ImFontAtlas_AddFontFromMemoryCompressedTTF(self, compressed_font_data, compressed_font_size, size_pixels, font_cfg, glyph_ranges);
 		}
 
-		public ImFont* AddFontFromMemoryTTF(void* font_data, int font_size, float size_pixels, ImFontConfig* font_cfg, ushort* glyph_ranges)
+		public ImFont* AddFontFromMemoryTTF(void* font_data, int font_size, float size_pixels, ImFontConfig* font_cfg = null, ushort* glyph_ranges = null)
 		{
 			return ImguiNative.ImFontAtlas_AddFontFromMemoryTTF(self, font_data, font_size, size_pixels, font_cfg, glyph_ranges);
 		}
@@ -796,12 +796,12 @@ namespace Evergine.Bindings.Imgui
 			return ImguiNative.ImFontAtlas_GetMouseCursorTexData(self, cursor, out_offset, out_size, out_uv_border, out_uv_fill);
 		}
 
-		public void GetTexDataAsAlpha8(byte** out_pixels, int* out_width, int* out_height, int* out_bytes_per_pixel)
+		public void GetTexDataAsAlpha8(byte** out_pixels, int* out_width, int* out_height, int* out_bytes_per_pixel = null)
 		{
 			ImguiNative.ImFontAtlas_GetTexDataAsAlpha8(self, out_pixels, out_width, out_height, out_bytes_per_pixel);
 		}
 
-		public void GetTexDataAsRGBA32(byte** out_pixels, int* out_width, int* out_height, int* out_bytes_per_pixel)
+		public void GetTexDataAsRGBA32(byte** out_pixels, int* out_width, int* out_height, int* out_bytes_per_pixel = null)
 		{
 			ImguiNative.ImFontAtlas_GetTexDataAsRGBA32(self, out_pixels, out_width, out_height, out_bytes_per_pixel);
 		}
@@ -899,7 +899,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImFontGlyphRangesBuilder_AddRanges(self, ranges);
 		}
 
-		public void AddText([MarshalAs(UnmanagedType.LPStr)] string text, [MarshalAs(UnmanagedType.LPStr)] string text_end)
+		public void AddText([MarshalAs(UnmanagedType.LPStr)] string text, [MarshalAs(UnmanagedType.LPStr)] string text_end = null)
 		{
 			ImguiNative.ImFontGlyphRangesBuilder_AddText(self, text, text_end);
 		}
@@ -1720,7 +1720,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImGuiIO_ClearInputKeys(self);
 		}
 
-		public void SetKeyEventNativeData(ImGuiKey key, int native_keycode, int native_scancode, int native_legacy_index)
+		public void SetKeyEventNativeData(ImGuiKey key, int native_keycode, int native_scancode, int native_legacy_index = -1)
 		{
 			ImguiNative.ImGuiIO_SetKeyEventNativeData(self, key, native_keycode, native_scancode, native_legacy_index);
 		}
@@ -1759,7 +1759,7 @@ namespace Evergine.Bindings.Imgui
 			return ImguiNative.ImGuiInputTextCallbackData_HasSelection(self);
 		}
 
-		public void InsertChars(int pos, [MarshalAs(UnmanagedType.LPStr)] string text, [MarshalAs(UnmanagedType.LPStr)] string text_end)
+		public void InsertChars(int pos, [MarshalAs(UnmanagedType.LPStr)] string text, [MarshalAs(UnmanagedType.LPStr)] string text_end = null)
 		{
 			ImguiNative.ImGuiInputTextCallbackData_InsertChars(self, pos, text, text_end);
 		}
@@ -1793,7 +1793,7 @@ namespace Evergine.Bindings.Imgui
 		public ImGuiListClipper* self => (ImGuiListClipper*)Unsafe.AsPointer(ref this);
 
 
-		public void Begin(int items_count, float items_height)
+		public void Begin(int items_count, float items_height = -1.0f)
 		{
 			ImguiNative.ImGuiListClipper_Begin(self, items_count, items_height);
 		}
@@ -1895,32 +1895,32 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImGuiStorage_Clear(self);
 		}
 
-		public bool GetBool(uint key, [MarshalAs(UnmanagedType.Bool)] bool default_val)
+		public bool GetBool(uint key, [MarshalAs(UnmanagedType.Bool)] bool default_val = true)
 		{
 			return ImguiNative.ImGuiStorage_GetBool(self, key, default_val);
 		}
 
-		public bool GetBoolRef(uint key, [MarshalAs(UnmanagedType.Bool)] bool default_val)
+		public bool GetBoolRef(uint key, [MarshalAs(UnmanagedType.Bool)] bool default_val = true)
 		{
 			return ImguiNative.ImGuiStorage_GetBoolRef(self, key, default_val);
 		}
 
-		public float GetFloat(uint key, float default_val)
+		public float GetFloat(uint key, float default_val = 0.0f)
 		{
 			return ImguiNative.ImGuiStorage_GetFloat(self, key, default_val);
 		}
 
-		public float* GetFloatRef(uint key, float default_val)
+		public float* GetFloatRef(uint key, float default_val = 0.0f)
 		{
 			return ImguiNative.ImGuiStorage_GetFloatRef(self, key, default_val);
 		}
 
-		public int GetInt(uint key, int default_val)
+		public int GetInt(uint key, int default_val = 0)
 		{
 			return ImguiNative.ImGuiStorage_GetInt(self, key, default_val);
 		}
 
-		public int* GetIntRef(uint key, int default_val)
+		public int* GetIntRef(uint key, int default_val = 0)
 		{
 			return ImguiNative.ImGuiStorage_GetIntRef(self, key, default_val);
 		}
@@ -1930,7 +1930,7 @@ namespace Evergine.Bindings.Imgui
 			return ImguiNative.ImGuiStorage_GetVoidPtr(self, key);
 		}
 
-		public void** GetVoidPtrRef(uint key, void* default_val)
+		public void** GetVoidPtrRef(uint key, void* default_val = null)
 		{
 			return ImguiNative.ImGuiStorage_GetVoidPtrRef(self, key, default_val);
 		}
@@ -2094,7 +2094,7 @@ namespace Evergine.Bindings.Imgui
 		public ImGuiTextBuffer* self => (ImGuiTextBuffer*)Unsafe.AsPointer(ref this);
 
 
-		public void append([MarshalAs(UnmanagedType.LPStr)] string str, [MarshalAs(UnmanagedType.LPStr)] string str_end)
+		public void append([MarshalAs(UnmanagedType.LPStr)] string str, [MarshalAs(UnmanagedType.LPStr)] string str_end = null)
 		{
 			ImguiNative.ImGuiTextBuffer_append(self, str, str_end);
 		}
@@ -2159,7 +2159,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImGuiTextFilter_Clear(self);
 		}
 
-		public bool Draw([MarshalAs(UnmanagedType.LPStr)] string label, float width)
+		public bool Draw([MarshalAs(UnmanagedType.LPStr)] string label = "Filter(inc,-exc)", float width = 0.0f)
 		{
 			return ImguiNative.ImGuiTextFilter_Draw(self, label, width);
 		}
@@ -2169,7 +2169,7 @@ namespace Evergine.Bindings.Imgui
 			return ImguiNative.ImGuiTextFilter_IsActive(self);
 		}
 
-		public bool PassFilter([MarshalAs(UnmanagedType.LPStr)] string text, [MarshalAs(UnmanagedType.LPStr)] string text_end)
+		public bool PassFilter([MarshalAs(UnmanagedType.LPStr)] string text, [MarshalAs(UnmanagedType.LPStr)] string text_end = null)
 		{
 			return ImguiNative.ImGuiTextFilter_PassFilter(self, text, text_end);
 		}
