@@ -172,7 +172,8 @@ namespace EvergineImGUITest.Managers
             ImguizmoNative.ImGuizmo_SetImGuiContext(imGuiContext);
 
             this.io = ImguiNative.igGetIO();
-            ImguiNative.ImFontAtlas_AddFontDefault(io->Fonts, null); 
+            ////ImguiNative.ImFontAtlas_AddFontDefault(io->Fonts, null);
+            this.io->Fonts->AddFontDefault(null);
 
             // Compile shaders.
             var vsCode = this.NativeAPICompiler(ShaderStages.Vertex);
@@ -264,9 +265,11 @@ namespace EvergineImGUITest.Managers
             int height;
             int bytesPerPixel;
             byte* pixels = null;
-            ImguiNative.ImFontAtlas_GetTexDataAsRGBA32(io->Fonts, &pixels, &width, &height, &bytesPerPixel);
+            ////ImguiNative.ImFontAtlas_GetTexDataAsRGBA32(io->Fonts, &pixels, &width, &height, &bytesPerPixel);
+            this.io->Fonts->GetTexDataAsRGBA32(&pixels, &width, &height, &bytesPerPixel);
 
-            ImguiNative.ImFontAtlas_SetTexID(io->Fonts, this.fontAtlasID);
+            ////ImguiNative.ImFontAtlas_SetTexID(io->Fonts, this.fontAtlasID);
+            this.io->Fonts->SetTexID(this.fontAtlasID);
 
             var fontTextureDescription = new TextureDescription()
             {
@@ -305,7 +308,8 @@ namespace EvergineImGUITest.Managers
             var resourceSetDescription = new ResourceSetDescription(this.layout, this.constantBuffer, this.fontTexture, this.sampler);
             this.resourceSet = this.graphicsContext.Factory.CreateResourceSet(ref resourceSetDescription);
 
-            ImguiNative.ImFontAtlas_ClearTexData(io->Fonts);
+            ////ImguiNative.ImFontAtlas_ClearTexData(io->Fonts);
+            this.io->Fonts->ClearTexData();
 
             // Keyboard mapping. ImGui will use those indices to peek into the io.KeyDown[] array that we will update during the application lifetime.
             this.io->KeyMap[(int)ImGuiKey.Tab] = (int)Keys.Tab;
@@ -388,7 +392,8 @@ namespace EvergineImGUITest.Managers
 
             keyboardDispatcher.KeyChar += (s, e) =>
             {
-                ImguiNative.ImGuiIO_AddInputCharacter(this.io, e.Character);
+                ////ImguiNative.ImGuiIO_AddInputCharacter(this.io, e.Character);
+                this.io->AddInputCharacter(e.Character);
             };
         }
 
@@ -567,7 +572,8 @@ namespace EvergineImGUITest.Managers
             commandBuffer.SetVertexBuffers(this.vertexBuffers);
             commandBuffer.SetIndexBuffer(this.indexBuffer, IndexFormat.UInt16);
 
-            ImguiNative.ImDrawData_ScaleClipRects(drawData, this.io->DisplayFramebufferScale);
+            ////ImguiNative.ImDrawData_ScaleClipRects(drawData, this.io->DisplayFramebufferScale);
+            drawData->ScaleClipRects(this.io->DisplayFramebufferScale);
 
             // Render command lists
             uint vtx_offset = 0;
