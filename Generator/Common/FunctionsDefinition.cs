@@ -42,6 +42,8 @@ namespace Common
         public string FuncName;
         public string ReturnType;
         public string Signature;
+        public bool IsConstructor;
+        public bool IsDestructor;
         public List<Param> Params = new List<Param>();
         public Dictionary<string, string> Defaults = new Dictionary<string, string>();
 
@@ -51,6 +53,8 @@ namespace Common
             overload.FuncName = f["ov_cimguiname"].ToString();
             overload.ReturnType = f["ret"]?.ToString() ?? "void";
             overload.Signature = f["signature"]?.ToString();
+            overload.IsConstructor = f.Value<bool>("constructor");
+            overload.IsDestructor = f.Value<bool>("destructor");
 
             foreach (var a in f["argsT"])
             {
@@ -65,7 +69,7 @@ namespace Common
             return overload;
         }
 
-        public string GetParametersSignature(Specification spec)
+        public string GetParametersSignature(bool writeType = true, bool avoidSelfpOut = false, bool pOutAddress = false)
         {
             StringBuilder signature = new StringBuilder();
             foreach (var p in Params)
@@ -73,25 +77,29 @@ namespace Common
                 if (p.Name == "...")
                     continue;
 
-                string csType = Helpers.ConvertToCSharpType(p.Type, Helpers.Family.param);
-                signature.Append($"{csType} ");
-                signature.Append($"{p.Name}");
+                if (avoidSelfpOut && (p.Name == "self" || p.Name == "pOut"))
+                    continue;
 
-                ////Defaults.TryGetValue(p.Name, out string value);
-                ////if (!string.IsNullOrEmpty(value))
-                ////{
-                ////    string defaultValue = Helpers.ConvertDefault(value, csType, spec);
-                ////    if(!string.IsNullOrEmpty(defaultValue))
-                ////        signature.Append($" = {defaultValue}");
-                ////}
 
-                signature.Append($", ");
+                if (writeType)
+                {
+                    string csType = Helpers.ConvertToCSharpType(p.Type, Helpers.Family.param);
+                    signature.Append($"{csType} ");
+                }
+
+                string address = pOutAddress && p.Name == "pOut" ? "&" : "";
+                signature.Append($"{address}{p.Name}, ");
             }
 
             if(signature.Length > 0)
                 signature.Length -= 2;
 
             return signature.ToString();
+        }
+
+        public Param HasOut()
+        {
+            return Params.Find(p => p.Name == "pOut");
         }
     }
 

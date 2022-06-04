@@ -8,6 +8,7 @@ using Evergine.Framework.Services;
 using Evergine.Mathematics;
 using EvergineImGUITest.Managers;
 using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace EvergineImGUITest.Components
@@ -98,11 +99,9 @@ namespace EvergineImGUITest.Components
             ImguizmoNative.ImGuizmo_ViewManipulate(&view.M11, 2, Vector2.Zero, new Vector2(128, 128), 0x10101010);
 
             //ImGuizmoNET.ImGuizmo.DrawCubes(ref view.M11, ref projection.M11, ref world.M11, 1); //(Debug)
-                        
-            fixed (float* f = &bounds[0])
-            {
-                ImguizmoNative.ImGuizmo_Manipulate(&view.M11, &projection.M11, this.currentOperation, MODE.WORLD, &world.M11, null, null, f, null);
-            }
+
+            float* f = (float*)Unsafe.AsPointer(ref bounds[0]);
+            ImguizmoNative.ImGuizmo_Manipulate(view.Ptr(), projection.Ptr(), this.currentOperation, MODE.WORLD, world.Ptr(), null, null, f, null);
 
             this.transform.WorldTransform = world;
 

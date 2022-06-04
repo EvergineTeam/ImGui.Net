@@ -8,29 +8,11 @@ namespace Evergine.Bindings.Implot
 	public static unsafe partial class ImplotNative
 	{
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlotInputMap_ImPlotInputMap();
-
-		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlotPoint_ImPlotPoint_Nil();
-
-		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlotPoint_ImPlotPoint_double(double _x, double _y);
-
-		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlotPoint_ImPlotPoint_Vec2(Vector2 p);
-
-		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern double ImPlotRange_Clamp(ImPlotRange* self, double value);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
 		public static extern bool ImPlotRange_Contains(ImPlotRange* self, double value);
-
-		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlotRange_ImPlotRange_Nil();
-
-		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlotRange_ImPlotRange_double(double _min, double _max);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern double ImPlotRange_Size(ImPlotRange* self);
@@ -50,12 +32,6 @@ namespace Evergine.Bindings.Implot
 		public static extern bool ImPlotRect_Contains_double(ImPlotRect* self, double x, double y);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlotRect_ImPlotRect_Nil();
-
-		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlotRect_ImPlotRect_double(double x_min, double x_max, double y_min, double y_max);
-
-		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlotRect_Max(ImPlotPoint* pOut, ImPlotRect* self);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
@@ -63,9 +39,6 @@ namespace Evergine.Bindings.Implot
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlotRect_Size(ImPlotPoint* pOut, ImPlotRect* self);
-
-		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlotStyle_ImPlotStyle();
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern ImPlotColormap ImPlot_AddColormap_Vec4Ptr([MarshalAs(UnmanagedType.LPStr)] string name, Vector4* cols, int size, [MarshalAs(UnmanagedType.Bool)] bool qual);

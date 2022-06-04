@@ -8,18 +8,6 @@ namespace Evergine.Bindings.Imnodes
 	public static unsafe partial class ImnodesNative
 	{
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void EmulateThreeButtonMouse_EmulateThreeButtonMouse();
-
-		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImNodesIO_ImNodesIO();
-
-		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImNodesStyle_ImNodesStyle();
-
-		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void LinkDetachWithModifierClick_LinkDetachWithModifierClick();
-
-		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void imnodes_BeginInputAttribute(int id, ImNodesPinShape shape);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
@@ -220,14 +208,14 @@ namespace Evergine.Bindings.Imnodes
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.LPStr)]
-		public static extern string imnodes_SaveCurrentEditorStateToIniString(UIntPtr data_size);
+		public static extern string imnodes_SaveCurrentEditorStateToIniString(uint* data_size);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void imnodes_SaveEditorStateToIniFile(IntPtr editor, [MarshalAs(UnmanagedType.LPStr)] string file_name);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.LPStr)]
-		public static extern string imnodes_SaveEditorStateToIniString(IntPtr editor, UIntPtr data_size);
+		public static extern string imnodes_SaveEditorStateToIniString(IntPtr editor, uint* data_size);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void imnodes_SelectLink(int link_id);

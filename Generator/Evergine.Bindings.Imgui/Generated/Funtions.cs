@@ -11,37 +11,16 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImColor_HSV(ImColor* pOut, float h, float s, float v, float a);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImColor_ImColor_Nil();
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImColor_ImColor_Int(int r, int g, int b, int a);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImColor_ImColor_U32(uint rgba);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImColor_ImColor_Float(float r, float g, float b, float a);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImColor_ImColor_Vec4(Vector4 col);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImColor_SetHSV(ImColor* self, float h, float s, float v, float a);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern IntPtr ImDrawCmd_GetTexID(ImDrawCmd* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImDrawCmd_ImDrawCmd();
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImDrawData_Clear(ImDrawData* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImDrawData_DeIndexAllBuffers(ImDrawData* self);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImDrawData_ImDrawData();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImDrawData_ScaleClipRects(ImDrawData* self, Vector2 fb_scale);
@@ -51,9 +30,6 @@ namespace Evergine.Bindings.Imgui
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImDrawListSplitter_ClearFreeMemory(ImDrawListSplitter* self);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImDrawListSplitter_ImDrawListSplitter();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImDrawListSplitter_Merge(ImDrawListSplitter* self, ImDrawList* draw_list);
@@ -150,9 +126,6 @@ namespace Evergine.Bindings.Imgui
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImDrawList_GetClipRectMin(Vector2* pOut, ImDrawList* self);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImDrawList_ImDrawList(IntPtr shared_data);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImDrawList_PathArcTo(ImDrawList* self, Vector2 center, float radius, float a_min, float a_max, int num_segments);
@@ -254,9 +227,6 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImDrawList__TryMergeDrawCmds(ImDrawList* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImFontAtlasCustomRect_ImFontAtlasCustomRect();
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
 		public static extern bool ImFontAtlasCustomRect_IsPacked(ImFontAtlasCustomRect* self);
 
@@ -341,17 +311,11 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImFontAtlas_GetTexDataAsRGBA32(ImFontAtlas* self, byte** out_pixels, int* out_width, int* out_height, int* out_bytes_per_pixel);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImFontAtlas_ImFontAtlas();
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
 		public static extern bool ImFontAtlas_IsBuilt(ImFontAtlas* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImFontAtlas_SetTexID(ImFontAtlas* self, IntPtr id);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImFontConfig_ImFontConfig();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImFontGlyphRangesBuilder_AddChar(ImFontGlyphRangesBuilder* self, ushort c);
@@ -371,9 +335,6 @@ namespace Evergine.Bindings.Imgui
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
 		public static extern bool ImFontGlyphRangesBuilder_GetBit(ImFontGlyphRangesBuilder* self, uint n);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImFontGlyphRangesBuilder_ImFontGlyphRangesBuilder();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImFontGlyphRangesBuilder_SetBit(ImFontGlyphRangesBuilder* self, uint n);
@@ -412,9 +373,6 @@ namespace Evergine.Bindings.Imgui
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImFont_GrowIndex(ImFont* self, int new_size);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImFont_ImFont();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
@@ -467,9 +425,6 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImGuiIO_ClearInputKeys(ImGuiIO* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuiIO_ImGuiIO();
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuiIO_SetKeyEventNativeData(ImGuiIO* self, ImGuiKey key, int native_keycode, int native_scancode, int native_legacy_index);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
@@ -481,9 +436,6 @@ namespace Evergine.Bindings.Imgui
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
 		public static extern bool ImGuiInputTextCallbackData_HasSelection(ImGuiInputTextCallbackData* self);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuiInputTextCallbackData_ImGuiInputTextCallbackData();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuiInputTextCallbackData_InsertChars(ImGuiInputTextCallbackData* self, int pos, [MarshalAs(UnmanagedType.LPStr)] string text, [MarshalAs(UnmanagedType.LPStr)] string text_end);
@@ -501,20 +453,11 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImGuiListClipper_ForceDisplayRangeByIndices(ImGuiListClipper* self, int item_min, int item_max);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuiListClipper_ImGuiListClipper();
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
 		public static extern bool ImGuiListClipper_Step(ImGuiListClipper* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuiOnceUponAFrame_ImGuiOnceUponAFrame();
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuiPayload_Clear(ImGuiPayload* self);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuiPayload_ImGuiPayload();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
@@ -527,9 +470,6 @@ namespace Evergine.Bindings.Imgui
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
 		public static extern bool ImGuiPayload_IsPreview(ImGuiPayload* self);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuiPlatformImeData_ImGuiPlatformImeData();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuiStorage_BuildSortByKey(ImGuiStorage* self);
@@ -579,19 +519,7 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImGuiStorage_SetVoidPtr(ImGuiStorage* self, uint key, void* val);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuiStyle_ImGuiStyle();
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuiStyle_ScaleAllSizes(ImGuiStyle* self, float scale_factor);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuiTableColumnSortSpecs_ImGuiTableColumnSortSpecs();
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuiTableSortSpecs_ImGuiTableSortSpecs();
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuiTextBuffer_ImGuiTextBuffer();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuiTextBuffer_append(ImGuiTextBuffer* self, [MarshalAs(UnmanagedType.LPStr)] string str, [MarshalAs(UnmanagedType.LPStr)] string str_end);
@@ -635,21 +563,12 @@ namespace Evergine.Bindings.Imgui
 		public static extern bool ImGuiTextFilter_Draw(ImGuiTextFilter* self, [MarshalAs(UnmanagedType.LPStr)] string label, float width);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuiTextFilter_ImGuiTextFilter([MarshalAs(UnmanagedType.LPStr)] string default_filter);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
 		public static extern bool ImGuiTextFilter_IsActive(ImGuiTextFilter* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
 		public static extern bool ImGuiTextFilter_PassFilter(ImGuiTextFilter* self, [MarshalAs(UnmanagedType.LPStr)] string text, [MarshalAs(UnmanagedType.LPStr)] string text_end);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuiTextRange_ImGuiTextRange_Nil();
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuiTextRange_ImGuiTextRange_Str([MarshalAs(UnmanagedType.LPStr)] string _b, [MarshalAs(UnmanagedType.LPStr)] string _e);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
@@ -663,21 +582,6 @@ namespace Evergine.Bindings.Imgui
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuiViewport_GetWorkCenter(Vector2* pOut, ImGuiViewport* self);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuiViewport_ImGuiViewport();
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImVec2_ImVec2_Nil();
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImVec2_ImVec2_Float(float _x, float _y);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImVec4_ImVec4_Nil();
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImVec4_ImVec4_Float(float _x, float _y, float _z, float _w);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern ImGuiPayload* igAcceptDragDropPayload([MarshalAs(UnmanagedType.LPStr)] string type, ImGuiDragDropFlags flags);

@@ -1,10 +1,13 @@
-﻿namespace EvergineImGUITest.Managers
+﻿using Evergine.Mathematics;
+using System.Runtime.CompilerServices;
+
+namespace EvergineImGUITest.Managers
 {
     public static unsafe class ImGUIHelpers
     {
-        public static byte* ToPointer(this string text)
+        public static float* Ptr(this ref Matrix4x4 matrix)
         {
-            return (byte*)System.Runtime.InteropServices.Marshal.StringToHGlobalAnsi(text);
+            return (float*)Unsafe.AsPointer(ref matrix.M11);
         }
     }
 }
