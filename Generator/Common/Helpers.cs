@@ -124,8 +124,18 @@ namespace Common
                 case "ImS64*":
                     return "long*";
                 case "unsigned char**":
-                case "char* const[]":
                     return "byte**";
+                case "char* const[]":
+                    switch (family)
+                    {
+                        case Family.param:
+                            return "[MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[]";
+                        case Family.ret:
+                            return "string[]";
+                        case Family.field:
+                        default:
+                            return "byte**";
+                    }
                 case "ImVector_ImDrawCmd":
                 case "ImVector_ImDrawIdx":
                 case "ImVector_ImDrawVert":
