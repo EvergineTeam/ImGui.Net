@@ -24,7 +24,8 @@ namespace EvergineImGUITest
             // Imgui window
             Entity e = new Entity()
                     .AddComponent(new Transform3D())
-                    .AddComponent(new ImguiDemo());
+                    .AddComponent(new ImguiDemo())
+                    .AddComponent(new ImnodesDemo());                        
 
             this.Managers.EntityManager.Add(e);
 

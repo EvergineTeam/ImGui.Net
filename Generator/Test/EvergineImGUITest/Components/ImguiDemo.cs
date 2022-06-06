@@ -1,9 +1,6 @@
 ﻿using Evergine.Bindings.Imgui;
 using Evergine.Bindings.Implot;
 using Evergine.Framework;
-using Evergine.Framework.Graphics;
-using Evergine.Mathematics;
-using EvergineImGUITest.Managers;
 using System;
 
 namespace EvergineImGUITest.Components
@@ -22,7 +19,7 @@ namespace EvergineImGUITest.Components
             //ImguiNative.igProgressBar(0, new Vector2(-1, 0), "0%");
             //ImguiNative.igProgressBar(0.5f, new Vector2(-1, 0), "50%");
             //ImguiNative.igProgressBar(1.0f, new Vector2(-1, 0), "100%");
-            //ImguiNative.igEnd();
+            //ImguiNative.igEnd();               
         }
     }
 }
