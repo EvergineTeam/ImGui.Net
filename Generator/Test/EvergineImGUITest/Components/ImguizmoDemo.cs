@@ -96,7 +96,7 @@ namespace EvergineImGUITest.Components
 
             //ImGuizmoNET.ImGuizmo.AllowAxisFlip(this.showGuizmo);
             //ImGuizmoNET.ImGuizmo.DrawGrid(ref view.M11, ref projection.M11, ref WorldTransform.M11, 10.0f);
-            ImguizmoNative.ImGuizmo_ViewManipulate(&view.M11, 2, Vector2.Zero, new Vector2(128, 128), 0x10101010);
+            ImguizmoNative.ImGuizmo_ViewManipulate(view.Ptr(), 2, Vector2.Zero, new Vector2(128, 128), 0x10101010);
 
             //ImGuizmoNET.ImGuizmo.DrawCubes(ref view.M11, ref projection.M11, ref world.M11, 1); //(Debug)
 

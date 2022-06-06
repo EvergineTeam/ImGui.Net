@@ -2,6 +2,7 @@
 using Evergine.Bindings.Imnodes;
 using Evergine.Framework;
 using Evergine.Mathematics;
+using EvergineImGUITest.Managers;
 using System;
 
 namespace EvergineImGUITest.Components
@@ -31,7 +32,8 @@ namespace EvergineImGUITest.Components
 
         protected override void Update(TimeSpan gameTime)
         {
-            ImguiNative.igBegin("Imnodes Window", true, ImGuiWindowFlags.None);
+            bool b = true;
+            ImguiNative.igBegin("Imnodes Window", b.Ptr(), ImGuiWindowFlags.None);
 
             ImnodesNative.imnodes_BeginNodeEditor();
             int id = 0;

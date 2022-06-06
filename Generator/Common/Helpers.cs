@@ -47,11 +47,10 @@ namespace Common
                     }
                 case "bool*":
                     switch (family)
-                    {
-                        case Family.param:
-                            return "[MarshalAs(UnmanagedType.Bool)] bool";
+                    {                            
                         case Family.ret:
                             return "bool";
+                        case Family.param:
                         case Family.field:
                         default:
                             return "byte*";

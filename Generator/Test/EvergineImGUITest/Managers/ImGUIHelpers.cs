@@ -9,5 +9,10 @@ namespace EvergineImGUITest.Managers
         {
             return (float*)Unsafe.AsPointer(ref matrix.M11);
         }
+
+        public static byte* Ptr(this ref bool b)
+        {
+            return (byte*)Unsafe.AsPointer(ref b);
+        }
     }
 }

@@ -251,64 +251,64 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_PixelsToPlot_Float(ImPlotPoint* pOut, float x, float y, ImAxis x_axis, ImAxis y_axis);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroups_FloatPtr(byte** label_ids, float* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroups_FloatPtr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, float* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroups_doublePtr(byte** label_ids, double* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroups_doublePtr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, double* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroups_S8Ptr(byte** label_ids, sbyte* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroups_S8Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, sbyte* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroups_U8Ptr(byte** label_ids, byte* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroups_U8Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, byte* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroups_S16Ptr(byte** label_ids, short* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroups_S16Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, short* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroups_U16Ptr(byte** label_ids, ushort* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroups_U16Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, ushort* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroups_S32Ptr(byte** label_ids, int* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroups_S32Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, int* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroups_U32Ptr(byte** label_ids, uint* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroups_U32Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, uint* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroups_S64Ptr(byte** label_ids, long* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroups_S64Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, long* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroups_U64Ptr(byte** label_ids, ulong* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroups_U64Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, ulong* values, int item_count, int group_count, double group_width, double x0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroupsH_FloatPtr(byte** label_ids, float* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroupsH_FloatPtr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, float* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroupsH_doublePtr(byte** label_ids, double* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroupsH_doublePtr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, double* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroupsH_S8Ptr(byte** label_ids, sbyte* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroupsH_S8Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, sbyte* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroupsH_U8Ptr(byte** label_ids, byte* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroupsH_U8Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, byte* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroupsH_S16Ptr(byte** label_ids, short* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroupsH_S16Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, short* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroupsH_U16Ptr(byte** label_ids, ushort* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroupsH_U16Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, ushort* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroupsH_S32Ptr(byte** label_ids, int* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroupsH_S32Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, int* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroupsH_U32Ptr(byte** label_ids, uint* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroupsH_U32Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, uint* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroupsH_S64Ptr(byte** label_ids, long* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroupsH_S64Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, long* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarGroupsH_U64Ptr(byte** label_ids, ulong* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
+		public static extern void ImPlot_PlotBarGroupsH_U64Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, ulong* values, int item_count, int group_count, double group_height, double y0, ImPlotBarGroupsFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_PlotBars_FloatPtrInt([MarshalAs(UnmanagedType.LPStr)] string label_id, float* values, int count, double bar_width, double x0, int offset, int stride);
@@ -779,34 +779,34 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_PlotLineG([MarshalAs(UnmanagedType.LPStr)] string label_id, ImPlotPoint* getter, void* data, int count);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPieChart_FloatPtr(byte** label_ids, float* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
+		public static extern void ImPlot_PlotPieChart_FloatPtr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, float* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPieChart_doublePtr(byte** label_ids, double* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
+		public static extern void ImPlot_PlotPieChart_doublePtr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, double* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPieChart_S8Ptr(byte** label_ids, sbyte* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
+		public static extern void ImPlot_PlotPieChart_S8Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, sbyte* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPieChart_U8Ptr(byte** label_ids, byte* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
+		public static extern void ImPlot_PlotPieChart_U8Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, byte* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPieChart_S16Ptr(byte** label_ids, short* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
+		public static extern void ImPlot_PlotPieChart_S16Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, short* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPieChart_U16Ptr(byte** label_ids, ushort* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
+		public static extern void ImPlot_PlotPieChart_U16Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, ushort* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPieChart_S32Ptr(byte** label_ids, int* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
+		public static extern void ImPlot_PlotPieChart_S32Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, int* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPieChart_U32Ptr(byte** label_ids, uint* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
+		public static extern void ImPlot_PlotPieChart_U32Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, uint* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPieChart_S64Ptr(byte** label_ids, long* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
+		public static extern void ImPlot_PlotPieChart_S64Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, long* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPieChart_U64Ptr(byte** label_ids, ulong* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
+		public static extern void ImPlot_PlotPieChart_U64Ptr([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] label_ids, ulong* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.Bool)] bool normalize, [MarshalAs(UnmanagedType.LPStr)] string label_fmt, double angle0);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_PlotScatter_FloatPtrInt([MarshalAs(UnmanagedType.LPStr)] string label_id, float* values, int count, double xscale, double x0, int offset, int stride);
@@ -1226,10 +1226,10 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_SetupAxisLinks(ImAxis axis, double* link_min, double* link_max);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_SetupAxisTicks_doublePtr(ImAxis axis, double* values, int n_ticks, byte** labels, [MarshalAs(UnmanagedType.Bool)] bool keep_default);
+		public static extern void ImPlot_SetupAxisTicks_doublePtr(ImAxis axis, double* values, int n_ticks, [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] labels, [MarshalAs(UnmanagedType.Bool)] bool keep_default);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_SetupAxisTicks_double(ImAxis axis, double v_min, double v_max, int n_ticks, byte** labels, [MarshalAs(UnmanagedType.Bool)] bool keep_default);
+		public static extern void ImPlot_SetupAxisTicks_double(ImAxis axis, double v_min, double v_max, int n_ticks, [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] labels, [MarshalAs(UnmanagedType.Bool)] bool keep_default);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_SetupFinish();
@@ -1245,14 +1245,14 @@ namespace Evergine.Bindings.Implot
 		public static extern bool ImPlot_ShowColormapSelector([MarshalAs(UnmanagedType.LPStr)] string label);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_ShowDemoWindow([MarshalAs(UnmanagedType.Bool)] bool p_open);
+		public static extern void ImPlot_ShowDemoWindow(byte* p_open);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
 		public static extern bool ImPlot_ShowInputMapSelector([MarshalAs(UnmanagedType.LPStr)] string label);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_ShowMetricsWindow([MarshalAs(UnmanagedType.Bool)] bool p_popen);
+		public static extern void ImPlot_ShowMetricsWindow(byte* p_popen);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_ShowStyleEditor(ImPlotStyle* @ref);

@@ -120,11 +120,11 @@ namespace Evergine.Bindings.Imnodes
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
-		public static extern bool imnodes_IsLinkCreated_BoolPtr(int* started_at_attribute_id, int* ended_at_attribute_id, [MarshalAs(UnmanagedType.Bool)] bool created_from_snap);
+		public static extern bool imnodes_IsLinkCreated_BoolPtr(int* started_at_attribute_id, int* ended_at_attribute_id, byte* created_from_snap);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
-		public static extern bool imnodes_IsLinkCreated_IntPtr(int* started_at_node_id, int* started_at_attribute_id, int* ended_at_node_id, int* ended_at_attribute_id, [MarshalAs(UnmanagedType.Bool)] bool created_from_snap);
+		public static extern bool imnodes_IsLinkCreated_IntPtr(int* started_at_node_id, int* started_at_attribute_id, int* ended_at_node_id, int* ended_at_attribute_id, byte* created_from_snap);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
