@@ -8,6 +8,9 @@
 	<ItemGroup>
 		<Content Include="build\**" PackagePath="build" />
 		<Content Include="runtimes\**" PackagePath="runtimes" />
+		<Content Include="Evergine.Bindings.Imgui.dll.config" Pack="true" Visible="true" PackageCopyToOutput="true">
+			      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
