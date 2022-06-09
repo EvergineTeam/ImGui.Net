@@ -3,11 +3,16 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+		<Description>Provides csharp bindings to Implot library.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<Content Include="build\**" PackagePath="build" />
 		<Content Include="runtimes\**" PackagePath="runtimes" />
+		<None Remove="Evergine.Bindings.Implot.dll.config" />
+		<None Remove="Evergine.Bindings.Implot.Reference.targets" />
+		<Content Include="Evergine.Bindings.Implot.dll.config" Pack="true" Visible="true" PackageCopyToOutput="true" />
+		<Content Include="Evergine.Bindings.Implot.Reference.targets" Pack="false" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -3,11 +3,14 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+		<Description>Provides csharp bindings to ImGuizmo library.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<Content Include="build\**" PackagePath="build" />
 		<Content Include="runtimes\**" PackagePath="runtimes" />
+		<Content Include="Evergine.Bindings.Imguizmo.dll.config" Pack="true" Visible="true" PackageCopyToOutput="true" />
+		<Content Include="Evergine.Bindings.Imguizmo.Reference.targets" Pack="false" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -15,7 +18,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Evergine.Bindings.Imgui\Evergine.Bindings.Imgui.csproj" />
+		<ProjectReference Include="..\Evergine.Bindings.Imgui\Evergine.Bindings.Imgui.csproj" />
 	</ItemGroup>
 
 </Project>
