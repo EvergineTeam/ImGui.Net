@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
@@ -6,18 +6,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Generated\" />
+		<Content Include="build\**" PackagePath="build" />
+		<Content Include="runtimes\**" PackagePath="runtimes" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Evergine.Mathematics" Version="2022.2.16.6" />
 		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Update="runtimes\win-x64\cimgui.dll">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
 	</ItemGroup>
 
 </Project>

@@ -6,7 +6,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Generated\" />
+		<Content Include="build\**" PackagePath="build" />
+		<Content Include="runtimes\**" PackagePath="runtimes" />
 	</ItemGroup>
 
 	<ItemGroup>
