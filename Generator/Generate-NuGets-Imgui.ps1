@@ -2,7 +2,7 @@
 .SYNOPSIS
 	Evergine bindings NuGet Packages generator script, (c) 2022 Evergine Team
 .DESCRIPTION
-	This script generates NuGet packages for the low-level Vulkan bindings used in Evergine
+	This script generates NuGet packages for the low-level ImGui bindings used in Evergine
 	It's meant to have the same behavior when executed locally as when it's executed in a CI pipeline.
 .EXAMPLE
 	<script> -version 2021.11.17.1-local
@@ -20,7 +20,7 @@ param (
 
 # Utility functions
 function LogDebug($line)
-{ Write-Host "##[debug] $line" -Foreground Blue -Background Black 
+{ Write-Host "##[debug] $line" -Foreground Blue -Background Black
 }
 
 # Show variables
