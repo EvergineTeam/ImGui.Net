@@ -20,7 +20,7 @@ param (
 
 # Utility functions
 function LogDebug($line)
-{ Write-Host "##[debug] $line" -Foreground Blue -Background Black
+{ Write-Host "##[debug] $line" -Foreground Blue -Background Black 
 }
 
 # Show variables
