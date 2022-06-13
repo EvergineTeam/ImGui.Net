@@ -36,9 +36,15 @@ $outputFolder = Join-Path $outputFolderBase $versionWithSuffix
 New-Item -ItemType Directory -Force -Path $outputFolder
 $absoluteOutputFolder = Resolve-Path $outputFolder
 
+$symbols = false
+if($buildConfiguration -eq "Debug")
+{
+	$symbols = true
+}
+
 # Generate packages
 LogDebug "START packaging process"
-dotnet pack "$imguiBindingsCsprojPath" -v:$buildVerbosity -p:Configuration=$buildConfiguration -p:PackageOutputPath="$absoluteOutputFolder" -p:IncludeSymbols -p:Version=$version
+dotnet pack "$imguiBindingsCsprojPath" -v:$buildVerbosity -p:Configuration=$buildConfiguration -p:PackageOutputPath="$absoluteOutputFolder" -p:IncludeSymbols=$symbols -p:Version=$version
 if($?)
 {
    LogDebug "END packaging process"
