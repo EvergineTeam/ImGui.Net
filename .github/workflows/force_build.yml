@@ -35,7 +35,7 @@ jobs:
           cd ./Generator
           ./Generate-Bindings-Imgui.ps1
       - name: Commit if update
-        uses: stefanzweifel/git-auto-commit-action@v4.14.1
+        uses: stefanzweifel/git-auto-commit-action@v3
         with:
           commit_message: Updating Imgui version
           add_options: "-u"
@@ -43,7 +43,7 @@ jobs:
         id: build_nugets
         run: |
           cd ./Generator
-          ./Generate-NuGets-Imgui.ps1 -Version  $(Get-Date -Format "yyyy.M.d").$([string]([int]$(Get-Date -Format "HH")*60+[int]$(Get-Date -Format "mm"))).${{  github.run_number  }} -outputfolder ${{  env.nugetOutputPath  }}
+          ./Generate-NuGets-Imgui.ps1 -Version $(Get-Date -Format "yyyy.M.d").$([string]([int]$(Get-Date -Format "HH")*60+[int]$(Get-Date -Format "mm"))).${{  github.run_number  }} -outputfolder ${{  env.nugetOutputPath  }}
       - name: Publish NuGet
         if: ${{ success() && github.event.inputs.publishEnabled == 'true' }}
         run: |
