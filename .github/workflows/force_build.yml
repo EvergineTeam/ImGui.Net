@@ -1,0 +1,68 @@
+name: Force build
+on:
+  workflow_dispatch:
+    inputs:
+      publishEnabled:
+        description: "Publish to Nuget.org"
+        type: boolean
+        required: false
+        default: false
+
+env:
+  filePath: ${{  'xr.xml'  }}
+  fileTmpPath: ${{  'xr.xml_tmp'  }}
+  basePath: ${{  'KhronosRegistry'  }}
+  sourceUrl: ${{  'https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/master/specification/registry/xr.xml'  }}
+  selfUrl: ${{  'https://raw.githubusercontent.com/EvergineTeam/OpenXR.NET/main/KhronosRegistry/xr.xml'  }}
+  nugetOutputPath: ${{  'nupkgs'  }}
+
+jobs:
+  build_and_publish:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: |
+            3.1.x
+            5.x
+      - uses: nuget/setup-nuget@v1
+        with:
+          nuget-version: "5.x"
+      - name: Generate Bindings
+        id: build_bindings
+        run: |
+          cd ./Generator
+          ./Generate-Bindings-Imgui.ps1
+      - name: Commit if update
+        uses: stefanzweifel/git-auto-commit-action@v4.11.0
+        with:
+          commit_message: Updating Imgui version
+          add_options: "-u"
+      - name: Generate NuGet packages
+        id: build_nugets
+        run: |
+          cd ./Generator
+          ./Generate-NuGets-Imgui.ps1 -Version  ${{ date::$(date +'%Y.%m.%d') }}.${{  github.run_number  }} -outputfolder ${{  env.nugetOutputPath  }}
+      - name: Publish NuGet
+        if: ${{ success() && github.event.inputs.publishEnabled == 'true' }}
+        run: |
+          cd ${{  env.nugetOutputPath  }}
+          ls *.nupkg
+          dotnet nuget push "**/*.nupkg" --skip-duplicate --no-symbols -k ${{secrets.EVERGINE_NUGETORG_TOKEN}} -s https://api.nuget.org/v3/index.json
+      - name: SendGrid Mail Action
+        if: ${{ failure() }}
+        uses: mmichailidis/sendgrid-mail-action@v1.1
+        with:
+          # The token for sendgrid
+          sendgrid-token: ${{ secrets.WAVE_SENDGRID_TOKEN }}
+          # List of emails separated by comma that the email will go
+          mail: ${{ secrets.EVERGINE_EMAILREPORT_LIST }}
+          # The email that will be shown as sender
+          from: ${{ secrets.EVERGINE_EMAIL }}
+          # The subject of the email
+          subject: Imgui Update NuGet has failed
+          # Defines if it should be one email with multiple address or multiple emails with a single address
+          individual: false
+          # The body of the mail. The placeholders that can be used are $EVENT$, $ISSUE$, $ACTION$
+          text: something when wrong when updating Imgui bindings

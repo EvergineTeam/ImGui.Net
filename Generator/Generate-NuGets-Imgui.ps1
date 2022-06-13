@@ -38,6 +38,13 @@ $absoluteOutputFolder = Resolve-Path $outputFolder
 
 # Generate packages
 LogDebug "START packaging process"
-& dotnet pack "$imguiBindingsCsprojPath" -v:$buildVerbosity -p:Configuration=$buildConfiguration -p:PackageOutputPath="$absoluteOutputFolder" -p:IncludeSymbols=true -p:Version=$version
-
-LogDebug "END packaging process"
+dotnet pack "$imguiBindingsCsprojPath" -v:$buildVerbosity -p:Configuration=$buildConfiguration -p:PackageOutputPath="$absoluteOutputFolder" -p:IncludeSymbols -p:Version=$version
+if($?)
+{
+   LogDebug "END packaging process"
+}
+else
+{
+	LogDebug "ERROR; packaging failed"
+   	exit -1
+}
