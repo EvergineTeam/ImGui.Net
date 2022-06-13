@@ -35,7 +35,7 @@ jobs:
           cd ./Generator
           ./Generate-Bindings-Imgui.ps1
       - name: Commit if update
-        uses: stefanzweifel/git-auto-commit-action@v4.11.0
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Updating Imgui version
           add_options: "-u"
