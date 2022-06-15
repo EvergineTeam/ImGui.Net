@@ -42,7 +42,7 @@ jobs:
         id: build_nugets
         run: |
           cd ./Generator
-          ./Generate-NuGets-Imgui.ps1 -runNumber ${{  github.run_number  }} -outputfolder ${{  env.nugetOutputPath  }}
+          ./Generate-NuGets-Imgui.ps1 -outputfolder ${{  env.nugetOutputPath  }}
       - name: Publish NuGet
         if: ${{ success() && github.event.inputs.publishEnabled == 'true' }}
         run: |

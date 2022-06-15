@@ -62,7 +62,7 @@ jobs:
           targetType: filePath
           workingDirectory: Generator/
           filePath: Generator/Generate-NuGets-Imgui.ps1
-          arguments: -Version $(Build.BuildNumber) -Outputfolder $(nugetOutputPath) -BuildConfiguration $(buildConfiguration)
+          arguments: -outputfolder $(nugetOutputPath) -buildConfiguration $(buildConfiguration)
 
       - task: PublishBuildArtifacts@1
         displayName: "Publish Artifact: NuGets"

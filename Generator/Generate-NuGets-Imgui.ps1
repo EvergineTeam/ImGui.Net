@@ -11,11 +11,11 @@
 #>
 
 param (
-	[Parameter(mandatory=$true)][string]$runNumber,
 	[string]$outputFolderBase = "nupkgs",
 	[string]$buildVerbosity = "normal",
 	[string]$buildConfiguration = "Release",
-	[string]$imguiBindingsCsprojPath = "Evergine.Bindings.Imgui\Evergine.Bindings.Imgui.csproj"
+	[string]$imguiBindingsCsprojPath = "Evergine.Bindings.Imgui\Evergine.Bindings.Imgui.csproj",
+    [string]$versionSuffix = ""
 )
 
 # Utility functions
@@ -24,7 +24,7 @@ function LogDebug($line)
 }
 
 # calculate version
-$version = "$(Get-Date -Format "yyyy.M.d").$([string]([int]$(Get-Date -Format "HH")*60+[int]$(Get-Date -Format "mm"))).$runNumber"
+$version = "$(Get-Date -Format "yyyy.M.d").$([string]([int]$(Get-Date -Format "HH")*60+[int]$(Get-Date -Format "mm")))$versionSuffix"
 
 # Show variables
 LogDebug "############## VARIABLES ##############"
