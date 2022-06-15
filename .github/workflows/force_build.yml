@@ -35,10 +35,9 @@ jobs:
           cd ./Generator
           ./Generate-Bindings-Imgui.ps1
       - name: Commit if update
-        uses: stefanzweifel/git-auto-commit-action@v4.14.1
+        uses: EndBug/add-and-commit@v9
         with:
-          commit_message: Updating Imgui version
-          add_options: "-u"
+          message: Updating Imgui version
       - name: Generate NuGet packages
         id: build_nugets
         run: |
