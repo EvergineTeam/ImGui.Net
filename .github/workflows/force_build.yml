@@ -46,7 +46,7 @@ jobs:
       - name: Publish NuGet
         if: ${{ success() && github.event.inputs.publishEnabled == 'true' }}
         run: |
-          cd ${{  env.nugetOutputPath  }}
+          cd ./Generator/${{  env.nugetOutputPath  }}
           ls *.nupkg
           dotnet nuget push "**/*.nupkg" --skip-duplicate --no-symbols -k ${{secrets.EVERGINE_NUGETORG_TOKEN}} -s https://api.nuget.org/v3/index.json
       - name: SendGrid Mail Action
