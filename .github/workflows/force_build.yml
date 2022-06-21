@@ -49,6 +49,7 @@ jobs:
         run: |
           cd ./Generator/${{  env.nugetOutputPath  }}
           ls *.nupkg
+          echo "${{secrets.EVERGINE_NUGETORG_TOKEN}}"
           dotnet nuget push "**/*.nupkg" --skip-duplicate --no-symbols -k ${{secrets.EVERGINE_NUGETORG_TOKEN}} -s https://api.nuget.org/v3/index.json
       - name: SendGrid Mail Action
         if: ${{ failure() }}
