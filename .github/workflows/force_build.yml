@@ -44,6 +44,7 @@ jobs:
           cd ./Generator
           ./Generate-NuGets-Imgui.ps1 -outputfolder ${{  env.nugetOutputPath  }}
       - name: Publish NuGet
+        shell: pwsh
         if: ${{ success() && github.event.inputs.publishEnabled == 'true' }}
         env:
           token: ${{secrets.EVERGINE_NUGETORG_TOKEN}}
