@@ -54,6 +54,7 @@ jobs:
           dotnet --version
           echo "dotnet nuget push ""**/*.nupkg"" --skip-duplicate --no-symbols -k ""$env:token"" -s https://api.nuget.org/v3/index.json"
           dotnet nuget push "**/*.nupkg" --skip-duplicate --no-symbols -k "$env:token" -s https://api.nuget.org/v3/index.json
+          dotnet nuget push "**/*.nupkg" --skip-duplicate --no-symbols true -k "$env:token" -s https://api.nuget.org/v3/index.json
 
 #      - name: SendGrid Mail Action
 #        if: ${{ failure() }}
