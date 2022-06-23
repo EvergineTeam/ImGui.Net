@@ -28,7 +28,7 @@ jobs:
             5.x
       - uses: nuget/setup-nuget@v1
         with:
-          nuget-version: "5.x"
+          nuget-version: "6.x"
       - name: Generate Bindings
         id: build_bindings
         run: |
@@ -50,6 +50,8 @@ jobs:
           token: oy2agzf64losngjhzynqygjo2itkfpmujhp7lukhualc6m
         run: |
           cd ./Generator/${{  env.nugetOutputPath  }}
+          ls
+          dotnet --version
           echo "dotnet nuget push ""**/*.nupkg"" --skip-duplicate --no-symbols -k ""$env:token"" -s https://api.nuget.org/v3/index.json"
           dotnet nuget push "**/*.nupkg" --skip-duplicate --no-symbols -k "$env:token" -s https://api.nuget.org/v3/index.json
 
