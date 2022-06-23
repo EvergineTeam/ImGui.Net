@@ -46,10 +46,13 @@ jobs:
       - name: Publish NuGet
         shell: pwsh
         if: ${{ success() && github.event.inputs.publishEnabled == 'true' }}
+        env:
+          token: oy2agzf64losngjhzynqygjo2itkfpmujhp7lukhualc6m
         run: |
           cd ./Generator/${{  env.nugetOutputPath  }}
-          ls *.nupkg
-          dotnet nuget push "**/*.nupkg" --skip-duplicate --no-symbols --api-key ${{secrets.EVERGINE_NUGETORG_TOKEN}} --source https://api.nuget.org/v3/index.json
+          echo "dotnet nuget push ""**/*.nupkg"" --skip-duplicate --no-symbols -k ""$env:token"" -s https://api.nuget.org/v3/index.json"
+          dotnet nuget push "**/*.nupkg" --skip-duplicate --no-symbols -k "$env:token" -s https://api.nuget.org/v3/index.json
+
 #      - name: SendGrid Mail Action
 #        if: ${{ failure() }}
 #        uses: mmichailidis/sendgrid-mail-action@v1.1
