@@ -1,4 +1,4 @@
-name: Force build
+name: Force build Imnodes
 on:
   workflow_dispatch:
     inputs:

@@ -1,4 +1,4 @@
-name: Force build
+name: Force build Imgui
 on:
   workflow_dispatch:
     inputs:
