@@ -4,6 +4,9 @@
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 		<Description>Provides csharp bindings to Implot library.</Description>
+		<PackageProjectUrl></PackageProjectUrl>
+		<RepositoryUrl>https://github.com/EvergineTeam/ImGui.Net</RepositoryUrl>
+		<PackageIcon>icon.png</PackageIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -13,6 +16,13 @@
 		<None Remove="Evergine.Bindings.Implot.Reference.targets" />
 		<Content Include="Evergine.Bindings.Implot.dll.config" Pack="true" Visible="true" PackageCopyToOutput="true" />
 		<Content Include="Evergine.Bindings.Implot.Reference.targets" Pack="false" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="..\icon.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	</ItemGroup>
 
 	<ItemGroup>
