@@ -1,12 +1,12 @@
-[submodule "cimgui"]
-	path = Generator/NativeLibraries/cimgui
+[submodule "NativeLibraries/cimgui"]
+	path = NativeLibraries/cimgui
 	url = https://github.com/cimgui/cimgui
-[submodule "cimguizmo"]
-	path = Generator/NativeLibraries/extensions/cimguizmo
+[submodule "NativeLibraries/extensions/cimguizmo"]
+	path = NativeLibraries/extensions/cimguizmo
 	url = https://github.com/cimgui/cimguizmo
-[submodule "cimplot"]
-	path = Generator/NativeLibraries/extensions/cimplot
+[submodule "NativeLibraries/extensions/cimplot"]
+	path = NativeLibraries/extensions/cimplot
 	url = https://github.com/cimgui/cimplot.git
-[submodule "cimnodes"]
-	path = Generator/NativeLibraries/extensions/cimnodes
+[submodule "NativeLibraries/extensions/cimnodes"]
+	path = NativeLibraries/extensions/cimnodes
 	url = https://github.com/cimgui/cimnodes.git
