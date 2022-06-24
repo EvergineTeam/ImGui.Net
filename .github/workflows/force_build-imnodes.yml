@@ -30,20 +30,20 @@ jobs:
       - uses: nuget/setup-nuget@v1
         with:
           nuget-version: "6.x"
-      - name: Generate Bindings
-        id: build_bindings
-        run: |
-          cd ./Generator
-          ./Generate-Bindings-Imgui.ps1
-      - name: Commit if update
-        uses: EndBug/add-and-commit@v9
-        with:
-          message: Updating Imgui version
+     # - name: Generate Bindings
+     #   id: build_bindings
+     #   run: |
+     #     cd ./Generator
+     #     ./Generate-Bindings-Imgui.ps1
+     # - name: Commit if update
+     #   uses: EndBug/add-and-commit@v9
+     #   with:
+     #     message: Updating Imgui version
       - name: Generate NuGet packages
         id: build_nugets
         run: |
           cd ./Generator
-          ./Generate-NuGets-Imgui.ps1 -outputfolder ${{  env.nugetOutputPath  }}
+          ./Generate-NuGets.ps1 -csprojPath Evergine.Bindings.Imnodes\Evergine.Bindings.Imnodes.csproj -outputfolder ${{  env.nugetOutputPath  }}
       - name: Publish NuGet
         shell: pwsh
         if: ${{ success() && github.event.inputs.publishEnabled == 'true' }}
@@ -63,8 +63,8 @@ jobs:
           # The email that will be shown as sender
           from: ${{ secrets.EVERGINE_EMAIL }}
           # The subject of the email
-          subject: Imgui Update NuGet has failed
+          subject: Imnodes Update NuGet has failed
           # Defines if it should be one email with multiple address or multiple emails with a single address
           individual: false
           # The body of the mail. The placeholders that can be used are $EVENT$, $ISSUE$, $ACTION$
-          text: something when wrong when updating Imgui bindings
+          text: something when wrong when updating Imnodes bindings

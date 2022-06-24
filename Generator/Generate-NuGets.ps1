@@ -2,7 +2,7 @@
 .SYNOPSIS
 	Evergine bindings NuGet Packages generator script, (c) 2022 Evergine Team
 .DESCRIPTION
-	This script generates NuGet packages for the low-level Vulkan bindings used in Evergine
+	This script generates NuGet packages for the low-level ImGui bindings used in Evergine
 	It's meant to have the same behavior when executed locally as when it's executed in a CI pipeline.
 .EXAMPLE
 	<script> -version 2021.11.17.1-local
@@ -11,17 +11,20 @@
 #>
 
 param (
-	[Parameter(mandatory=$true)][string]$version,
+	[string]$csprojPath = "Evergine.Bindings.Imgui\Evergine.Bindings.Imgui.csproj",
 	[string]$outputFolderBase = "nupkgs",
 	[string]$buildVerbosity = "normal",
 	[string]$buildConfiguration = "Release",
-	[string]$implotBindingsCsprojPath = "Evergine.Bindings.Implot\Evergine.Bindings.Implot.csproj"
+    [string]$versionSuffix = ""
 )
 
 # Utility functions
 function LogDebug($line)
-{ Write-Host "##[debug] $line" -Foreground Blue -Background Black 
+{ Write-Host "##[debug] $line" -Foreground Blue -Background Black
 }
+
+# calculate version
+$version = "$(Get-Date -Format "yyyy.M.d").$([string]([int]$(Get-Date -Format "HH")*60+[int]$(Get-Date -Format "mm")))$versionSuffix"
 
 # Show variables
 LogDebug "############## VARIABLES ##############"
@@ -36,8 +39,21 @@ $outputFolder = Join-Path $outputFolderBase $versionWithSuffix
 New-Item -ItemType Directory -Force -Path $outputFolder
 $absoluteOutputFolder = Resolve-Path $outputFolder
 
+$symbols = false
+if($buildConfiguration -eq "Debug")
+{
+	$symbols = true
+}
+
 # Generate packages
 LogDebug "START packaging process"
-& dotnet pack "$implotBindingsCsprojPath" -v:$buildVerbosity -p:Configuration=$buildConfiguration -p:PackageOutputPath="$absoluteOutputFolder" -p:IncludeSymbols=true -p:Version=$version
-
-LogDebug "END packaging process"
+dotnet pack "$csprojPath" -v:$buildVerbosity -p:Configuration=$buildConfiguration -p:PackageOutputPath="$absoluteOutputFolder" -p:IncludeSymbols=$symbols -p:Version=$version
+if($?)
+{
+   LogDebug "END packaging process"
+}
+else
+{
+	LogDebug "ERROR; packaging failed"
+   	exit -1
+}

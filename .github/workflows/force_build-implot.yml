@@ -1,0 +1,70 @@
+name: Force build
+on:
+  workflow_dispatch:
+    inputs:
+      publishEnabled:
+        description: "Publish to Nuget.org"
+        type: boolean
+        required: false
+        default: false
+
+env:
+  filePath: ${{  'xr.xml'  }}
+  fileTmpPath: ${{  'xr.xml_tmp'  }}
+  basePath: ${{  'KhronosRegistry'  }}
+  sourceUrl: ${{  'https://raw.githubusercontent.com/KhronosGroup/OpenXR-Docs/master/specification/registry/xr.xml'  }}
+  selfUrl: ${{  'https://raw.githubusercontent.com/EvergineTeam/OpenXR.NET/main/KhronosRegistry/xr.xml'  }}
+  nugetOutputPath: ${{  'nupkgs'  }}
+
+jobs:
+  build_and_publish:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: |
+            3.1.x
+            5.x
+            6.x
+    #  - uses: nuget/setup-nuget@v1
+    #    with:
+    #      nuget-version: "6.x"
+    #  - name: Generate Bindings
+    #    id: build_bindings
+    #    run: |
+    #      cd ./Generator
+    #      ./Generate-Bindings-Imgui.ps1
+    #  - name: Commit if update
+    #    uses: EndBug/add-and-commit@v9
+    #    with:
+    #      message: Updating Imgui version
+      - name: Generate NuGet packages
+        id: build_nugets
+        run: |
+          cd ./Generator
+          ./Generate-NuGets.ps1 -csprojPath Evergine.Bindings.Implot\Evergine.Bindings.Implot.csproj -outputfolder ${{  env.nugetOutputPath  }}
+      - name: Publish NuGet
+        shell: pwsh
+        if: ${{ success() && github.event.inputs.publishEnabled == 'true' }}
+        env:
+          token: ${{secrets.EVERGINE_NUGETORG_TOKEN}}
+        run: |
+          cd ./Generator/${{  env.nugetOutputPath  }}
+          dotnet nuget push "**/*.nupkg" --skip-duplicate --no-symbols -k "$env:token" -s https://api.nuget.org/v3/index.json
+      - name: SendGrid Mail Action
+        if: ${{ failure() }}
+        uses: mmichailidis/sendgrid-mail-action@v1.1
+        with:
+          # The token for sendgrid
+          sendgrid-token: ${{ secrets.WAVE_SENDGRID_TOKEN }}
+          # List of emails separated by comma that the email will go
+          mail: ${{ secrets.EVERGINE_EMAILREPORT_LIST }}
+          # The email that will be shown as sender
+          from: ${{ secrets.EVERGINE_EMAIL }}
+          # The subject of the email
+          subject: Implot Update NuGet has failed
+          # Defines if it should be one email with multiple address or multiple emails with a single address
+          individual: false
+          # The body of the mail. The placeholders that can be used are $EVENT$, $ISSUE$, $ACTION$
+          text: something when wrong when updating Implot bindings
