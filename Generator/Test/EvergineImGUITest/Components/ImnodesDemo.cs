@@ -40,7 +40,7 @@ namespace EvergineImGUITest.Components
             for (int i = 0; i < nodes.Length; i++)
             {
                 var node = nodes[i];
-                
+
                 ImnodesNative.imnodes_BeginNode(id++);
 
                 ImnodesNative.imnodes_BeginNodeTitleBar();

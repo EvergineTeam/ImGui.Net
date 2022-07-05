@@ -1,7 +1,7 @@
 ﻿using Evergine.Bindings.Imgui;
 using Evergine.Bindings.Imguizmo;
-using Evergine.Bindings.Imnodes;
-using Evergine.Bindings.Implot;
+////using Evergine.Bindings.Imnodes;
+////using Evergine.Bindings.Implot;
 using Evergine.Common.Graphics;
 using Evergine.Common.Input.Keyboard;
 using Evergine.Common.Input.Mouse;
@@ -85,7 +85,7 @@ namespace EvergineImGUITest.Managers
             this.surface = display.Surface;
             display.DisplaySizeChanged += this.Display_DisplaySizeChanged;
             display.DisplayFrameBufferChanged += this.Display_DisplayFrameBufferChanged;
-            
+
 
             this.InitializeImGui();
 
@@ -136,7 +136,7 @@ namespace EvergineImGUITest.Managers
             var keyboardDispatcher = this.surface.KeyboardDispatcher;
             this.io->KeyCtrl = keyboardDispatcher.IsKeyDown(Keys.LeftControl) ? (byte)1 : (byte)0;
             this.io->KeyShift = keyboardDispatcher.IsKeyDown(Keys.LeftShift) ? (byte)1 : (byte)0;
-            this.io->KeyAlt =  keyboardDispatcher.IsKeyDown(Keys.LeftAlt) ? (byte)1 : (byte)0;
+            this.io->KeyAlt = keyboardDispatcher.IsKeyDown(Keys.LeftAlt) ? (byte)1 : (byte)0;
 
             // Set orthographics projection matrix
             this.mvp = Matrix4x4.CreateOrthographicOffCenter(
@@ -163,18 +163,18 @@ namespace EvergineImGUITest.Managers
             IntPtr imGuiContext = ImguiNative.igCreateContext((ImFontAtlas*)null);
             ImguiNative.igSetCurrentContext(imGuiContext);
 
-            // Create implot context
-            IntPtr implotContext = ImplotNative.ImPlot_CreateContext();
-            ImplotNative.ImPlot_SetCurrentContext(implotContext);
-            ImplotNative.ImPlot_SetImGuiContext(imGuiContext);            
+            ////// Create implot context
+            ////IntPtr implotContext = ImplotNative.ImPlot_CreateContext();
+            ////ImplotNative.ImPlot_SetCurrentContext(implotContext);
+            ////ImplotNative.ImPlot_SetImGuiContext(imGuiContext);
 
             // Create imguizmo context
             ImguizmoNative.ImGuizmo_SetImGuiContext(imGuiContext);
 
-            // Create imnodes context
-            IntPtr imnodesContext = ImnodesNative.imnodes_CreateContext();
-            ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
-            ImnodesNative.imnodes_SetImGuiContext(imGuiContext);
+            ////// Create imnodes context
+            ////IntPtr imnodesContext = ImnodesNative.imnodes_CreateContext();
+            ////ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
+            ////ImnodesNative.imnodes_SetImGuiContext(imGuiContext);
 
             this.io = ImguiNative.igGetIO();
             ////ImguiNative.ImFontAtlas_AddFontDefault(io->Fonts, null);
@@ -340,10 +340,10 @@ namespace EvergineImGUITest.Managers
             // Register input events
             var mouseDispatcher = this.surface.MouseDispatcher;
             mouseDispatcher.MouseButtonDown += (s, e) =>
-            {                
+            {
                 switch (e.Button)
                 {
-                    case MouseButtons.Left:                        
+                    case MouseButtons.Left:
                         this.io->MouseDown[0] = 1;
                         break;
                     case MouseButtons.Right:
@@ -501,7 +501,7 @@ namespace EvergineImGUITest.Managers
         /// <param name="drawContext">The graphics drawcontext.</param>
         /// <param name="commandBuffer">The commandbuffer to draw.</param>
         private unsafe void DrawContext_OnPostRender(Evergine.Framework.Graphics.DrawContext drawContext, CommandBuffer commandBuffer)
-        {            
+        {
             ImguiNative.igRender();
 
             uint vertexOffsetInVertices = 0;
@@ -615,10 +615,10 @@ namespace EvergineImGUITest.Managers
                         (int)(cmd->ClipRect.W - cmd->ClipRect.Y)),
                     };
 
-                    commandBuffer.SetScissorRectangles(scissors);                    
+                    commandBuffer.SetScissorRectangles(scissors);
 
                     commandBuffer.DrawIndexedInstanced(cmd->ElemCount, 1, idx_offset, vtx_offset, 0);
-                    
+
                     idx_offset += cmd->ElemCount;
                 }
 
