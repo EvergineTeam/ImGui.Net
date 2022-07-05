@@ -1,6 +1,6 @@
 ﻿using Evergine.Bindings.Imgui;
 using Evergine.Bindings.Imguizmo;
-////using Evergine.Bindings.Imnodes;
+using Evergine.Bindings.Imnodes;
 using Evergine.Bindings.Implot;
 using Evergine.Common.Graphics;
 using Evergine.Common.Input.Keyboard;
@@ -171,10 +171,10 @@ namespace EvergineImGUITest.Managers
             // Create imguizmo context
             ImguizmoNative.ImGuizmo_SetImGuiContext(imGuiContext);
 
-            ////// Create imnodes context
-            ////IntPtr imnodesContext = ImnodesNative.imnodes_CreateContext();
-            ////ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
-            ////ImnodesNative.imnodes_SetImGuiContext(imGuiContext);
+            // Create imnodes context
+            IntPtr imnodesContext = ImnodesNative.imnodes_CreateContext();
+            ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
+            ImnodesNative.imnodes_SetImGuiContext(imGuiContext);
 
             this.io = ImguiNative.igGetIO();
             ////ImguiNative.ImFontAtlas_AddFontDefault(io->Fonts, null);
