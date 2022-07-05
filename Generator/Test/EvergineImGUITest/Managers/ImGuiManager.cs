@@ -1,7 +1,7 @@
 ﻿using Evergine.Bindings.Imgui;
 using Evergine.Bindings.Imguizmo;
 ////using Evergine.Bindings.Imnodes;
-////using Evergine.Bindings.Implot;
+using Evergine.Bindings.Implot;
 using Evergine.Common.Graphics;
 using Evergine.Common.Input.Keyboard;
 using Evergine.Common.Input.Mouse;
@@ -163,10 +163,10 @@ namespace EvergineImGUITest.Managers
             IntPtr imGuiContext = ImguiNative.igCreateContext((ImFontAtlas*)null);
             ImguiNative.igSetCurrentContext(imGuiContext);
 
-            ////// Create implot context
-            ////IntPtr implotContext = ImplotNative.ImPlot_CreateContext();
-            ////ImplotNative.ImPlot_SetCurrentContext(implotContext);
-            ////ImplotNative.ImPlot_SetImGuiContext(imGuiContext);
+            // Create implot context
+            IntPtr implotContext = ImplotNative.ImPlot_CreateContext();
+            ImplotNative.ImPlot_SetCurrentContext(implotContext);
+            ImplotNative.ImPlot_SetImGuiContext(imGuiContext);
 
             // Create imguizmo context
             ImguizmoNative.ImGuizmo_SetImGuiContext(imGuiContext);
