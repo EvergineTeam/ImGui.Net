@@ -4,6 +4,10 @@
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 		<Description>Provides csharp bindings to Implot library.</Description>
+		<PackageProjectUrl></PackageProjectUrl>
+		<RepositoryUrl>https://github.com/EvergineTeam/ImGui.Net</RepositoryUrl>
+		<PackageIcon>icon.png</PackageIcon>
+		<Platforms>AnyCPU;x86;x64</Platforms>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -16,11 +20,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Evergine.Mathematics" Version="2022.2.16.6" />
+	  <None Include="..\icon.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Evergine.Bindings.Imgui\Evergine.Bindings.Imgui.csproj" />
+		<PackageReference Include="Evergine.Bindings.Imgui" Version="2022.6.23.582" />
+		<PackageReference Include="Evergine.Mathematics" Version="2022.2.16.6" />
 	</ItemGroup>
-	
+
 </Project>

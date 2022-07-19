@@ -1,4 +1,4 @@
-name: Force build
+name: Force build Imgui
 on:
   workflow_dispatch:
     inputs:
@@ -43,7 +43,7 @@ jobs:
         id: build_nugets
         run: |
           cd ./Generator
-          ./Generate-NuGets-Imgui.ps1 -outputfolder ${{  env.nugetOutputPath  }}
+          ./Generate-NuGets.ps1 -csprojPath Evergine.Bindings.Imgui\Evergine.Bindings.Imgui.csproj -outputfolder ${{  env.nugetOutputPath  }}
       - name: Publish NuGet
         shell: pwsh
         if: ${{ success() && github.event.inputs.publishEnabled == 'true' }}

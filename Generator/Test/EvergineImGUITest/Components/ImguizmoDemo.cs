@@ -81,7 +81,7 @@ namespace EvergineImGUITest.Components
         }
 
         private void ImGuizmoDemo()
-        {            
+        {
             //ImguizmoNative.ImGuizmo_SetOrthographic(true);
             ImguizmoNative.ImGuizmo_SetRect(0, 0, this.io->DisplaySize.X, this.io->DisplaySize.Y);
 
@@ -106,7 +106,7 @@ namespace EvergineImGUITest.Components
             this.transform.WorldTransform = world;
 
             var iview = Matrix4x4.Invert(view);
-            this.camera.Transform.LocalRotation = iview.Rotation; 
+            this.camera.Transform.LocalRotation = iview.Rotation;
             this.camera.Transform.LocalPosition = iview.Translation;
         }
     }
