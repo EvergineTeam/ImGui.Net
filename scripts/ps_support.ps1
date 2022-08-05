@@ -4,6 +4,7 @@ $PSDefaultParameterValues['*:ErrorAction']='Stop'
 function ThrowOnNativeFailure {
     if (-not $?)
     {
+        Pop-Location
         throw 'Native Failure'
     }
 }

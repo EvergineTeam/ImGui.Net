@@ -1,0 +1,87 @@
+<#
+.SYNOPSIS
+	Updates cimX definitions and native libraries.
+.DESCRIPTION
+	This script updates cimX definitions and native libraries.
+.EXAMPLE
+	<script> -buildImgui $true -buildExtensions $true
+.LINK
+	https://evergine.com
+#>
+
+param (
+  [ValidateSet('Debug', 'Release')][string]$buildConfig = "Release",
+  [bool]$buildImgui = $false,
+  [bool]$buildExtensions = $false
+)
+
+$ErrorActionPreference = "Stop"
+. "$PSScriptRoot\ps_support.ps1"
+
+$archs = @('x86', 'x64') #, 'ARM', 'ARM64')
+$main = "imgui"
+$extensions = @("imguizmo", "imnodes", "implot")
+
+
+$TextInfo = (Get-Culture).TextInfo
+
+#region build extensions
+if ($buildImgui) {
+  # Set working directory
+  Push-Location (Get-Location).Path
+  Set-Location $PSScriptRoot
+
+  foreach ($arch in $archs) {
+    Write-Output "Building cimgui $arch..."
+    ./build-win-cimx-native.ps1 -buildArch $arch -buildConfig $buildConfig
+    if (-Not $?) {
+      exit $lastexitcode
+    }
+
+    Copy-Item ..\NativeLibraries\cimgui\build\$arch\$buildConfig\*.dll ..\Generator\Evergine.Bindings.Imgui\runtimes\win-$arch\native\
+  }
+  Copy-Item ..\NativeLibraries\cimgui\generator\output\*.json ..\Generator\ImguiGen\Jsons\
+
+  Pop-Location
+}
+
+if ($buildExtensions) {
+  # Set working directory
+  Push-Location (Get-Location).Path
+  Set-Location $PSScriptRoot
+
+  foreach ($arch in $archs) {
+    Write-Output "Building extensions $arch..."
+    ./build-win-cimx-native.ps1 -buildArch $arch -buildConfig $buildConfig -extensions
+    if (-Not $?) {
+      exit $lastexitcode
+    }
+
+    foreach ($extension in $extensions) {
+      Copy-Item ..\NativeLibraries\extensions\build\$arch\$buildConfig\c$($extension).dll ..\Generator\Evergine.Bindings.$($TextInfo.ToTitleCase($extension))\runtimes\win-$arch\native\
+    }
+  }
+  foreach ($extension in $extensions) {
+    Copy-Item ..\NativeLibraries\extensions\c$($extension)\generator\output\*.json ..\Generator\$($TextInfo.ToTitleCase($extension))Gen\Jsons\
+  }
+
+  Pop-Location
+}
+
+#endregion
+
+#region commit changes
+
+# # # Set working directory
+# # Push-Location (Get-Location).Path
+# # Set-Location $PSScriptRoot\..
+
+# # if ($buildImgui -or $buildExtensions) {
+# #   git add .
+# #   git commit -m "Definitions & native libraries updated"
+# #   git push
+# # }
+
+# # Pop-Location
+
+#endregion
