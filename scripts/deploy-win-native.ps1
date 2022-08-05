@@ -4,15 +4,15 @@
 .DESCRIPTION
 	This script updates cimX definitions and native libraries.
 .EXAMPLE
-	<script> -buildImgui $true -buildExtensions $true
+	<script> -buildImgui -buildExtensions
 .LINK
 	https://evergine.com
 #>
 
 param (
   [ValidateSet('Debug', 'Release')][string]$buildConfig = "Release",
-  [bool]$buildImgui = $false,
-  [bool]$buildExtensions = $false
+  [switch]$buildImgui = $false,
+  [switch]$buildExtensions = $false
 )
 
 $ErrorActionPreference = "Stop"

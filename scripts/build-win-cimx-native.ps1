@@ -19,16 +19,16 @@ param (
 $ErrorActionPreference = "Stop"
 . "$PSScriptRoot\ps_support.ps1"
 
+# Set working directory
+Push-Location (Get-Location).Path
+Set-Location $PSScriptRoot\..\NativeLibraries
+
 switch ( $buildArch ) {
   'x86' { $BUILD_CMAKE_GENERATOR_PLATFORM = 'Win32' }
   'x64' { $BUILD_CMAKE_GENERATOR_PLATFORM = '' }
   'ARM' { $BUILD_CMAKE_GENERATOR_PLATFORM = 'ARM' }
   'ARM64' { $BUILD_CMAKE_GENERATOR_PLATFORM = 'ARM64' }
 }
-
-# Set working directory
-Push-Location (Get-Location).Path
-Set-Location $PSScriptRoot\..\NativeLibraries
 
 if ($extensions) {
   Set-Location ./extensions

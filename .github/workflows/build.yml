@@ -1,0 +1,73 @@
+name: Generate and build bindings
+on:
+  workflow_dispatch:
+    inputs:
+      publishEnabled:
+        description: "Publish to Nuget.org"
+        type: boolean
+        required: false
+        default: false
+
+jobs:
+  update_submodules:
+    runs-on: ubuntu-latest
+    outputs:
+      buildMain: ${{ steps.update.outputs.BUILD_CIMGUI }}
+      buildExtensions: ${{ steps.update.outputs.BUILD_EXT }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Generate Bindings
+        id: update
+        shell: bash
+        run: |
+          ./scripts/update-cimx.sh
+      # # - name: Commit if update
+      # #   uses: EndBug/add-and-commit@v9
+      # #   with:
+      # #     message: Updating cimx to latest
+
+  build_cimgui_win:
+    if: needs.update_submodules.outputs.buildMain == 'true'
+    needs: update_submodules
+    uses: ./.github/workflows/build-native-win.yml
+    with:
+      Target: Imgui
+
+  build_extensions_win:
+    if: needs.update_submodules.outputs.buildMain == 'true' || needs.update_submodules.outputs.buildExtensions == 'true'
+    needs: update_submodules
+    uses: ./.github/workflows/build-native-win.yml
+    with:
+      Target: Extensions
+
+  generate_imgui:
+    needs: build_cimgui_win
+    uses: ./.github/workflows/generate-bindings.yml
+    with:
+      ImX: Imgui
+
+  generate_imguizmo:
+    needs:
+      - build_cimgui_win
+      - build_extensions_win
+    uses: ./.github/workflows/generate-bindings.yml
+    with:
+      ImX: Imguizmo
+
+  generate_imnodes:
+    needs:
+      - build_cimgui_win
+      - build_extensions_win
+    uses: ./.github/workflows/generate-bindings.yml
+    with:
+      ImX: Imnodes
+
+  generate_implot:
+    needs:
+      - build_cimgui_win
+      - build_extensions_win
+    uses: ./.github/workflows/generate-bindings.yml
+    with:
+      ImX: Implot

@@ -1,0 +1,38 @@
+name: Build and deploy native libraries
+on:
+  workflow_call:
+    inputs:
+      Target:
+        description: "Values: 'Imgui' or 'Extensions'. Default 'Imgui'"
+        type: string
+        required: false
+        default: Imgui
+
+jobs:
+  generate_and_build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: |
+            3.1.x
+            5.x
+            6.x
+      - uses: nuget/setup-nuget@v1
+        with:
+          nuget-version: "6.x"
+      - name: Build cimgui
+        id: build_cimgui
+        run: |
+          .\scripts\deploy-win-native.ps1 -buildImgui
+      - name: Build extensions
+        id: build_extensions
+        run: |
+          .\scripts\deploy-win-native.ps1 -buildExtensions
+      # # - name: Commit if update
+      # #   uses: EndBug/add-and-commit@v9
+      # #   with:
+      # #     message: Updated native libraries
