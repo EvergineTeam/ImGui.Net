@@ -1,18 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Common
 {
     public static class Helpers
     {
+        private static string delegatePattern = @"([A-z|\d]+)\(\*\)(\(.+\))";
+
         public static string ConvertToCSharpType(string type, Family family = Family.field)
         {
             string result = type.Replace("const ", "");
 
-            result = ConvertToBasicTypes(result, family);
-
-            return result;
+            if (Regex.Match(type, delegatePattern).Success)
+            {
+                return GetDelegateType(type);
+            }
+            else
+            {
+                return ConvertToBasicTypes(result, family);
+            }
         }
 
         public enum Family
@@ -22,13 +30,13 @@ namespace Common
             ret,
         }
 
+        private static string GetDelegateType(string type)
+        {
+            return "IntPtr";
+        }
+
         private static string ConvertToBasicTypes(string type, Family family)
         {
-            if (type.StartsWith("bool(*)"))
-                return "bool*";
-            if (type.StartsWith("float(*)"))
-                return "float*";
-
             switch (type)
             {
                 case "char":
@@ -152,6 +160,8 @@ namespace Common
                 case "ImVector_float":
                 case "ImVector_ImFontGlyph":
                 case "ImVector_ImU32":
+                case "ImVector_ImGuiPlatformMonitor":
+                case "ImVector_ImGuiViewportPtr":
                     return "ImVector";
                 case "ImVector_ImWchar*":
                 case "ImVector_ImGuiTextRange*":
@@ -248,5 +258,12 @@ namespace Common
                     return false;
             }
         }
+    }
+
+    public struct InlineDelegate
+    {
+        public string Name;
+        public string Type;
+        public string Arguments;
     }
 }

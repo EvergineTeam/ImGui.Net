@@ -89,7 +89,6 @@ namespace Common
                             }
                         }
 
-
                         //Write Selft pointer
                         file.WriteLine($"\n\t\tpublic {structure.Name}* self => ({structure.Name}*)Unsafe.AsPointer(ref this);\n");
 

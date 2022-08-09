@@ -1884,31 +1884,31 @@ namespace Evergine.Bindings.Imgui
 
 	public unsafe partial struct ImGuiPlatformIO
 	{
-		public void(*)(ImGuiViewport* vp) Platform_CreateWindow;
-		public void(*)(ImGuiViewport* vp) Platform_DestroyWindow;
-		public void(*)(ImGuiViewport* vp) Platform_ShowWindow;
-		public void(*)(ImGuiViewport* vp,ImVec2 pos) Platform_SetWindowPos;
-		public ImVec2(*)(ImGuiViewport* vp) Platform_GetWindowPos;
-		public void(*)(ImGuiViewport* vp,ImVec2 size) Platform_SetWindowSize;
-		public ImVec2(*)(ImGuiViewport* vp) Platform_GetWindowSize;
-		public void(*)(ImGuiViewport* vp) Platform_SetWindowFocus;
-		public bool* Platform_GetWindowFocus;
-		public bool* Platform_GetWindowMinimized;
-		public void(*)(ImGuiViewport* vp,char* str) Platform_SetWindowTitle;
-		public void(*)(ImGuiViewport* vp,float alpha) Platform_SetWindowAlpha;
-		public void(*)(ImGuiViewport* vp) Platform_UpdateWindow;
-		public void(*)(ImGuiViewport* vp,void* render_arg) Platform_RenderWindow;
-		public void(*)(ImGuiViewport* vp,void* render_arg) Platform_SwapBuffers;
-		public float* Platform_GetWindowDpiScale;
-		public void(*)(ImGuiViewport* vp) Platform_OnChangedViewport;
-		public int(*)(ImGuiViewport* vp,ImU64 vk_inst,void* vk_allocators,ImU64* out_vk_surface) Platform_CreateVkSurface;
-		public void(*)(ImGuiViewport* vp) Renderer_CreateWindow;
-		public void(*)(ImGuiViewport* vp) Renderer_DestroyWindow;
-		public void(*)(ImGuiViewport* vp,ImVec2 size) Renderer_SetWindowSize;
-		public void(*)(ImGuiViewport* vp,void* render_arg) Renderer_RenderWindow;
-		public void(*)(ImGuiViewport* vp,void* render_arg) Renderer_SwapBuffers;
-		public ImVector_ImGuiPlatformMonitor Monitors;
-		public ImVector_ImGuiViewportPtr Viewports;
+		public IntPtr Platform_CreateWindow;
+		public IntPtr Platform_DestroyWindow;
+		public IntPtr Platform_ShowWindow;
+		public IntPtr Platform_SetWindowPos;
+		public IntPtr Platform_GetWindowPos;
+		public IntPtr Platform_SetWindowSize;
+		public IntPtr Platform_GetWindowSize;
+		public IntPtr Platform_SetWindowFocus;
+		public IntPtr Platform_GetWindowFocus;
+		public IntPtr Platform_GetWindowMinimized;
+		public IntPtr Platform_SetWindowTitle;
+		public IntPtr Platform_SetWindowAlpha;
+		public IntPtr Platform_UpdateWindow;
+		public IntPtr Platform_RenderWindow;
+		public IntPtr Platform_SwapBuffers;
+		public IntPtr Platform_GetWindowDpiScale;
+		public IntPtr Platform_OnChangedViewport;
+		public IntPtr Platform_CreateVkSurface;
+		public IntPtr Renderer_CreateWindow;
+		public IntPtr Renderer_DestroyWindow;
+		public IntPtr Renderer_SetWindowSize;
+		public IntPtr Renderer_RenderWindow;
+		public IntPtr Renderer_SwapBuffers;
+		public ImVector Monitors;
+		public ImVector Viewports;
 
 		public ImGuiPlatformIO* self => (ImGuiPlatformIO*)Unsafe.AsPointer(ref this);
 
