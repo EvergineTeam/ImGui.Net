@@ -1,0 +1,22 @@
+name: Win native libraries
+description: Build and deploy native libraries on Windows
+inputs:
+  Target:
+    description: "Values: 'Imgui' or 'Extensions'. Default 'Imgui'"
+    required: false
+    default: Imgui
+runs:
+  using: composite
+  steps:
+    - name: Build cimgui
+      shell: pwsh
+      id: build_cimgui
+      if: ${{ inputs.Target == 'Imgui' }}
+      run: |
+        .\scripts\deploy-win-native.ps1 -buildImgui
+    - name: Build extensions
+      shell: pwsh
+      id: build_extensions
+      if: ${{ inputs.Target == 'Extensions' }}
+      run: |
+        .\scripts\deploy-win-native.ps1 -buildExtensions

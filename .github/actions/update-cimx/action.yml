@@ -1,0 +1,27 @@
+name: Update cimx
+description: Update cimx submodules
+inputs:
+  Persists:
+    description: "Commits changes if appropiate"
+    required: false
+    default: "true"
+outputs:
+  buildMain:
+    description: "True if cimgui has been updated"
+    value: ${{ steps.update.outputs.BUILD_CIMGUI }}
+  buildExtensions:
+    description: "True if any extension has been updated"
+    value: ${{ steps.update.outputs.BUILD_EXT }}
+runs:
+  using: composite
+  steps:
+    - name: Update cimx submodules
+      id: update
+      shell: pwsh
+      run: |
+        ./scripts/update-cimx.ps1
+    - name: Commit if update
+      if: ${{ inputs.Persists == 'true' }}
+      uses: EndBug/add-and-commit@v9
+      with:
+        message: Updating cimx to latest

@@ -1,0 +1,29 @@
+name: Publish to Nuget.org
+description: "Publish nugets to Nuget.org"
+inputs:
+  NugetsPath:
+    description: "Nugets path to publish to Nuget.org"
+    required: true
+  Token:
+    description: "Nuget.org token"
+    required: true
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: |
+          3.1.x
+          5.x
+          6.x
+    - uses: nuget/setup-nuget@v1
+      with:
+        nuget-version: "6.x"
+    - name: Publish NuGet
+      shell: pwsh
+      env:
+        token: ${{ inputs.Token }}
+      run: |
+        cd ${{ inputs.NugetsPath }}
+        ls *.nupkg
+        dotnet nuget push "**/*.nupkg" --skip-duplicate --no-symbols -k "$env:token" -s https://api.nuget.org/v3/index.json

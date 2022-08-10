@@ -15,7 +15,7 @@ param (
 	[string]$outputFolderBase = "nupkgs",
 	[string]$buildVerbosity = "normal",
 	[string]$buildConfiguration = "Release",
-    [string]$versionSuffix = ""
+	[string]$versionSuffix = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -23,13 +23,13 @@ $ErrorActionPreference = "Stop"
 
 # Set working directory
 Push-Location (Get-Location).Path
-Set-Location $PSScriptRoot\..\Generator
+Set-Location $PSScriptRoot\..
 
 $csprojPath = "Evergine.Bindings.$($ImX)\Evergine.Bindings.$($ImX).csproj"
 
 # Utility functions
-function LogDebug($line)
-{ Write-Host "##[debug] $line" -Foreground Blue -Background Black
+function LogDebug($line) {
+ Write-Host "##[debug] $line" -Foreground Blue -Background Black
 }
 
 # calculate version
@@ -53,22 +53,21 @@ New-Item -ItemType Directory -Force -Path $outputFolder
 $absoluteOutputFolder = Resolve-Path $outputFolder
 
 $symbols = "false"
-if($buildConfiguration -eq "Debug")
-{
+if ($buildConfiguration -eq "Debug") {
 	$symbols = "true"
 }
+
+Set-Location .\Generator
 
 # Generate packages
 LogDebug "START packaging process"
 dotnet pack "$csprojPath" -v:$buildVerbosity -p:Configuration=$buildConfiguration -p:PackageOutputPath="$absoluteOutputFolder" -p:IncludeSymbols=$symbols -p:Version=$version
-if($?)
-{
-   LogDebug "END packaging process"
+if ($?) {
+	LogDebug "END packaging process"
 }
-else
-{
+else {
 	LogDebug "ERROR; packaging failed"
-   	exit -1
+	exit -1
 }
 
 Pop-Location

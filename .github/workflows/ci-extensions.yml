@@ -1,0 +1,31 @@
+name: CI Extensions
+on:
+  push:
+    paths:
+      - "Generator/ImguizmoGen/**"
+      - "Generator/ImnodesGen/**"
+      - "Generator/ImplotGen/**"
+      - "NativeLibraries/extensions/**"
+      - "scripts/deploy-win-native.ps1"
+      - "scripts/generate-bindings.ps1"
+      - "scripts/generate-nugets.ps1"
+
+jobs:
+  build_win:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: ./.github/actions/build-native-win
+        with:
+          Target: Extensions
+      - uses: ./.github/actions/generate-bindings-nugets
+        with:
+          ImX: Imguizmo
+      - uses: ./.github/actions/generate-bindings-nugets
+        with:
+          ImX: Imnodes
+      - uses: ./.github/actions/generate-bindings-nugets
+        with:
+          ImX: Implot

@@ -1,0 +1,23 @@
+name: CI Imgui
+on:
+  push:
+    paths:
+      - "Generator/ImguiGen/**"
+      - "NativeLibraries/cimgui/**"
+      - "scripts/deploy-win-native.ps1"
+      - "scripts/generate-bindings.ps1"
+      - "scripts/generate-nugets.ps1"
+
+jobs:
+  build_win:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: ./.github/actions/build-native-win
+        with:
+          Target: Imgui
+      - uses: ./.github/actions/generate-bindings-nugets
+        with:
+          ImX: Imgui

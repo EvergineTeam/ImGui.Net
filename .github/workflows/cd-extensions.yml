@@ -1,0 +1,50 @@
+name: CD Extensions
+on:
+  workflow_dispatch:
+    inputs:
+      publishEnabled:
+        description: "Publish to Nuget.org"
+        type: boolean
+        required: false
+        default: false
+  schedule:
+    - cron: "0 0 1 * *" # TODO once every day
+
+env:
+  nugetsPath: "nupkgs"
+
+jobs:
+  build_win:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      # TODO check if there is a new nuget of Imgui
+      # TODO update nugets references with new nuget
+      - uses: ./.github/actions/build-native-win
+        with:
+          Target: Extensions
+          NugetsPath: ${{ env.nugetsPath }}
+      - uses: ./.github/actions/generate-bindings-nugets
+        with:
+          ImX: Imguizmo
+          NugetsPath: ${{ env.nugetsPath }}
+      - uses: ./.github/actions/generate-bindings-nugets
+        with:
+          ImX: Imnodes
+          NugetsPath: ${{ env.nugetsPath }}
+      - uses: ./.github/actions/generate-bindings-nugets
+        with:
+          ImX: Implot
+          NugetsPath: ${{ env.nugetsPath }}
+      - uses: ./.github/actions/publish-nugets
+        if: ${{ success() && (github.event_name == 'schedule' || github.event.inputs.publishEnabled == 'true') }}
+        with:
+          NugetsPath: ${{ env.nugetsPath }}
+          Token: ${{ secrets.EVERGINE_NUGETORG_TOKEN }}
+      - name: Commit if appropiate
+        if: ${{ success() }}
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: Updating nugets

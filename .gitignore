@@ -2,4 +2,4 @@
 *obj
 *bin
 Generator/NativeLibraries/build
-Generator/nupkgs
+*.nupkg

@@ -1,0 +1,44 @@
+name: CD Imgui
+on:
+  workflow_dispatch:
+    inputs:
+      publishEnabled:
+        description: "Publish to Nuget.org"
+        type: boolean
+        required: false
+        default: false
+  schedule:
+    - cron: "0 0 1 * *"
+
+env:
+  nugetsPath: "nupkgs"
+
+jobs:
+  build_win:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: ./.github/actions/update-cimx
+        if: ${{ github.event_name == 'schedule' }}
+        with:
+          Persists: False
+      - uses: ./.github/actions/build-native-win
+        with:
+          Target: Imgui
+      - uses: ./.github/actions/generate-bindings-nugets
+        id: nugets
+        with:
+          ImX: Imgui
+          NugetsPath: ${{ env.nugetsPath }}
+      - uses: ./.github/actions/publish-nugets
+        if: ${{ success() && (github.event_name == 'schedule' || github.event.inputs.publishEnabled == 'true') }}
+        with:
+          NugetsPath: ${{ env.nugetsPath }}
+          Token: ${{ secrets.EVERGINE_NUGETORG_TOKEN }}
+      - name: Commit if appropiate
+        if: ${{ success() }}
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: Updating nugets
