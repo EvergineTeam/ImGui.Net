@@ -8,18 +8,17 @@ namespace Common
     public static class Helpers
     {
         private static string delegatePattern = @"([A-z|\d]+)\(\*\)(\(.+\))";
+        private static int nextInlineDelegateId = 0;
 
         public static string ConvertToCSharpType(string type, Family family = Family.field)
         {
-            string result = type.Replace("const ", "");
-
             if (Regex.Match(type, delegatePattern).Success)
             {
                 return GetDelegateType(type);
             }
             else
             {
-                return ConvertToBasicTypes(result, family);
+                return ConvertToBasicTypes(type, family);
             }
         }
 
@@ -30,13 +29,59 @@ namespace Common
             ret,
         }
 
+        private static Dictionary<string, string> delegates = new Dictionary<string, string>();
+        public static Queue<InlineDelegate> PendingDelegates = new Queue<InlineDelegate>();
+
         private static string GetDelegateType(string type)
         {
-            return "IntPtr";
+            if (!delegates.ContainsKey(type))
+            {
+                var name = $"InlineDelegate{nextInlineDelegateId}";
+                delegates[type] = name;
+                nextInlineDelegateId++;
+
+                var parts = Regex.Split(type, delegatePattern);
+                var inlineDelegate = new InlineDelegate()
+                {
+                    Name = name,
+                    Type = parts[1],
+                    Arguments = ConvertArguments(parts[2])
+                };
+                PendingDelegates.Enqueue(inlineDelegate);
+            }
+
+            return delegates[type];
+        }
+
+        private static string ConvertArguments(string argstr)
+        {
+            var args = argstr.Substring(1, argstr.Length - 2).Split(",");
+            string converted = "(";
+            foreach (var arg in args)
+            {
+                var elements = arg.Split();
+                var last = elements[elements.Length - 1];
+                string type, name;
+                if (last.EndsWith("*"))
+                {
+                    type = arg;
+                    name = String.Empty;
+                }
+                else
+                {
+                    type = String.Join(" ", elements[..^1]);
+                    name = last;
+                }
+                converted += $"{ConvertToBasicTypes(type, Family.param)} {name}, ";
+            }
+
+            return converted.Substring(0, converted.Length - 2) + ")";
         }
 
         private static string ConvertToBasicTypes(string type, Family family)
         {
+            type = type.Replace("const ", "");
+
             switch (type)
             {
                 case "char":
@@ -180,6 +225,7 @@ namespace Common
                 case "ImGuiWindow*":
                 case "ImGuiMemAllocFunc":
                 case "ImGuiMemFreeFunc":
+                case "ImGuiPlatformIO*":
                     return "IntPtr";
                 case "ImGuiMemAllocFunc*":
                 case "ImGuiMemFreeFunc*":

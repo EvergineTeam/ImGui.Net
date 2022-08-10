@@ -26,6 +26,9 @@ namespace ImguiGen
 
                 // Functions
                 CSCodeWriter.WriteFuntions(outputPath, @namespace, libraryName, implotVersion);
+
+                // InlineDelegates
+                CSCodeWriter.WriteInlineDelegates(outputPath, @namespace);
             }
         }
     }

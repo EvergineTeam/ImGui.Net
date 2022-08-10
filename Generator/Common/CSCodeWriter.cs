@@ -89,10 +89,8 @@ namespace Common
                             }
                         }
 
-                        //Write Selft pointer
-                        file.WriteLine($"\n\t\tpublic {structure.Name}* self => ({structure.Name}*)Unsafe.AsPointer(ref this);\n");
-
                         // Write Methods
+                        var hasMethods = false;
                         foreach (var m in spec.Funtions)
                         {
                             foreach (var o in m.Overloads)
@@ -107,6 +105,7 @@ namespace Common
                                     if (o.IsConstructor || o.IsDestructor)
                                         continue;
 
+                                    hasMethods = true;
                                     file.WriteLine();
 
                                     int underLineIndex = o.FuncName.IndexOf('_') + 1;
@@ -133,6 +132,12 @@ namespace Common
                                     file.WriteLine("\t\t}");
                                 }
                             }
+                        }
+
+                        if (hasMethods)
+                        {
+                            //Write Selft pointer
+                            file.WriteLine($"\n\t\tpublic {structure.Name}* self => ({structure.Name}*)Unsafe.AsPointer(ref this);\n");
                         }
 
                         file.WriteLine("\t}\n");
@@ -174,7 +179,7 @@ namespace Common
 
                             string csType = Helpers.ConvertToCSharpType(o.ReturnType, Helpers.Family.ret);
                             string returnHeader = Helpers.GetReturnTypeHeader(csType);
-                            if(!string.IsNullOrEmpty(returnHeader))
+                            if (!string.IsNullOrEmpty(returnHeader))
                                 file.WriteLine($"\t\t{returnHeader}");
 
                             file.WriteLine($"\t\tpublic static extern {csType} {o.FuncName}({o.GetParametersSignature(spec)});\n");
@@ -184,6 +189,27 @@ namespace Common
                     file.WriteLine("\t}");
                     file.WriteLine("}");
                 }
+            }
+
+        }
+        public static void WriteInlineDelegates(string outputPath, string @namespace)
+        {
+            using (StreamWriter file = File.CreateText(Path.Combine(outputPath, "Delegates.cs")))
+            {
+                file.WriteLine("using Evergine.Mathematics;");
+                file.WriteLine("using System.Runtime.InteropServices;\n");
+                file.WriteLine($"namespace Evergine.Bindings.{@namespace}");
+                file.WriteLine("{");
+
+                //Write delegates
+                while (Helpers.PendingDelegates.Any())
+                {
+                    var inlineDelegate = Helpers.PendingDelegates.Dequeue();
+
+                    file.WriteLine($"\tpublic unsafe delegate {inlineDelegate.Type} {inlineDelegate.Name}{inlineDelegate.Arguments};");
+                }
+
+                file.WriteLine("}");
             }
         }
     }

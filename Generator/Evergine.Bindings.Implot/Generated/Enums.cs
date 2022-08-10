@@ -27,14 +27,13 @@ namespace Evergine.Bindings.Implot
 		NoMenus = 32,
 		Opposite = 64,
 		Foreground = 128,
-		LogScale = 256,
-		Time = 512,
-		Invert = 1024,
-		AutoFit = 2048,
-		RangeFit = 4096,
-		LockMin = 8192,
-		LockMax = 16384,
-		Lock = 24576,
+		Invert = 256,
+		AutoFit = 512,
+		RangeFit = 1024,
+		PanStretch = 2048,
+		LockMin = 4096,
+		LockMax = 8192,
+		Lock = 12288,
 		NoDecorations = 15,
 		AuxDefault = 66,
 	}
@@ -43,7 +42,15 @@ namespace Evergine.Bindings.Implot
 	public enum ImPlotBarGroupsFlags
 	{
 		None = 0,
-		Stacked = 1,
+		Horizontal = 1024,
+		Stacked = 2048,
+	}
+
+	[Flags]
+	public enum ImPlotBarsFlags
+	{
+		None = 0,
+		Horizontal = 1024,
 	}
 
 	public enum ImPlotBin
@@ -81,6 +88,15 @@ namespace Evergine.Bindings.Implot
 		COUNT = 21,
 	}
 
+	[Flags]
+	public enum ImPlotColormapScaleFlags
+	{
+		None = 0,
+		NoLabel = 1,
+		Opposite = 2,
+		Invert = 4,
+	}
+
 	public enum ImPlotColormap
 	{
 		Deep = 0,
@@ -109,6 +125,12 @@ namespace Evergine.Bindings.Implot
 	}
 
 	[Flags]
+	public enum ImPlotDigitalFlags
+	{
+		None = 0,
+	}
+
+	[Flags]
 	public enum ImPlotDragToolFlags
 	{
 		None = 0,
@@ -116,6 +138,19 @@ namespace Evergine.Bindings.Implot
 		NoFit = 2,
 		NoInputs = 4,
 		Delayed = 8,
+	}
+
+	[Flags]
+	public enum ImPlotDummyFlags
+	{
+		None = 0,
+	}
+
+	[Flags]
+	public enum ImPlotErrorBarsFlags
+	{
+		None = 0,
+		Horizontal = 1024,
 	}
 
 	[Flags]
@@ -132,8 +167,46 @@ namespace Evergine.Bindings.Implot
 		NoFrame = 128,
 		Equal = 256,
 		Crosshairs = 512,
-		AntiAliased = 1024,
 		CanvasOnly = 55,
+	}
+
+	[Flags]
+	public enum ImPlotHeatmapFlags
+	{
+		None = 0,
+		ColMajor = 1024,
+	}
+
+	[Flags]
+	public enum ImPlotHistogramFlags
+	{
+		None = 0,
+		Horizontal = 1024,
+		Cumulative = 2048,
+		Density = 4096,
+		NoOutliers = 8192,
+		ColMajor = 16384,
+	}
+
+	[Flags]
+	public enum ImPlotImageFlags
+	{
+		None = 0,
+	}
+
+	[Flags]
+	public enum ImPlotInfLinesFlags
+	{
+		None = 0,
+		Horizontal = 1024,
+	}
+
+	[Flags]
+	public enum ImPlotItemFlags
+	{
+		None = 0,
+		NoLegend = 1,
+		NoFit = 2,
 	}
 
 	[Flags]
@@ -146,6 +219,16 @@ namespace Evergine.Bindings.Implot
 		NoMenus = 8,
 		Outside = 16,
 		Horizontal = 32,
+	}
+
+	[Flags]
+	public enum ImPlotLineFlags
+	{
+		None = 0,
+		Segments = 1024,
+		Loop = 2048,
+		SkipNaN = 4096,
+		NoClip = 8192,
 	}
 
 	public enum ImPlotLocation
@@ -184,6 +267,48 @@ namespace Evergine.Bindings.Implot
 		NoAuxAxes = 1,
 		NoFormat = 2,
 		ShowAlways = 4,
+	}
+
+	[Flags]
+	public enum ImPlotPieChartFlags
+	{
+		None = 0,
+		Normalize = 1024,
+	}
+
+	public enum ImPlotScale
+	{
+		Linear = 0,
+		Time = 1,
+		Log10 = 2,
+		SymLog = 3,
+	}
+
+	[Flags]
+	public enum ImPlotScatterFlags
+	{
+		None = 0,
+		NoClip = 1024,
+	}
+
+	[Flags]
+	public enum ImPlotShadedFlags
+	{
+		None = 0,
+	}
+
+	[Flags]
+	public enum ImPlotStairsFlags
+	{
+		None = 0,
+		PreStep = 1024,
+	}
+
+	[Flags]
+	public enum ImPlotStemsFlags
+	{
+		None = 0,
+		Horizontal = 1024,
 	}
 
 	public enum ImPlotStyleVar
@@ -233,6 +358,13 @@ namespace Evergine.Bindings.Implot
 		LinkAllX = 256,
 		LinkAllY = 512,
 		ColMajor = 1024,
+	}
+
+	[Flags]
+	public enum ImPlotTextFlags
+	{
+		None = 0,
+		Vertical = 1024,
 	}
 
 }

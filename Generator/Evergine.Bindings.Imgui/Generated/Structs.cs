@@ -10,9 +10,6 @@ namespace Evergine.Bindings.Imgui
 	{
 		public Vector4 Value;
 
-		public ImColor* self => (ImColor*)Unsafe.AsPointer(ref this);
-
-
 		public ImColor HSV(float h, float s, float v, float a = 1.0f)
 		{
 			ImColor pOut;
@@ -25,15 +22,15 @@ namespace Evergine.Bindings.Imgui
 		{
 			ImguiNative.ImColor_SetHSV(self, h, s, v, a);
 		}
+
+		public ImColor* self => (ImColor*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImDrawChannel
 	{
 		public ImVector _CmdBuffer;
 		public ImVector _IdxBuffer;
-
-		public ImDrawChannel* self => (ImDrawChannel*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct ImDrawCmd
@@ -46,13 +43,13 @@ namespace Evergine.Bindings.Imgui
 		public IntPtr UserCallback;
 		public void* UserCallbackData;
 
-		public ImDrawCmd* self => (ImDrawCmd*)Unsafe.AsPointer(ref this);
-
-
 		public IntPtr GetTexID()
 		{
 			return ImguiNative.ImDrawCmd_GetTexID(self);
 		}
+
+		public ImDrawCmd* self => (ImDrawCmd*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImDrawCmdHeader
@@ -60,9 +57,6 @@ namespace Evergine.Bindings.Imgui
 		public Vector4 ClipRect;
 		public IntPtr TextureId;
 		public uint VtxOffset;
-
-		public ImDrawCmdHeader* self => (ImDrawCmdHeader*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct ImDrawData
@@ -76,9 +70,6 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 DisplaySize;
 		public Vector2 FramebufferScale;
 		public ImGuiViewport* OwnerViewport;
-
-		public ImDrawData* self => (ImDrawData*)Unsafe.AsPointer(ref this);
-
 
 		public void Clear()
 		{
@@ -94,6 +85,9 @@ namespace Evergine.Bindings.Imgui
 		{
 			ImguiNative.ImDrawData_ScaleClipRects(self, fb_scale);
 		}
+
+		public ImDrawData* self => (ImDrawData*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImDrawList
@@ -113,9 +107,6 @@ namespace Evergine.Bindings.Imgui
 		public ImDrawCmdHeader _CmdHeader;
 		public ImDrawListSplitter _Splitter;
 		public float _FringeScale;
-
-		public ImDrawList* self => (ImDrawList*)Unsafe.AsPointer(ref this);
-
 
 		public void AddBezierCubic(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, uint col, float thickness, int num_segments = 0)
 		{
@@ -432,6 +423,9 @@ namespace Evergine.Bindings.Imgui
 		{
 			ImguiNative.ImDrawList__TryMergeDrawCmds(self);
 		}
+
+		public ImDrawList* self => (ImDrawList*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImDrawListSplitter
@@ -439,9 +433,6 @@ namespace Evergine.Bindings.Imgui
 		public int _Current;
 		public int _Count;
 		public ImVector _Channels;
-
-		public ImDrawListSplitter* self => (ImDrawListSplitter*)Unsafe.AsPointer(ref this);
-
 
 		public void Clear()
 		{
@@ -467,6 +458,9 @@ namespace Evergine.Bindings.Imgui
 		{
 			ImguiNative.ImDrawListSplitter_Split(self, draw_list, count);
 		}
+
+		public ImDrawListSplitter* self => (ImDrawListSplitter*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImDrawVert
@@ -474,9 +468,6 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 pos;
 		public Vector2 uv;
 		public uint col;
-
-		public ImDrawVert* self => (ImDrawVert*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct ImFont
@@ -499,9 +490,6 @@ namespace Evergine.Bindings.Imgui
 		public float Descent;
 		public int MetricsTotalSurface;
 		public fixed byte Used4kPagesMap[2];
-
-		public ImFont* self => (ImFont*)Unsafe.AsPointer(ref this);
-
 
 		public void AddGlyph(ImFontConfig* src_cfg, ushort c, float x0, float y0, float x1, float y1, float u0, float v0, float u1, float v1, float advance_x)
 		{
@@ -585,6 +573,9 @@ namespace Evergine.Bindings.Imgui
 		{
 			ImguiNative.ImFont_SetGlyphVisible(self, c, visible);
 		}
+
+		public ImFont* self => (ImFont*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImFontAtlas
@@ -673,9 +664,6 @@ namespace Evergine.Bindings.Imgui
 		public uint FontBuilderFlags;
 		public int PackIdMouseCursors;
 		public int PackIdLines;
-
-		public ImFontAtlas* self => (ImFontAtlas*)Unsafe.AsPointer(ref this);
-
 
 		public int AddCustomRectFontGlyph(ImFont* font, ushort id, int width, int height, float advance_x, Vector2 offset)
 		{
@@ -816,6 +804,9 @@ namespace Evergine.Bindings.Imgui
 		{
 			ImguiNative.ImFontAtlas_SetTexID(self, id);
 		}
+
+		public ImFontAtlas* self => (ImFontAtlas*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImFontAtlasCustomRect
@@ -829,13 +820,13 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 GlyphOffset;
 		public ImFont* Font;
 
-		public ImFontAtlasCustomRect* self => (ImFontAtlasCustomRect*)Unsafe.AsPointer(ref this);
-
-
 		public bool IsPacked()
 		{
 			return ImguiNative.ImFontAtlasCustomRect_IsPacked(self);
 		}
+
+		public ImFontAtlasCustomRect* self => (ImFontAtlasCustomRect*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImFontConfig
@@ -859,9 +850,6 @@ namespace Evergine.Bindings.Imgui
 		public ushort EllipsisChar;
 		public fixed byte Name[40];
 		public ImFont* DstFont;
-
-		public ImFontConfig* self => (ImFontConfig*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct ImFontGlyph
@@ -878,17 +866,11 @@ namespace Evergine.Bindings.Imgui
 		public float V0;
 		public float U1;
 		public float V1;
-
-		public ImFontGlyph* self => (ImFontGlyph*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct ImFontGlyphRangesBuilder
 	{
 		public ImVector UsedChars;
-
-		public ImFontGlyphRangesBuilder* self => (ImFontGlyphRangesBuilder*)Unsafe.AsPointer(ref this);
-
 
 		public void AddChar(ushort c)
 		{
@@ -924,6 +906,9 @@ namespace Evergine.Bindings.Imgui
 		{
 			ImguiNative.ImFontGlyphRangesBuilder_SetBit(self, n);
 		}
+
+		public ImFontGlyphRangesBuilder* self => (ImFontGlyphRangesBuilder*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImGuiIO
@@ -1677,9 +1662,6 @@ namespace Evergine.Bindings.Imgui
 		public ushort InputQueueSurrogate;
 		public ImVector InputQueueCharacters;
 
-		public ImGuiIO* self => (ImGuiIO*)Unsafe.AsPointer(ref this);
-
-
 		public void AddFocusEvent([MarshalAs(UnmanagedType.Bool)] bool focused)
 		{
 			ImguiNative.ImGuiIO_AddFocusEvent(self, focused);
@@ -1749,6 +1731,9 @@ namespace Evergine.Bindings.Imgui
 		{
 			ImguiNative.ImGuiIO_SetKeyEventNativeData(self, key, native_keycode, native_scancode, native_legacy_index);
 		}
+
+		public ImGuiIO* self => (ImGuiIO*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImGuiInputTextCallbackData
@@ -1765,9 +1750,6 @@ namespace Evergine.Bindings.Imgui
 		public int CursorPos;
 		public int SelectionStart;
 		public int SelectionEnd;
-
-		public ImGuiInputTextCallbackData* self => (ImGuiInputTextCallbackData*)Unsafe.AsPointer(ref this);
-
 
 		public void ClearSelection()
 		{
@@ -1793,6 +1775,9 @@ namespace Evergine.Bindings.Imgui
 		{
 			ImguiNative.ImGuiInputTextCallbackData_SelectAll(self);
 		}
+
+		public ImGuiInputTextCallbackData* self => (ImGuiInputTextCallbackData*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImGuiKeyData
@@ -1801,9 +1786,6 @@ namespace Evergine.Bindings.Imgui
 		public float DownDuration;
 		public float DownDurationPrev;
 		public float AnalogValue;
-
-		public ImGuiKeyData* self => (ImGuiKeyData*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct ImGuiListClipper
@@ -1814,9 +1796,6 @@ namespace Evergine.Bindings.Imgui
 		public float ItemsHeight;
 		public float StartPosY;
 		public void* TempData;
-
-		public ImGuiListClipper* self => (ImGuiListClipper*)Unsafe.AsPointer(ref this);
-
 
 		public void Begin(int items_count, float items_height = -1.0f)
 		{
@@ -1837,14 +1816,14 @@ namespace Evergine.Bindings.Imgui
 		{
 			return ImguiNative.ImGuiListClipper_Step(self);
 		}
+
+		public ImGuiListClipper* self => (ImGuiListClipper*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImGuiOnceUponAFrame
 	{
 		public int RefFrame;
-
-		public ImGuiOnceUponAFrame* self => (ImGuiOnceUponAFrame*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct ImGuiPayload
@@ -1857,9 +1836,6 @@ namespace Evergine.Bindings.Imgui
 		public fixed byte DataType[33];
 		public byte Preview;
 		public byte Delivery;
-
-		public ImGuiPayload* self => (ImGuiPayload*)Unsafe.AsPointer(ref this);
-
 
 		public void Clear()
 		{
@@ -1880,38 +1856,38 @@ namespace Evergine.Bindings.Imgui
 		{
 			return ImguiNative.ImGuiPayload_IsPreview(self);
 		}
+
+		public ImGuiPayload* self => (ImGuiPayload*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImGuiPlatformIO
 	{
-		public IntPtr Platform_CreateWindow;
-		public IntPtr Platform_DestroyWindow;
-		public IntPtr Platform_ShowWindow;
-		public IntPtr Platform_SetWindowPos;
-		public IntPtr Platform_GetWindowPos;
-		public IntPtr Platform_SetWindowSize;
-		public IntPtr Platform_GetWindowSize;
-		public IntPtr Platform_SetWindowFocus;
-		public IntPtr Platform_GetWindowFocus;
-		public IntPtr Platform_GetWindowMinimized;
-		public IntPtr Platform_SetWindowTitle;
-		public IntPtr Platform_SetWindowAlpha;
-		public IntPtr Platform_UpdateWindow;
-		public IntPtr Platform_RenderWindow;
-		public IntPtr Platform_SwapBuffers;
-		public IntPtr Platform_GetWindowDpiScale;
-		public IntPtr Platform_OnChangedViewport;
-		public IntPtr Platform_CreateVkSurface;
-		public IntPtr Renderer_CreateWindow;
-		public IntPtr Renderer_DestroyWindow;
-		public IntPtr Renderer_SetWindowSize;
-		public IntPtr Renderer_RenderWindow;
-		public IntPtr Renderer_SwapBuffers;
+		public InlineDelegate0 Platform_CreateWindow;
+		public InlineDelegate0 Platform_DestroyWindow;
+		public InlineDelegate0 Platform_ShowWindow;
+		public InlineDelegate1 Platform_SetWindowPos;
+		public InlineDelegate2 Platform_GetWindowPos;
+		public InlineDelegate3 Platform_SetWindowSize;
+		public InlineDelegate2 Platform_GetWindowSize;
+		public InlineDelegate0 Platform_SetWindowFocus;
+		public InlineDelegate4 Platform_GetWindowFocus;
+		public InlineDelegate4 Platform_GetWindowMinimized;
+		public InlineDelegate5 Platform_SetWindowTitle;
+		public InlineDelegate6 Platform_SetWindowAlpha;
+		public InlineDelegate0 Platform_UpdateWindow;
+		public InlineDelegate7 Platform_RenderWindow;
+		public InlineDelegate7 Platform_SwapBuffers;
+		public InlineDelegate8 Platform_GetWindowDpiScale;
+		public InlineDelegate0 Platform_OnChangedViewport;
+		public InlineDelegate9 Platform_CreateVkSurface;
+		public InlineDelegate0 Renderer_CreateWindow;
+		public InlineDelegate0 Renderer_DestroyWindow;
+		public InlineDelegate3 Renderer_SetWindowSize;
+		public InlineDelegate7 Renderer_RenderWindow;
+		public InlineDelegate7 Renderer_SwapBuffers;
 		public ImVector Monitors;
 		public ImVector Viewports;
-
-		public ImGuiPlatformIO* self => (ImGuiPlatformIO*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct ImGuiPlatformImeData
@@ -1919,9 +1895,6 @@ namespace Evergine.Bindings.Imgui
 		public byte WantVisible;
 		public Vector2 InputPos;
 		public float InputLineHeight;
-
-		public ImGuiPlatformImeData* self => (ImGuiPlatformImeData*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct ImGuiPlatformMonitor
@@ -1931,9 +1904,6 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 WorkPos;
 		public Vector2 WorkSize;
 		public float DpiScale;
-
-		public ImGuiPlatformMonitor* self => (ImGuiPlatformMonitor*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct ImGuiSizeCallbackData
@@ -1942,17 +1912,11 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 Pos;
 		public Vector2 CurrentSize;
 		public Vector2 DesiredSize;
-
-		public ImGuiSizeCallbackData* self => (ImGuiSizeCallbackData*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct ImGuiStorage
 	{
 		public ImVector Data;
-
-		public ImGuiStorage* self => (ImGuiStorage*)Unsafe.AsPointer(ref this);
-
 
 		public void BuildSortByKey()
 		{
@@ -2028,6 +1992,9 @@ namespace Evergine.Bindings.Imgui
 		{
 			ImguiNative.ImGuiStorage_SetVoidPtr(self, key, val);
 		}
+
+		public ImGuiStorage* self => (ImGuiStorage*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImGuiStyle
@@ -2128,13 +2095,13 @@ namespace Evergine.Bindings.Imgui
 		public Vector4 Colors_53;
 		public Vector4 Colors_54;
 
-		public ImGuiStyle* self => (ImGuiStyle*)Unsafe.AsPointer(ref this);
-
-
 		public void ScaleAllSizes(float scale_factor)
 		{
 			ImguiNative.ImGuiStyle_ScaleAllSizes(self, scale_factor);
 		}
+
+		public ImGuiStyle* self => (ImGuiStyle*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImGuiTableColumnSortSpecs
@@ -2143,9 +2110,6 @@ namespace Evergine.Bindings.Imgui
 		public short ColumnIndex;
 		public short SortOrder;
 		public ImGuiSortDirection SortDirection;
-
-		public ImGuiTableColumnSortSpecs* self => (ImGuiTableColumnSortSpecs*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct ImGuiTableSortSpecs
@@ -2153,17 +2117,11 @@ namespace Evergine.Bindings.Imgui
 		public ImGuiTableColumnSortSpecs* Specs;
 		public int SpecsCount;
 		public byte SpecsDirty;
-
-		public ImGuiTableSortSpecs* self => (ImGuiTableSortSpecs*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct ImGuiTextBuffer
 	{
 		public ImVector Buf;
-
-		public ImGuiTextBuffer* self => (ImGuiTextBuffer*)Unsafe.AsPointer(ref this);
-
 
 		public void append([MarshalAs(UnmanagedType.LPStr)] string str, [MarshalAs(UnmanagedType.LPStr)] string str_end = null)
 		{
@@ -2209,6 +2167,9 @@ namespace Evergine.Bindings.Imgui
 		{
 			return ImguiNative.ImGuiTextBuffer_size(self);
 		}
+
+		public ImGuiTextBuffer* self => (ImGuiTextBuffer*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImGuiTextFilter
@@ -2216,9 +2177,6 @@ namespace Evergine.Bindings.Imgui
 		public fixed byte InputBuf[256];
 		public ImVector Filters;
 		public int CountGrep;
-
-		public ImGuiTextFilter* self => (ImGuiTextFilter*)Unsafe.AsPointer(ref this);
-
 
 		public void Build()
 		{
@@ -2244,15 +2202,15 @@ namespace Evergine.Bindings.Imgui
 		{
 			return ImguiNative.ImGuiTextFilter_PassFilter(self, text, text_end);
 		}
+
+		public ImGuiTextFilter* self => (ImGuiTextFilter*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImGuiTextRange
 	{
 		public byte* b;
 		public byte* e;
-
-		public ImGuiTextRange* self => (ImGuiTextRange*)Unsafe.AsPointer(ref this);
-
 
 		public bool empty()
 		{
@@ -2263,6 +2221,9 @@ namespace Evergine.Bindings.Imgui
 		{
 			ImguiNative.ImGuiTextRange_split(self, separator, @out);
 		}
+
+		public ImGuiTextRange* self => (ImGuiTextRange*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImGuiViewport
@@ -2284,9 +2245,6 @@ namespace Evergine.Bindings.Imgui
 		public byte PlatformRequestResize;
 		public byte PlatformRequestClose;
 
-		public ImGuiViewport* self => (ImGuiViewport*)Unsafe.AsPointer(ref this);
-
-
 		public Vector2 GetCenter()
 		{
 			Vector2 pOut;
@@ -2302,6 +2260,9 @@ namespace Evergine.Bindings.Imgui
 
 			return pOut;
 		}
+
+		public ImGuiViewport* self => (ImGuiViewport*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImGuiWindowClass
@@ -2314,18 +2275,12 @@ namespace Evergine.Bindings.Imgui
 		public ImGuiDockNodeFlags DockNodeFlagsOverrideSet;
 		public byte DockingAlwaysTabBar;
 		public byte DockingAllowUnclassed;
-
-		public ImGuiWindowClass* self => (ImGuiWindowClass*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct ImVec2
 	{
 		public float x;
 		public float y;
-
-		public ImVec2* self => (ImVec2*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct ImVec4
@@ -2334,9 +2289,6 @@ namespace Evergine.Bindings.Imgui
 		public float y;
 		public float z;
 		public float w;
-
-		public ImVec4* self => (ImVec4*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct STB_TexteditState
@@ -2355,9 +2307,6 @@ namespace Evergine.Bindings.Imgui
 		public byte padding3;
 		public float preferred_x;
 		public StbUndoState undostate;
-
-		public STB_TexteditState* self => (STB_TexteditState*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct StbTexteditRow
@@ -2368,9 +2317,6 @@ namespace Evergine.Bindings.Imgui
 		public float ymin;
 		public float ymax;
 		public int num_chars;
-
-		public StbTexteditRow* self => (StbTexteditRow*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct StbUndoRecord
@@ -2379,9 +2325,6 @@ namespace Evergine.Bindings.Imgui
 		public int insert_length;
 		public int delete_length;
 		public int char_storage;
-
-		public StbUndoRecord* self => (StbUndoRecord*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct StbUndoState
@@ -2490,9 +2433,6 @@ namespace Evergine.Bindings.Imgui
 		public short redo_point;
 		public int undo_char_point;
 		public int redo_char_point;
-
-		public StbUndoState* self => (StbUndoState*)Unsafe.AsPointer(ref this);
-
 	}
 
 }

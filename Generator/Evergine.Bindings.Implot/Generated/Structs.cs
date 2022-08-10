@@ -9,16 +9,16 @@ namespace Evergine.Bindings.Implot
 	public unsafe partial struct ImPlotInputMap
 	{
 		public ImGuiMouseButton Pan;
-		public ImGuiKeyModFlags PanMod;
+		public ImGuiModFlags PanMod;
 		public ImGuiMouseButton Fit;
 		public ImGuiMouseButton Select;
 		public ImGuiMouseButton SelectCancel;
-		public ImGuiKeyModFlags SelectMod;
-		public ImGuiKeyModFlags SelectHorzMod;
-		public ImGuiKeyModFlags SelectVertMod;
+		public ImGuiModFlags SelectMod;
+		public ImGuiModFlags SelectHorzMod;
+		public ImGuiModFlags SelectVertMod;
 		public ImGuiMouseButton Menu;
-		public ImGuiKeyModFlags OverrideMod;
-		public ImGuiKeyModFlags ZoomMod;
+		public ImGuiModFlags OverrideMod;
+		public ImGuiModFlags ZoomMod;
 		public float ZoomRate;
 
 		public ImPlotInputMap* self => (ImPlotInputMap*)Unsafe.AsPointer(ref this);
@@ -168,7 +168,6 @@ namespace Evergine.Bindings.Implot
 		public Vector4 Colors_19;
 		public Vector4 Colors_20;
 		public ImPlotColormap Colormap;
-		public byte AntiAliasedLines;
 		public byte UseLocalTime;
 		public byte UseISO8601;
 		public byte Use24HourClock;

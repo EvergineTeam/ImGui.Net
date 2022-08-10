@@ -768,7 +768,7 @@ namespace Evergine.Bindings.Imgui
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
-		public static extern bool igCombo_FnBoolPtr([MarshalAs(UnmanagedType.LPStr)] string label, int* current_item, IntPtr items_getter, void* data, int items_count, int popup_max_height_in_items);
+		public static extern bool igCombo_FnBoolPtr([MarshalAs(UnmanagedType.LPStr)] string label, int* current_item, InlineDelegate10 items_getter, void* data, int items_count, int popup_max_height_in_items);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern IntPtr igCreateContext(ImFontAtlas* shared_font_atlas);
@@ -1044,7 +1044,7 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igGetMousePosOnOpeningCurrentPopup(Vector2* pOut);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImGuiPlatformIO* igGetPlatformIO();
+		public static extern IntPtr igGetPlatformIO();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern float igGetScrollMaxX();
@@ -1324,7 +1324,7 @@ namespace Evergine.Bindings.Imgui
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
-		public static extern bool igListBox_FnBoolPtr([MarshalAs(UnmanagedType.LPStr)] string label, int* current_item, IntPtr items_getter, void* data, int items_count, int height_in_items);
+		public static extern bool igListBox_FnBoolPtr([MarshalAs(UnmanagedType.LPStr)] string label, int* current_item, InlineDelegate10 items_getter, void* data, int items_count, int height_in_items);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igLoadIniSettingsFromDisk([MarshalAs(UnmanagedType.LPStr)] string ini_filename);
@@ -1386,13 +1386,13 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igPlotHistogram_FloatPtr([MarshalAs(UnmanagedType.LPStr)] string label, float* values, int values_count, int values_offset, [MarshalAs(UnmanagedType.LPStr)] string overlay_text, float scale_min, float scale_max, Vector2 graph_size, int stride);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void igPlotHistogram_FnFloatPtr([MarshalAs(UnmanagedType.LPStr)] string label, IntPtr values_getter, void* data, int values_count, int values_offset, [MarshalAs(UnmanagedType.LPStr)] string overlay_text, float scale_min, float scale_max, Vector2 graph_size);
+		public static extern void igPlotHistogram_FnFloatPtr([MarshalAs(UnmanagedType.LPStr)] string label, InlineDelegate11 values_getter, void* data, int values_count, int values_offset, [MarshalAs(UnmanagedType.LPStr)] string overlay_text, float scale_min, float scale_max, Vector2 graph_size);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igPlotLines_FloatPtr([MarshalAs(UnmanagedType.LPStr)] string label, float* values, int values_count, int values_offset, [MarshalAs(UnmanagedType.LPStr)] string overlay_text, float scale_min, float scale_max, Vector2 graph_size, int stride);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void igPlotLines_FnFloatPtr([MarshalAs(UnmanagedType.LPStr)] string label, IntPtr values_getter, void* data, int values_count, int values_offset, [MarshalAs(UnmanagedType.LPStr)] string overlay_text, float scale_min, float scale_max, Vector2 graph_size);
+		public static extern void igPlotLines_FnFloatPtr([MarshalAs(UnmanagedType.LPStr)] string label, InlineDelegate11 values_getter, void* data, int values_count, int values_offset, [MarshalAs(UnmanagedType.LPStr)] string overlay_text, float scale_min, float scale_max, Vector2 graph_size);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igPopAllowKeyboardFocus();
