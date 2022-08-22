@@ -14,7 +14,8 @@ env:
   nugetsPath: "nupkgs"
 
 jobs:
-  build_win:
+  build_publish_extensions_win:
+    name: Generate extensions nugets (windows only)
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
@@ -22,6 +23,7 @@ jobs:
           submodules: recursive
       # TODO check if there is a new nuget of Imgui
       # TODO update nugets references with new nuget
+      # TODO move build native steps to different jobs, commit, and then continue with Imgui on Windows
       - uses: ./.github/actions/build-native-win
         with:
           Target: Extensions
@@ -43,8 +45,15 @@ jobs:
         with:
           NugetsPath: ${{ env.nugetsPath }}
           Token: ${{ secrets.EVERGINE_NUGETORG_TOKEN }}
+      - name: Verify changes
+        id: verify-changed-files
+        shell: pwsh
+        run: |
+          .\scripts\verify-changes.ps1
       - name: Commit if appropiate
-        if: ${{ success() }}
+        if: ${{ success() && steps.verify-changed-files.outputs.files_changed == 'true' }} # don't commit if only dlls have been changed
         uses: EndBug/add-and-commit@v9
         with:
           message: Updating nugets
+          committer_name: GitHub Actions
+          committer_email: 41898282+github-actions[bot]@users.noreply.github.com

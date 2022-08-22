@@ -14,7 +14,8 @@ env:
   nugetsPath: "nupkgs"
 
 jobs:
-  build_win:
+  build_publish_imgui_win:
+    name: Generate Imgui nuget (windows only)
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
@@ -24,6 +25,7 @@ jobs:
         if: ${{ github.event_name == 'schedule' }}
         with:
           Persists: False
+      # TODO move build native steps to different jobs, commit, and then continue with Imgui on Windows
       - uses: ./.github/actions/build-native-win
         with:
           Target: Imgui
@@ -37,8 +39,15 @@ jobs:
         with:
           NugetsPath: ${{ env.nugetsPath }}
           Token: ${{ secrets.EVERGINE_NUGETORG_TOKEN }}
+      - name: Verify changes
+        id: verify-changed-files
+        shell: pwsh
+        run: |
+          .\scripts\verify-changes.ps1
       - name: Commit if appropiate
-        if: ${{ success() }}
+        if: ${{ success() && steps.verify-changed-files.outputs.files_changed == 'true' }} # don't commit if only dlls have been changed
         uses: EndBug/add-and-commit@v9
         with:
           message: Updating nugets
+          committer_name: GitHub Actions
+          committer_email: 41898282+github-actions[bot]@users.noreply.github.com

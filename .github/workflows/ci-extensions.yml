@@ -11,7 +11,8 @@ on:
       - "scripts/generate-nugets.ps1"
 
 jobs:
-  build_win:
+  build_extensions_win:
+    name: Build extensions nugets
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
