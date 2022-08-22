@@ -41,7 +41,7 @@ This is a Evergine project created with the default template which uses the nuge
 ## Development
 
 - Optionally, update all submodules.
-- Then, build cimgui and its native extensions running `deploy-win-native.ps1`
+- Then, build cimgui and its native extensions running `.\scripts\deploy-win-native.ps1 -buildImgui -buildExtensions`
 - Use visual studio to compile and generate every binding.
 
 **NOTE:** Extensions bindings use latest Imgui nuget package on Nuget.org.

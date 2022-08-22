@@ -1049,7 +1049,7 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_SetupAxisScale_PlotScale(ImAxis axis, ImPlotScale scale);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_SetupAxisScale_PlotTransform(ImAxis axis, ImPlotTransform forward, ImPlotTransform inverse, void* data);
+		public static extern void ImPlot_SetupAxisScale_PlotTransform(ImAxis axis, IntPtr forward, IntPtr inverse, void* data);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_SetupAxisTicks_doublePtr(ImAxis axis, double* values, int n_ticks, [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] labels, [MarshalAs(UnmanagedType.Bool)] bool keep_default);

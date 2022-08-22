@@ -20,27 +20,18 @@ namespace Evergine.Bindings.Implot
 		public ImGuiModFlags OverrideMod;
 		public ImGuiModFlags ZoomMod;
 		public float ZoomRate;
-
-		public ImPlotInputMap* self => (ImPlotInputMap*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct ImPlotPoint
 	{
 		public double x;
 		public double y;
-
-		public ImPlotPoint* self => (ImPlotPoint*)Unsafe.AsPointer(ref this);
-
 	}
 
 	public unsafe partial struct ImPlotRange
 	{
 		public double Min;
 		public double Max;
-
-		public ImPlotRange* self => (ImPlotRange*)Unsafe.AsPointer(ref this);
-
 
 		public double Clamp(double value)
 		{
@@ -56,15 +47,15 @@ namespace Evergine.Bindings.Implot
 		{
 			return ImplotNative.ImPlotRange_Size(self);
 		}
+
+		public ImPlotRange* self => (ImPlotRange*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImPlotRect
 	{
 		public ImPlotRange X;
 		public ImPlotRange Y;
-
-		public ImPlotRect* self => (ImPlotRect*)Unsafe.AsPointer(ref this);
-
 
 		public ImPlotPoint Clamp_PlotPoInt(ImPlotPoint p)
 		{
@@ -115,6 +106,9 @@ namespace Evergine.Bindings.Implot
 
 			return pOut;
 		}
+
+		public ImPlotRect* self => (ImPlotRect*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImPlotStyle
@@ -171,9 +165,6 @@ namespace Evergine.Bindings.Implot
 		public byte UseLocalTime;
 		public byte UseISO8601;
 		public byte Use24HourClock;
-
-		public ImPlotStyle* self => (ImPlotStyle*)Unsafe.AsPointer(ref this);
-
 	}
 
 }
