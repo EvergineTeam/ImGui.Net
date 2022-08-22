@@ -1,4 +1,6 @@
 name: CD Extensions
+# This CD builds and publish what is currently on the repo.
+# Addionally, periodically updates the reference to latest Imgui nuget and try to publish a new ones.
 on:
   workflow_dispatch:
     inputs:
@@ -8,10 +10,14 @@ on:
         required: false
         default: false
   schedule:
-    - cron: "0 0 1 * *" # TODO once every day
+    - cron: "23 20 * * *" # Executed every day at 23:20
 
 env:
   nugetsPath: "nupkgs"
+  imguiNuget: "Evergine.Bindings.Imgui"
+  imguizmoPath: "./Generator/Evergine.Bindings.Imguizmo"
+  imnodesPath: "./Generator/Evergine.Bindings.Imnodes"
+  implotPath: "./Generator/Evergine.Bindings.Implot"
 
 jobs:
   build_publish_extensions_win:
@@ -21,32 +27,55 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-      # TODO check if there is a new nuget of Imgui
-      # TODO update nugets references with new nuget
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: |
+            3.1.x
+            5.x
+            6.x
+      - name: Update nugets
+        if: ${{ github.event_name == 'schedule' }}
+        shell: pwsh
+        run: |
+          dotnet add ${{ env.imguizmoPath }} package ${{ env.imguiNuget }}
+          dotnet add ${{ env.imnodesPath }} package ${{ env.imguiNuget }}
+          dotnet add ${{ env.implotPath }} package ${{ env.imguiNuget }}
+      # check if there is a new nuget of Imgui
+      - name: Verify Imgui nuget changes
+        if: ${{ github.event_name == 'schedule' }}
+        id: verify-imgui-nuget
+        shell: pwsh
+        run: |
+          .\scripts\verify-changes.ps1
       # TODO move build native steps to different jobs, commit, and then continue with Imgui on Windows
       - uses: ./.github/actions/build-native-win
+        if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.files_changed == 'true') }}
         with:
           Target: Extensions
           NugetsPath: ${{ env.nugetsPath }}
       - uses: ./.github/actions/generate-bindings-nugets
+        if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.files_changed == 'true') }}
         with:
           ImX: Imguizmo
           NugetsPath: ${{ env.nugetsPath }}
       - uses: ./.github/actions/generate-bindings-nugets
+        if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.files_changed == 'true') }}
         with:
           ImX: Imnodes
           NugetsPath: ${{ env.nugetsPath }}
       - uses: ./.github/actions/generate-bindings-nugets
+        if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.files_changed == 'true') }}
         with:
           ImX: Implot
           NugetsPath: ${{ env.nugetsPath }}
       - uses: ./.github/actions/publish-nugets
-        if: ${{ success() && (github.event_name == 'schedule' || github.event.inputs.publishEnabled == 'true') }}
+        if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.files_changed == 'true') && (github.event_name == 'schedule' || github.event.inputs.publishEnabled == 'true') }}
         with:
           NugetsPath: ${{ env.nugetsPath }}
           Token: ${{ secrets.EVERGINE_NUGETORG_TOKEN }}
       - name: Verify changes
         id: verify-changed-files
+        if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.files_changed == 'true') }}
         shell: pwsh
         run: |
           .\scripts\verify-changes.ps1

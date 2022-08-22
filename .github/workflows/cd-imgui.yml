@@ -1,4 +1,6 @@
 name: CD Imgui
+# This CD builds and publish what is currently on the repo.
+# Addionally, periodically updates the submodules and try to publish a new nuget.
 on:
   workflow_dispatch:
     inputs:

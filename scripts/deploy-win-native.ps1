@@ -69,19 +69,3 @@ if ($buildExtensions) {
 }
 
 #endregion
-
-#region commit changes
-
-# # # Set working directory
-# # Push-Location (Get-Location).Path
-# # Set-Location $PSScriptRoot\..
-
-# # if ($buildImgui -or $buildExtensions) {
-# #   git add .
-# #   git commit -m "Definitions & native libraries updated"
-# #   git push
-# # }
-
-# # Pop-Location
-
-#endregion

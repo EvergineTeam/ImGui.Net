@@ -1,4 +1,5 @@
 name: CI Imgui
+# This CI only builds what is currently on the repo
 on:
   push:
     paths:

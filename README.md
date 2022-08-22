@@ -14,7 +14,7 @@ You will find c# bindings of the most popular imgui libraries as well, Imguizmo,
 
 ## How it works
 
-This automated binding are generated based on the cimgui project json outputs: 
+This automated binding are generated based on the cimgui project json outputs:
 - [cimgui](https://github.com/cimgui/cimgui)
 - [cimguzimo](https://github.com/cimgui/cimguizmo)
 - [cimplot](https://github.com/cimgui/cimplot)
@@ -38,11 +38,18 @@ This is a Evergine project created with the default template which uses the nuge
 ![capture1](https://user-images.githubusercontent.com/1783366/177344719-8b570a1a-efea-43c6-ae5f-1143bd0643b6.png)
 ![capture3](https://user-images.githubusercontent.com/1783366/177344724-b2018558-9bc1-44dc-a694-26210924a07e.png)
 
+## Development
+
+- Optionally, update all submodules.
+- Then, build cimgui and its native extensions running `deploy-win-native.ps1`
+- Use visual studio to compile and generate every binding.
+
+**NOTE:** Extensions bindings use latest Imgui nuget package on Nuget.org.
 
 ## Platforms
 We are working to add support to all this plaforms:
 
-- [x] Windows x86, x64 
+- [x] Windows x86, x64
 - [ ] Linux x64
 - [ ] MacOS
 - [ ] iOS
