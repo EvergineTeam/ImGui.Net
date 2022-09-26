@@ -34,7 +34,6 @@ jobs:
             5.x
             6.x
       - name: Update nugets
-        #if: ${{ github.event_name == 'schedule' }}
         shell: pwsh
         run: |
           dotnet add ${{ env.imguizmoPath }} package ${{ env.imguiNuget }}
@@ -42,7 +41,6 @@ jobs:
           dotnet add ${{ env.implotPath }} package ${{ env.imguiNuget }}
       # check if there is a new nuget of Imgui
       - name: Verify Imgui nuget changes
-        if: ${{ github.event_name == 'schedule' }}
         id: verify-imgui-nuget
         shell: pwsh
         run: |
