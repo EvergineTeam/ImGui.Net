@@ -10,18 +10,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Evergine.Bindings.Imgui" Version="2022.6.24.1084" />
-    <PackageReference Include="Evergine.Bindings.Imguizmo" Version="2022.6.24.1084" />
-    <PackageReference Include="Evergine.Bindings.Imnodes" Version="2022.7.5.784" />
-    <PackageReference Include="Evergine.Bindings.Implot" Version="2022.6.24.1083" />
-    <PackageReference Include="Evergine.Common" Version="2022.2.16.6" />
-    <PackageReference Include="Evergine.Components" Version="2022.2.16.6" />
-    <PackageReference Include="Evergine.Framework" Version="2022.2.16.6" />
-    <PackageReference Include="Evergine.Mathematics" Version="2022.2.16.6" />
-    <PackageReference Include="Evergine.Platform" Version="2022.2.16.6" />
-    <PackageReference Include="Evergine.Bullet" Version="2022.2.16.6" />
-    <PackageReference Include="Evergine.Targets" Version="2022.2.16.6" />
-    <PackageReference Include="Evergine.CodeScenes" Version="2022.2.16.6" />
+    <PackageReference Include="Evergine.Bindings.Imgui" Version="2022.9.26.742" />
+    <PackageReference Include="Evergine.Bindings.Imguizmo" Version="2022.9.26.769" />
+    <PackageReference Include="Evergine.Bindings.Imnodes" Version="2022.9.26.770" />
+    <PackageReference Include="Evergine.Bindings.Implot" Version="2022.9.26.770" />
+    <PackageReference Include="Evergine.Common" Version="2022.2.16.9" />
+    <PackageReference Include="Evergine.Components" Version="2022.2.16.9" />
+    <PackageReference Include="Evergine.Framework" Version="2022.2.16.9" />
+    <PackageReference Include="Evergine.Mathematics" Version="2022.2.16.9" />
+    <PackageReference Include="Evergine.Platform" Version="2022.2.16.9" />
+    <PackageReference Include="Evergine.Bullet" Version="2022.2.16.9" />
+    <PackageReference Include="Evergine.Targets" Version="2022.2.16.9" />
+    <PackageReference Include="Evergine.CodeScenes" Version="2022.2.16.9" />
   </ItemGroup>
 
 </Project>
