@@ -1,15 +1,13 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
 	<ItemGroup>
-		<Content Include="$(MSBuildThisFileDirectory)..\..\runtimes\win-x64\nativeassets\netstandard2.0\*">
-			<Link>runtimes/win-x64/nativeassets/netstandard2.0/%(Filename)%(Extension)</Link>
+		<Content Include="$(MSBuildThisFileDirectory)..\..\runtimes\win-x86\native\cimnodes.dll">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-			<Visible>False</Visible>
+			<Link>runtimes\win-x86\native\cimnodes.dll</Link>
 		</Content>
-		<Content Include="$(MSBuildThisFileDirectory)..\..\runtimes\win-x86\nativeassets\netstandard2.0\*">
-			<Link>runtimes/win-x86/nativeassets/netstandard2.0/%(Filename)%(Extension)</Link>
+		<Content Include="$(MSBuildThisFileDirectory)..\..\runtimes\win-x64\native\cimnodes.dll">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-			<Visible>False</Visible>
+			<Link>runtimes\win-x64\native\cimnodes.dll</Link>
 		</Content>
 	</ItemGroup>
 

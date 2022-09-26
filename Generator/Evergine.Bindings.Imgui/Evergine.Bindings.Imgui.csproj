@@ -17,8 +17,14 @@
 	</ItemGroup>
 		
 	<ItemGroup>
-		<Content Include="build\**" PackagePath="build" />
-		<Content Include="runtimes\**" PackagePath="runtimes" />
+		<Content Include="runtimes\**">
+			<PackagePath>%(Identity)</PackagePath>
+			<Pack>true</Pack>
+		</Content>
+		<Content Include="build\**" PackagePath="build">
+			<PackagePath>%(Identity)</PackagePath>
+			<Pack>true</Pack>
+		</Content>
 	</ItemGroup>
 		
 	<ItemGroup>
