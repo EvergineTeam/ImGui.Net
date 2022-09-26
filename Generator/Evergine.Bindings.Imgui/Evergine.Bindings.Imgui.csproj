@@ -11,6 +11,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Evergine.LibraryLoader" Version="0.0.7" />
 		<PackageReference Include="Evergine.Mathematics" Version="2022.2.16.6" />
 		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
 	</ItemGroup>
@@ -18,8 +19,6 @@
 	<ItemGroup>
 		<Content Include="build\**" PackagePath="build" />
 		<Content Include="runtimes\**" PackagePath="runtimes" />
-		<Content Include="Evergine.Bindings.Imgui.dll.config" Pack="true" Visible="true" PackageCopyToOutput="true" />
-		<Content Include="Evergine.Bindings.Imgui.Reference.targets" Pack="false" />
 	</ItemGroup>
 		
 	<ItemGroup>
