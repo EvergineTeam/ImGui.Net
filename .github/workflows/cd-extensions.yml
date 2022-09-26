@@ -34,7 +34,6 @@ jobs:
             5.x
             6.x
       - name: Update nugets
-        #if: ${{ github.event_name == 'schedule' }}
         shell: pwsh
         run: |
           dotnet add ${{ env.imguizmoPath }} package ${{ env.imguiNuget }}
@@ -42,43 +41,42 @@ jobs:
           dotnet add ${{ env.implotPath }} package ${{ env.imguiNuget }}
       # check if there is a new nuget of Imgui
       - name: Verify Imgui nuget changes
-        if: ${{ github.event_name == 'schedule' }}
         id: verify-imgui-nuget
         shell: pwsh
         run: |
           .\scripts\verify-changes.ps1
       # TODO move build native steps to different jobs, commit, and then continue with Imgui on Windows
       - uses: ./.github/actions/build-native-win
-        if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.files_changed == 'true') }}
+        if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.outputs.files_changed == 'true') }}
         with:
           Target: Extensions
           NugetsPath: ${{ env.nugetsPath }}
       - uses: ./.github/actions/generate-bindings-nugets
-        if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.files_changed == 'true') }}
+        if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.outputs.files_changed == 'true') }}
         with:
           ImX: Imguizmo
           NugetsPath: ${{ env.nugetsPath }}
       - uses: ./.github/actions/generate-bindings-nugets
-        if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.files_changed == 'true') }}
+        if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.outputs.files_changed == 'true') }}
         with:
           ImX: Imnodes
           NugetsPath: ${{ env.nugetsPath }}
       - uses: ./.github/actions/generate-bindings-nugets
-        if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.files_changed == 'true') }}
+        if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.outputs.files_changed == 'true') }}
         with:
           ImX: Implot
           NugetsPath: ${{ env.nugetsPath }}
-      - uses: ./.github/actions/publish-nugets
-        if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.files_changed == 'true') && (github.event_name == 'schedule' || github.event.inputs.publishEnabled == 'true') }}
-        with:
-          NugetsPath: ${{ env.nugetsPath }}
-          Token: ${{ secrets.EVERGINE_NUGETORG_TOKEN }}
       - name: Verify changes
         id: verify-changed-files
-        if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.files_changed == 'true') }}
+        if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.outputs.files_changed == 'true') }}
         shell: pwsh
         run: |
           .\scripts\verify-changes.ps1
+      - uses: ./.github/actions/publish-nugets
+        if: ${{ success() && ((github.event_name != 'schedule' && github.event.inputs.publishEnabled == 'true') || (github.event_name == 'schedule' && steps.verify-changed-files.outputs.files_changed == 'true')) }}
+        with:
+          NugetsPath: ${{ env.nugetsPath }}
+          Token: ${{ secrets.EVERGINE_NUGETORG_TOKEN }}
       - name: Commit if appropiate
         if: ${{ success() && steps.verify-changed-files.outputs.files_changed == 'true' }} # don't commit if only dlls have been changed
         uses: EndBug/add-and-commit@v9
