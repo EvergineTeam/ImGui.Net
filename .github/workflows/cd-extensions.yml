@@ -34,7 +34,7 @@ jobs:
             5.x
             6.x
       - name: Update nugets
-        if: ${{ github.event_name == 'schedule' }}
+        #if: ${{ github.event_name == 'schedule' }}
         shell: pwsh
         run: |
           dotnet add ${{ env.imguizmoPath }} package ${{ env.imguiNuget }}
