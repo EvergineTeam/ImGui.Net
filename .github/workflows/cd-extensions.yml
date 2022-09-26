@@ -66,17 +66,17 @@ jobs:
         with:
           ImX: Implot
           NugetsPath: ${{ env.nugetsPath }}
-      - uses: ./.github/actions/publish-nugets
-        if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.outputs.files_changed == 'true') && (github.event_name == 'schedule' || github.event.inputs.publishEnabled == 'true') }}
-        with:
-          NugetsPath: ${{ env.nugetsPath }}
-          Token: ${{ secrets.EVERGINE_NUGETORG_TOKEN }}
       - name: Verify changes
         id: verify-changed-files
         if: ${{ success() && (github.event_name != 'schedule' || steps.verify-imgui-nuget.outputs.files_changed == 'true') }}
         shell: pwsh
         run: |
           .\scripts\verify-changes.ps1
+      - uses: ./.github/actions/publish-nugets
+        if: ${{ success() && ((github.event_name != 'schedule' && github.event.inputs.publishEnabled == 'true') || (github.event_name == 'schedule' && steps.verify-changed-files.outputs.files_changed == 'true')) }}
+        with:
+          NugetsPath: ${{ env.nugetsPath }}
+          Token: ${{ secrets.EVERGINE_NUGETORG_TOKEN }}
       - name: Commit if appropiate
         if: ${{ success() && steps.verify-changed-files.outputs.files_changed == 'true' }} # don't commit if only dlls have been changed
         uses: EndBug/add-and-commit@v9
