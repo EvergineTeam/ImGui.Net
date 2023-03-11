@@ -80,7 +80,8 @@ namespace Common
 
         private static string ConvertToBasicTypes(string type, Family family)
         {
-            type = type.Replace("const ", "");
+            if (!type.Equals("const char*"))
+                type = type.Replace("const ", "");
 
             switch (type)
             {
@@ -109,6 +110,8 @@ namespace Common
                             return "byte*";
                     }
                 case "char*":
+                    return "byte*";
+                case "const char*":
                 case "unsigned char*":
                     switch (family)
                     {

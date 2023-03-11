@@ -1173,15 +1173,15 @@ namespace Evergine.Bindings.Imgui
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
-		public static extern bool igInputText([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.LPStr)] string buf, uint buf_size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* user_data);
+		public static extern bool igInputText([MarshalAs(UnmanagedType.LPStr)] string label, byte* buf, uint buf_size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* user_data);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
-		public static extern bool igInputTextMultiline([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.LPStr)] string buf, uint buf_size, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* user_data);
+		public static extern bool igInputTextMultiline([MarshalAs(UnmanagedType.LPStr)] string label, byte* buf, uint buf_size, Vector2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* user_data);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
-		public static extern bool igInputTextWithHint([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.LPStr)] string hint, [MarshalAs(UnmanagedType.LPStr)] string buf, uint buf_size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* user_data);
+		public static extern bool igInputTextWithHint([MarshalAs(UnmanagedType.LPStr)] string label, [MarshalAs(UnmanagedType.LPStr)] string hint, byte* buf, uint buf_size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* user_data);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.Bool)]
