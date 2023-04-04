@@ -51,7 +51,7 @@ else
 
 LogDebug "START bindings generator process"
 $cmd = ".\publish\$($ImX)Gen.exe"
-Push-Location .\$($ImX)Gen\bin\Release\netcoreapp3.1
+Push-Location .\$($ImX)Gen\bin\Release\net6.0
 $($cmd)
 if($?)
 {
