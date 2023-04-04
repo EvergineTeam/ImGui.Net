@@ -116,7 +116,7 @@ namespace Common
                     switch (family)
                     {
                         case Family.param:
-                            return "[MarshalAs(UnmanagedType.LPStr)] string";
+                            return "[MarshalAs(UnmanagedType.LPUTF8Str)] string";
                         case Family.ret:
                             return "string";
                         case Family.field:
@@ -184,7 +184,7 @@ namespace Common
                     switch (family)
                     {
                         case Family.param:
-                            return "[MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[]";
+                            return "[MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPUTF8Str)] string[]";
                         case Family.ret:
                             return "string[]";
                         case Family.field:
@@ -279,7 +279,7 @@ namespace Common
             switch (csType)
             {
                 case "string":
-                    return "[return:MarshalAs(UnmanagedType.LPStr)]";
+                    return "[return:MarshalAs(UnmanagedType.LPUTF8Str)]";
                 case "bool":
                     return "[return:MarshalAs(UnmanagedType.Bool)]";
                 default:

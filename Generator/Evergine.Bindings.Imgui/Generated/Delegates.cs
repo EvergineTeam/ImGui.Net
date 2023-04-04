@@ -8,7 +8,7 @@ namespace Evergine.Bindings.Imgui
 	public unsafe delegate ImVec2 InlineDelegate2(ImGuiViewport* vp);
 	public unsafe delegate void InlineDelegate3(ImGuiViewport* vp, Vector2 size);
 	public unsafe delegate bool InlineDelegate4(ImGuiViewport* vp);
-	public unsafe delegate void InlineDelegate5(ImGuiViewport* vp, [MarshalAs(UnmanagedType.LPStr)] string str);
+	public unsafe delegate void InlineDelegate5(ImGuiViewport* vp, [MarshalAs(UnmanagedType.LPUTF8Str)] string str);
 	public unsafe delegate void InlineDelegate6(ImGuiViewport* vp, float alpha);
 	public unsafe delegate void InlineDelegate7(ImGuiViewport* vp, void* render_arg);
 	public unsafe delegate float InlineDelegate8(ImGuiViewport* vp);

@@ -162,16 +162,16 @@ namespace Evergine.Bindings.Imnodes
 		public static extern void imnodes_Link(int id, int start_attribute_id, int end_attribute_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void imnodes_LoadCurrentEditorStateFromIniFile([MarshalAs(UnmanagedType.LPStr)] string file_name);
+		public static extern void imnodes_LoadCurrentEditorStateFromIniFile([MarshalAs(UnmanagedType.LPUTF8Str)] string file_name);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void imnodes_LoadCurrentEditorStateFromIniString([MarshalAs(UnmanagedType.LPStr)] string data, uint data_size);
+		public static extern void imnodes_LoadCurrentEditorStateFromIniString([MarshalAs(UnmanagedType.LPUTF8Str)] string data, uint data_size);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void imnodes_LoadEditorStateFromIniFile(IntPtr editor, [MarshalAs(UnmanagedType.LPStr)] string file_name);
+		public static extern void imnodes_LoadEditorStateFromIniFile(IntPtr editor, [MarshalAs(UnmanagedType.LPUTF8Str)] string file_name);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void imnodes_LoadEditorStateFromIniString(IntPtr editor, [MarshalAs(UnmanagedType.LPStr)] string data, uint data_size);
+		public static extern void imnodes_LoadEditorStateFromIniString(IntPtr editor, [MarshalAs(UnmanagedType.LPUTF8Str)] string data, uint data_size);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void imnodes_MiniMap(float minimap_size_fraction, ImNodesMiniMapLocation location, IntPtr node_hovering_callback, IntPtr node_hovering_callback_data);
@@ -204,17 +204,17 @@ namespace Evergine.Bindings.Imnodes
 		public static extern void imnodes_PushStyleVar_Vec2(ImNodesStyleVar style_item, Vector2 value);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void imnodes_SaveCurrentEditorStateToIniFile([MarshalAs(UnmanagedType.LPStr)] string file_name);
+		public static extern void imnodes_SaveCurrentEditorStateToIniFile([MarshalAs(UnmanagedType.LPUTF8Str)] string file_name);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		[return:MarshalAs(UnmanagedType.LPStr)]
+		[return:MarshalAs(UnmanagedType.LPUTF8Str)]
 		public static extern string imnodes_SaveCurrentEditorStateToIniString(uint* data_size);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void imnodes_SaveEditorStateToIniFile(IntPtr editor, [MarshalAs(UnmanagedType.LPStr)] string file_name);
+		public static extern void imnodes_SaveEditorStateToIniFile(IntPtr editor, [MarshalAs(UnmanagedType.LPUTF8Str)] string file_name);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		[return:MarshalAs(UnmanagedType.LPStr)]
+		[return:MarshalAs(UnmanagedType.LPUTF8Str)]
 		public static extern string imnodes_SaveEditorStateToIniString(IntPtr editor, uint* data_size);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
