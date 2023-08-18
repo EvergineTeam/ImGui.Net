@@ -104,7 +104,11 @@ namespace EvergineImGUITest.Managers
         {
             base.OnDeactivated();
 
-            var display = this.renderManager.ActiveCamera3D.Display;
+            var display = this.renderManager.ActiveCamera3D?.Display;
+            if ( display == null ) {
+                return;
+            }
+            
             display.DisplaySizeChanged -= this.Display_DisplaySizeChanged;
             display.DisplayFrameBufferChanged -= this.Display_DisplayFrameBufferChanged;
             this.renderManager.ActiveCamera3D.DrawContext.OnPostRender -= this.DrawContext_OnPostRender;
