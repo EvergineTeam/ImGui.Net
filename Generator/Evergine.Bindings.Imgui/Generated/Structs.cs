@@ -359,7 +359,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_PrimWriteVtx(self, pos, uv, col);
 		}
 
-		public void PushClipRect(Vector2 clip_rect_min, Vector2 clip_rect_max, [MarshalAs(UnmanagedType.Bool)] bool intersect_with_current_clip_rect = true)
+		public void PushClipRect(Vector2 clip_rect_min, Vector2 clip_rect_max, [MarshalAs(UnmanagedType.I1)] bool intersect_with_current_clip_rect = true)
 		{
 			ImguiNative.ImDrawList_PushClipRect(self, clip_rect_min, clip_rect_max, intersect_with_current_clip_rect);
 		}
@@ -496,7 +496,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImFont_AddGlyph(self, src_cfg, c, x0, y0, x1, y1, u0, v0, u1, v1, advance_x);
 		}
 
-		public void AddRemapChar(ushort dst, ushort src, [MarshalAs(UnmanagedType.Bool)] bool overwrite_dst = true)
+		public void AddRemapChar(ushort dst, ushort src, [MarshalAs(UnmanagedType.I1)] bool overwrite_dst = true)
 		{
 			ImguiNative.ImFont_AddRemapChar(self, dst, src, overwrite_dst);
 		}
@@ -564,12 +564,12 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImFont_RenderChar(self, draw_list, size, pos, col, c);
 		}
 
-		public void RenderText(ImDrawList* draw_list, float size, Vector2 pos, uint col, Vector4 clip_rect, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_begin, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_end, float wrap_width = 0.0f, [MarshalAs(UnmanagedType.Bool)] bool cpu_fine_clip = true)
+		public void RenderText(ImDrawList* draw_list, float size, Vector2 pos, uint col, Vector4 clip_rect, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_begin, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_end, float wrap_width = 0.0f, [MarshalAs(UnmanagedType.I1)] bool cpu_fine_clip = true)
 		{
 			ImguiNative.ImFont_RenderText(self, draw_list, size, pos, col, clip_rect, text_begin, text_end, wrap_width, cpu_fine_clip);
 		}
 
-		public void SetGlyphVisible(ushort c, [MarshalAs(UnmanagedType.Bool)] bool visible)
+		public void SetGlyphVisible(ushort c, [MarshalAs(UnmanagedType.I1)] bool visible)
 		{
 			ImguiNative.ImFont_SetGlyphVisible(self, c, visible);
 		}
@@ -1662,7 +1662,7 @@ namespace Evergine.Bindings.Imgui
 		public ushort InputQueueSurrogate;
 		public ImVector InputQueueCharacters;
 
-		public void AddFocusEvent([MarshalAs(UnmanagedType.Bool)] bool focused)
+		public void AddFocusEvent([MarshalAs(UnmanagedType.I1)] bool focused)
 		{
 			ImguiNative.ImGuiIO_AddFocusEvent(self, focused);
 		}
@@ -1682,17 +1682,17 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImGuiIO_AddInputCharactersUTF8(self, str);
 		}
 
-		public void AddKeyAnalogEvent(ImGuiKey key, [MarshalAs(UnmanagedType.Bool)] bool down, float v)
+		public void AddKeyAnalogEvent(ImGuiKey key, [MarshalAs(UnmanagedType.I1)] bool down, float v)
 		{
 			ImguiNative.ImGuiIO_AddKeyAnalogEvent(self, key, down, v);
 		}
 
-		public void AddKeyEvent(ImGuiKey key, [MarshalAs(UnmanagedType.Bool)] bool down)
+		public void AddKeyEvent(ImGuiKey key, [MarshalAs(UnmanagedType.I1)] bool down)
 		{
 			ImguiNative.ImGuiIO_AddKeyEvent(self, key, down);
 		}
 
-		public void AddMouseButtonEvent(int button, [MarshalAs(UnmanagedType.Bool)] bool down)
+		public void AddMouseButtonEvent(int button, [MarshalAs(UnmanagedType.I1)] bool down)
 		{
 			ImguiNative.ImGuiIO_AddMouseButtonEvent(self, button, down);
 		}
@@ -1722,7 +1722,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImGuiIO_ClearInputKeys(self);
 		}
 
-		public void SetAppAcceptingEvents([MarshalAs(UnmanagedType.Bool)] bool accepting_events)
+		public void SetAppAcceptingEvents([MarshalAs(UnmanagedType.I1)] bool accepting_events)
 		{
 			ImguiNative.ImGuiIO_SetAppAcceptingEvents(self, accepting_events);
 		}
@@ -1928,12 +1928,12 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImGuiStorage_Clear(self);
 		}
 
-		public bool GetBool(uint key, [MarshalAs(UnmanagedType.Bool)] bool default_val = true)
+		public bool GetBool(uint key, [MarshalAs(UnmanagedType.I1)] bool default_val = true)
 		{
 			return ImguiNative.ImGuiStorage_GetBool(self, key, default_val);
 		}
 
-		public bool GetBoolRef(uint key, [MarshalAs(UnmanagedType.Bool)] bool default_val = true)
+		public bool GetBoolRef(uint key, [MarshalAs(UnmanagedType.I1)] bool default_val = true)
 		{
 			return ImguiNative.ImGuiStorage_GetBoolRef(self, key, default_val);
 		}
@@ -1973,7 +1973,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImGuiStorage_SetAllInt(self, val);
 		}
 
-		public void SetBool(uint key, [MarshalAs(UnmanagedType.Bool)] bool val)
+		public void SetBool(uint key, [MarshalAs(UnmanagedType.I1)] bool val)
 		{
 			ImguiNative.ImGuiStorage_SetBool(self, key, val);
 		}

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -6,10 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Evergine.Common" Version="2022.2.16.9" />
-    <PackageReference Include="Evergine.Components" Version="2022.2.16.9" />
-    <PackageReference Include="Evergine.Framework" Version="2022.2.16.9" />
-    <PackageReference Include="Evergine.Editor.Extension" Version="2022.2.16.9" />
+    <PackageReference Include="Evergine.Common" Version="2023.9.28.1837" />
+    <PackageReference Include="Evergine.Components" Version="2023.9.28.1837" />
+    <PackageReference Include="Evergine.Framework" Version="2023.9.28.1837" />
+    <PackageReference Include="Evergine.Editor.Extension" Version="2023.9.28.1837" />
   </ItemGroup>
 
   <ItemGroup>
