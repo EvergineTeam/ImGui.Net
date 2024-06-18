@@ -92,7 +92,7 @@ namespace Common
                     switch (family)
                     {
                         case Family.param:
-                            return "[MarshalAs(UnmanagedType.Bool)] bool";
+                            return "[MarshalAs(UnmanagedType.I1)] bool";
                         case Family.ret:
                             return "bool";
                         case Family.field:
@@ -100,15 +100,7 @@ namespace Common
                             return "byte";
                     }
                 case "bool*":
-                    switch (family)
-                    {                            
-                        case Family.ret:
-                            return "bool";
-                        case Family.param:
-                        case Family.field:
-                        default:
-                            return "byte*";
-                    }
+                    return "bool*";
                 case "char*":
                     return "byte*";
                 case "const char*":
@@ -281,7 +273,7 @@ namespace Common
                 case "string":
                     return "[return:MarshalAs(UnmanagedType.LPUTF8Str)]";
                 case "bool":
-                    return "[return:MarshalAs(UnmanagedType.Bool)]";
+                    return "[return:MarshalAs(UnmanagedType.I1)]";
                 default:
                     return null;
             }
