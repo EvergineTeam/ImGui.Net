@@ -29,7 +29,7 @@ runs:
       run: |
         .\scripts\generate-nugets.ps1 -ImX ${{  inputs.ImX  }} -outputfolder ${{  inputs.NugetsPath  }}
     - name: Save nugets
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{  inputs.ImX  }}-nugets
         path: ${{  inputs.NugetsPath  }}
