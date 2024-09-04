@@ -10,11 +10,10 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: actions/setup-dotnet@v1
+    - uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: |
-          6.x
-    - uses: nuget/setup-nuget@v1
+        dotnet-version: 8.x
+    - uses: nuget/setup-nuget@v2
       with:
         nuget-version: "6.x"
     - name: Publish NuGet
