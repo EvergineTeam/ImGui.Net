@@ -31,10 +31,12 @@ jobs:
       - uses: ./.github/actions/build-native-win
         with:
           Target: Imgui
+      - uses: ./.github/actions/build-native-win
+        with:
+          Target: Extensions
       - uses: ./.github/actions/generate-bindings-nugets
         id: nugets
         with:
-          ImX: Imgui
           NugetsPath: ${{ env.nugetsPath }}
       - name: Verify changes
         id: verify-changed-files

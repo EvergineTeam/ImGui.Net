@@ -1,10 +1,6 @@
 name: Binding Nugets
 description: Generate and build bindings
 inputs:
-  ImX:
-    description: "Values: 'Imgui', 'Imguizmo', 'Imnodes' or 'Implot'. Default 'Imgui'"
-    required: false
-    default: Imgui
   NugetsPath:
     description: "Local path to deliver the nugets"
     required: false
@@ -22,15 +18,15 @@ runs:
       shell: pwsh
       id: build_bindings
       run: |
-        .\scripts\generate-bindings.ps1 -ImX ${{  inputs.ImX  }}
+        .\scripts\generate-bindings.ps1
     - name: Generate NuGet packages
       shell: pwsh
       id: build_nugets
       run: |
-        .\scripts\generate-nugets.ps1 -ImX ${{  inputs.ImX  }} -outputfolder ${{  inputs.NugetsPath  }}
+        .\scripts\generate-nugets.ps1 -outputfolder ${{  inputs.NugetsPath  }}
     - name: Save nugets
       uses: actions/upload-artifact@v4
       with:
-        name: ${{  inputs.ImX  }}-nugets
+        name: Imgui-nugets
         path: ${{  inputs.NugetsPath  }}
         retention-days: 5
