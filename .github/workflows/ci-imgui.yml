@@ -4,7 +4,11 @@ on:
   push:
     paths:
       - "Generator/ImguiGen/**"
+      - "Generator/ImguizmoGen/**"
+      - "Generator/ImnodesGen/**"
+      - "Generator/ImplotGen/**"
       - "NativeLibraries/cimgui/**"
+      - "NativeLibraries/extensions/**"
       - "scripts/deploy-win-native.ps1"
       - "scripts/generate-bindings.ps1"
       - "scripts/generate-nugets.ps1"
@@ -20,6 +24,7 @@ jobs:
       - uses: ./.github/actions/build-native-win
         with:
           Target: Imgui
-      - uses: ./.github/actions/generate-bindings-nugets
+      - uses: ./.github/actions/build-native-win
         with:
-          ImX: Imgui
+          Target: Extensions
+      - uses: ./.github/actions/generate-bindings-nugets

@@ -11,32 +11,30 @@
 #>
 
 param (
-	[ValidateSet('Imgui', 'Imguizmo', 'Imnodes', 'Implot')][string]$ImX = "Imgui",
-	[string]$outputFolderBase = "nupkgs",
-	[string]$buildVerbosity = "normal",
-	[string]$buildConfiguration = "Release",
-	[string]$versionSuffix = ""
+    [string[]]$ImX = @('Imgui', 'Imguizmo', 'Imnodes', 'Implot'),
+    [string]$outputFolderBase = "nupkgs",
+    [string]$buildVerbosity = "normal",
+    [string]$buildConfiguration = "Release",
+    [string]$versionSuffix = ""
 )
 
 $ErrorActionPreference = "Stop"
 . "$PSScriptRoot\ps_support.ps1"
-
-# Set working directory
-Push-Location (Get-Location).Path
-Set-Location $PSScriptRoot\..
-
-$csprojPath = "Evergine.Bindings.$($ImX)\Evergine.Bindings.$($ImX).csproj"
-
-# Utility functions
-function LogDebug($line) {
- Write-Host "##[debug] $line" -Foreground Blue -Background Black
-}
 
 # calculate version
 $version = "$(Get-Date -Format "yyyy.M.d").$([string]([int]$(Get-Date -Format "HH")*60+[int]$(Get-Date -Format "mm")))"
 
 if ($versionSuffix -ne "") {
 	$version = "$version-$versionSuffix"
+}
+
+# Set working directory
+Push-Location (Get-Location).Path
+Set-Location $PSScriptRoot\..
+
+# Utility functions
+function LogDebug($line) {
+ Write-Host "##[debug] $line" -Foreground Blue -Background Black
 }
 
 # Show variables
@@ -59,15 +57,18 @@ if ($buildConfiguration -eq "Debug") {
 
 Set-Location .\Generator
 
-# Generate packages
-LogDebug "START packaging process"
-dotnet pack "$csprojPath" -v:$buildVerbosity -p:Configuration=$buildConfiguration -p:PackageOutputPath="$absoluteOutputFolder" -p:IncludeSymbols=$symbols -p:Version=$version
-if ($?) {
-	LogDebug "END packaging process"
-}
-else {
-	LogDebug "ERROR; packaging failed"
-	exit -1
+# Iterate over each ImX value and generate packages
+foreach ($item in $ImX) {
+    LogDebug "START packaging process for $item"
+    $csprojPath = "Evergine.Bindings.$($item)\Evergine.Bindings.$($item).csproj"
+    dotnet pack "$csprojPath" -v:$buildVerbosity -p:Configuration=$buildConfiguration -p:PackageOutputPath="$absoluteOutputFolder" -p:IncludeSymbols=$symbols -p:Version=$version
+    if ($?) {
+        LogDebug "END packaging process for $item"
+    }
+    else {
+        LogDebug "ERROR; packaging failed for $item"
+        exit -1
+    }
 }
 
 Pop-Location
