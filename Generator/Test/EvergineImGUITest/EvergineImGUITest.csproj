@@ -10,10 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Evergine.Bindings.Imgui" Version="2023.4.4.966" />
-    <PackageReference Include="Evergine.Bindings.Imguizmo" Version="2023.4.4.1231" />
-    <PackageReference Include="Evergine.Bindings.Imnodes" Version="2023.4.4.1231" />
-    <PackageReference Include="Evergine.Bindings.Implot" Version="2023.4.4.1231" />
     <PackageReference Include="Evergine.Common" Version="2023.9.28.1837" />
     <PackageReference Include="Evergine.Components" Version="2023.9.28.1837" />
     <PackageReference Include="Evergine.Framework" Version="2023.9.28.1837" />
@@ -22,6 +18,13 @@
     <PackageReference Include="Evergine.Bullet" Version="2023.9.28.1837" />
     <PackageReference Include="Evergine.Targets" Version="2023.9.28.1837" />
     <PackageReference Include="Evergine.CodeScenes" Version="2023.9.28.1837" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Evergine.Bindings.Imguizmo\Evergine.Bindings.Imguizmo.csproj" />
+    <ProjectReference Include="..\..\Evergine.Bindings.Imgui\Evergine.Bindings.Imgui.csproj" />
+    <ProjectReference Include="..\..\Evergine.Bindings.Imnodes\Evergine.Bindings.Imnodes.csproj" />
+    <ProjectReference Include="..\..\Evergine.Bindings.Implot\Evergine.Bindings.Implot.csproj" />
   </ItemGroup>
 
 </Project>

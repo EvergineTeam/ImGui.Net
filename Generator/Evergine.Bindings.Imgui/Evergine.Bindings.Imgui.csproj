@@ -14,20 +14,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Evergine.LibraryLoader" Version="0.0.7" />
+		<Content Include="runtimes\**" PackagePath="runtimes" Visible="true" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Evergine.Mathematics" Version="2022.2.16.9" />
 		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
-	</ItemGroup>
-		
-	<ItemGroup>
-		<Content Include="runtimes\**">
-			<PackagePath>%(Identity)</PackagePath>
-			<Pack>true</Pack>
-		</Content>
-		<Content Include="build\**" PackagePath="build">
-			<PackagePath>%(Identity)</PackagePath>
-			<Pack>true</Pack>
-		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
