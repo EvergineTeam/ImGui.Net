@@ -100,7 +100,7 @@ namespace Common
                             return "byte";
                     }
                 case "bool*":
-                    return "bool*";
+                    return "byte*";
                 case "char*":
                     return "byte*";
                 case "const char*":
