@@ -1933,7 +1933,7 @@ namespace Evergine.Bindings.Imgui
 			return ImguiNative.ImGuiStorage_GetBool(self, key, default_val);
 		}
 
-		public bool GetBoolRef(uint key, [MarshalAs(UnmanagedType.I1)] bool default_val = true)
+		public bool* GetBoolRef(uint key, [MarshalAs(UnmanagedType.I1)] bool default_val = true)
 		{
 			return ImguiNative.ImGuiStorage_GetBoolRef(self, key, default_val);
 		}
