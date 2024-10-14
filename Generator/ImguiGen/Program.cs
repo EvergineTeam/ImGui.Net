@@ -14,18 +14,18 @@ namespace ImguiGen
             string @namespace = "Imgui";
             string libraryName = "cimgui";
 
-            var implotVersion = Specification.FromFiles(structs_and_enums_json, definitions_json);
+            var imguiVersion = Specification.FromFiles(structs_and_enums_json, definitions_json);
 
-            if (implotVersion != null)
+            if (imguiVersion != null)
             {
                 // Enums
-                CSCodeWriter.WriteEnums(outputPath, @namespace, implotVersion);
+                CSCodeWriter.WriteEnums(outputPath, @namespace, imguiVersion);
 
                 // Structs
-                CSCodeWriter.WriteStructs(outputPath, @namespace, implotVersion);
+                CSCodeWriter.WriteStructs(outputPath, @namespace, imguiVersion);
 
                 // Functions
-                CSCodeWriter.WriteFuntions(outputPath, @namespace, libraryName, implotVersion);
+                CSCodeWriter.WriteFuntions(outputPath, @namespace, libraryName, imguiVersion);
 
                 // Delegates
                 CSCodeWriter.WriteInlineDelegates(outputPath, @namespace);
