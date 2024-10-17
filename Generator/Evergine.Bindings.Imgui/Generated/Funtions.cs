@@ -488,8 +488,7 @@ namespace Evergine.Bindings.Imgui
 		public static extern bool ImGuiStorage_GetBool(ImGuiStorage* self, uint key, [MarshalAs(UnmanagedType.I1)] bool default_val);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		[return:MarshalAs(UnmanagedType.I1)]
-		public static extern bool ImGuiStorage_GetBoolRef(ImGuiStorage* self, uint key, [MarshalAs(UnmanagedType.I1)] bool default_val);
+		public static extern byte* ImGuiStorage_GetBoolRef(ImGuiStorage* self, uint key, [MarshalAs(UnmanagedType.I1)] bool default_val);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern float ImGuiStorage_GetFloat(ImGuiStorage* self, uint key, float default_val);
@@ -760,7 +759,7 @@ namespace Evergine.Bindings.Imgui
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.I1)]
-		public static extern bool igCombo_Str_arr([MarshalAs(UnmanagedType.LPUTF8Str)] string label, int* current_item, [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPUTF8Str)] string[] items, int items_count, int popup_max_height_in_items);
+		public static extern bool igCombo_Str_arr([MarshalAs(UnmanagedType.LPUTF8Str)] string label, int* current_item, [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] items, int items_count, int popup_max_height_in_items);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.I1)]
@@ -1320,7 +1319,7 @@ namespace Evergine.Bindings.Imgui
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.I1)]
-		public static extern bool igListBox_Str_arr([MarshalAs(UnmanagedType.LPUTF8Str)] string label, int* current_item, [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPUTF8Str)] string[] items, int items_count, int height_in_items);
+		public static extern bool igListBox_Str_arr([MarshalAs(UnmanagedType.LPUTF8Str)] string label, int* current_item, [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] items, int items_count, int height_in_items);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.I1)]
