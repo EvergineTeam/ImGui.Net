@@ -28,10 +28,10 @@ jobs:
         with:
           Persists: False
       # TODO move build native steps to different jobs, commit, and then continue with Imgui on Windows
-      - uses: ./.github/actions/build-native-win
+      - uses: ./.github/actions/build-native
         with:
           Target: Imgui
-      - uses: ./.github/actions/build-native-win
+      - uses: ./.github/actions/build-native
         with:
           Target: Extensions
       - name: Install Dependencies building with Emscripten
