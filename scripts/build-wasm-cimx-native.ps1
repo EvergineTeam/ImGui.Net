@@ -39,7 +39,7 @@ $ToolchainFile = "$EmSdkPath/upstream/emscripten/cmake/Modules/Platform/Emscript
 $NinjaPath = "$PSScriptRoot/../tmp/ninja.exe"
 
 Set-Location $buildPath
-cmake -B "." -GNinja -DCMAKE_BUILD_TYPE="$buildConfig" -DCMAKE_TOOLCHAIN_FILE="$ToolchainFile" -DCMAKE_MAKE_PROGRAM="$NinjaPath" ../..
+cmake -B "." -GNinja -DCMAKE_BUILD_TYPE="$buildConfig" -GNinja -DCMAKE_TOOLCHAIN_FILE="$ToolchainFile" -DCMAKE_MAKE_PROGRAM="$NinjaPath" ../..
 
 Write-Output "Calling cmake --build . --config $buildConfig"
 cmake --build . --config $buildConfig
