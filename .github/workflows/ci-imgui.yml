@@ -9,7 +9,7 @@ on:
       - "Generator/ImplotGen/**"
       - "NativeLibraries/cimgui/**"
       - "NativeLibraries/extensions/**"
-      - "scripts/deploy-win-native.ps1"
+      - "scripts/deploy-native.ps1"
       - "scripts/generate-bindings.ps1"
       - "scripts/generate-nugets.ps1"
 

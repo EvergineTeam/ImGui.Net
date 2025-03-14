@@ -3,3 +3,4 @@
 *bin
 Generator/NativeLibraries/build
 *.nupkg
+tmp/

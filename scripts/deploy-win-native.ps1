@@ -19,7 +19,6 @@ $ErrorActionPreference = "Stop"
 . "$PSScriptRoot\ps_support.ps1"
 
 $archs = @('x86', 'x64') #, 'ARM', 'ARM64')
-$main = "imgui"
 $extensions = @("imguizmo", "imnodes", "implot")
 
 
@@ -38,8 +37,20 @@ if ($buildImgui) {
       exit $lastexitcode
     }
 
-    Copy-Item ..\NativeLibraries\cimgui\build\$arch\$buildConfig\*.dll ..\Generator\Evergine.Bindings.Imgui\runtimes\win-$arch\native\
+    $dstDir = "..\Generator\Evergine.Bindings.Imgui\runtimes\win-$arch\native\"
+    New-Item -ErrorAction Ignore -Type dir -Path $dstDir
+    Copy-Item ..\NativeLibraries\cimgui\build\$arch\$buildConfig\*.dll $dstDir
   }
+
+  Write-Output "Building cimgui wasm..."
+  ./build-wasm-cimx-native.ps1 -buildConfig $buildConfig
+  if (-Not $?) {
+    exit $lastexitcode
+  }
+  $dstDir = "..\Generator\Evergine.Bindings.Imgui\runtimes\browser-wasm\"
+  New-Item -ErrorAction Ignore -Type dir -Path $dstDir
+  Copy-Item "..\NativeLibraries\cimgui\build\wasm\*.a" $dstDir
+
   Copy-Item ..\NativeLibraries\cimgui\generator\output\*.json ..\Generator\ImguiGen\Jsons\
 
   Pop-Location
@@ -58,9 +69,23 @@ if ($buildExtensions) {
     }
 
     foreach ($extension in $extensions) {
-      Copy-Item ..\NativeLibraries\extensions\build\$arch\$buildConfig\c$($extension).dll ..\Generator\Evergine.Bindings.$($TextInfo.ToTitleCase($extension))\runtimes\win-$arch\native\
+      $dstPath = "..\Generator\Evergine.Bindings.$($TextInfo.ToTitleCase($extension))\runtimes\win-$arch\native\"
+      New-Item -ErrorAction Ignore -Type dir -Path $dstPath
+      Copy-Item ..\NativeLibraries\extensions\build\$arch\$buildConfig\c$($extension).dll $dstPath
     }
   }
+
+  Write-Output "Building extensions wasm..."
+  ./build-wasm-cimx-native.ps1 -buildConfig $buildConfig -extensions
+  if (-Not $?) {
+    exit $lastexitcode
+  }
+  foreach ($extension in $extensions) {
+    $dstPath = "..\Generator\Evergine.Bindings.$($TextInfo.ToTitleCase($extension))\runtimes\browser-wasm\"
+    New-Item -ErrorAction Ignore -Type dir -Path $dstPath
+    Copy-Item "..\NativeLibraries\extensions\build\wasm\c$($extension).a" $dstPath
+  }
+
   foreach ($extension in $extensions) {
     Copy-Item ..\NativeLibraries\extensions\c$($extension)\generator\output\*.json ..\Generator\$($TextInfo.ToTitleCase($extension))Gen\Jsons\
   }

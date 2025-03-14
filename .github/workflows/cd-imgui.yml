@@ -16,8 +16,8 @@ env:
   nugetsPath: "nupkgs"
 
 jobs:
-  build_publish_imgui_win:
-    name: Generate Imgui nuget (windows only)
+  build_publish_imgui:
+    name: Generate Imgui nuget
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -34,6 +34,10 @@ jobs:
       - uses: ./.github/actions/build-native-win
         with:
           Target: Extensions
+      - name: Install Dependencies building with Emscripten
+        shell: pwsh
+        run: |
+          .\scripts\install_deps.ps1
       - uses: ./.github/actions/generate-bindings-nugets
         id: nugets
         with:
