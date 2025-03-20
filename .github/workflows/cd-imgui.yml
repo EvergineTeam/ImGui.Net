@@ -27,6 +27,10 @@ jobs:
         if: ${{ github.event_name == 'schedule' }}
         with:
           Persists: False
+      - name: Install Dependencies building with Emscripten
+        shell: pwsh
+        run: |
+          .\scripts\install_deps.ps1
       # TODO move build native steps to different jobs, commit, and then continue with Imgui on Windows
       - uses: ./.github/actions/build-native
         with:
@@ -34,10 +38,6 @@ jobs:
       - uses: ./.github/actions/build-native
         with:
           Target: Extensions
-      - name: Install Dependencies building with Emscripten
-        shell: pwsh
-        run: |
-          .\scripts\install_deps.ps1
       - uses: ./.github/actions/generate-bindings-nugets
         id: nugets
         with:
