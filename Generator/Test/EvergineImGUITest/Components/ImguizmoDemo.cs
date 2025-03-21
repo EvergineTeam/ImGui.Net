@@ -82,7 +82,6 @@ namespace EvergineImGUITest.Components
 
         private void ImGuizmoDemo()
         {
-            //ImguizmoNative.ImGuizmo_SetOrthographic(true);
             ImguizmoNative.ImGuizmo_SetRect(0, 0, this.io->DisplaySize.X, this.io->DisplaySize.Y);
 
             Matrix4x4 view = this.camera.View;
@@ -90,15 +89,9 @@ namespace EvergineImGUITest.Components
             Matrix4x4 world = this.transform.WorldTransform;
 
             ImguizmoNative.ImGuizmo_Enable(true);
-            //ImguizmoNative.ImGuizmo_Enable(this.enableGuizmo);
-            //ImGuizmoNET.ImGuizmo.IsUsing();
             ImguizmoNative.ImGuizmo_SetGizmoSizeClipSpace(0.15f);
 
-            //ImGuizmoNET.ImGuizmo.AllowAxisFlip(this.showGuizmo);
-            //ImGuizmoNET.ImGuizmo.DrawGrid(ref view.M11, ref projection.M11, ref WorldTransform.M11, 10.0f);
-            ImguizmoNative.ImGuizmo_ViewManipulate(view.Ptr(), 2, Vector2.Zero, new Vector2(128, 128), 0x10101010);
-
-            //ImGuizmoNET.ImGuizmo.DrawCubes(ref view.M11, ref projection.M11, ref world.M11, 1); //(Debug)
+            ////ImguizmoNative.ImGuizmo_ViewManipulate(view.Ptr(), 2, Vector2.Zero, new Vector2(128, 128), 0x10101010);
 
             float* f = (float*)Unsafe.AsPointer(ref bounds[0]);
             ImguizmoNative.ImGuizmo_Manipulate(view.Ptr(), projection.Ptr(), this.currentOperation, MODE.WORLD, world.Ptr(), null, null, f, null);

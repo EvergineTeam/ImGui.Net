@@ -158,7 +158,7 @@ namespace EvergineImGUITest.Managers
             }
 
             ImguiNative.igNewFrame();
-            ImguizmoNative.ImGuizmo_BeginFrame();
+            ////ImguizmoNative.ImGuizmo_BeginFrame();
         }
 
         private unsafe void InitializeImGui()
@@ -321,25 +321,25 @@ namespace EvergineImGUITest.Managers
             this.io->Fonts->ClearTexData();
 
             // Keyboard mapping. ImGui will use those indices to peek into the io.KeyDown[] array that we will update during the application lifetime.
-            this.io->KeyMap[(int)ImGuiKey.Tab] = (int)Keys.Tab;
-            this.io->KeyMap[(int)ImGuiKey.LeftArrow] = (int)Keys.Left;
-            this.io->KeyMap[(int)ImGuiKey.RightArrow] = (int)Keys.Right;
-            this.io->KeyMap[(int)ImGuiKey.UpArrow] = (int)Keys.Up;
-            this.io->KeyMap[(int)ImGuiKey.DownArrow] = (int)Keys.Down;
-            this.io->KeyMap[(int)ImGuiKey.PageUp] = (int)Keys.PageUp;
-            this.io->KeyMap[(int)ImGuiKey.PageDown] = (int)Keys.PageDown;
-            this.io->KeyMap[(int)ImGuiKey.Home] = (int)Keys.Home;
-            this.io->KeyMap[(int)ImGuiKey.End] = (int)Keys.End;
-            this.io->KeyMap[(int)ImGuiKey.Delete] = (int)Keys.Delete;
-            this.io->KeyMap[(int)ImGuiKey.Backspace] = (int)Keys.Back;
-            this.io->KeyMap[(int)ImGuiKey.Enter] = (int)Keys.Enter;
-            this.io->KeyMap[(int)ImGuiKey.Escape] = (int)Keys.Escape;
-            this.io->KeyMap[(int)ImGuiKey.A] = (int)Keys.A;
-            this.io->KeyMap[(int)ImGuiKey.C] = (int)Keys.C;
-            this.io->KeyMap[(int)ImGuiKey.V] = (int)Keys.V;
-            this.io->KeyMap[(int)ImGuiKey.X] = (int)Keys.X;
-            this.io->KeyMap[(int)ImGuiKey.Y] = (int)Keys.Y;
-            this.io->KeyMap[(int)ImGuiKey.Z] = (int)Keys.Z;
+            ////this.io->KeyMods[(int)ImGuiKey.Tab] = (int)Keys.Tab;
+            ////this.io->KeyMap[(int)ImGuiKey.LeftArrow] = (int)Keys.Left;
+            ////this.io->KeyMap[(int)ImGuiKey.RightArrow] = (int)Keys.Right;
+            ////this.io->KeyMap[(int)ImGuiKey.UpArrow] = (int)Keys.Up;
+            ////this.io->KeyMap[(int)ImGuiKey.DownArrow] = (int)Keys.Down;
+            ////this.io->KeyMap[(int)ImGuiKey.PageUp] = (int)Keys.PageUp;
+            ////this.io->KeyMap[(int)ImGuiKey.PageDown] = (int)Keys.PageDown;
+            ////this.io->KeyMap[(int)ImGuiKey.Home] = (int)Keys.Home;
+            ////this.io->KeyMap[(int)ImGuiKey.End] = (int)Keys.End;
+            ////this.io->KeyMap[(int)ImGuiKey.Delete] = (int)Keys.Delete;
+            ////this.io->KeyMap[(int)ImGuiKey.Backspace] = (int)Keys.Back;
+            ////this.io->KeyMap[(int)ImGuiKey.Enter] = (int)Keys.Enter;
+            ////this.io->KeyMap[(int)ImGuiKey.Escape] = (int)Keys.Escape;
+            ////this.io->KeyMap[(int)ImGuiKey.A] = (int)Keys.A;
+            ////this.io->KeyMap[(int)ImGuiKey.C] = (int)Keys.C;
+            ////this.io->KeyMap[(int)ImGuiKey.V] = (int)Keys.V;
+            ////this.io->KeyMap[(int)ImGuiKey.X] = (int)Keys.X;
+            ////this.io->KeyMap[(int)ImGuiKey.Y] = (int)Keys.Y;
+            ////this.io->KeyMap[(int)ImGuiKey.Z] = (int)Keys.Z;
 
             // Register input events
             var mouseDispatcher = this.surface.MouseDispatcher;
@@ -391,12 +391,12 @@ namespace EvergineImGUITest.Managers
             var keyboardDispatcher = this.surface.KeyboardDispatcher;
             keyboardDispatcher.KeyDown += (s, e) =>
             {
-                this.io->KeysDown[(int)e.Key] = 1;
+                ////this.io->key KeysDown[(int)e.Key] = 1;
             };
 
             keyboardDispatcher.KeyUp += (s, e) =>
             {
-                this.io->KeysDown[(int)e.Key] = 0;
+                ////this.io->KeysDown[(int)e.Key] = 0;
             };
 
             keyboardDispatcher.KeyChar += (s, e) =>
@@ -553,18 +553,18 @@ namespace EvergineImGUITest.Managers
 
             for (int i = 0; i < drawData->CmdListsCount; i++)
             {
-                ImDrawList* cmdList = drawData->CmdLists[i];
+                ImDrawList cmdList = drawData->CmdLists[i];
 
                 // Copy vertex
                 var vOffset = vertexOffsetInVertices * (uint)sizeof(ImDrawVert);
-                Unsafe.CopyBlock((void*)((long)vResource.Data + vOffset), (void*)cmdList->VtxBuffer.Data, (uint)(cmdList->VtxBuffer.Size * sizeof(ImDrawVert)));
+                Unsafe.CopyBlock((void*)((long)vResource.Data + vOffset), (void*)cmdList.VtxBuffer.Data, (uint)(cmdList.VtxBuffer.Size * sizeof(ImDrawVert)));
 
                 // Copy index
                 var iOffset = indexOffsetInElements * sizeof(ushort);
-                Unsafe.CopyBlock((void*)((long)iResource.Data + iOffset), (void*)cmdList->IdxBuffer.Data, (uint)(cmdList->IdxBuffer.Size * sizeof(ushort)));
+                Unsafe.CopyBlock((void*)((long)iResource.Data + iOffset), (void*)cmdList.IdxBuffer.Data, (uint)(cmdList.IdxBuffer.Size * sizeof(ushort)));
 
-                vertexOffsetInVertices += (uint)cmdList->VtxBuffer.Size;
-                indexOffsetInElements += (uint)cmdList->IdxBuffer.Size;
+                vertexOffsetInVertices += (uint)cmdList.VtxBuffer.Size;
+                indexOffsetInElements += (uint)cmdList.IdxBuffer.Size;
             }
 
             this.graphicsContext.UnmapMemory(this.vertexBuffers[0]);
@@ -590,12 +590,12 @@ namespace EvergineImGUITest.Managers
 
             for (int n = 0; n < drawData->CmdListsCount; n++)
             {
-                ImDrawList* cmdList = drawData->CmdLists[n];
+                ImDrawList cmdList = drawData->CmdLists[n];
 
-                for (int i = 0; i < cmdList->CmdBuffer.Size; i++)
+                for (int i = 0; i < cmdList.CmdBuffer.Size; i++)
                 {
                     /////ImDrawCmd* cmd = (ImDrawCmd*)((long)cmdList->CmdBuffer.Data + i*(sizeof(ImDrawCmd)));
-                    ImDrawCmd* cmd = cmdList->GetDrawCmdAt(i);
+                    ImDrawCmd* cmd = cmdList.GetDrawCmdAt(i);
                     ////ImDrawCmd* cmd = (*cmdList)[i];
 
                     if (cmd->TextureId != IntPtr.Zero)
@@ -626,7 +626,7 @@ namespace EvergineImGUITest.Managers
                     idx_offset += cmd->ElemCount;
                 }
 
-                vtx_offset += (uint)cmdList->VtxBuffer.Size;
+                vtx_offset += (uint)cmdList.VtxBuffer.Size;
             }
 
             commandBuffer.EndDebugMarker();

@@ -15,6 +15,7 @@ namespace Evergine.Bindings.Imnodes
 	{
 		public EmulateThreeButtonMouse EmulateThreeButtonMouse;
 		public LinkDetachWithModifierClick LinkDetachWithModifierClick;
+		public MultipleSelectModifier MultipleSelectModifier;
 		public int AltMouseButton;
 		public float AutoPanningSpeed;
 	}
@@ -37,10 +38,15 @@ namespace Evergine.Bindings.Imnodes
 		public Vector2 MiniMapPadding;
 		public Vector2 MiniMapOffset;
 		public ImNodesStyleFlags Flags;
-		public fixed uint Colors[28];
+		public fixed uint Colors[29];
 	}
 
 	public unsafe partial struct LinkDetachWithModifierClick
+	{
+		public byte* Modifier;
+	}
+
+	public unsafe partial struct MultipleSelectModifier
 	{
 		public byte* Modifier;
 	}

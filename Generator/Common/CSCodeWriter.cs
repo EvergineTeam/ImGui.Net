@@ -192,25 +192,5 @@ namespace Common
             }
 
         }
-        public static void WriteInlineDelegates(string outputPath, string @namespace)
-        {
-            using (StreamWriter file = File.CreateText(Path.Combine(outputPath, "Delegates.cs")))
-            {
-                file.WriteLine("using Evergine.Mathematics;");
-                file.WriteLine("using System.Runtime.InteropServices;\n");
-                file.WriteLine($"namespace Evergine.Bindings.{@namespace}");
-                file.WriteLine("{");
-
-                //Write delegates
-                while (Helpers.PendingDelegates.Any())
-                {
-                    var inlineDelegate = Helpers.PendingDelegates.Dequeue();
-
-                    file.WriteLine($"\tpublic unsafe delegate {inlineDelegate.Type} {inlineDelegate.Name}{inlineDelegate.Arguments};");
-                }
-
-                file.WriteLine("}");
-            }
-        }
     }
 }

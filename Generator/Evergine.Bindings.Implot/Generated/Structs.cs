@@ -9,16 +9,16 @@ namespace Evergine.Bindings.Implot
 	public unsafe partial struct ImPlotInputMap
 	{
 		public ImGuiMouseButton Pan;
-		public ImGuiModFlags PanMod;
+		public int PanMod;
 		public ImGuiMouseButton Fit;
 		public ImGuiMouseButton Select;
 		public ImGuiMouseButton SelectCancel;
-		public ImGuiModFlags SelectMod;
-		public ImGuiModFlags SelectHorzMod;
-		public ImGuiModFlags SelectVertMod;
+		public int SelectMod;
+		public int SelectHorzMod;
+		public int SelectVertMod;
 		public ImGuiMouseButton Menu;
-		public ImGuiModFlags OverrideMod;
-		public ImGuiModFlags ZoomMod;
+		public int OverrideMod;
+		public int ZoomMod;
 		public float ZoomRate;
 	}
 
