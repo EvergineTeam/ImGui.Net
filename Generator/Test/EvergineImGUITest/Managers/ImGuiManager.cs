@@ -9,6 +9,7 @@ using Evergine.Framework;
 using Evergine.Framework.Managers;
 using Evergine.Framework.Services;
 using Evergine.Mathematics;
+using SharpYaml.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -274,10 +275,8 @@ namespace EvergineImGUITest.Managers
             int height;
             int bytesPerPixel;
             byte* pixels = null;
-            ////ImguiNative.ImFontAtlas_GetTexDataAsRGBA32(io->Fonts, &pixels, &width, &height, &bytesPerPixel);
             this.io->Fonts->GetTexDataAsRGBA32(&pixels, &width, &height, &bytesPerPixel);
 
-            ////ImguiNative.ImFontAtlas_SetTexID(io->Fonts, this.fontAtlasID);
             this.io->Fonts->SetTexID(this.fontAtlasID);
 
             var fontTextureDescription = new TextureDescription()
@@ -317,29 +316,7 @@ namespace EvergineImGUITest.Managers
             var resourceSetDescription = new ResourceSetDescription(this.layout, this.constantBuffer, this.fontTexture, this.sampler);
             this.resourceSet = this.graphicsContext.Factory.CreateResourceSet(ref resourceSetDescription);
 
-            ////ImguiNative.ImFontAtlas_ClearTexData(io->Fonts);
             this.io->Fonts->ClearTexData();
-
-            // Keyboard mapping. ImGui will use those indices to peek into the io.KeyDown[] array that we will update during the application lifetime.
-            ////this.io->KeyMods[(int)ImGuiKey.Tab] = (int)Keys.Tab;
-            ////this.io->KeyMap[(int)ImGuiKey.LeftArrow] = (int)Keys.Left;
-            ////this.io->KeyMap[(int)ImGuiKey.RightArrow] = (int)Keys.Right;
-            ////this.io->KeyMap[(int)ImGuiKey.UpArrow] = (int)Keys.Up;
-            ////this.io->KeyMap[(int)ImGuiKey.DownArrow] = (int)Keys.Down;
-            ////this.io->KeyMap[(int)ImGuiKey.PageUp] = (int)Keys.PageUp;
-            ////this.io->KeyMap[(int)ImGuiKey.PageDown] = (int)Keys.PageDown;
-            ////this.io->KeyMap[(int)ImGuiKey.Home] = (int)Keys.Home;
-            ////this.io->KeyMap[(int)ImGuiKey.End] = (int)Keys.End;
-            ////this.io->KeyMap[(int)ImGuiKey.Delete] = (int)Keys.Delete;
-            ////this.io->KeyMap[(int)ImGuiKey.Backspace] = (int)Keys.Back;
-            ////this.io->KeyMap[(int)ImGuiKey.Enter] = (int)Keys.Enter;
-            ////this.io->KeyMap[(int)ImGuiKey.Escape] = (int)Keys.Escape;
-            ////this.io->KeyMap[(int)ImGuiKey.A] = (int)Keys.A;
-            ////this.io->KeyMap[(int)ImGuiKey.C] = (int)Keys.C;
-            ////this.io->KeyMap[(int)ImGuiKey.V] = (int)Keys.V;
-            ////this.io->KeyMap[(int)ImGuiKey.X] = (int)Keys.X;
-            ////this.io->KeyMap[(int)ImGuiKey.Y] = (int)Keys.Y;
-            ////this.io->KeyMap[(int)ImGuiKey.Z] = (int)Keys.Z;
 
             // Register input events
             var mouseDispatcher = this.surface.MouseDispatcher;
@@ -391,19 +368,81 @@ namespace EvergineImGUITest.Managers
             var keyboardDispatcher = this.surface.KeyboardDispatcher;
             keyboardDispatcher.KeyDown += (s, e) =>
             {
-                ////this.io->key KeysDown[(int)e.Key] = 1;
+                if(TryMapKey(e.Key, out ImGuiKey imguiKey))
+                {
+                    this.io->AddKeyEvent(imguiKey, e.IsDown);
+                }
             };
 
             keyboardDispatcher.KeyUp += (s, e) =>
             {
-                ////this.io->KeysDown[(int)e.Key] = 0;
+                if (TryMapKey(e.Key, out ImGuiKey imguiKey))
+                {
+                    this.io->AddKeyEvent(imguiKey, e.IsDown);
+                }
             };
 
             keyboardDispatcher.KeyChar += (s, e) =>
             {
-                ////ImguiNative.ImGuiIO_AddInputCharacter(this.io, e.Character);
                 this.io->AddInputCharacter(e.Character);
             };
+        }
+
+        private bool TryMapKey(Keys key, out ImGuiKey result)
+        {
+            ImGuiKey KeyToImGuiKeyShortcut(Keys keyToConvert, Keys startKey1, ImGuiKey startKey2)
+            {
+                int changeFromStart1 = (int)keyToConvert - (int)startKey1;
+                return startKey2 + changeFromStart1;
+            }
+
+            result = key switch
+            {
+                >= Keys.F1 and <= Keys.F24 => KeyToImGuiKeyShortcut(key, Keys.F1, ImGuiKey.F1),
+                >= Keys.D0 and <= Keys.D9 => KeyToImGuiKeyShortcut(key, Keys.D0, ImGuiKey.Keypad0),
+                >= Keys.A and <= Keys.Z => KeyToImGuiKeyShortcut(key, Keys.A, ImGuiKey.A),
+                >= Keys.NumPad0 and <= Keys.NumPad9 => KeyToImGuiKeyShortcut(key, Keys.NumPad0, ImGuiKey._0),
+                Keys.LeftShift or Keys.RightShift => ImGuiKey.ImGuiMod_Shift,
+                Keys.LeftControl or Keys.RightControl => ImGuiKey.ImGuiMod_Ctrl,
+                Keys.LeftAlt or Keys.RightAlt => ImGuiKey.ImGuiMod_Alt,
+                Keys.LeftWindows or Keys.RightWindows => ImGuiKey.ImGuiMod_Super,
+                Keys.Up => ImGuiKey.UpArrow,
+                Keys.Down => ImGuiKey.DownArrow,
+                Keys.Left => ImGuiKey.LeftArrow,
+                Keys.Right => ImGuiKey.RightArrow,
+                Keys.Enter => ImGuiKey.Enter,
+                Keys.Escape => ImGuiKey.Escape,
+                Keys.Space => ImGuiKey.Space,
+                Keys.Tab => ImGuiKey.Tab,
+                Keys.Back => ImGuiKey.Backspace,
+                Keys.Insert => ImGuiKey.Insert,
+                Keys.Delete => ImGuiKey.Delete,
+                Keys.PageUp => ImGuiKey.PageUp,
+                Keys.PageDown => ImGuiKey.PageDown,
+                Keys.Home => ImGuiKey.Home,
+                Keys.End => ImGuiKey.End,
+                Keys.CapsLock => ImGuiKey.CapsLock,
+                Keys.Scroll => ImGuiKey.ScrollLock,
+                Keys.PrintScreen => ImGuiKey.PrintScreen,
+                Keys.Pause => ImGuiKey.Pause,
+                Keys.NumLock => ImGuiKey.NumLock,
+                Keys.Divide => ImGuiKey.KeypadDivide,
+                Keys.Multiply => ImGuiKey.KeypadMultiply,
+                Keys.Subtract => ImGuiKey.KeypadSubtract,
+                Keys.Add => ImGuiKey.KeypadAdd,
+                Keys.Decimal => ImGuiKey.KeypadDecimal,
+                Keys.OemTilde => ImGuiKey.GraveAccent,
+                Keys.OemMinus => ImGuiKey.Minus,
+                Keys.OemPlus => ImGuiKey.Equal,
+                Keys.OemSemicolon => ImGuiKey.Semicolon,
+                Keys.OemQuotes => ImGuiKey.Apostrophe,
+                Keys.OemComma => ImGuiKey.Comma,
+                Keys.OemPeriod => ImGuiKey.Period,
+                Keys.OemBackslash => ImGuiKey.Backslash,
+                _ => ImGuiKey.None
+            };
+
+            return result != ImGuiKey.None;
         }
 
         private byte[] NativeAPICompiler(ShaderStages stage)
