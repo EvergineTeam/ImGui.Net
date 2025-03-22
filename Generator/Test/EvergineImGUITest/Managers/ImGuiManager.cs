@@ -325,13 +325,13 @@ namespace EvergineImGUITest.Managers
                 switch (e.Button)
                 {
                     case MouseButtons.Left:
-                        this.io->MouseDown[0] = 1;
+                        this.io->AddMouseButtonEvent((int)ImGuiMouseButton.Left, true);   
                         break;
                     case MouseButtons.Right:
-                        this.io->MouseDown[1] = 1;
+                        this.io->AddMouseButtonEvent((int)ImGuiMouseButton.Right, true);
                         break;
                     case MouseButtons.Middle:
-                        this.io->MouseDown[2] = 1;
+                        this.io->AddMouseButtonEvent((int)ImGuiMouseButton.Middle, true);
                         break;
                 }
             };
@@ -341,13 +341,13 @@ namespace EvergineImGUITest.Managers
                 switch (e.Button)
                 {
                     case MouseButtons.Left:
-                        this.io->MouseDown[0] = 0;
+                        this.io->AddMouseButtonEvent((int)ImGuiMouseButton.Left, false);
                         break;
                     case MouseButtons.Right:
-                        this.io->MouseDown[1] = 0;
+                        this.io->AddMouseButtonEvent((int)ImGuiMouseButton.Left, false);
                         break;
                     case MouseButtons.Middle:
-                        this.io->MouseDown[2] = 0;
+                        this.io->AddMouseButtonEvent((int)ImGuiMouseButton.Left, false);
                         break;
                     default:
                         break;
@@ -356,13 +356,12 @@ namespace EvergineImGUITest.Managers
 
             mouseDispatcher.MouseMove += (s, e) =>
             {
-                this.io->MousePos.X = e.Position.X / this.surface.DPIDensity;
-                this.io->MousePos.Y = e.Position.Y / this.surface.DPIDensity;
+                this.io->AddMousePosEvent(e.Position.X / this.surface.DPIDensity, e.Position.Y / this.surface.DPIDensity);
             };
 
             mouseDispatcher.MouseScroll += (s, e) =>
             {
-                this.io->MouseWheel = e.Delta.Y;
+                this.io->AddMouseWheelEvent(e.Delta.X, e.Delta.Y);
             };
 
             var keyboardDispatcher = this.surface.KeyboardDispatcher;
@@ -370,7 +369,7 @@ namespace EvergineImGUITest.Managers
             {
                 if(TryMapKey(e.Key, out ImGuiKey imguiKey))
                 {
-                    this.io->AddKeyEvent(imguiKey, e.IsDown);
+                    this.io->AddKeyEvent(imguiKey, true);
                 }
             };
 
@@ -378,7 +377,7 @@ namespace EvergineImGUITest.Managers
             {
                 if (TryMapKey(e.Key, out ImGuiKey imguiKey))
                 {
-                    this.io->AddKeyEvent(imguiKey, e.IsDown);
+                    this.io->AddKeyEvent(imguiKey, false);
                 }
             };
 
