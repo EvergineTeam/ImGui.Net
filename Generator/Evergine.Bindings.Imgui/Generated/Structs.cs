@@ -67,7 +67,7 @@ namespace Evergine.Bindings.Imgui
 		public int CmdListsCount;
 		public int TotalIdxCount;
 		public int TotalVtxCount;
-		public ImDrawList* CmdLists;
+		public ImVector CmdLists;
 		public Vector2 DisplayPos;
 		public Vector2 DisplaySize;
 		public Vector2 FramebufferScale;

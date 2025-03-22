@@ -158,7 +158,7 @@ namespace EvergineImGUITest.Managers
             }
 
             ImguiNative.igNewFrame();
-            ////ImguizmoNative.ImGuizmo_BeginFrame();
+            //ImguizmoNative.ImGuizmo_BeginFrame();
         }
 
         private unsafe void InitializeImGui()
@@ -553,18 +553,19 @@ namespace EvergineImGUITest.Managers
 
             for (int i = 0; i < drawData->CmdListsCount; i++)
             {
-                ImDrawList cmdList = drawData->CmdLists[i];
+                ImVector<IntPtr> cmdList = new ImVector<IntPtr>(drawData->CmdLists);
+                ImDrawList* cmdListPtr = (ImDrawList*)cmdList[i];
 
                 // Copy vertex
                 var vOffset = vertexOffsetInVertices * (uint)sizeof(ImDrawVert);
-                Unsafe.CopyBlock((void*)((long)vResource.Data + vOffset), (void*)cmdList.VtxBuffer.Data, (uint)(cmdList.VtxBuffer.Size * sizeof(ImDrawVert)));
+                Unsafe.CopyBlock((void*)((long)vResource.Data + vOffset), (void*)cmdListPtr->VtxBuffer.Data, (uint)(cmdListPtr->VtxBuffer.Size * sizeof(ImDrawVert)));
 
                 // Copy index
                 var iOffset = indexOffsetInElements * sizeof(ushort);
-                Unsafe.CopyBlock((void*)((long)iResource.Data + iOffset), (void*)cmdList.IdxBuffer.Data, (uint)(cmdList.IdxBuffer.Size * sizeof(ushort)));
+                Unsafe.CopyBlock((void*)((long)iResource.Data + iOffset), (void*)cmdListPtr->IdxBuffer.Data, (uint)(cmdListPtr->IdxBuffer.Size * sizeof(ushort)));
 
-                vertexOffsetInVertices += (uint)cmdList.VtxBuffer.Size;
-                indexOffsetInElements += (uint)cmdList.IdxBuffer.Size;
+                vertexOffsetInVertices += (uint)cmdListPtr->VtxBuffer.Size;
+                indexOffsetInElements += (uint)cmdListPtr->IdxBuffer.Size;
             }
 
             this.graphicsContext.UnmapMemory(this.vertexBuffers[0]);
@@ -581,7 +582,6 @@ namespace EvergineImGUITest.Managers
             commandBuffer.SetVertexBuffers(this.vertexBuffers);
             commandBuffer.SetIndexBuffer(this.indexBuffer, IndexFormat.UInt16);
 
-            ////ImguiNative.ImDrawData_ScaleClipRects(drawData, this.io->DisplayFramebufferScale);
             drawData->ScaleClipRects(this.io->DisplayFramebufferScale);
 
             // Render command lists
@@ -590,13 +590,12 @@ namespace EvergineImGUITest.Managers
 
             for (int n = 0; n < drawData->CmdListsCount; n++)
             {
-                ImDrawList cmdList = drawData->CmdLists[n];
+                ImVector<IntPtr> cmdList = new ImVector<IntPtr>(drawData->CmdLists);
+                ImDrawList* cmdListPtr = (ImDrawList*)cmdList[n];
 
-                for (int i = 0; i < cmdList.CmdBuffer.Size; i++)
+                for (int i = 0; i < cmdListPtr->CmdBuffer.Size; i++)
                 {
-                    /////ImDrawCmd* cmd = (ImDrawCmd*)((long)cmdList->CmdBuffer.Data + i*(sizeof(ImDrawCmd)));
-                    ImDrawCmd* cmd = cmdList.GetDrawCmdAt(i);
-                    ////ImDrawCmd* cmd = (*cmdList)[i];
+                    ImDrawCmd* cmd = (ImDrawCmd*)((long)cmdListPtr->CmdBuffer.Data + i*(sizeof(ImDrawCmd)));
 
                     if (cmd->TextureId != IntPtr.Zero)
                     {
@@ -626,7 +625,7 @@ namespace EvergineImGUITest.Managers
                     idx_offset += cmd->ElemCount;
                 }
 
-                vtx_offset += (uint)cmdList.VtxBuffer.Size;
+                vtx_offset += (uint)cmdListPtr->VtxBuffer.Size;
             }
 
             commandBuffer.EndDebugMarker();

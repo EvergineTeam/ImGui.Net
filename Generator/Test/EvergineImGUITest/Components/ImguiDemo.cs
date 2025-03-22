@@ -23,7 +23,7 @@ namespace EvergineImGUITest.Components
             bool alwaysOpen = true;
             ImguiNative.igShowDemoWindow(alwaysOpen.Ptr());
 
-            ////ImplotNative.ImPlot_ShowDemoWindow(alwaysOpen.Ptr());
+            //ImplotNative.ImPlot_ShowDemoWindow(alwaysOpen.Ptr());
         }
     }
 }

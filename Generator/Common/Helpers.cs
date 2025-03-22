@@ -143,12 +143,11 @@ namespace Common
                 case "ImVector_ImU16":
                 case "ImVector_ImU32":
                 case "ImVector_ImGuiSelectionRequest":
+                case "ImVector_ImDrawListPtr":
                     return "ImVector";
                 case "ImVector_ImWchar*":
                 case "ImVector_ImGuiTextRange*":
                     return "ImVector*";
-                case "ImVector_ImDrawListPtr":
-                    return "ImDrawList*";
                 case "ImGuiContext*":
                 case "ImNodesContext*":
                 case "ImPlotContext*":
