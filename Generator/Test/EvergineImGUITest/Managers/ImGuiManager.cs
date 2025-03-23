@@ -1,7 +1,7 @@
 ﻿using Evergine.Bindings.Imgui;
 //using Evergine.Bindings.Imguizmo;
-//using Evergine.Bindings.Imnodes;
-//using Evergine.Bindings.Implot;
+using Evergine.Bindings.Imnodes;
+using Evergine.Bindings.Implot;
 using Evergine.Common.Graphics;
 using Evergine.Common.Input.Keyboard;
 using Evergine.Common.Input.Mouse;
@@ -30,6 +30,10 @@ namespace EvergineImGUITest.Managers
 
         [BindSceneManager]
         private RenderManager renderManager = null;
+
+        private IntPtr imguiContext;
+        private IntPtr implotContext;
+        private IntPtr imnodesContext;
 
         private Buffer[] vertexBuffers;
         private Buffer indexBuffer;
@@ -158,6 +162,13 @@ namespace EvergineImGUITest.Managers
                 this.mvp.M22 *= -1;
             }
 
+            ImguiNative.igSetCurrentContext(imguiContext);
+            ImplotNative.ImPlot_SetImGuiContext(imguiContext);
+            ImplotNative.ImPlot_SetCurrentContext(implotContext);
+
+            ImnodesNative.imnodes_SetImGuiContext(imguiContext);
+            ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
+
             ImguiNative.igNewFrame();
             //ImguizmoNative.ImGuizmo_BeginFrame();
         }
@@ -165,24 +176,23 @@ namespace EvergineImGUITest.Managers
         private unsafe void InitializeImGui()
         {
             // Create imgui context            
-            IntPtr imGuiContext = ImguiNative.igCreateContext((ImFontAtlas*)null);
-            ImguiNative.igSetCurrentContext(imGuiContext);
+            imguiContext = ImguiNative.igCreateContext((ImFontAtlas*)null);
+            ImguiNative.igSetCurrentContext(imguiContext);
 
             // Create implot context
-            //IntPtr implotContext = ImplotNative.ImPlot_CreateContext();
-            //ImplotNative.ImPlot_SetCurrentContext(implotContext);
-            //ImplotNative.ImPlot_SetImGuiContext(imGuiContext);
+            ImplotNative.ImPlot_SetImGuiContext(imguiContext);
+            implotContext = ImplotNative.ImPlot_CreateContext();
+            ImplotNative.ImPlot_SetCurrentContext(implotContext);
 
             //// Create imguizmo context
             //ImguizmoNative.ImGuizmo_SetImGuiContext(imGuiContext);
 
             //// Create imnodes context
-            //IntPtr imnodesContext = ImnodesNative.imnodes_CreateContext();
-            //ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
-            //ImnodesNative.imnodes_SetImGuiContext(imGuiContext);
+            ImnodesNative.imnodes_SetImGuiContext(imguiContext);
+            imnodesContext = ImnodesNative.imnodes_CreateContext();
+            ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
 
             this.io = ImguiNative.igGetIO();
-            ////ImguiNative.ImFontAtlas_AddFontDefault(io->Fonts, null);
             this.io->Fonts->AddFontDefault(null);
 
             // Compile shaders.
@@ -674,6 +684,15 @@ namespace EvergineImGUITest.Managers
         public override void Destroy()
         {
             base.Destroy();
+
+            ImplotNative.ImPlot_SetCurrentContext(IntPtr.Zero);
+            ImplotNative.ImPlot_SetImGuiContext(IntPtr.Zero);
+
+            ImnodesNative.imnodes_SetCurrentContext(IntPtr.Zero);
+            ImnodesNative.imnodes_SetImGuiContext(IntPtr.Zero);
+
+            ImplotNative.ImPlot_DestroyContext(implotContext);
+            ImnodesNative.imnodes_DestroyContext(imnodesContext);
 
             foreach (var rsi in this.resourceById)
             {

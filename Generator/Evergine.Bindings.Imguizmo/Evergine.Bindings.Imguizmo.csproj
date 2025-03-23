@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
-		<Copyright>Copyright (c) Evergine 2024</Copyright>
+		<Copyright>Copyright (c) Evergine 2025</Copyright>
 		<Authors>Evergine Team</Authors>
 		<Company>Plain Concepts</Company>
 		<Description>Provides csharp bindings to ImGuizmo library.</Description>
@@ -23,7 +23,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Evergine.Mathematics" Version="2022.2.16.9" />
+		<PackageReference Include="Evergine.Mathematics" Version="2025.3.18.7" />
 	</ItemGroup>
 
 	<ItemGroup>

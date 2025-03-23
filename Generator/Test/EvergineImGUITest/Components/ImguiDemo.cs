@@ -16,11 +16,10 @@ namespace EvergineImGUITest.Components
         [BindService]
         protected GraphicsPresenter graphicsPresenter;
 
-        private static bool open = true;
-
         protected override void Update(TimeSpan gameTime)
         {
             ImguiNative.igShowDemoWindow(default);
+
             //ImplotNative.ImPlot_ShowDemoWindow(default);
         }
     }
