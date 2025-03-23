@@ -20,10 +20,8 @@ namespace EvergineImGUITest.Components
 
         protected override void Update(TimeSpan gameTime)
         {
-            bool alwaysOpen = true;
-            ImguiNative.igShowDemoWindow(alwaysOpen.Ptr());
-
-            //ImplotNative.ImPlot_ShowDemoWindow(alwaysOpen.Ptr());
+            ImguiNative.igShowDemoWindow(default);
+            //ImplotNative.ImPlot_ShowDemoWindow(default);
         }
     }
 }

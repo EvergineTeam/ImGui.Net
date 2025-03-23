@@ -90,11 +90,12 @@ namespace EvergineImGUITest.Components
 
             ImguizmoNative.ImGuizmo_Enable(true);
             ImguizmoNative.ImGuizmo_SetGizmoSizeClipSpace(0.15f);
+            ImguizmoNative.ImGuizmo_DrawGrid(view.Ptr(), projection.Ptr(), world.Ptr(), 1.0f);
 
             ////ImguizmoNative.ImGuizmo_ViewManipulate(view.Ptr(), 2, Vector2.Zero, new Vector2(128, 128), 0x10101010);
 
-            float* f = (float*)Unsafe.AsPointer(ref bounds[0]);
-            ImguizmoNative.ImGuizmo_Manipulate(view.Ptr(), projection.Ptr(), this.currentOperation, MODE.WORLD, world.Ptr(), null, null, f, null);
+            //float* f = (float*)Unsafe.AsPointer(ref bounds[0]);
+            //ImguizmoNative.ImGuizmo_Manipulate(view.Ptr(), projection.Ptr(), this.currentOperation, MODE.WORLD, world.Ptr(), null, null, f, null);
 
             this.transform.WorldTransform = world;
 

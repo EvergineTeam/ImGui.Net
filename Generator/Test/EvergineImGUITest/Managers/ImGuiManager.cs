@@ -1,7 +1,7 @@
 ﻿using Evergine.Bindings.Imgui;
-using Evergine.Bindings.Imguizmo;
-using Evergine.Bindings.Imnodes;
-using Evergine.Bindings.Implot;
+//using Evergine.Bindings.Imguizmo;
+//using Evergine.Bindings.Imnodes;
+//using Evergine.Bindings.Implot;
 using Evergine.Common.Graphics;
 using Evergine.Common.Input.Keyboard;
 using Evergine.Common.Input.Mouse;
@@ -169,17 +169,17 @@ namespace EvergineImGUITest.Managers
             ImguiNative.igSetCurrentContext(imGuiContext);
 
             // Create implot context
-            IntPtr implotContext = ImplotNative.ImPlot_CreateContext();
-            ImplotNative.ImPlot_SetCurrentContext(implotContext);
-            ImplotNative.ImPlot_SetImGuiContext(imGuiContext);
+            //IntPtr implotContext = ImplotNative.ImPlot_CreateContext();
+            //ImplotNative.ImPlot_SetCurrentContext(implotContext);
+            //ImplotNative.ImPlot_SetImGuiContext(imGuiContext);
 
-            // Create imguizmo context
-            ImguizmoNative.ImGuizmo_SetImGuiContext(imGuiContext);
+            //// Create imguizmo context
+            //ImguizmoNative.ImGuizmo_SetImGuiContext(imGuiContext);
 
-            // Create imnodes context
-            IntPtr imnodesContext = ImnodesNative.imnodes_CreateContext();
-            ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
-            ImnodesNative.imnodes_SetImGuiContext(imGuiContext);
+            //// Create imnodes context
+            //IntPtr imnodesContext = ImnodesNative.imnodes_CreateContext();
+            //ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
+            //ImnodesNative.imnodes_SetImGuiContext(imGuiContext);
 
             this.io = ImguiNative.igGetIO();
             ////ImguiNative.ImFontAtlas_AddFontDefault(io->Fonts, null);

@@ -29,35 +29,35 @@ namespace EvergineImGUITest
 
             this.Managers.EntityManager.Add(e);
 
-            ////// Cube with imguizmo
-            ////var assetsService = Application.Current.Container.Resolve<AssetsService>();
-            ////Effect standardEffect = assetsService.Load<Effect>(EvergineContent.Effects.StandardEffect);
+            // Cube with imguizmo
+            var assetsService = Application.Current.Container.Resolve<AssetsService>();
+            Effect standardEffect = assetsService.Load<Effect>(EvergineContent.Effects.StandardEffect);
 
-            ////RenderLayerDescription opaqueLayerDescription = new RenderLayerDescription()
-            ////{
-            ////    RenderState = new RenderStateDescription()
-            ////    {
-            ////        RasterizerState = RasterizerStates.CullBack,
-            ////        BlendState = BlendStates.Opaque,
-            ////        DepthStencilState = DepthStencilStates.ReadWrite,
-            ////    },
-            ////};
+            RenderLayerDescription opaqueLayerDescription = new RenderLayerDescription()
+            {
+                RenderState = new RenderStateDescription()
+                {
+                    RasterizerState = RasterizerStates.CullBack,
+                    BlendState = BlendStates.Opaque,
+                    DepthStencilState = DepthStencilStates.ReadWrite,
+                },
+            };
 
-            ////StandardMaterial standardMaterial = new StandardMaterial(standardEffect)
-            ////{
-            ////    LayerDescription = opaqueLayerDescription,
-            ////    BaseColor = Color.White,
-            ////    LightingEnabled = true,
-            ////};
+            StandardMaterial standardMaterial = new StandardMaterial(standardEffect)
+            {
+                LayerDescription = opaqueLayerDescription,
+                BaseColor = Color.White,
+                LightingEnabled = true,
+            };
 
-            ////Entity primitive = new Entity()
-            ////    .AddComponent(new Transform3D())
-            ////    .AddComponent(new MaterialComponent() { Material = standardMaterial.Material })
-            ////    .AddComponent(new CubeMesh())
-            ////    .AddComponent(new ImguizmoDemo())
-            ////    .AddComponent(new MeshRenderer());
+            Entity primitive = new Entity()
+                .AddComponent(new Transform3D())
+                .AddComponent(new MaterialComponent() { Material = standardMaterial.Material })
+                .AddComponent(new CubeMesh())
+                //.AddComponent(new ImguizmoDemo())
+                .AddComponent(new MeshRenderer());
 
-            ////this.Managers.EntityManager.Add(primitive);
+            this.Managers.EntityManager.Add(primitive);
         }
     }
 }
