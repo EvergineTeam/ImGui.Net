@@ -164,7 +164,7 @@ namespace ExampleEvergine.Managers
             imnodesContext = ImnodesNative.imnodes_CreateContext();
             ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
 
-            this.io = ImguiNative.igGetIO();
+            this.io = ImguiNative.igGetIO_Nil();
             this.io->Fonts->AddFontDefault(null);
 
             // Compile shaders.

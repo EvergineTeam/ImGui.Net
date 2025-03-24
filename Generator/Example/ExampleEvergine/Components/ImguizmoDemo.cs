@@ -46,7 +46,7 @@ namespace ExampleEvergine.Components
 
             this.bounds = new[] { -0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f };
 
-            this.io = ImguiNative.igGetIO();
+            this.io = ImguiNative.igGetIO_Nil();
 
             return result;
         }

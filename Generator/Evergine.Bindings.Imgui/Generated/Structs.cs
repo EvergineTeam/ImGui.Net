@@ -517,8 +517,8 @@ namespace Evergine.Bindings.Imgui
 		public ImVector Glyphs;
 		public ImFontGlyph* FallbackGlyph;
 		public ImFontAtlas* ContainerAtlas;
-		public ImFontConfig* ConfigData;
-		public short ConfigDataCount;
+		public ImFontConfig* Sources;
+		public short SourcesCount;
 		public short EllipsisCharCount;
 		public ushort EllipsisChar;
 		public ushort FallbackChar;
@@ -609,11 +609,6 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImFont_RenderText(self, draw_list, size, pos, col, clip_rect, text_begin, text_end, wrap_width, cpu_fine_clip);
 		}
 
-		public void SetGlyphVisible(ushort c, [MarshalAs(UnmanagedType.I1)] bool visible)
-		{
-			ImguiNative.ImFont_SetGlyphVisible(self, c, visible);
-		}
-
 		public ImFont* self => (ImFont*)Unsafe.AsPointer(ref this);
 
 	}
@@ -636,7 +631,7 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 TexUvWhitePixel;
 		public ImVector Fonts;
 		public ImVector CustomRects;
-		public ImVector ConfigData;
+		public ImVector Sources;
 		public Vector4 TexUvLines_0;
 		public Vector4 TexUvLines_1;
 		public Vector4 TexUvLines_2;
@@ -795,11 +790,6 @@ namespace Evergine.Bindings.Imgui
 			return ImguiNative.ImFontAtlas_GetGlyphRangesVietnamese(self);
 		}
 
-		public bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* out_offset, Vector2* out_size, Vector2* out_uv_border, Vector2* out_uv_fill)
-		{
-			return ImguiNative.ImFontAtlas_GetMouseCursorTexData(self, cursor, out_offset, out_size, out_uv_border, out_uv_fill);
-		}
-
 		public void GetTexDataAsAlpha8(byte** out_pixels, int* out_width, int* out_height, int* out_bytes_per_pixel = null)
 		{
 			ImguiNative.ImFontAtlas_GetTexDataAsAlpha8(self, out_pixels, out_width, out_height, out_bytes_per_pixel);
@@ -856,11 +846,11 @@ namespace Evergine.Bindings.Imgui
 		public int OversampleH;
 		public int OversampleV;
 		public float SizePixels;
-		public Vector2 GlyphExtraSpacing;
 		public Vector2 GlyphOffset;
 		public ushort* GlyphRanges;
 		public float GlyphMinAdvanceX;
 		public float GlyphMaxAdvanceX;
+		public float GlyphExtraAdvanceX;
 		public uint FontBuilderFlags;
 		public float RasterizerMultiply;
 		public float RasterizerDensity;
@@ -972,6 +962,7 @@ namespace Evergine.Bindings.Imgui
 		public byte ConfigErrorRecoveryEnableTooltip;
 		public byte ConfigDebugIsDebuggerPresent;
 		public byte ConfigDebugHighlightIdConflicts;
+		public byte ConfigDebugHighlightIdConflictsShowItemPicker;
 		public byte ConfigDebugBeginReturnValueOnce;
 		public byte ConfigDebugBeginReturnValueLoop;
 		public byte ConfigDebugIgnoreFocusLoss;
@@ -1159,6 +1150,7 @@ namespace Evergine.Bindings.Imgui
 		public ImGuiKeyData KeysData_151;
 		public ImGuiKeyData KeysData_152;
 		public ImGuiKeyData KeysData_153;
+		public ImGuiKeyData KeysData_154;
 		public byte WantCaptureMouseUnlessPopupClose;
 		public Vector2 MousePosPrev;
 		public Vector2 MouseClickedPos_0;
@@ -1602,6 +1594,7 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 WindowPadding;
 		public float WindowRounding;
 		public float WindowBorderSize;
+		public float WindowBorderHoverPadding;
 		public Vector2 WindowMinSize;
 		public Vector2 WindowTitleAlign;
 		public ImGuiDir WindowMenuButtonPosition;
@@ -1623,9 +1616,11 @@ namespace Evergine.Bindings.Imgui
 		public float GrabMinSize;
 		public float GrabRounding;
 		public float LogSliderDeadzone;
+		public float ImageBorderSize;
 		public float TabRounding;
 		public float TabBorderSize;
-		public float TabMinWidthForCloseButton;
+		public float TabCloseButtonMinWidthSelected;
+		public float TabCloseButtonMinWidthUnselected;
 		public float TabBarBorderSize;
 		public float TabBarOverlineSize;
 		public float TableAngledHeadersAngle;
@@ -1772,6 +1767,11 @@ namespace Evergine.Bindings.Imgui
 		public void reserve(int capacity)
 		{
 			ImguiNative.ImGuiTextBuffer_reserve(self, capacity);
+		}
+
+		public void resize(int size)
+		{
+			ImguiNative.ImGuiTextBuffer_resize(self, size);
 		}
 
 		public int size()
