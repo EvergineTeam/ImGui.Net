@@ -6,6 +6,7 @@ using Evergine.Common.Graphics;
 using Evergine.Common.Input.Keyboard;
 using Evergine.Common.Input.Mouse;
 using Evergine.Framework;
+using Evergine.Framework.Graphics;
 using Evergine.Framework.Managers;
 using Evergine.Framework.Services;
 using Evergine.Mathematics;
@@ -20,16 +21,13 @@ namespace ExampleEvergine.Managers
     /// <summary>
     /// The ImGui integration service.
     /// </summary>
-    public unsafe class ImGuiManager : UpdatableSceneManager
+    public unsafe class ImGuiManager
     {
-        [BindService]
         protected GraphicsPresenter graphicsPresenter;
 
-        [BindService]
         private GraphicsContext graphicsContext = null;
 
-        [BindSceneManager]
-        private RenderManager renderManager = null;
+        private BaseRenderManager renderManager = null;
 
         private IntPtr imguiContext;
         private IntPtr implotContext;
@@ -80,45 +78,6 @@ namespace ExampleEvergine.Managers
             this.fontAtlasID = (IntPtr)1;
         }
 
-        protected override bool OnAttached()
-        {
-            var result = base.OnAttached();
-
-            var display = this.graphicsPresenter.FocusedDisplay;
-
-            this.framebuffer = display.FrameBuffer;
-            this.surface = display.Surface;
-            display.DisplaySizeChanged += this.Display_DisplaySizeChanged;
-            display.DisplayFrameBufferChanged += this.Display_DisplayFrameBufferChanged;
-
-
-            this.InitializeImGui();
-
-            return result;
-        }
-
-        /// <inheritdoc/>
-        protected override void Start()
-        {
-            base.Start();
-            this.renderManager.ActiveCamera3D.DrawContext.OnPostRender += this.DrawContext_OnPostRender;
-        }
-
-        /// <inheritdoc/>
-        protected override void OnDeactivated()
-        {
-            base.OnDeactivated();
-
-            var display = this.renderManager.ActiveCamera3D?.Display;
-            if ( display == null ) {
-                return;
-            }
-            
-            display.DisplaySizeChanged -= this.Display_DisplaySizeChanged;
-            display.DisplayFrameBufferChanged -= this.Display_DisplayFrameBufferChanged;
-            this.renderManager.ActiveCamera3D.DrawContext.OnPostRender -= this.DrawContext_OnPostRender;
-        }
-
         private void Display_DisplayFrameBufferChanged(object sender, EventArgs e)
         {
             var display = this.renderManager.ActiveCamera3D.Display;
@@ -132,7 +91,7 @@ namespace ExampleEvergine.Managers
         }
 
         /// <inheritdoc/>
-        public override void Update(TimeSpan gameTime)
+        public void Update(TimeSpan gameTime)
         {
             this.io->DisplaySize = new Evergine.Mathematics.Vector2(
                             this.windowWidth / this.scaleFactor.X,
@@ -173,8 +132,21 @@ namespace ExampleEvergine.Managers
             //ImguizmoNative.ImGuizmo_BeginFrame();
         }
 
-        private unsafe void InitializeImGui()
+        public unsafe void Initialize(GraphicsPresenter presenter, GraphicsContext context, BaseRenderManager renderManager)
         {
+            this.graphicsPresenter = presenter;
+            this.graphicsContext = context;
+            this.renderManager = renderManager;
+
+            this.renderManager.ActiveCamera3D.DrawContext.OnPostRender += this.PostRender;
+
+            var display = this.graphicsPresenter.FocusedDisplay;
+
+            this.framebuffer = display.FrameBuffer;
+            this.surface = display.Surface;
+            display.DisplaySizeChanged += this.Display_DisplaySizeChanged;
+            display.DisplayFrameBufferChanged += this.Display_DisplayFrameBufferChanged;
+
             // Create imgui context            
             imguiContext = ImguiNative.igCreateContext((ImFontAtlas*)null);
             ImguiNative.igSetCurrentContext(imguiContext);
@@ -552,7 +524,7 @@ namespace ExampleEvergine.Managers
         /// </summary>
         /// <param name="drawContext">The graphics drawcontext.</param>
         /// <param name="commandBuffer">The commandbuffer to draw.</param>
-        private unsafe void DrawContext_OnPostRender(Evergine.Framework.Graphics.DrawContext drawContext, CommandBuffer commandBuffer)
+        public unsafe void PostRender(Evergine.Framework.Graphics.DrawContext drawContext, CommandBuffer commandBuffer)
         {
             ImguiNative.igRender();
 
@@ -681,9 +653,17 @@ namespace ExampleEvergine.Managers
         }
 
         /// <inheritdoc/>
-        public override void Destroy()
+        public void Destroy()
         {
-            base.Destroy();
+            var display = this.renderManager.ActiveCamera3D?.Display;
+            if (display == null)
+            {
+                return;
+            }
+
+            display.DisplaySizeChanged -= this.Display_DisplaySizeChanged;
+            display.DisplayFrameBufferChanged -= this.Display_DisplayFrameBufferChanged;
+            this.renderManager.ActiveCamera3D.DrawContext.OnPostRender -= this.PostRender;
 
             ImplotNative.ImPlot_SetCurrentContext(IntPtr.Zero);
             ImplotNative.ImPlot_SetImGuiContext(IntPtr.Zero);

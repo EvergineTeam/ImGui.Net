@@ -4,20 +4,25 @@ using Evergine.Framework;
 using Evergine.Framework.Graphics;
 using Evergine.Framework.Graphics.Effects;
 using Evergine.Framework.Graphics.Materials;
+using Evergine.Framework.Managers;
 using Evergine.Framework.Services;
 using Evergine.Mathematics;
 using ExampleEvergine.Components;
 using ExampleEvergine.Managers;
+using System;
 
 namespace ExampleEvergine
 {
     public class MyScene : Scene
     {
+        public ImGuiManager ImGuiManager;
+
         public override void RegisterManagers()
         {
             base.RegisterManagers();
-            this.Managers.AddManager(new ImGuiManager());
             this.Managers.AddManager(new global::Evergine.Bullet.BulletPhysicManager3D());
+
+            this.ImGuiManager = new ImGuiManager();
         }
 
         protected override void CreateScene()
@@ -59,6 +64,29 @@ namespace ExampleEvergine
                 .AddComponent(new MeshRenderer());
 
             this.Managers.EntityManager.Add(primitive);
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+
+            var graphicsPresenter = Application.Current.Container.Resolve<GraphicsPresenter>();
+            var graphicsContext = Application.Current.Container.Resolve<GraphicsContext>();
+            var renderManager = this.Managers.RenderManager;
+            this.ImGuiManager.Initialize(graphicsPresenter, graphicsContext, renderManager);
+        }
+
+        protected override void Update(TimeSpan gameTime)
+        {
+            this.ImGuiManager.Update(gameTime);
+
+            base.Update(gameTime);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            this.ImGuiManager.Destroy();
+            base.Dispose(disposing);
         }
     }
 }
