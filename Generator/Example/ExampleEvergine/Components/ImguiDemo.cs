@@ -8,6 +8,7 @@ using Evergine.Mathematics;
 using ExampleEvergine.Managers;
 using System;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace ExampleEvergine.Components
 {
@@ -15,12 +16,51 @@ namespace ExampleEvergine.Components
     {
         [BindService]
         protected GraphicsPresenter graphicsPresenter;
+        Vector4 my_color = new Vector4(1, 0, 0, 1);
 
         protected override void Update(TimeSpan gameTime)
         {
-            ImguiNative.igShowDemoWindow(default);
+            //ImguiNative.igShowDemoWindow(default);
 
-            //ImplotNative.ImPlot_ShowDemoWindow(default);
+            byte* p = (byte*)1;
+            //ImplotNative.ImPlot_ShowDemoWindow(p);
+
+            ImguiNative.igBegin("MyWindow", null, ImGuiWindowFlags.MenuBar);
+
+            if (ImguiNative.igBeginMenuBar())
+            {
+                if (ImguiNative.igBeginMenu("File", true))
+                {
+                    if (ImguiNative.igMenuItem_Bool("Open", "Ctrl+O", true, true)) { }
+                    if (ImguiNative.igMenuItem_Bool("Save", "Ctrl+S", true, true)) { }
+                    if (ImguiNative.igMenuItem_Bool("Close", "Ctrl+C", true, true)) { }
+
+                    ImguiNative.igEndMenu();
+                }
+
+                ImguiNative.igEndMenuBar();
+            }
+
+            // Edit a color stored as 4 floats
+            Vector4 colorPtr = my_color;
+            ImguiNative.igColorEdit4("Color", &colorPtr, ImGuiColorEditFlags.Float);
+            my_color = colorPtr;
+
+            // Generate samples and plot them
+            float* samples = stackalloc float[100];
+            for (int n = 0; n < 100; n++)
+                samples[n] = (float)Math.Sin(n * 0.5d + ImguiNative.igGetTime() * 1.5d);
+
+            ImguiNative.igPlotLines_FloatPtr("Samples", samples, 100, 0, "", -1, 1, new Vector2(200, 20), sizeof(float));
+
+            // Display contents in a scrolling region
+            ImguiNative.igTextColored(new Vector4(1, 1, 0, 1), "Important Stuff");
+            ImguiNative.igBeginChild_Str("Scrolling", Vector2.Zero, ImGuiChildFlags.None, ImGuiWindowFlags.None);
+            for (int n = 0; n < 50; n++)
+                ImguiNative.igText($"{n}: Some text");
+            ImguiNative.igEndChild();
+
+            ImguiNative.igEnd();
         }
     }
 }

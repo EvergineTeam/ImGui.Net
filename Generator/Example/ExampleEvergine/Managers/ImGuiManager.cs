@@ -124,11 +124,11 @@ namespace ExampleEvergine.Managers
             ImguiNative.igSetCurrentContext(imguiContext);
             ImplotNative.ImPlot_SetImGuiContext(imguiContext);
             ImplotNative.ImPlot_SetCurrentContext(implotContext);
-
-            ImnodesNative.imnodes_SetImGuiContext(imguiContext);
-            ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
-
             ImguiNative.igNewFrame();
+
+            //byte* p = (byte*)1;
+            //ImplotNative.ImPlot_ShowDemoWindow(p);
+
             //ImguizmoNative.ImGuizmo_BeginFrame();
         }
 
@@ -150,9 +150,9 @@ namespace ExampleEvergine.Managers
             // Create imgui context            
             imguiContext = ImguiNative.igCreateContext((ImFontAtlas*)null);
             ImguiNative.igSetCurrentContext(imguiContext);
+            ImplotNative.ImPlot_SetImGuiContext(imguiContext);
 
             // Create implot context
-            ImplotNative.ImPlot_SetImGuiContext(imguiContext);
             implotContext = ImplotNative.ImPlot_CreateContext();
             ImplotNative.ImPlot_SetCurrentContext(implotContext);
 
@@ -160,9 +160,9 @@ namespace ExampleEvergine.Managers
             //ImguizmoNative.ImGuizmo_SetImGuiContext(imGuiContext);
 
             //// Create imnodes context
-            ImnodesNative.imnodes_SetImGuiContext(imguiContext);
-            imnodesContext = ImnodesNative.imnodes_CreateContext();
-            ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
+            //ImnodesNative.imnodes_SetImGuiContext(imguiContext);
+            //imnodesContext = ImnodesNative.imnodes_CreateContext();
+            //ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
 
             this.io = ImguiNative.igGetIO_Nil();
             this.io->Fonts->AddFontDefault(null);

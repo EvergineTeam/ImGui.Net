@@ -10,7 +10,7 @@
 #>
 
 param (
-  [ValidateSet('Debug', 'Release')][string]$buildConfig = "Release",
+  [ValidateSet('Debug', 'Release')][string]$buildConfig = "Debug",
   [switch]$buildImgui = $false,
   [switch]$buildExtensions = $false
 )
@@ -21,7 +21,6 @@ $ErrorActionPreference = "Stop"
 $archs = @('x86', 'x64') #, 'ARM', 'ARM64')
 $main = "imgui"
 $extensions = @("imguizmo", "imnodes", "implot")
-
 
 $TextInfo = (Get-Culture).TextInfo
 
