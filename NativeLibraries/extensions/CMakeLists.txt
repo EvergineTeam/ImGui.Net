@@ -4,6 +4,7 @@ project(../cimgui)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+add_definitions("-DIMGUI_USER_CONFIG=\"../cimconfig.h\"")
 
 
 add_library(cimplot SHARED
@@ -17,8 +18,11 @@ add_library(cimplot SHARED
     cimplot/implot/implot_demo.cpp
     cimplot/implot/implot_items.cpp)
 
-target_include_directories(cimplot PUBLIC ../cimgui)
-target_include_directories(cimplot PUBLIC ../cimgui/imgui)
+
+target_compile_definitions(cimplot PUBLIC IMGUI_DISABLE_OBSOLETE_FUNCTIONS=1)
+target_include_directories(cimplot PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cimplot/implot)
+target_include_directories(cimplot PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../cimgui/imgui)
+target_include_directories(cimplot PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../cimgui)
 set_target_properties(cimplot PROPERTIES PREFIX "")
 
 
@@ -31,10 +35,11 @@ add_library(cimnodes SHARED
     cimnodes/cimnodes.cpp
     cimnodes/imnodes/imnodes.cpp)
 
-target_include_directories(cimnodes PUBLIC ../cimgui)
-target_include_directories(cimnodes PUBLIC ../cimgui/imgui)
+target_compile_definitions(cimnodes PRIVATE IMNODES_NAMESPACE=imnodes IMGUI_DISABLE_OBSOLETE_FUNCTIONS=1)
+target_include_directories(cimnodes PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cimnodes/imnodes)
+target_include_directories(cimnodes PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../cimgui/imgui)
+target_include_directories(cimnodes PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../cimgui)
 set_target_properties(cimnodes PROPERTIES PREFIX "")
-target_compile_definitions(cimnodes PRIVATE IMNODES_NAMESPACE=imnodes)
 
 
 add_library(cimguizmo SHARED
@@ -46,6 +51,8 @@ add_library(cimguizmo SHARED
     cimguizmo/cimguizmo.cpp
     cimguizmo/ImGuizmo/ImGuizmo.cpp)
 
-target_include_directories(cimguizmo PUBLIC ../cimgui)
-target_include_directories(cimguizmo PUBLIC ../cimgui/imgui)
+target_compile_definitions(cimguizmo PUBLIC IMGUI_DISABLE_OBSOLETE_FUNCTIONS=1)
+target_include_directories(cimguizmo PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cimguizmo/imguizmo)
+target_include_directories(cimguizmo PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../cimgui/imgui)
+target_include_directories(cimguizmo PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../cimgui)
 set_target_properties(cimguizmo PROPERTIES PREFIX "")
