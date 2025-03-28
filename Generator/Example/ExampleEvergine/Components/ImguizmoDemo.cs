@@ -27,8 +27,6 @@ namespace ExampleEvergine.Components
 
         private Matrix4x4 WorldTransform;
 
-        private OPERATION currentOperation;
-
         private bool enableGuizmo = true;
 
         private float[] bounds;
@@ -41,43 +39,12 @@ namespace ExampleEvergine.Components
 
             this.WorldTransform = Matrix4x4.Identity;
 
-            this.currentOperation = OPERATION.TRANSLATE;
-
             this.bounds = new[] { -0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f };
 
             return result;
         }
 
         protected override void Update(TimeSpan gameTime)
-        {
-            KeyboardDispatcher keyboardDispatcher = this.graphicsPresenter.FocusedDisplay?.KeyboardDispatcher;
-
-            if (keyboardDispatcher?.ReadKeyState(Keys.Z) == ButtonState.Pressing)
-            {
-                this.currentOperation = OPERATION.TRANSLATE;
-            }
-            else if (keyboardDispatcher?.ReadKeyState(Keys.X) == ButtonState.Pressing)
-            {
-                this.currentOperation = OPERATION.ROTATE;
-            }
-            else if (keyboardDispatcher?.ReadKeyState(Keys.C) == ButtonState.Pressing)
-            {
-                this.currentOperation = OPERATION.SCALE;
-            }
-            else if (keyboardDispatcher?.ReadKeyState(Keys.V) == ButtonState.Pressing)
-            {
-                this.currentOperation = OPERATION.BOUNDS;
-            }
-
-            if (keyboardDispatcher?.ReadKeyState(Keys.P) == ButtonState.Pressing)
-            {
-                this.enableGuizmo = !this.enableGuizmo;
-            }
-
-            this.ImGuizmoDemo();
-        }
-
-        private void ImGuizmoDemo()
         {
             var io = ImguiNative.igGetIO_Nil();
             ImguizmoNative.ImGuizmo_SetRect(0, 0, io->DisplaySize.X, io->DisplaySize.Y);
@@ -90,10 +57,8 @@ namespace ExampleEvergine.Components
             ImguizmoNative.ImGuizmo_SetGizmoSizeClipSpace(0.15f);
             ImguizmoNative.ImGuizmo_DrawGrid(view.Ptr(), projection.Ptr(), world.Ptr(), 1.0f);
 
-            ImguizmoNative.ImGuizmo_ViewManipulate_Float(view.Ptr(), 1, Vector2.Zero, new Vector2(128, 128), 0);
-
             float* f = (float*)Unsafe.AsPointer(ref bounds[0]);
-            ImguizmoNative.ImGuizmo_Manipulate(view.Ptr(), projection.Ptr(), this.currentOperation, MODE.WORLD, world.Ptr(), null, null, f, null);
+            ImguizmoNative.ImGuizmo_Manipulate(view.Ptr(), projection.Ptr(), OPERATION.UNIVERSAL, MODE.WORLD, world.Ptr(), null, null, f, null);
 
             this.transform.WorldTransform = world;
 
