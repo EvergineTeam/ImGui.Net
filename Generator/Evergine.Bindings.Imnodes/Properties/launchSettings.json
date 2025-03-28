@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Evergine.Bindings.Imnodes": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

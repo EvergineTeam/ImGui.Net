@@ -1,0 +1,17 @@
+Packages:
+  - Id: Evergine.Core
+    LocalPath: null
+    Version: 2025.3.18.7
+Parameters:
+  MaxSkinningWeights: 4
+  SparseMorphTargets: false
+Profiles:
+  - AdditionalEffectTechniqueCombinations: SHADOW_SUPPORTED-SHADOWFILTER3,SHADOW_SUPPORTED-SHADOWFILTER3-POINT_LIGHT,SHADOW_SUPPORTED-SHADOWFILTER3-SPOT_LIGHT,SHADOW_SUPPORTED-SHADOWFILTER3-POINT_LIGHT-SPOT_LIGHT
+    AlphaCompressionFormat: BC3_UNorm
+    CompileEffects: false
+    GraphicsBackend: DirectX11
+    LauncherType: Default
+    Name: Windows
+    NonAlphaCompressionFormat: BC3_UNorm
+    Platform: Windows
+ResourcesPath: Content

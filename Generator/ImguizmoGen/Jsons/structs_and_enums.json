@@ -1,5 +1,87 @@
 {
   "enums": {
+    "COLOR": [
+      {
+        "calc_value": 0,
+        "name": "DIRECTION_X",
+        "value": "0"
+      },
+      {
+        "calc_value": 1,
+        "name": "DIRECTION_Y",
+        "value": "1"
+      },
+      {
+        "calc_value": 2,
+        "name": "DIRECTION_Z",
+        "value": "2"
+      },
+      {
+        "calc_value": 3,
+        "name": "PLANE_X",
+        "value": "3"
+      },
+      {
+        "calc_value": 4,
+        "name": "PLANE_Y",
+        "value": "4"
+      },
+      {
+        "calc_value": 5,
+        "name": "PLANE_Z",
+        "value": "5"
+      },
+      {
+        "calc_value": 6,
+        "name": "SELECTION",
+        "value": "6"
+      },
+      {
+        "calc_value": 7,
+        "name": "INACTIVE",
+        "value": "7"
+      },
+      {
+        "calc_value": 8,
+        "name": "TRANSLATION_LINE",
+        "value": "8"
+      },
+      {
+        "calc_value": 9,
+        "name": "SCALE_LINE",
+        "value": "9"
+      },
+      {
+        "calc_value": 10,
+        "name": "ROTATION_USING_BORDER",
+        "value": "10"
+      },
+      {
+        "calc_value": 11,
+        "name": "ROTATION_USING_FILL",
+        "value": "11"
+      },
+      {
+        "calc_value": 12,
+        "name": "HATCHED_AXIS_LINES",
+        "value": "12"
+      },
+      {
+        "calc_value": 13,
+        "name": "TEXT",
+        "value": "13"
+      },
+      {
+        "calc_value": 14,
+        "name": "TEXT_SHADOW",
+        "value": "14"
+      },
+      {
+        "calc_value": 15,
+        "name": "COUNT",
+        "value": "15"
+      }
+    ],
     "MODE": [
       {
         "calc_value": 0,
@@ -112,8 +194,53 @@
   },
   "enumtypes": [],
   "locations": {
-    "MODE": "ImGuizmo:199",
-    "OPERATION": "ImGuizmo:170"
+    "COLOR": "ImGuizmo:269",
+    "MODE": "ImGuizmo:209",
+    "OPERATION": "ImGuizmo:180",
+    "Style": "ImGuizmo:289"
   },
-  "structs": []
+  "nonPOD": {
+    "Style": true
+  },
+  "structs": {
+    "Style": [
+      {
+        "name": "TranslationLineThickness",
+        "type": "float"
+      },
+      {
+        "name": "TranslationLineArrowSize",
+        "type": "float"
+      },
+      {
+        "name": "RotationLineThickness",
+        "type": "float"
+      },
+      {
+        "name": "RotationOuterLineThickness",
+        "type": "float"
+      },
+      {
+        "name": "ScaleLineThickness",
+        "type": "float"
+      },
+      {
+        "name": "ScaleLineCircleSize",
+        "type": "float"
+      },
+      {
+        "name": "HatchedAxisLineThickness",
+        "type": "float"
+      },
+      {
+        "name": "CenterCircleSize",
+        "type": "float"
+      },
+      {
+        "name": "Colors[COUNT]",
+        "size": 15,
+        "type": "ImVec4"
+      }
+    ]
+  }
 }

@@ -107,55 +107,55 @@ namespace Evergine.Bindings.Imnodes
 		public static extern ImNodesStyle* imnodes_GetStyle();
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		[return:MarshalAs(UnmanagedType.Bool)]
+		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool imnodes_IsAnyAttributeActive(int* attribute_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		[return:MarshalAs(UnmanagedType.Bool)]
+		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool imnodes_IsAttributeActive();
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		[return:MarshalAs(UnmanagedType.Bool)]
+		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool imnodes_IsEditorHovered();
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		[return:MarshalAs(UnmanagedType.Bool)]
+		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool imnodes_IsLinkCreated_BoolPtr(int* started_at_attribute_id, int* ended_at_attribute_id, byte* created_from_snap);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		[return:MarshalAs(UnmanagedType.Bool)]
+		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool imnodes_IsLinkCreated_IntPtr(int* started_at_node_id, int* started_at_attribute_id, int* ended_at_node_id, int* ended_at_attribute_id, byte* created_from_snap);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		[return:MarshalAs(UnmanagedType.Bool)]
+		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool imnodes_IsLinkDestroyed(int* link_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		[return:MarshalAs(UnmanagedType.Bool)]
-		public static extern bool imnodes_IsLinkDropped(int* started_at_attribute_id, [MarshalAs(UnmanagedType.Bool)] bool including_detached_links);
+		[return:MarshalAs(UnmanagedType.I1)]
+		public static extern bool imnodes_IsLinkDropped(int* started_at_attribute_id, [MarshalAs(UnmanagedType.I1)] bool including_detached_links);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		[return:MarshalAs(UnmanagedType.Bool)]
+		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool imnodes_IsLinkHovered(int* link_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		[return:MarshalAs(UnmanagedType.Bool)]
+		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool imnodes_IsLinkSelected(int link_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		[return:MarshalAs(UnmanagedType.Bool)]
+		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool imnodes_IsLinkStarted(int* started_at_attribute_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		[return:MarshalAs(UnmanagedType.Bool)]
+		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool imnodes_IsNodeHovered(int* node_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		[return:MarshalAs(UnmanagedType.Bool)]
+		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool imnodes_IsNodeSelected(int node_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		[return:MarshalAs(UnmanagedType.Bool)]
+		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool imnodes_IsPinHovered(int* attribute_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
@@ -230,7 +230,7 @@ namespace Evergine.Bindings.Imnodes
 		public static extern void imnodes_SetImGuiContext(IntPtr ctx);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void imnodes_SetNodeDraggable(int node_id, [MarshalAs(UnmanagedType.Bool)] bool draggable);
+		public static extern void imnodes_SetNodeDraggable(int node_id, [MarshalAs(UnmanagedType.I1)] bool draggable);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void imnodes_SetNodeEditorSpacePos(int node_id, Vector2 editor_space_pos);
@@ -242,13 +242,16 @@ namespace Evergine.Bindings.Imnodes
 		public static extern void imnodes_SetNodeScreenSpacePos(int node_id, Vector2 screen_space_pos);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void imnodes_StyleColorsClassic();
+		public static extern void imnodes_SnapNodeToGrid(int node_id);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void imnodes_StyleColorsDark();
+		public static extern void imnodes_StyleColorsClassic(ImNodesStyle* dest);
 
 		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void imnodes_StyleColorsLight();
+		public static extern void imnodes_StyleColorsDark(ImNodesStyle* dest);
+
+		[DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
+		public static extern void imnodes_StyleColorsLight(ImNodesStyle* dest);
 
 	}
 }

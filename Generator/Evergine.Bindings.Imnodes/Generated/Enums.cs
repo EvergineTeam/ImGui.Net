@@ -30,19 +30,20 @@ namespace Evergine.Bindings.Imnodes
 		BoxSelectorOutline = 13,
 		GridBackground = 14,
 		GridLine = 15,
-		MiniMapBackground = 16,
-		MiniMapBackgroundHovered = 17,
-		MiniMapOutline = 18,
-		MiniMapOutlineHovered = 19,
-		MiniMapNodeBackground = 20,
-		MiniMapNodeBackgroundHovered = 21,
-		MiniMapNodeBackgroundSelected = 22,
-		MiniMapNodeOutline = 23,
-		MiniMapLink = 24,
-		MiniMapLinkSelected = 25,
-		MiniMapCanvas = 26,
-		MiniMapCanvasOutline = 27,
-		COUNT = 28,
+		GridLinePrimary = 16,
+		MiniMapBackground = 17,
+		MiniMapBackgroundHovered = 18,
+		MiniMapOutline = 19,
+		MiniMapOutlineHovered = 20,
+		MiniMapNodeBackground = 21,
+		MiniMapNodeBackgroundHovered = 22,
+		MiniMapNodeBackgroundSelected = 23,
+		MiniMapNodeOutline = 24,
+		MiniMapLink = 25,
+		MiniMapLinkSelected = 26,
+		MiniMapCanvas = 27,
+		MiniMapCanvasOutline = 28,
+		COUNT = 29,
 	}
 
 	public enum ImNodesMiniMapLocation
@@ -69,6 +70,8 @@ namespace Evergine.Bindings.Imnodes
 		None = 0,
 		NodeOutline = 1,
 		GridLines = 4,
+		GridLinesPrimary = 8,
+		GridSnapping = 16,
 	}
 
 	public enum ImNodesStyleVar

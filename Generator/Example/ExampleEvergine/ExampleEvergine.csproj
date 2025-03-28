@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<GenerateEvergineContent>True</GenerateEvergineContent>
+		<GenerateEvergineAssets>False</GenerateEvergineAssets>
+		<GenerateEvergineScenesCode>True</GenerateEvergineScenesCode>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Evergine.Common" Version="2025.3.18.7" />
+		<PackageReference Include="Evergine.Components" Version="2025.3.18.7" />
+		<PackageReference Include="Evergine.Framework" Version="2025.3.18.7" />
+		<PackageReference Include="Evergine.Mathematics" Version="2025.3.18.7" />
+		<PackageReference Include="Evergine.Bullet" Version="2025.3.18.7" />
+		<PackageReference Include="Evergine.Targets" Version="2025.3.18.7" />
+		<PackageReference Include="Evergine.CodeScenes" Version="2025.3.18.7" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Evergine.Bindings.Imguizmo\Evergine.Bindings.Imguizmo.csproj" />
+	  <ProjectReference Include="..\..\Evergine.Bindings.Imgui\Evergine.Bindings.Imgui.csproj" />
+	  <ProjectReference Include="..\..\Evergine.Bindings.Imnodes\Evergine.Bindings.Imnodes.csproj" />
+	  <ProjectReference Include="..\..\Evergine.Bindings.Implot\Evergine.Bindings.Implot.csproj" />
+	</ItemGroup>
+</Project>

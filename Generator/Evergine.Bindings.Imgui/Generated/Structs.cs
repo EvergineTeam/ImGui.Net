@@ -42,6 +42,8 @@ namespace Evergine.Bindings.Imgui
 		public uint ElemCount;
 		public IntPtr UserCallback;
 		public void* UserCallbackData;
+		public int UserCallbackDataSize;
+		public int UserCallbackDataOffset;
 
 		public IntPtr GetTexID()
 		{
@@ -65,11 +67,16 @@ namespace Evergine.Bindings.Imgui
 		public int CmdListsCount;
 		public int TotalIdxCount;
 		public int TotalVtxCount;
-		public ImDrawList** CmdLists;
+		public ImVector CmdLists;
 		public Vector2 DisplayPos;
 		public Vector2 DisplaySize;
 		public Vector2 FramebufferScale;
 		public ImGuiViewport* OwnerViewport;
+
+		public void AddDrawList(ImDrawList* draw_list)
+		{
+			ImguiNative.ImDrawData_AddDrawList(self, draw_list);
+		}
 
 		public void Clear()
 		{
@@ -98,15 +105,16 @@ namespace Evergine.Bindings.Imgui
 		public ImDrawListFlags Flags;
 		public uint _VtxCurrentIdx;
 		public IntPtr _Data;
-		public byte* _OwnerName;
 		public ImDrawVert* _VtxWritePtr;
 		public ushort* _IdxWritePtr;
-		public ImVector _ClipRectStack;
-		public ImVector _TextureIdStack;
 		public ImVector _Path;
 		public ImDrawCmdHeader _CmdHeader;
 		public ImDrawListSplitter _Splitter;
+		public ImVector _ClipRectStack;
+		public ImVector _TextureIdStack;
+		public ImVector _CallbacksDataBuf;
 		public float _FringeScale;
+		public byte* _OwnerName;
 
 		public void AddBezierCubic(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, uint col, float thickness, int num_segments = 0)
 		{
@@ -118,9 +126,9 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddBezierQuadratic(self, p1, p2, p3, col, thickness, num_segments);
 		}
 
-		public void AddCallback(IntPtr callback, void* callback_data)
+		public void AddCallback(IntPtr callback, void* userdata, uint userdata_size = 0)
 		{
-			ImguiNative.ImDrawList_AddCallback(self, callback, callback_data);
+			ImguiNative.ImDrawList_AddCallback(self, callback, userdata, userdata_size);
 		}
 
 		public void AddCircle(Vector2 center, float radius, uint col, int num_segments = 0, float thickness = 1.0f)
@@ -133,6 +141,11 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddCircleFilled(self, center, radius, col, num_segments);
 		}
 
+		public void AddConcavePolyFilled(Vector2* points, int num_points, uint col)
+		{
+			ImguiNative.ImDrawList_AddConcavePolyFilled(self, points, num_points, col);
+		}
+
 		public void AddConvexPolyFilled(Vector2* points, int num_points, uint col)
 		{
 			ImguiNative.ImDrawList_AddConvexPolyFilled(self, points, num_points, col);
@@ -141,6 +154,16 @@ namespace Evergine.Bindings.Imgui
 		public void AddDrawCmd()
 		{
 			ImguiNative.ImDrawList_AddDrawCmd(self);
+		}
+
+		public void AddEllipse(Vector2 center, Vector2 radius, uint col, float rot = 0.0f, int num_segments = 0, float thickness = 1.0f)
+		{
+			ImguiNative.ImDrawList_AddEllipse(self, center, radius, col, rot, num_segments, thickness);
+		}
+
+		public void AddEllipseFilled(Vector2 center, Vector2 radius, uint col, float rot = 0.0f, int num_segments = 0)
+		{
+			ImguiNative.ImDrawList_AddEllipseFilled(self, center, radius, col, rot, num_segments);
 		}
 
 		public void AddImage(IntPtr user_texture_id, Vector2 p_min, Vector2 p_max, Vector2 uv_min, Vector2 uv_max, uint col = 4294967295)
@@ -284,6 +307,16 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_PathClear(self);
 		}
 
+		public void PathEllipticalArcTo(Vector2 center, Vector2 radius, float rot, float a_min, float a_max, int num_segments = 0)
+		{
+			ImguiNative.ImDrawList_PathEllipticalArcTo(self, center, radius, rot, a_min, a_max, num_segments);
+		}
+
+		public void PathFillConcave(uint col)
+		{
+			ImguiNative.ImDrawList_PathFillConcave(self, col);
+		}
+
 		public void PathFillConvex(uint col)
 		{
 			ImguiNative.ImDrawList_PathFillConvex(self, col);
@@ -419,6 +452,11 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList__ResetForNewFrame(self);
 		}
 
+		public void _SetTextureID(IntPtr texture_id)
+		{
+			ImguiNative.ImDrawList__SetTextureID(self, texture_id);
+		}
+
 		public void _TryMergeDrawCmds()
 		{
 			ImguiNative.ImDrawList__TryMergeDrawCmds(self);
@@ -479,17 +517,19 @@ namespace Evergine.Bindings.Imgui
 		public ImVector Glyphs;
 		public ImFontGlyph* FallbackGlyph;
 		public ImFontAtlas* ContainerAtlas;
-		public ImFontConfig* ConfigData;
-		public short ConfigDataCount;
-		public ushort FallbackChar;
+		public ImFontConfig* Sources;
+		public short SourcesCount;
+		public short EllipsisCharCount;
 		public ushort EllipsisChar;
-		public ushort DotChar;
-		public byte DirtyLookupTables;
+		public ushort FallbackChar;
+		public float EllipsisWidth;
+		public float EllipsisCharStep;
 		public float Scale;
 		public float Ascent;
 		public float Descent;
 		public int MetricsTotalSurface;
-		public fixed byte Used4kPagesMap[2];
+		public byte DirtyLookupTables;
+		public fixed byte Used8kPagesMap[1];
 
 		public void AddGlyph(ImFontConfig* src_cfg, ushort c, float x0, float y0, float x1, float y1, float u0, float v0, float u1, float v1, float advance_x)
 		{
@@ -569,11 +609,6 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImFont_RenderText(self, draw_list, size, pos, col, clip_rect, text_begin, text_end, wrap_width, cpu_fine_clip);
 		}
 
-		public void SetGlyphVisible(ushort c, [MarshalAs(UnmanagedType.I1)] bool visible)
-		{
-			ImguiNative.ImFont_SetGlyphVisible(self, c, visible);
-		}
-
 		public ImFont* self => (ImFont*)Unsafe.AsPointer(ref this);
 
 	}
@@ -584,6 +619,7 @@ namespace Evergine.Bindings.Imgui
 		public IntPtr TexID;
 		public int TexDesiredWidth;
 		public int TexGlyphPadding;
+		public void* UserData;
 		public byte Locked;
 		public byte TexReady;
 		public byte TexPixelsUseColors;
@@ -595,7 +631,7 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 TexUvWhitePixel;
 		public ImVector Fonts;
 		public ImVector CustomRects;
-		public ImVector ConfigData;
+		public ImVector Sources;
 		public Vector4 TexUvLines_0;
 		public Vector4 TexUvLines_1;
 		public Vector4 TexUvLines_2;
@@ -629,37 +665,6 @@ namespace Evergine.Bindings.Imgui
 		public Vector4 TexUvLines_30;
 		public Vector4 TexUvLines_31;
 		public Vector4 TexUvLines_32;
-		public Vector4 TexUvLines_33;
-		public Vector4 TexUvLines_34;
-		public Vector4 TexUvLines_35;
-		public Vector4 TexUvLines_36;
-		public Vector4 TexUvLines_37;
-		public Vector4 TexUvLines_38;
-		public Vector4 TexUvLines_39;
-		public Vector4 TexUvLines_40;
-		public Vector4 TexUvLines_41;
-		public Vector4 TexUvLines_42;
-		public Vector4 TexUvLines_43;
-		public Vector4 TexUvLines_44;
-		public Vector4 TexUvLines_45;
-		public Vector4 TexUvLines_46;
-		public Vector4 TexUvLines_47;
-		public Vector4 TexUvLines_48;
-		public Vector4 TexUvLines_49;
-		public Vector4 TexUvLines_50;
-		public Vector4 TexUvLines_51;
-		public Vector4 TexUvLines_52;
-		public Vector4 TexUvLines_53;
-		public Vector4 TexUvLines_54;
-		public Vector4 TexUvLines_55;
-		public Vector4 TexUvLines_56;
-		public Vector4 TexUvLines_57;
-		public Vector4 TexUvLines_58;
-		public Vector4 TexUvLines_59;
-		public Vector4 TexUvLines_60;
-		public Vector4 TexUvLines_61;
-		public Vector4 TexUvLines_62;
-		public Vector4 TexUvLines_63;
 		public IntPtr FontBuilderIO;
 		public uint FontBuilderFlags;
 		public int PackIdMouseCursors;
@@ -695,14 +700,14 @@ namespace Evergine.Bindings.Imgui
 			return ImguiNative.ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(self, compressed_font_data_base85, size_pixels, font_cfg, glyph_ranges);
 		}
 
-		public ImFont* AddFontFromMemoryCompressedTTF(void* compressed_font_data, int compressed_font_size, float size_pixels, ImFontConfig* font_cfg = null, ushort* glyph_ranges = null)
+		public ImFont* AddFontFromMemoryCompressedTTF(void* compressed_font_data, int compressed_font_data_size, float size_pixels, ImFontConfig* font_cfg = null, ushort* glyph_ranges = null)
 		{
-			return ImguiNative.ImFontAtlas_AddFontFromMemoryCompressedTTF(self, compressed_font_data, compressed_font_size, size_pixels, font_cfg, glyph_ranges);
+			return ImguiNative.ImFontAtlas_AddFontFromMemoryCompressedTTF(self, compressed_font_data, compressed_font_data_size, size_pixels, font_cfg, glyph_ranges);
 		}
 
-		public ImFont* AddFontFromMemoryTTF(void* font_data, int font_size, float size_pixels, ImFontConfig* font_cfg = null, ushort* glyph_ranges = null)
+		public ImFont* AddFontFromMemoryTTF(void* font_data, int font_data_size, float size_pixels, ImFontConfig* font_cfg = null, ushort* glyph_ranges = null)
 		{
-			return ImguiNative.ImFontAtlas_AddFontFromMemoryTTF(self, font_data, font_size, size_pixels, font_cfg, glyph_ranges);
+			return ImguiNative.ImFontAtlas_AddFontFromMemoryTTF(self, font_data, font_data_size, size_pixels, font_cfg, glyph_ranges);
 		}
 
 		public bool Build()
@@ -760,6 +765,11 @@ namespace Evergine.Bindings.Imgui
 			return ImguiNative.ImFontAtlas_GetGlyphRangesDefault(self);
 		}
 
+		public ushort* GetGlyphRangesGreek()
+		{
+			return ImguiNative.ImFontAtlas_GetGlyphRangesGreek(self);
+		}
+
 		public ushort* GetGlyphRangesJapanese()
 		{
 			return ImguiNative.ImFontAtlas_GetGlyphRangesJapanese(self);
@@ -778,11 +788,6 @@ namespace Evergine.Bindings.Imgui
 		public ushort* GetGlyphRangesVietnamese()
 		{
 			return ImguiNative.ImFontAtlas_GetGlyphRangesVietnamese(self);
-		}
-
-		public bool GetMouseCursorTexData(ImGuiMouseCursor cursor, Vector2* out_offset, Vector2* out_size, Vector2* out_uv_border, Vector2* out_uv_fill)
-		{
-			return ImguiNative.ImFontAtlas_GetMouseCursorTexData(self, cursor, out_offset, out_size, out_uv_border, out_uv_fill);
 		}
 
 		public void GetTexDataAsAlpha8(byte** out_pixels, int* out_width, int* out_height, int* out_bytes_per_pixel = null)
@@ -811,11 +816,12 @@ namespace Evergine.Bindings.Imgui
 
 	public unsafe partial struct ImFontAtlasCustomRect
 	{
-		public ushort Width;
-		public ushort Height;
 		public ushort X;
 		public ushort Y;
+		public ushort Width;
+		public ushort Height;
 		public uint GlyphID;
+		public uint GlyphColored;
 		public float GlyphAdvanceX;
 		public Vector2 GlyphOffset;
 		public ImFont* Font;
@@ -834,19 +840,20 @@ namespace Evergine.Bindings.Imgui
 		public void* FontData;
 		public int FontDataSize;
 		public byte FontDataOwnedByAtlas;
+		public byte MergeMode;
+		public byte PixelSnapH;
 		public int FontNo;
-		public float SizePixels;
 		public int OversampleH;
 		public int OversampleV;
-		public byte PixelSnapH;
-		public Vector2 GlyphExtraSpacing;
+		public float SizePixels;
 		public Vector2 GlyphOffset;
 		public ushort* GlyphRanges;
 		public float GlyphMinAdvanceX;
 		public float GlyphMaxAdvanceX;
-		public byte MergeMode;
+		public float GlyphExtraAdvanceX;
 		public uint FontBuilderFlags;
 		public float RasterizerMultiply;
+		public float RasterizerDensity;
 		public ushort EllipsisChar;
 		public fixed byte Name[40];
 		public ImFont* DstFont;
@@ -920,43 +927,51 @@ namespace Evergine.Bindings.Imgui
 		public float IniSavingRate;
 		public byte* IniFilename;
 		public byte* LogFilename;
-		public float MouseDoubleClickTime;
-		public float MouseDoubleClickMaxDist;
-		public float MouseDragThreshold;
-		public float KeyRepeatDelay;
-		public float KeyRepeatRate;
 		public void* UserData;
 		public ImFontAtlas* Fonts;
 		public float FontGlobalScale;
 		public byte FontAllowUserScaling;
 		public ImFont* FontDefault;
 		public Vector2 DisplayFramebufferScale;
-		public byte ConfigDockingNoSplit;
-		public byte ConfigDockingWithShift;
-		public byte ConfigDockingAlwaysTabBar;
-		public byte ConfigDockingTransparentPayload;
-		public byte ConfigViewportsNoAutoMerge;
-		public byte ConfigViewportsNoTaskBarIcon;
-		public byte ConfigViewportsNoDecoration;
-		public byte ConfigViewportsNoDefaultParent;
+		public byte ConfigNavSwapGamepadButtons;
+		public byte ConfigNavMoveSetMousePos;
+		public byte ConfigNavCaptureKeyboard;
+		public byte ConfigNavEscapeClearFocusItem;
+		public byte ConfigNavEscapeClearFocusWindow;
+		public byte ConfigNavCursorVisibleAuto;
+		public byte ConfigNavCursorVisibleAlways;
 		public byte MouseDrawCursor;
 		public byte ConfigMacOSXBehaviors;
 		public byte ConfigInputTrickleEventQueue;
 		public byte ConfigInputTextCursorBlink;
+		public byte ConfigInputTextEnterKeepActive;
 		public byte ConfigDragClickToInputText;
 		public byte ConfigWindowsResizeFromEdges;
 		public byte ConfigWindowsMoveFromTitleBarOnly;
+		public byte ConfigWindowsCopyContentsWithCtrlC;
+		public byte ConfigScrollbarScrollByPage;
 		public float ConfigMemoryCompactTimer;
+		public float MouseDoubleClickTime;
+		public float MouseDoubleClickMaxDist;
+		public float MouseDragThreshold;
+		public float KeyRepeatDelay;
+		public float KeyRepeatRate;
+		public byte ConfigErrorRecovery;
+		public byte ConfigErrorRecoveryEnableAssert;
+		public byte ConfigErrorRecoveryEnableDebugLog;
+		public byte ConfigErrorRecoveryEnableTooltip;
+		public byte ConfigDebugIsDebuggerPresent;
+		public byte ConfigDebugHighlightIdConflicts;
+		public byte ConfigDebugHighlightIdConflictsShowItemPicker;
+		public byte ConfigDebugBeginReturnValueOnce;
+		public byte ConfigDebugBeginReturnValueLoop;
+		public byte ConfigDebugIgnoreFocusLoss;
+		public byte ConfigDebugIniSettings;
 		public byte* BackendPlatformName;
 		public byte* BackendRendererName;
 		public void* BackendPlatformUserData;
 		public void* BackendRendererUserData;
 		public void* BackendLanguageUserData;
-		public IntPtr GetClipboardTextFn;
-		public IntPtr SetClipboardTextFn;
-		public void* ClipboardUserData;
-		public IntPtr SetPlatformImeDataFn;
-		public void* _UnusedPadding;
 		public byte WantCaptureMouse;
 		public byte WantCaptureKeyboard;
 		public byte WantTextInput;
@@ -969,21 +984,18 @@ namespace Evergine.Bindings.Imgui
 		public int MetricsRenderIndices;
 		public int MetricsRenderWindows;
 		public int MetricsActiveWindows;
-		public int MetricsActiveAllocations;
 		public Vector2 MouseDelta;
-		public fixed int KeyMap[645];
-		public fixed byte KeysDown[645];
+		public IntPtr Ctx;
 		public Vector2 MousePos;
 		public fixed byte MouseDown[5];
 		public float MouseWheel;
 		public float MouseWheelH;
-		public uint MouseHoveredViewport;
+		public ImGuiMouseSource MouseSource;
 		public byte KeyCtrl;
 		public byte KeyShift;
 		public byte KeyAlt;
 		public byte KeySuper;
-		public fixed float NavInputs[20];
-		public ImGuiModFlags KeyMods;
+		public ImGuiKey KeyMods;
 		public ImGuiKeyData KeysData_0;
 		public ImGuiKeyData KeysData_1;
 		public ImGuiKeyData KeysData_2;
@@ -1139,496 +1151,6 @@ namespace Evergine.Bindings.Imgui
 		public ImGuiKeyData KeysData_152;
 		public ImGuiKeyData KeysData_153;
 		public ImGuiKeyData KeysData_154;
-		public ImGuiKeyData KeysData_155;
-		public ImGuiKeyData KeysData_156;
-		public ImGuiKeyData KeysData_157;
-		public ImGuiKeyData KeysData_158;
-		public ImGuiKeyData KeysData_159;
-		public ImGuiKeyData KeysData_160;
-		public ImGuiKeyData KeysData_161;
-		public ImGuiKeyData KeysData_162;
-		public ImGuiKeyData KeysData_163;
-		public ImGuiKeyData KeysData_164;
-		public ImGuiKeyData KeysData_165;
-		public ImGuiKeyData KeysData_166;
-		public ImGuiKeyData KeysData_167;
-		public ImGuiKeyData KeysData_168;
-		public ImGuiKeyData KeysData_169;
-		public ImGuiKeyData KeysData_170;
-		public ImGuiKeyData KeysData_171;
-		public ImGuiKeyData KeysData_172;
-		public ImGuiKeyData KeysData_173;
-		public ImGuiKeyData KeysData_174;
-		public ImGuiKeyData KeysData_175;
-		public ImGuiKeyData KeysData_176;
-		public ImGuiKeyData KeysData_177;
-		public ImGuiKeyData KeysData_178;
-		public ImGuiKeyData KeysData_179;
-		public ImGuiKeyData KeysData_180;
-		public ImGuiKeyData KeysData_181;
-		public ImGuiKeyData KeysData_182;
-		public ImGuiKeyData KeysData_183;
-		public ImGuiKeyData KeysData_184;
-		public ImGuiKeyData KeysData_185;
-		public ImGuiKeyData KeysData_186;
-		public ImGuiKeyData KeysData_187;
-		public ImGuiKeyData KeysData_188;
-		public ImGuiKeyData KeysData_189;
-		public ImGuiKeyData KeysData_190;
-		public ImGuiKeyData KeysData_191;
-		public ImGuiKeyData KeysData_192;
-		public ImGuiKeyData KeysData_193;
-		public ImGuiKeyData KeysData_194;
-		public ImGuiKeyData KeysData_195;
-		public ImGuiKeyData KeysData_196;
-		public ImGuiKeyData KeysData_197;
-		public ImGuiKeyData KeysData_198;
-		public ImGuiKeyData KeysData_199;
-		public ImGuiKeyData KeysData_200;
-		public ImGuiKeyData KeysData_201;
-		public ImGuiKeyData KeysData_202;
-		public ImGuiKeyData KeysData_203;
-		public ImGuiKeyData KeysData_204;
-		public ImGuiKeyData KeysData_205;
-		public ImGuiKeyData KeysData_206;
-		public ImGuiKeyData KeysData_207;
-		public ImGuiKeyData KeysData_208;
-		public ImGuiKeyData KeysData_209;
-		public ImGuiKeyData KeysData_210;
-		public ImGuiKeyData KeysData_211;
-		public ImGuiKeyData KeysData_212;
-		public ImGuiKeyData KeysData_213;
-		public ImGuiKeyData KeysData_214;
-		public ImGuiKeyData KeysData_215;
-		public ImGuiKeyData KeysData_216;
-		public ImGuiKeyData KeysData_217;
-		public ImGuiKeyData KeysData_218;
-		public ImGuiKeyData KeysData_219;
-		public ImGuiKeyData KeysData_220;
-		public ImGuiKeyData KeysData_221;
-		public ImGuiKeyData KeysData_222;
-		public ImGuiKeyData KeysData_223;
-		public ImGuiKeyData KeysData_224;
-		public ImGuiKeyData KeysData_225;
-		public ImGuiKeyData KeysData_226;
-		public ImGuiKeyData KeysData_227;
-		public ImGuiKeyData KeysData_228;
-		public ImGuiKeyData KeysData_229;
-		public ImGuiKeyData KeysData_230;
-		public ImGuiKeyData KeysData_231;
-		public ImGuiKeyData KeysData_232;
-		public ImGuiKeyData KeysData_233;
-		public ImGuiKeyData KeysData_234;
-		public ImGuiKeyData KeysData_235;
-		public ImGuiKeyData KeysData_236;
-		public ImGuiKeyData KeysData_237;
-		public ImGuiKeyData KeysData_238;
-		public ImGuiKeyData KeysData_239;
-		public ImGuiKeyData KeysData_240;
-		public ImGuiKeyData KeysData_241;
-		public ImGuiKeyData KeysData_242;
-		public ImGuiKeyData KeysData_243;
-		public ImGuiKeyData KeysData_244;
-		public ImGuiKeyData KeysData_245;
-		public ImGuiKeyData KeysData_246;
-		public ImGuiKeyData KeysData_247;
-		public ImGuiKeyData KeysData_248;
-		public ImGuiKeyData KeysData_249;
-		public ImGuiKeyData KeysData_250;
-		public ImGuiKeyData KeysData_251;
-		public ImGuiKeyData KeysData_252;
-		public ImGuiKeyData KeysData_253;
-		public ImGuiKeyData KeysData_254;
-		public ImGuiKeyData KeysData_255;
-		public ImGuiKeyData KeysData_256;
-		public ImGuiKeyData KeysData_257;
-		public ImGuiKeyData KeysData_258;
-		public ImGuiKeyData KeysData_259;
-		public ImGuiKeyData KeysData_260;
-		public ImGuiKeyData KeysData_261;
-		public ImGuiKeyData KeysData_262;
-		public ImGuiKeyData KeysData_263;
-		public ImGuiKeyData KeysData_264;
-		public ImGuiKeyData KeysData_265;
-		public ImGuiKeyData KeysData_266;
-		public ImGuiKeyData KeysData_267;
-		public ImGuiKeyData KeysData_268;
-		public ImGuiKeyData KeysData_269;
-		public ImGuiKeyData KeysData_270;
-		public ImGuiKeyData KeysData_271;
-		public ImGuiKeyData KeysData_272;
-		public ImGuiKeyData KeysData_273;
-		public ImGuiKeyData KeysData_274;
-		public ImGuiKeyData KeysData_275;
-		public ImGuiKeyData KeysData_276;
-		public ImGuiKeyData KeysData_277;
-		public ImGuiKeyData KeysData_278;
-		public ImGuiKeyData KeysData_279;
-		public ImGuiKeyData KeysData_280;
-		public ImGuiKeyData KeysData_281;
-		public ImGuiKeyData KeysData_282;
-		public ImGuiKeyData KeysData_283;
-		public ImGuiKeyData KeysData_284;
-		public ImGuiKeyData KeysData_285;
-		public ImGuiKeyData KeysData_286;
-		public ImGuiKeyData KeysData_287;
-		public ImGuiKeyData KeysData_288;
-		public ImGuiKeyData KeysData_289;
-		public ImGuiKeyData KeysData_290;
-		public ImGuiKeyData KeysData_291;
-		public ImGuiKeyData KeysData_292;
-		public ImGuiKeyData KeysData_293;
-		public ImGuiKeyData KeysData_294;
-		public ImGuiKeyData KeysData_295;
-		public ImGuiKeyData KeysData_296;
-		public ImGuiKeyData KeysData_297;
-		public ImGuiKeyData KeysData_298;
-		public ImGuiKeyData KeysData_299;
-		public ImGuiKeyData KeysData_300;
-		public ImGuiKeyData KeysData_301;
-		public ImGuiKeyData KeysData_302;
-		public ImGuiKeyData KeysData_303;
-		public ImGuiKeyData KeysData_304;
-		public ImGuiKeyData KeysData_305;
-		public ImGuiKeyData KeysData_306;
-		public ImGuiKeyData KeysData_307;
-		public ImGuiKeyData KeysData_308;
-		public ImGuiKeyData KeysData_309;
-		public ImGuiKeyData KeysData_310;
-		public ImGuiKeyData KeysData_311;
-		public ImGuiKeyData KeysData_312;
-		public ImGuiKeyData KeysData_313;
-		public ImGuiKeyData KeysData_314;
-		public ImGuiKeyData KeysData_315;
-		public ImGuiKeyData KeysData_316;
-		public ImGuiKeyData KeysData_317;
-		public ImGuiKeyData KeysData_318;
-		public ImGuiKeyData KeysData_319;
-		public ImGuiKeyData KeysData_320;
-		public ImGuiKeyData KeysData_321;
-		public ImGuiKeyData KeysData_322;
-		public ImGuiKeyData KeysData_323;
-		public ImGuiKeyData KeysData_324;
-		public ImGuiKeyData KeysData_325;
-		public ImGuiKeyData KeysData_326;
-		public ImGuiKeyData KeysData_327;
-		public ImGuiKeyData KeysData_328;
-		public ImGuiKeyData KeysData_329;
-		public ImGuiKeyData KeysData_330;
-		public ImGuiKeyData KeysData_331;
-		public ImGuiKeyData KeysData_332;
-		public ImGuiKeyData KeysData_333;
-		public ImGuiKeyData KeysData_334;
-		public ImGuiKeyData KeysData_335;
-		public ImGuiKeyData KeysData_336;
-		public ImGuiKeyData KeysData_337;
-		public ImGuiKeyData KeysData_338;
-		public ImGuiKeyData KeysData_339;
-		public ImGuiKeyData KeysData_340;
-		public ImGuiKeyData KeysData_341;
-		public ImGuiKeyData KeysData_342;
-		public ImGuiKeyData KeysData_343;
-		public ImGuiKeyData KeysData_344;
-		public ImGuiKeyData KeysData_345;
-		public ImGuiKeyData KeysData_346;
-		public ImGuiKeyData KeysData_347;
-		public ImGuiKeyData KeysData_348;
-		public ImGuiKeyData KeysData_349;
-		public ImGuiKeyData KeysData_350;
-		public ImGuiKeyData KeysData_351;
-		public ImGuiKeyData KeysData_352;
-		public ImGuiKeyData KeysData_353;
-		public ImGuiKeyData KeysData_354;
-		public ImGuiKeyData KeysData_355;
-		public ImGuiKeyData KeysData_356;
-		public ImGuiKeyData KeysData_357;
-		public ImGuiKeyData KeysData_358;
-		public ImGuiKeyData KeysData_359;
-		public ImGuiKeyData KeysData_360;
-		public ImGuiKeyData KeysData_361;
-		public ImGuiKeyData KeysData_362;
-		public ImGuiKeyData KeysData_363;
-		public ImGuiKeyData KeysData_364;
-		public ImGuiKeyData KeysData_365;
-		public ImGuiKeyData KeysData_366;
-		public ImGuiKeyData KeysData_367;
-		public ImGuiKeyData KeysData_368;
-		public ImGuiKeyData KeysData_369;
-		public ImGuiKeyData KeysData_370;
-		public ImGuiKeyData KeysData_371;
-		public ImGuiKeyData KeysData_372;
-		public ImGuiKeyData KeysData_373;
-		public ImGuiKeyData KeysData_374;
-		public ImGuiKeyData KeysData_375;
-		public ImGuiKeyData KeysData_376;
-		public ImGuiKeyData KeysData_377;
-		public ImGuiKeyData KeysData_378;
-		public ImGuiKeyData KeysData_379;
-		public ImGuiKeyData KeysData_380;
-		public ImGuiKeyData KeysData_381;
-		public ImGuiKeyData KeysData_382;
-		public ImGuiKeyData KeysData_383;
-		public ImGuiKeyData KeysData_384;
-		public ImGuiKeyData KeysData_385;
-		public ImGuiKeyData KeysData_386;
-		public ImGuiKeyData KeysData_387;
-		public ImGuiKeyData KeysData_388;
-		public ImGuiKeyData KeysData_389;
-		public ImGuiKeyData KeysData_390;
-		public ImGuiKeyData KeysData_391;
-		public ImGuiKeyData KeysData_392;
-		public ImGuiKeyData KeysData_393;
-		public ImGuiKeyData KeysData_394;
-		public ImGuiKeyData KeysData_395;
-		public ImGuiKeyData KeysData_396;
-		public ImGuiKeyData KeysData_397;
-		public ImGuiKeyData KeysData_398;
-		public ImGuiKeyData KeysData_399;
-		public ImGuiKeyData KeysData_400;
-		public ImGuiKeyData KeysData_401;
-		public ImGuiKeyData KeysData_402;
-		public ImGuiKeyData KeysData_403;
-		public ImGuiKeyData KeysData_404;
-		public ImGuiKeyData KeysData_405;
-		public ImGuiKeyData KeysData_406;
-		public ImGuiKeyData KeysData_407;
-		public ImGuiKeyData KeysData_408;
-		public ImGuiKeyData KeysData_409;
-		public ImGuiKeyData KeysData_410;
-		public ImGuiKeyData KeysData_411;
-		public ImGuiKeyData KeysData_412;
-		public ImGuiKeyData KeysData_413;
-		public ImGuiKeyData KeysData_414;
-		public ImGuiKeyData KeysData_415;
-		public ImGuiKeyData KeysData_416;
-		public ImGuiKeyData KeysData_417;
-		public ImGuiKeyData KeysData_418;
-		public ImGuiKeyData KeysData_419;
-		public ImGuiKeyData KeysData_420;
-		public ImGuiKeyData KeysData_421;
-		public ImGuiKeyData KeysData_422;
-		public ImGuiKeyData KeysData_423;
-		public ImGuiKeyData KeysData_424;
-		public ImGuiKeyData KeysData_425;
-		public ImGuiKeyData KeysData_426;
-		public ImGuiKeyData KeysData_427;
-		public ImGuiKeyData KeysData_428;
-		public ImGuiKeyData KeysData_429;
-		public ImGuiKeyData KeysData_430;
-		public ImGuiKeyData KeysData_431;
-		public ImGuiKeyData KeysData_432;
-		public ImGuiKeyData KeysData_433;
-		public ImGuiKeyData KeysData_434;
-		public ImGuiKeyData KeysData_435;
-		public ImGuiKeyData KeysData_436;
-		public ImGuiKeyData KeysData_437;
-		public ImGuiKeyData KeysData_438;
-		public ImGuiKeyData KeysData_439;
-		public ImGuiKeyData KeysData_440;
-		public ImGuiKeyData KeysData_441;
-		public ImGuiKeyData KeysData_442;
-		public ImGuiKeyData KeysData_443;
-		public ImGuiKeyData KeysData_444;
-		public ImGuiKeyData KeysData_445;
-		public ImGuiKeyData KeysData_446;
-		public ImGuiKeyData KeysData_447;
-		public ImGuiKeyData KeysData_448;
-		public ImGuiKeyData KeysData_449;
-		public ImGuiKeyData KeysData_450;
-		public ImGuiKeyData KeysData_451;
-		public ImGuiKeyData KeysData_452;
-		public ImGuiKeyData KeysData_453;
-		public ImGuiKeyData KeysData_454;
-		public ImGuiKeyData KeysData_455;
-		public ImGuiKeyData KeysData_456;
-		public ImGuiKeyData KeysData_457;
-		public ImGuiKeyData KeysData_458;
-		public ImGuiKeyData KeysData_459;
-		public ImGuiKeyData KeysData_460;
-		public ImGuiKeyData KeysData_461;
-		public ImGuiKeyData KeysData_462;
-		public ImGuiKeyData KeysData_463;
-		public ImGuiKeyData KeysData_464;
-		public ImGuiKeyData KeysData_465;
-		public ImGuiKeyData KeysData_466;
-		public ImGuiKeyData KeysData_467;
-		public ImGuiKeyData KeysData_468;
-		public ImGuiKeyData KeysData_469;
-		public ImGuiKeyData KeysData_470;
-		public ImGuiKeyData KeysData_471;
-		public ImGuiKeyData KeysData_472;
-		public ImGuiKeyData KeysData_473;
-		public ImGuiKeyData KeysData_474;
-		public ImGuiKeyData KeysData_475;
-		public ImGuiKeyData KeysData_476;
-		public ImGuiKeyData KeysData_477;
-		public ImGuiKeyData KeysData_478;
-		public ImGuiKeyData KeysData_479;
-		public ImGuiKeyData KeysData_480;
-		public ImGuiKeyData KeysData_481;
-		public ImGuiKeyData KeysData_482;
-		public ImGuiKeyData KeysData_483;
-		public ImGuiKeyData KeysData_484;
-		public ImGuiKeyData KeysData_485;
-		public ImGuiKeyData KeysData_486;
-		public ImGuiKeyData KeysData_487;
-		public ImGuiKeyData KeysData_488;
-		public ImGuiKeyData KeysData_489;
-		public ImGuiKeyData KeysData_490;
-		public ImGuiKeyData KeysData_491;
-		public ImGuiKeyData KeysData_492;
-		public ImGuiKeyData KeysData_493;
-		public ImGuiKeyData KeysData_494;
-		public ImGuiKeyData KeysData_495;
-		public ImGuiKeyData KeysData_496;
-		public ImGuiKeyData KeysData_497;
-		public ImGuiKeyData KeysData_498;
-		public ImGuiKeyData KeysData_499;
-		public ImGuiKeyData KeysData_500;
-		public ImGuiKeyData KeysData_501;
-		public ImGuiKeyData KeysData_502;
-		public ImGuiKeyData KeysData_503;
-		public ImGuiKeyData KeysData_504;
-		public ImGuiKeyData KeysData_505;
-		public ImGuiKeyData KeysData_506;
-		public ImGuiKeyData KeysData_507;
-		public ImGuiKeyData KeysData_508;
-		public ImGuiKeyData KeysData_509;
-		public ImGuiKeyData KeysData_510;
-		public ImGuiKeyData KeysData_511;
-		public ImGuiKeyData KeysData_512;
-		public ImGuiKeyData KeysData_513;
-		public ImGuiKeyData KeysData_514;
-		public ImGuiKeyData KeysData_515;
-		public ImGuiKeyData KeysData_516;
-		public ImGuiKeyData KeysData_517;
-		public ImGuiKeyData KeysData_518;
-		public ImGuiKeyData KeysData_519;
-		public ImGuiKeyData KeysData_520;
-		public ImGuiKeyData KeysData_521;
-		public ImGuiKeyData KeysData_522;
-		public ImGuiKeyData KeysData_523;
-		public ImGuiKeyData KeysData_524;
-		public ImGuiKeyData KeysData_525;
-		public ImGuiKeyData KeysData_526;
-		public ImGuiKeyData KeysData_527;
-		public ImGuiKeyData KeysData_528;
-		public ImGuiKeyData KeysData_529;
-		public ImGuiKeyData KeysData_530;
-		public ImGuiKeyData KeysData_531;
-		public ImGuiKeyData KeysData_532;
-		public ImGuiKeyData KeysData_533;
-		public ImGuiKeyData KeysData_534;
-		public ImGuiKeyData KeysData_535;
-		public ImGuiKeyData KeysData_536;
-		public ImGuiKeyData KeysData_537;
-		public ImGuiKeyData KeysData_538;
-		public ImGuiKeyData KeysData_539;
-		public ImGuiKeyData KeysData_540;
-		public ImGuiKeyData KeysData_541;
-		public ImGuiKeyData KeysData_542;
-		public ImGuiKeyData KeysData_543;
-		public ImGuiKeyData KeysData_544;
-		public ImGuiKeyData KeysData_545;
-		public ImGuiKeyData KeysData_546;
-		public ImGuiKeyData KeysData_547;
-		public ImGuiKeyData KeysData_548;
-		public ImGuiKeyData KeysData_549;
-		public ImGuiKeyData KeysData_550;
-		public ImGuiKeyData KeysData_551;
-		public ImGuiKeyData KeysData_552;
-		public ImGuiKeyData KeysData_553;
-		public ImGuiKeyData KeysData_554;
-		public ImGuiKeyData KeysData_555;
-		public ImGuiKeyData KeysData_556;
-		public ImGuiKeyData KeysData_557;
-		public ImGuiKeyData KeysData_558;
-		public ImGuiKeyData KeysData_559;
-		public ImGuiKeyData KeysData_560;
-		public ImGuiKeyData KeysData_561;
-		public ImGuiKeyData KeysData_562;
-		public ImGuiKeyData KeysData_563;
-		public ImGuiKeyData KeysData_564;
-		public ImGuiKeyData KeysData_565;
-		public ImGuiKeyData KeysData_566;
-		public ImGuiKeyData KeysData_567;
-		public ImGuiKeyData KeysData_568;
-		public ImGuiKeyData KeysData_569;
-		public ImGuiKeyData KeysData_570;
-		public ImGuiKeyData KeysData_571;
-		public ImGuiKeyData KeysData_572;
-		public ImGuiKeyData KeysData_573;
-		public ImGuiKeyData KeysData_574;
-		public ImGuiKeyData KeysData_575;
-		public ImGuiKeyData KeysData_576;
-		public ImGuiKeyData KeysData_577;
-		public ImGuiKeyData KeysData_578;
-		public ImGuiKeyData KeysData_579;
-		public ImGuiKeyData KeysData_580;
-		public ImGuiKeyData KeysData_581;
-		public ImGuiKeyData KeysData_582;
-		public ImGuiKeyData KeysData_583;
-		public ImGuiKeyData KeysData_584;
-		public ImGuiKeyData KeysData_585;
-		public ImGuiKeyData KeysData_586;
-		public ImGuiKeyData KeysData_587;
-		public ImGuiKeyData KeysData_588;
-		public ImGuiKeyData KeysData_589;
-		public ImGuiKeyData KeysData_590;
-		public ImGuiKeyData KeysData_591;
-		public ImGuiKeyData KeysData_592;
-		public ImGuiKeyData KeysData_593;
-		public ImGuiKeyData KeysData_594;
-		public ImGuiKeyData KeysData_595;
-		public ImGuiKeyData KeysData_596;
-		public ImGuiKeyData KeysData_597;
-		public ImGuiKeyData KeysData_598;
-		public ImGuiKeyData KeysData_599;
-		public ImGuiKeyData KeysData_600;
-		public ImGuiKeyData KeysData_601;
-		public ImGuiKeyData KeysData_602;
-		public ImGuiKeyData KeysData_603;
-		public ImGuiKeyData KeysData_604;
-		public ImGuiKeyData KeysData_605;
-		public ImGuiKeyData KeysData_606;
-		public ImGuiKeyData KeysData_607;
-		public ImGuiKeyData KeysData_608;
-		public ImGuiKeyData KeysData_609;
-		public ImGuiKeyData KeysData_610;
-		public ImGuiKeyData KeysData_611;
-		public ImGuiKeyData KeysData_612;
-		public ImGuiKeyData KeysData_613;
-		public ImGuiKeyData KeysData_614;
-		public ImGuiKeyData KeysData_615;
-		public ImGuiKeyData KeysData_616;
-		public ImGuiKeyData KeysData_617;
-		public ImGuiKeyData KeysData_618;
-		public ImGuiKeyData KeysData_619;
-		public ImGuiKeyData KeysData_620;
-		public ImGuiKeyData KeysData_621;
-		public ImGuiKeyData KeysData_622;
-		public ImGuiKeyData KeysData_623;
-		public ImGuiKeyData KeysData_624;
-		public ImGuiKeyData KeysData_625;
-		public ImGuiKeyData KeysData_626;
-		public ImGuiKeyData KeysData_627;
-		public ImGuiKeyData KeysData_628;
-		public ImGuiKeyData KeysData_629;
-		public ImGuiKeyData KeysData_630;
-		public ImGuiKeyData KeysData_631;
-		public ImGuiKeyData KeysData_632;
-		public ImGuiKeyData KeysData_633;
-		public ImGuiKeyData KeysData_634;
-		public ImGuiKeyData KeysData_635;
-		public ImGuiKeyData KeysData_636;
-		public ImGuiKeyData KeysData_637;
-		public ImGuiKeyData KeysData_638;
-		public ImGuiKeyData KeysData_639;
-		public ImGuiKeyData KeysData_640;
-		public ImGuiKeyData KeysData_641;
-		public ImGuiKeyData KeysData_642;
-		public ImGuiKeyData KeysData_643;
-		public ImGuiKeyData KeysData_644;
 		public byte WantCaptureMouseUnlessPopupClose;
 		public Vector2 MousePosPrev;
 		public Vector2 MouseClickedPos_0;
@@ -1642,23 +1164,17 @@ namespace Evergine.Bindings.Imgui
 		public fixed ushort MouseClickedCount[5];
 		public fixed ushort MouseClickedLastCount[5];
 		public fixed byte MouseReleased[5];
+		public fixed double MouseReleasedTime[5];
 		public fixed byte MouseDownOwned[5];
 		public fixed byte MouseDownOwnedUnlessPopupClose[5];
+		public byte MouseWheelRequestAxisSwap;
+		public byte MouseCtrlLeftAsRightClick;
 		public fixed float MouseDownDuration[5];
 		public fixed float MouseDownDurationPrev[5];
-		public Vector2 MouseDragMaxDistanceAbs_0;
-		public Vector2 MouseDragMaxDistanceAbs_1;
-		public Vector2 MouseDragMaxDistanceAbs_2;
-		public Vector2 MouseDragMaxDistanceAbs_3;
-		public Vector2 MouseDragMaxDistanceAbs_4;
 		public fixed float MouseDragMaxDistanceSqr[5];
-		public fixed float NavInputsDownDuration[20];
-		public fixed float NavInputsDownDurationPrev[20];
 		public float PenPressure;
 		public byte AppFocusLost;
 		public byte AppAcceptingEvents;
-		public sbyte BackendUsingLegacyKeyArrays;
-		public byte BackendUsingLegacyNavInputArray;
 		public ushort InputQueueSurrogate;
 		public ImVector InputQueueCharacters;
 
@@ -1702,24 +1218,29 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImGuiIO_AddMousePosEvent(self, x, y);
 		}
 
-		public void AddMouseViewportEvent(uint id)
+		public void AddMouseSourceEvent(ImGuiMouseSource source)
 		{
-			ImguiNative.ImGuiIO_AddMouseViewportEvent(self, id);
+			ImguiNative.ImGuiIO_AddMouseSourceEvent(self, source);
 		}
 
-		public void AddMouseWheelEvent(float wh_x, float wh_y)
+		public void AddMouseWheelEvent(float wheel_x, float wheel_y)
 		{
-			ImguiNative.ImGuiIO_AddMouseWheelEvent(self, wh_x, wh_y);
+			ImguiNative.ImGuiIO_AddMouseWheelEvent(self, wheel_x, wheel_y);
 		}
 
-		public void ClearInputCharacters()
+		public void ClearEventsQueue()
 		{
-			ImguiNative.ImGuiIO_ClearInputCharacters(self);
+			ImguiNative.ImGuiIO_ClearEventsQueue(self);
 		}
 
 		public void ClearInputKeys()
 		{
 			ImguiNative.ImGuiIO_ClearInputKeys(self);
+		}
+
+		public void ClearInputMouse()
+		{
+			ImguiNative.ImGuiIO_ClearInputMouse(self);
 		}
 
 		public void SetAppAcceptingEvents([MarshalAs(UnmanagedType.I1)] bool accepting_events)
@@ -1738,6 +1259,7 @@ namespace Evergine.Bindings.Imgui
 
 	public unsafe partial struct ImGuiInputTextCallbackData
 	{
+		public IntPtr Ctx;
 		public ImGuiInputTextFlags EventFlag;
 		public ImGuiInputTextFlags Flags;
 		public void* UserData;
@@ -1790,11 +1312,13 @@ namespace Evergine.Bindings.Imgui
 
 	public unsafe partial struct ImGuiListClipper
 	{
+		public IntPtr Ctx;
 		public int DisplayStart;
 		public int DisplayEnd;
 		public int ItemsCount;
 		public float ItemsHeight;
 		public float StartPosY;
+		public double StartSeekOffsetY;
 		public void* TempData;
 
 		public void Begin(int items_count, float items_height = -1.0f)
@@ -1807,9 +1331,19 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImGuiListClipper_End(self);
 		}
 
-		public void ForceDisplayRangeByIndices(int item_min, int item_max)
+		public void IncludeItemByIndex(int item_index)
 		{
-			ImguiNative.ImGuiListClipper_ForceDisplayRangeByIndices(self, item_min, item_max);
+			ImguiNative.ImGuiListClipper_IncludeItemByIndex(self, item_index);
+		}
+
+		public void IncludeItemsByIndex(int item_begin, int item_end)
+		{
+			ImguiNative.ImGuiListClipper_IncludeItemsByIndex(self, item_begin, item_end);
+		}
+
+		public void SeekCursorForItem(int item_index)
+		{
+			ImguiNative.ImGuiListClipper_SeekCursorForItem(self, item_index);
 		}
 
 		public bool Step()
@@ -1819,6 +1353,16 @@ namespace Evergine.Bindings.Imgui
 
 		public ImGuiListClipper* self => (ImGuiListClipper*)Unsafe.AsPointer(ref this);
 
+	}
+
+	public unsafe partial struct ImGuiMultiSelectIO
+	{
+		public ImVector Requests;
+		public long RangeSrcItem;
+		public long NavIdItem;
+		public byte NavIdSelected;
+		public byte RangeSrcReset;
+		public int ItemsCount;
 	}
 
 	public unsafe partial struct ImGuiOnceUponAFrame
@@ -1863,31 +1407,15 @@ namespace Evergine.Bindings.Imgui
 
 	public unsafe partial struct ImGuiPlatformIO
 	{
-		public InlineDelegate0 Platform_CreateWindow;
-		public InlineDelegate0 Platform_DestroyWindow;
-		public InlineDelegate0 Platform_ShowWindow;
-		public InlineDelegate1 Platform_SetWindowPos;
-		public InlineDelegate2 Platform_GetWindowPos;
-		public InlineDelegate3 Platform_SetWindowSize;
-		public InlineDelegate2 Platform_GetWindowSize;
-		public InlineDelegate0 Platform_SetWindowFocus;
-		public InlineDelegate4 Platform_GetWindowFocus;
-		public InlineDelegate4 Platform_GetWindowMinimized;
-		public InlineDelegate5 Platform_SetWindowTitle;
-		public InlineDelegate6 Platform_SetWindowAlpha;
-		public InlineDelegate0 Platform_UpdateWindow;
-		public InlineDelegate7 Platform_RenderWindow;
-		public InlineDelegate7 Platform_SwapBuffers;
-		public InlineDelegate8 Platform_GetWindowDpiScale;
-		public InlineDelegate0 Platform_OnChangedViewport;
-		public InlineDelegate9 Platform_CreateVkSurface;
-		public InlineDelegate0 Renderer_CreateWindow;
-		public InlineDelegate0 Renderer_DestroyWindow;
-		public InlineDelegate3 Renderer_SetWindowSize;
-		public InlineDelegate7 Renderer_RenderWindow;
-		public InlineDelegate7 Renderer_SwapBuffers;
-		public ImVector Monitors;
-		public ImVector Viewports;
+		public IntPtr Platform_GetClipboardTextFn;
+		public IntPtr Platform_SetClipboardTextFn;
+		public void* Platform_ClipboardUserData;
+		public IntPtr Platform_OpenInShellFn;
+		public void* Platform_OpenInShellUserData;
+		public IntPtr Platform_SetImeDataFn;
+		public void* Platform_ImeUserData;
+		public ushort Platform_LocaleDecimalPoint;
+		public void* Renderer_RenderState;
 	}
 
 	public unsafe partial struct ImGuiPlatformImeData
@@ -1897,13 +1425,75 @@ namespace Evergine.Bindings.Imgui
 		public float InputLineHeight;
 	}
 
-	public unsafe partial struct ImGuiPlatformMonitor
+	public unsafe partial struct ImGuiSelectionBasicStorage
 	{
-		public Vector2 MainPos;
-		public Vector2 MainSize;
-		public Vector2 WorkPos;
-		public Vector2 WorkSize;
-		public float DpiScale;
+		public int Size;
+		public byte PreserveOrder;
+		public void* UserData;
+		public IntPtr AdapterIndexToStorageId;
+		public int _SelectionOrder;
+		public ImGuiStorage _Storage;
+
+		public void ApplyRequests(ImGuiMultiSelectIO* ms_io)
+		{
+			ImguiNative.ImGuiSelectionBasicStorage_ApplyRequests(self, ms_io);
+		}
+
+		public void Clear()
+		{
+			ImguiNative.ImGuiSelectionBasicStorage_Clear(self);
+		}
+
+		public bool Contains(uint id)
+		{
+			return ImguiNative.ImGuiSelectionBasicStorage_Contains(self, id);
+		}
+
+		public bool GetNextSelectedItem(void** opaque_it, uint* out_id)
+		{
+			return ImguiNative.ImGuiSelectionBasicStorage_GetNextSelectedItem(self, opaque_it, out_id);
+		}
+
+		public uint GetStorageIdFromIndex(int idx)
+		{
+			return ImguiNative.ImGuiSelectionBasicStorage_GetStorageIdFromIndex(self, idx);
+		}
+
+		public void SetItemSelected(uint id, [MarshalAs(UnmanagedType.I1)] bool selected)
+		{
+			ImguiNative.ImGuiSelectionBasicStorage_SetItemSelected(self, id, selected);
+		}
+
+		public void Swap(ImGuiSelectionBasicStorage* r)
+		{
+			ImguiNative.ImGuiSelectionBasicStorage_Swap(self, r);
+		}
+
+		public ImGuiSelectionBasicStorage* self => (ImGuiSelectionBasicStorage*)Unsafe.AsPointer(ref this);
+
+	}
+
+	public unsafe partial struct ImGuiSelectionExternalStorage
+	{
+		public void* UserData;
+		public IntPtr AdapterSetItemSelected;
+
+		public void ApplyRequests(ImGuiMultiSelectIO* ms_io)
+		{
+			ImguiNative.ImGuiSelectionExternalStorage_ApplyRequests(self, ms_io);
+		}
+
+		public ImGuiSelectionExternalStorage* self => (ImGuiSelectionExternalStorage*)Unsafe.AsPointer(ref this);
+
+	}
+
+	public unsafe partial struct ImGuiSelectionRequest
+	{
+		public ImGuiSelectionRequestType Type;
+		public byte Selected;
+		public sbyte RangeDirection;
+		public long RangeFirstItem;
+		public long RangeLastItem;
 	}
 
 	public unsafe partial struct ImGuiSizeCallbackData
@@ -2004,6 +1594,7 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 WindowPadding;
 		public float WindowRounding;
 		public float WindowBorderSize;
+		public float WindowBorderHoverPadding;
 		public Vector2 WindowMinSize;
 		public Vector2 WindowTitleAlign;
 		public ImGuiDir WindowMenuButtonPosition;
@@ -2025,12 +1616,21 @@ namespace Evergine.Bindings.Imgui
 		public float GrabMinSize;
 		public float GrabRounding;
 		public float LogSliderDeadzone;
+		public float ImageBorderSize;
 		public float TabRounding;
 		public float TabBorderSize;
-		public float TabMinWidthForCloseButton;
+		public float TabCloseButtonMinWidthSelected;
+		public float TabCloseButtonMinWidthUnselected;
+		public float TabBarBorderSize;
+		public float TabBarOverlineSize;
+		public float TableAngledHeadersAngle;
+		public Vector2 TableAngledHeadersTextAlign;
 		public ImGuiDir ColorButtonPosition;
 		public Vector2 ButtonTextAlign;
 		public Vector2 SelectableTextAlign;
+		public float SeparatorTextBorderSize;
+		public Vector2 SeparatorTextAlign;
+		public Vector2 SeparatorTextPadding;
 		public Vector2 DisplayWindowPadding;
 		public Vector2 DisplaySafeAreaPadding;
 		public float MouseCursorScale;
@@ -2094,6 +1694,12 @@ namespace Evergine.Bindings.Imgui
 		public Vector4 Colors_52;
 		public Vector4 Colors_53;
 		public Vector4 Colors_54;
+		public Vector4 Colors_55;
+		public float HoverStationaryDelay;
+		public float HoverDelayShort;
+		public float HoverDelayNormal;
+		public ImGuiHoveredFlags HoverFlagsForTooltipMouse;
+		public ImGuiHoveredFlags HoverFlagsForTooltipNav;
 
 		public void ScaleAllSizes(float scale_factor)
 		{
@@ -2128,7 +1734,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImGuiTextBuffer_append(self, str, str_end);
 		}
 
-		public void appendf([MarshalAs(UnmanagedType.LPUTF8Str)] string fmt)
+		public void appendf( char* fmt)
 		{
 			ImguiNative.ImGuiTextBuffer_appendf(self, fmt);
 		}
@@ -2161,6 +1767,11 @@ namespace Evergine.Bindings.Imgui
 		public void reserve(int capacity)
 		{
 			ImguiNative.ImGuiTextBuffer_reserve(self, capacity);
+		}
+
+		public void resize(int size)
+		{
+			ImguiNative.ImGuiTextBuffer_resize(self, size);
 		}
 
 		public int size()
@@ -2234,16 +1845,8 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 Size;
 		public Vector2 WorkPos;
 		public Vector2 WorkSize;
-		public float DpiScale;
-		public uint ParentViewportId;
-		public ImDrawData* DrawData;
-		public void* RendererUserData;
-		public void* PlatformUserData;
 		public void* PlatformHandle;
 		public void* PlatformHandleRaw;
-		public byte PlatformRequestMove;
-		public byte PlatformRequestResize;
-		public byte PlatformRequestClose;
 
 		public Vector2 GetCenter()
 		{
@@ -2265,18 +1868,6 @@ namespace Evergine.Bindings.Imgui
 
 	}
 
-	public unsafe partial struct ImGuiWindowClass
-	{
-		public uint ClassId;
-		public uint ParentViewportId;
-		public ImGuiViewportFlags ViewportFlagsOverrideSet;
-		public ImGuiViewportFlags ViewportFlagsOverrideClear;
-		public ImGuiTabItemFlags TabItemFlagsOverrideSet;
-		public ImGuiDockNodeFlags DockNodeFlagsOverrideSet;
-		public byte DockingAlwaysTabBar;
-		public byte DockingAllowUnclassed;
-	}
-
 	public unsafe partial struct ImVec2
 	{
 		public float x;
@@ -2289,150 +1880,6 @@ namespace Evergine.Bindings.Imgui
 		public float y;
 		public float z;
 		public float w;
-	}
-
-	public unsafe partial struct STB_TexteditState
-	{
-		public int cursor;
-		public int select_start;
-		public int select_end;
-		public byte insert_mode;
-		public int row_count_per_page;
-		public byte cursor_at_end_of_line;
-		public byte initialized;
-		public byte has_preferred_x;
-		public byte single_line;
-		public byte padding1;
-		public byte padding2;
-		public byte padding3;
-		public float preferred_x;
-		public StbUndoState undostate;
-	}
-
-	public unsafe partial struct StbTexteditRow
-	{
-		public float x0;
-		public float x1;
-		public float baseline_y_delta;
-		public float ymin;
-		public float ymax;
-		public int num_chars;
-	}
-
-	public unsafe partial struct StbUndoRecord
-	{
-		public int where;
-		public int insert_length;
-		public int delete_length;
-		public int char_storage;
-	}
-
-	public unsafe partial struct StbUndoState
-	{
-		public StbUndoRecord undo_rec_0;
-		public StbUndoRecord undo_rec_1;
-		public StbUndoRecord undo_rec_2;
-		public StbUndoRecord undo_rec_3;
-		public StbUndoRecord undo_rec_4;
-		public StbUndoRecord undo_rec_5;
-		public StbUndoRecord undo_rec_6;
-		public StbUndoRecord undo_rec_7;
-		public StbUndoRecord undo_rec_8;
-		public StbUndoRecord undo_rec_9;
-		public StbUndoRecord undo_rec_10;
-		public StbUndoRecord undo_rec_11;
-		public StbUndoRecord undo_rec_12;
-		public StbUndoRecord undo_rec_13;
-		public StbUndoRecord undo_rec_14;
-		public StbUndoRecord undo_rec_15;
-		public StbUndoRecord undo_rec_16;
-		public StbUndoRecord undo_rec_17;
-		public StbUndoRecord undo_rec_18;
-		public StbUndoRecord undo_rec_19;
-		public StbUndoRecord undo_rec_20;
-		public StbUndoRecord undo_rec_21;
-		public StbUndoRecord undo_rec_22;
-		public StbUndoRecord undo_rec_23;
-		public StbUndoRecord undo_rec_24;
-		public StbUndoRecord undo_rec_25;
-		public StbUndoRecord undo_rec_26;
-		public StbUndoRecord undo_rec_27;
-		public StbUndoRecord undo_rec_28;
-		public StbUndoRecord undo_rec_29;
-		public StbUndoRecord undo_rec_30;
-		public StbUndoRecord undo_rec_31;
-		public StbUndoRecord undo_rec_32;
-		public StbUndoRecord undo_rec_33;
-		public StbUndoRecord undo_rec_34;
-		public StbUndoRecord undo_rec_35;
-		public StbUndoRecord undo_rec_36;
-		public StbUndoRecord undo_rec_37;
-		public StbUndoRecord undo_rec_38;
-		public StbUndoRecord undo_rec_39;
-		public StbUndoRecord undo_rec_40;
-		public StbUndoRecord undo_rec_41;
-		public StbUndoRecord undo_rec_42;
-		public StbUndoRecord undo_rec_43;
-		public StbUndoRecord undo_rec_44;
-		public StbUndoRecord undo_rec_45;
-		public StbUndoRecord undo_rec_46;
-		public StbUndoRecord undo_rec_47;
-		public StbUndoRecord undo_rec_48;
-		public StbUndoRecord undo_rec_49;
-		public StbUndoRecord undo_rec_50;
-		public StbUndoRecord undo_rec_51;
-		public StbUndoRecord undo_rec_52;
-		public StbUndoRecord undo_rec_53;
-		public StbUndoRecord undo_rec_54;
-		public StbUndoRecord undo_rec_55;
-		public StbUndoRecord undo_rec_56;
-		public StbUndoRecord undo_rec_57;
-		public StbUndoRecord undo_rec_58;
-		public StbUndoRecord undo_rec_59;
-		public StbUndoRecord undo_rec_60;
-		public StbUndoRecord undo_rec_61;
-		public StbUndoRecord undo_rec_62;
-		public StbUndoRecord undo_rec_63;
-		public StbUndoRecord undo_rec_64;
-		public StbUndoRecord undo_rec_65;
-		public StbUndoRecord undo_rec_66;
-		public StbUndoRecord undo_rec_67;
-		public StbUndoRecord undo_rec_68;
-		public StbUndoRecord undo_rec_69;
-		public StbUndoRecord undo_rec_70;
-		public StbUndoRecord undo_rec_71;
-		public StbUndoRecord undo_rec_72;
-		public StbUndoRecord undo_rec_73;
-		public StbUndoRecord undo_rec_74;
-		public StbUndoRecord undo_rec_75;
-		public StbUndoRecord undo_rec_76;
-		public StbUndoRecord undo_rec_77;
-		public StbUndoRecord undo_rec_78;
-		public StbUndoRecord undo_rec_79;
-		public StbUndoRecord undo_rec_80;
-		public StbUndoRecord undo_rec_81;
-		public StbUndoRecord undo_rec_82;
-		public StbUndoRecord undo_rec_83;
-		public StbUndoRecord undo_rec_84;
-		public StbUndoRecord undo_rec_85;
-		public StbUndoRecord undo_rec_86;
-		public StbUndoRecord undo_rec_87;
-		public StbUndoRecord undo_rec_88;
-		public StbUndoRecord undo_rec_89;
-		public StbUndoRecord undo_rec_90;
-		public StbUndoRecord undo_rec_91;
-		public StbUndoRecord undo_rec_92;
-		public StbUndoRecord undo_rec_93;
-		public StbUndoRecord undo_rec_94;
-		public StbUndoRecord undo_rec_95;
-		public StbUndoRecord undo_rec_96;
-		public StbUndoRecord undo_rec_97;
-		public StbUndoRecord undo_rec_98;
-		public fixed ushort undo_char[999];
-		public short undo_point;
-		public short redo_point;
-		public int undo_char_point;
-		public int redo_char_point;
 	}
 
 }

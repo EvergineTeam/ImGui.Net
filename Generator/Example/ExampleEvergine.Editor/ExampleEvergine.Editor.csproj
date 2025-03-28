@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Evergine.Common" Version="2025.3.18.7" />
+		<PackageReference Include="Evergine.Components" Version="2025.3.18.7" />
+		<PackageReference Include="Evergine.Framework" Version="2025.3.18.7" />
+		<PackageReference Include="Evergine.Editor.Extension" Version="2025.3.18.7" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\ExampleEvergine\ExampleEvergine.csproj" />
+	</ItemGroup>
+</Project>

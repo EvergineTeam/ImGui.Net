@@ -26,9 +26,6 @@ namespace ImguiGen
 
                 // Functions
                 CSCodeWriter.WriteFuntions(outputPath, @namespace, libraryName, imguiVersion);
-
-                // Delegates
-                CSCodeWriter.WriteInlineDelegates(outputPath, @namespace);
             }
         }
     }

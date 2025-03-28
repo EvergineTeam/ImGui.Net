@@ -25,17 +25,19 @@ namespace Evergine.Bindings.Implot
 		NoTickLabels = 8,
 		NoInitialFit = 16,
 		NoMenus = 32,
-		Opposite = 64,
-		Foreground = 128,
-		Invert = 256,
-		AutoFit = 512,
-		RangeFit = 1024,
-		PanStretch = 2048,
-		LockMin = 4096,
-		LockMax = 8192,
-		Lock = 12288,
+		NoSideSwitch = 64,
+		NoHighlight = 128,
+		Opposite = 256,
+		Foreground = 512,
+		Invert = 1024,
+		AutoFit = 2048,
+		RangeFit = 4096,
+		PanStretch = 8192,
+		LockMin = 16384,
+		LockMax = 32768,
+		Lock = 49152,
 		NoDecorations = 15,
-		AuxDefault = 66,
+		AuxDefault = 258,
 	}
 
 	[Flags]
@@ -163,10 +165,9 @@ namespace Evergine.Bindings.Implot
 		NoInputs = 8,
 		NoMenus = 16,
 		NoBoxSelect = 32,
-		NoChild = 64,
-		NoFrame = 128,
-		Equal = 256,
-		Crosshairs = 512,
+		NoFrame = 64,
+		Equal = 128,
+		Crosshairs = 256,
 		CanvasOnly = 55,
 	}
 
@@ -219,6 +220,7 @@ namespace Evergine.Bindings.Implot
 		NoMenus = 8,
 		Outside = 16,
 		Horizontal = 32,
+		Sort = 64,
 	}
 
 	[Flags]
@@ -229,6 +231,7 @@ namespace Evergine.Bindings.Implot
 		Loop = 2048,
 		SkipNaN = 4096,
 		NoClip = 8192,
+		Shaded = 16384,
 	}
 
 	public enum ImPlotLocation
@@ -274,6 +277,8 @@ namespace Evergine.Bindings.Implot
 	{
 		None = 0,
 		Normalize = 1024,
+		IgnoreHidden = 2048,
+		Exploding = 4096,
 	}
 
 	public enum ImPlotScale
@@ -302,6 +307,7 @@ namespace Evergine.Bindings.Implot
 	{
 		None = 0,
 		PreStep = 1024,
+		Shaded = 2048,
 	}
 
 	[Flags]

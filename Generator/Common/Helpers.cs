@@ -7,21 +7,6 @@ namespace Common
 {
     public static class Helpers
     {
-        private static string delegatePattern = @"([A-z|\d]+)\(\*\)(\(.+\))";
-        private static int nextInlineDelegateId = 0;
-
-        public static string ConvertToCSharpType(string type, Family family = Family.field)
-        {
-            if (Regex.Match(type, delegatePattern).Success)
-            {
-                return GetDelegateType(type);
-            }
-            else
-            {
-                return ConvertToBasicTypes(type, family);
-            }
-        }
-
         public enum Family
         {
             param,
@@ -29,56 +14,7 @@ namespace Common
             ret,
         }
 
-        private static Dictionary<string, string> delegates = new Dictionary<string, string>();
-        public static Queue<InlineDelegate> PendingDelegates = new Queue<InlineDelegate>();
-
-        private static string GetDelegateType(string type)
-        {
-            if (!delegates.ContainsKey(type))
-            {
-                var name = $"InlineDelegate{nextInlineDelegateId}";
-                delegates[type] = name;
-                nextInlineDelegateId++;
-
-                var parts = Regex.Split(type, delegatePattern);
-                var inlineDelegate = new InlineDelegate()
-                {
-                    Name = name,
-                    Type = parts[1],
-                    Arguments = ConvertArguments(parts[2])
-                };
-                PendingDelegates.Enqueue(inlineDelegate);
-            }
-
-            return delegates[type];
-        }
-
-        private static string ConvertArguments(string argstr)
-        {
-            var args = argstr.Substring(1, argstr.Length - 2).Split(",");
-            string converted = "(";
-            foreach (var arg in args)
-            {
-                var elements = arg.Split();
-                var last = elements[elements.Length - 1];
-                string type, name;
-                if (last.EndsWith("*"))
-                {
-                    type = arg;
-                    name = String.Empty;
-                }
-                else
-                {
-                    type = String.Join(" ", elements[..^1]);
-                    name = last;
-                }
-                converted += $"{ConvertToBasicTypes(type, Family.param)} {name}, ";
-            }
-
-            return converted.Substring(0, converted.Length - 2) + ")";
-        }
-
-        private static string ConvertToBasicTypes(string type, Family family)
+        public static string ConvertToCSharpType(string type, Family family = Family.field)
         {
             if (!type.Equals("const char*"))
                 type = type.Replace("const ", "");
@@ -157,6 +93,7 @@ namespace Common
                 case "unsigned int*":
                 case "ImU32*":
                 case "size_t*":
+                case "ImGuiID*":
                     return "uint*";
                 case "ImS32":
                     return "int";
@@ -167,6 +104,7 @@ namespace Common
                 case "ImU64*":
                     return "ulong*";
                 case "ImS64":
+                case "ImGuiSelectionUserData":
                     return "long";
                 case "ImS64*":
                     return "long*";
@@ -199,9 +137,13 @@ namespace Common
                 case "ImVector_char":
                 case "ImVector_float":
                 case "ImVector_ImFontGlyph":
-                case "ImVector_ImU32":
                 case "ImVector_ImGuiPlatformMonitor":
                 case "ImVector_ImGuiViewportPtr":
+                case "ImVector_ImU8":
+                case "ImVector_ImU16":
+                case "ImVector_ImU32":
+                case "ImVector_ImGuiSelectionRequest":
+                case "ImVector_ImDrawListPtr":
                     return "ImVector";
                 case "ImVector_ImWchar*":
                 case "ImVector_ImGuiTextRange*":
@@ -222,6 +164,13 @@ namespace Common
                 case "ImGuiMemFreeFunc":
                 case "ImGuiPlatformIO*":
                 case "ImPlotTransform":
+                // Delegates
+                case "ImGuiID(*)(ImGuiSelectionBasicStorage* self,int idx)":
+                case "void(*)(ImGuiSelectionExternalStorage* self,int idx,bool selected)":
+                case "void(*)(void* ptr,void* user_data)":
+                case "void*(*)(size_t sz,void* user_data)":
+                case "char*(*)(void* user_data,int idx)":
+                case "float(*)(void* data,int idx)":
                     return "IntPtr";
                 case "ImGuiMemAllocFunc*":
                 case "ImGuiMemFreeFunc*":
@@ -241,6 +190,8 @@ namespace Common
                     return "void*";
                 case "ImPlotGetter":
                     return "ImPlotPoint*";
+                case "ImGuiKeyChord":
+                    return "ImGuiKey";
                 default:
                     return type;
             }
@@ -300,12 +251,5 @@ namespace Common
                     return false;
             }
         }
-    }
-
-    public struct InlineDelegate
-    {
-        public string Name;
-        public string Type;
-        public string Arguments;
     }
 }
