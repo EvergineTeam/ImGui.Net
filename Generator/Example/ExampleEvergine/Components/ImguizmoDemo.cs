@@ -32,7 +32,6 @@ namespace ExampleEvergine.Components
         private bool enableGuizmo = true;
 
         private float[] bounds;
-        private ImGuiIO* io;
 
         protected override bool OnAttached()
         {
@@ -45,8 +44,6 @@ namespace ExampleEvergine.Components
             this.currentOperation = OPERATION.TRANSLATE;
 
             this.bounds = new[] { -0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f };
-
-            this.io = ImguiNative.igGetIO_Nil();
 
             return result;
         }
@@ -82,7 +79,8 @@ namespace ExampleEvergine.Components
 
         private void ImGuizmoDemo()
         {
-            ImguizmoNative.ImGuizmo_SetRect(0, 0, this.io->DisplaySize.X, this.io->DisplaySize.Y);
+            var io = ImguiNative.igGetIO_Nil();
+            ImguizmoNative.ImGuizmo_SetRect(0, 0, io->DisplaySize.X, io->DisplaySize.Y);
 
             Matrix4x4 view = this.camera.View;
             Matrix4x4 projection = this.camera.Projection;
@@ -92,10 +90,10 @@ namespace ExampleEvergine.Components
             ImguizmoNative.ImGuizmo_SetGizmoSizeClipSpace(0.15f);
             ImguizmoNative.ImGuizmo_DrawGrid(view.Ptr(), projection.Ptr(), world.Ptr(), 1.0f);
 
-            ////ImguizmoNative.ImGuizmo_ViewManipulate(view.Ptr(), 2, Vector2.Zero, new Vector2(128, 128), 0x10101010);
+            ImguizmoNative.ImGuizmo_ViewManipulate_Float(view.Ptr(), 1, Vector2.Zero, new Vector2(128, 128), 0);
 
-            //float* f = (float*)Unsafe.AsPointer(ref bounds[0]);
-            //ImguizmoNative.ImGuizmo_Manipulate(view.Ptr(), projection.Ptr(), this.currentOperation, MODE.WORLD, world.Ptr(), null, null, f, null);
+            float* f = (float*)Unsafe.AsPointer(ref bounds[0]);
+            ImguizmoNative.ImGuizmo_Manipulate(view.Ptr(), projection.Ptr(), this.currentOperation, MODE.WORLD, world.Ptr(), null, null, f, null);
 
             this.transform.WorldTransform = world;
 

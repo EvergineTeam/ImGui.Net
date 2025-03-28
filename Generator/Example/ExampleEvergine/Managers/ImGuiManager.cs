@@ -1,5 +1,5 @@
 ﻿using Evergine.Bindings.Imgui;
-//using Evergine.Bindings.Imguizmo;
+using Evergine.Bindings.Imguizmo;
 using Evergine.Bindings.Imnodes;
 using Evergine.Bindings.Implot;
 using Evergine.Common.Graphics;
@@ -32,6 +32,7 @@ namespace ExampleEvergine.Managers
         private IntPtr imguiContext;
         private IntPtr implotContext;
         private IntPtr imnodesContext;
+        private IntPtr imguizmoContext;
 
         private Buffer[] vertexBuffers;
         private Buffer indexBuffer;
@@ -122,7 +123,7 @@ namespace ExampleEvergine.Managers
             }
 
             ImguiNative.igNewFrame();
-            //ImguizmoNative.ImGuizmo_BeginFrame();
+            ImguizmoNative.ImGuizmo_BeginFrame();
         }
 
         public unsafe void Initialize(GraphicsPresenter presenter, GraphicsContext context, BaseRenderManager renderManager)
@@ -144,16 +145,14 @@ namespace ExampleEvergine.Managers
             imguiContext = ImguiNative.igCreateContext((ImFontAtlas*)null);
             ImguiNative.igSetCurrentContext(imguiContext);
             ImplotNative.ImPlot_SetImGuiContext(imguiContext);
+            ImnodesNative.imnodes_SetImGuiContext(imguiContext);
+            ImguizmoNative.ImGuizmo_SetImGuiContext(imguiContext);
 
             // Create implot context
             implotContext = ImplotNative.ImPlot_CreateContext();
             ImplotNative.ImPlot_SetCurrentContext(implotContext);
 
-            //// Create imguizmo context
-            //ImguizmoNative.ImGuizmo_SetImGuiContext(imGuiContext);
-
             // Create imnodes context
-            ImnodesNative.imnodes_SetImGuiContext(imguiContext);
             imnodesContext = ImnodesNative.imnodes_CreateContext();
             ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
 

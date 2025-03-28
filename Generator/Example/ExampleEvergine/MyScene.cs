@@ -60,7 +60,7 @@ namespace ExampleEvergine
                 .AddComponent(new Transform3D())
                 .AddComponent(new MaterialComponent() { Material = standardMaterial.Material })
                 .AddComponent(new CubeMesh())
-                //.AddComponent(new ImguizmoDemo())
+                .AddComponent(new ImguizmoDemo())
                 .AddComponent(new MeshRenderer());
 
             this.Managers.EntityManager.Add(primitive);
