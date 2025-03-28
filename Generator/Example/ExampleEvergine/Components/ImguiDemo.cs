@@ -20,8 +20,10 @@ namespace ExampleEvergine.Components
 
         protected override void Update(TimeSpan gameTime)
         {
+            byte openPtr = 1;
+
             // ImGUI Demo
-            ImguiNative.igShowDemoWindow(default);
+            ImguiNative.igShowDemoWindow(&openPtr);
 
             ImguiNative.igBegin("MyWindow", null, ImGuiWindowFlags.MenuBar);
 
@@ -67,7 +69,7 @@ namespace ExampleEvergine.Components
             ImguiNative.igEnd();
 
             // Implot Demo
-            ImplotNative.ImPlot_ShowDemoWindow(default);
+            ImplotNative.ImPlot_ShowDemoWindow(&openPtr);
         }
     }
 }

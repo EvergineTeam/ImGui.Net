@@ -28,8 +28,10 @@ namespace ExampleEvergine.Components
 
         protected override void Update(TimeSpan gameTime)
         {
+            byte openPtr = 1;
+
             int id = 0;
-            ImguiNative.igBegin("Imnodes Window", default, ImGuiWindowFlags.None);
+            ImguiNative.igBegin("Imnodes Window", &openPtr, ImGuiWindowFlags.None);
 
             ImnodesNative.imnodes_BeginNodeEditor();
             
