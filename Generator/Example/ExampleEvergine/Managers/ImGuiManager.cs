@@ -121,14 +121,7 @@ namespace ExampleEvergine.Managers
                 this.mvp.M22 *= -1;
             }
 
-            ImguiNative.igSetCurrentContext(imguiContext);
-            ImplotNative.ImPlot_SetImGuiContext(imguiContext);
-            ImplotNative.ImPlot_SetCurrentContext(implotContext);
             ImguiNative.igNewFrame();
-
-            //byte* p = (byte*)1;
-            //ImplotNative.ImPlot_ShowDemoWindow(p);
-
             //ImguizmoNative.ImGuizmo_BeginFrame();
         }
 
@@ -159,10 +152,10 @@ namespace ExampleEvergine.Managers
             //// Create imguizmo context
             //ImguizmoNative.ImGuizmo_SetImGuiContext(imGuiContext);
 
-            //// Create imnodes context
-            //ImnodesNative.imnodes_SetImGuiContext(imguiContext);
-            //imnodesContext = ImnodesNative.imnodes_CreateContext();
-            //ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
+            // Create imnodes context
+            ImnodesNative.imnodes_SetImGuiContext(imguiContext);
+            imnodesContext = ImnodesNative.imnodes_CreateContext();
+            ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
 
             this.io = ImguiNative.igGetIO_Nil();
             this.io->Fonts->AddFontDefault(null);

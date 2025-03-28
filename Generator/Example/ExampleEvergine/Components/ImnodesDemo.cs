@@ -28,37 +28,51 @@ namespace ExampleEvergine.Components
 
         protected override void Update(TimeSpan gameTime)
         {
-            bool b = true;
-            ImguiNative.igBegin("Imnodes Window", b.Ptr(), ImGuiWindowFlags.None);
+            int id = 0;
+            ImguiNative.igBegin("Imnodes Window", default, ImGuiWindowFlags.None);
 
             ImnodesNative.imnodes_BeginNodeEditor();
-            int id = 0;
-            for (int i = 0; i < nodes.Length; i++)
-            {
-                var node = nodes[i];
+            
+            // Node 1
+            ImnodesNative.imnodes_BeginNode(id++);
 
-                ImnodesNative.imnodes_BeginNode(id++);
+            ImnodesNative.imnodes_BeginNodeTitleBar();
+            ImguiNative.igText("Node 1");
+            ImnodesNative.imnodes_EndNodeTitleBar();
 
-                ImnodesNative.imnodes_BeginNodeTitleBar();
-                ImguiNative.igText(node.name);
-                ImnodesNative.imnodes_EndNodeTitleBar();
+            ImnodesNative.imnodes_BeginInputAttribute(id++, ImNodesPinShape.Circle);
+            ImguiNative.igText("input");
+            ImnodesNative.imnodes_EndInputAttribute();
 
-                ImnodesNative.imnodes_BeginInputAttribute(id++, ImNodesPinShape.Circle);
-                ImguiNative.igText("input");
-                ImnodesNative.imnodes_EndInputAttribute();
+            ImnodesNative.imnodes_BeginOutputAttribute(id++, ImNodesPinShape.Circle);
+            ImguiNative.igIndent(40);
+            ImguiNative.igText("output");
+            ImnodesNative.imnodes_EndOutputAttribute();
 
-                ImnodesNative.imnodes_BeginOutputAttribute(id++, ImNodesPinShape.Circle);
-                ImguiNative.igIndent(40);
-                ImguiNative.igText("output");
-                ImnodesNative.imnodes_EndOutputAttribute();
+            ImnodesNative.imnodes_EndNode();
 
-                ImnodesNative.imnodes_EndNode();
-            }
+            //Node 2
+            ImnodesNative.imnodes_BeginNode(id++);
 
+            ImnodesNative.imnodes_BeginNodeTitleBar();
+            ImguiNative.igText("Node 2");
+            ImnodesNative.imnodes_EndNodeTitleBar();
+
+            ImnodesNative.imnodes_BeginInputAttribute(id++, ImNodesPinShape.Circle);
+            ImguiNative.igText("input");
+            ImnodesNative.imnodes_EndInputAttribute();
+
+            ImnodesNative.imnodes_BeginOutputAttribute(id++, ImNodesPinShape.Circle);
+            ImguiNative.igIndent(40);
+            ImguiNative.igText("output");
+            ImnodesNative.imnodes_EndOutputAttribute();
+
+            ImnodesNative.imnodes_EndNode();
+
+            ImnodesNative.imnodes_Link(id++, 2, 4);
+
+            ImnodesNative.imnodes_MiniMap(0.25f, ImNodesMiniMapLocation.TopRight, 0, 0);
             ImnodesNative.imnodes_EndNodeEditor();
-
-            ImnodesNative.imnodes_MiniMap(0.25f, ImNodesMiniMapLocation.BottomRight, IntPtr.Zero, IntPtr.Zero);
-
             ImguiNative.igEnd();
         }
     }

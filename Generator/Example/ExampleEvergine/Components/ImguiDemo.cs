@@ -20,10 +20,8 @@ namespace ExampleEvergine.Components
 
         protected override void Update(TimeSpan gameTime)
         {
-            //ImguiNative.igShowDemoWindow(default);
-
-            byte* p = (byte*)1;
-            //ImplotNative.ImPlot_ShowDemoWindow(p);
+            // ImGUI Demo
+            ImguiNative.igShowDemoWindow(default);
 
             ImguiNative.igBegin("MyWindow", null, ImGuiWindowFlags.MenuBar);
 
@@ -32,6 +30,12 @@ namespace ExampleEvergine.Components
                 if (ImguiNative.igBeginMenu("File", true))
                 {
                     if (ImguiNative.igMenuItem_Bool("Open", "Ctrl+O", true, true)) { }
+                    if (ImguiNative.igBeginMenu("Source", true))
+                    {
+                        if (ImguiNative.igMenuItem_Bool("Button1", "Ctrl+S", true, true)) { }
+                        if (ImguiNative.igMenuItem_Bool("Button2", "Ctrl+C", true, true)) { }
+                        ImguiNative.igEndMenu();
+                    }
                     if (ImguiNative.igMenuItem_Bool("Save", "Ctrl+S", true, true)) { }
                     if (ImguiNative.igMenuItem_Bool("Close", "Ctrl+C", true, true)) { }
 
@@ -59,8 +63,11 @@ namespace ExampleEvergine.Components
             for (int n = 0; n < 50; n++)
                 ImguiNative.igText($"{n}: Some text");
             ImguiNative.igEndChild();
-
+            ImguiNative.igText("Hello, world!");
             ImguiNative.igEnd();
+
+            // Implot Demo
+            ImplotNative.ImPlot_ShowDemoWindow(default);
         }
     }
 }
