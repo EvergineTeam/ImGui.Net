@@ -32,7 +32,6 @@ namespace ExampleEvergine.Managers
         private IntPtr imguiContext;
         private IntPtr implotContext;
         private IntPtr imnodesContext;
-        private IntPtr imguizmoContext;
 
         private Buffer[] vertexBuffers;
         private Buffer indexBuffer;
