@@ -318,10 +318,10 @@ namespace ExampleEvergine.Managers
                         this.io->AddMouseButtonEvent((int)ImGuiMouseButton.Left, false);
                         break;
                     case MouseButtons.Right:
-                        this.io->AddMouseButtonEvent((int)ImGuiMouseButton.Left, false);
+                        this.io->AddMouseButtonEvent((int)ImGuiMouseButton.Right, false);
                         break;
                     case MouseButtons.Middle:
-                        this.io->AddMouseButtonEvent((int)ImGuiMouseButton.Left, false);
+                        this.io->AddMouseButtonEvent((int)ImGuiMouseButton.Middle, false);
                         break;
                     default:
                         break;
