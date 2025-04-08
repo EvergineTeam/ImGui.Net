@@ -59,6 +59,14 @@ jobs:
       run: |
         sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 
+    - name: Install Emscripten
+      if: matrix.arch == 'wasm'
+      run: |
+        git clone https://github.com/emscripten-core/emsdk.git tmp/emsdk
+        ./tmp/emsdk/emsdk install 4.0.6
+        ./tmp/emsdk/emsdk activate 4.0.6
+        source ./tmp/emsdk/emsdk_env.sh
+
     - name: Install vcpkg on Linux and macOS
       if: runner.os != 'Windows'
       run: |
@@ -74,14 +82,6 @@ jobs:
         git clone https://github.com/microsoft/vcpkg.git
         ./vcpkg/bootstrap-vcpkg.bat
         ./vcpkg/vcpkg.exe install freetype --triplet ${{ matrix.vcpkg-triplet }}
-
-    - name: Install Emscripten
-      if: matrix.arch == 'wasm'
-      run: |
-        git clone https://github.com/emscripten-core/emsdk.git tmp/emsdk
-        ./tmp/emsdk/emsdk install 4.0.6
-        ./tmp/emsdk/emsdk activate 4.0.6
-        source ./tmp/emsdk/emsdk_env.sh
 
     - name: Configure cimgui with CMake for ARM64 on Linux
       if: matrix.os == 'ubuntu-latest' && matrix.arch == 'arm64'
