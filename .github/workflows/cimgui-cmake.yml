@@ -61,11 +61,10 @@ jobs:
 
     - name: Install Emscripten
       if: matrix.arch == 'wasm'
-      run: |
-        git clone https://github.com/emscripten-core/emsdk.git tmp/emsdk
-        ./tmp/emsdk/emsdk install 4.0.6
-        ./tmp/emsdk/emsdk activate 4.0.6
-        source ./tmp/emsdk/emsdk_env.sh
+      uses: mymindstorm/setup-emsdk@v14
+      with:
+        version: 4.0.6
+        actions-cache-folder: 'emsdk-cache'
 
     - name: Install vcpkg on Linux and macOS
       if: runner.os != 'Windows'
