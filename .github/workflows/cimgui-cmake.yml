@@ -39,7 +39,7 @@ jobs:
           - os: ubuntu-latest
             arch: wasm
             cmake-arch: wasm
-            vcpkg-triplet: wasm-static
+            vcpkg-triplet: wasm32-emscripten
     steps:
     - uses: actions/checkout@v4.1.7
       with:
