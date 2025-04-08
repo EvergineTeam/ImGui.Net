@@ -36,6 +36,10 @@ jobs:
             arch: arm64
             cmake-arch: arm64
             vcpkg-triplet: arm64-osx
+          - os: ubuntu-latest
+            arch: wasm
+            cmake-arch: wasm
+            vcpkg-triplet: wasm-static
     steps:
     - uses: actions/checkout@v4.1.7
       with:
@@ -48,7 +52,7 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential cmake
+        sudo apt-get install -y build-essential cmake ninja-build
         
     - name: Install Cross-Compilation Tools for ARM64
       if: matrix.os == 'ubuntu-latest' && matrix.arch == 'arm64'
@@ -70,6 +74,14 @@ jobs:
         git clone https://github.com/microsoft/vcpkg.git
         ./vcpkg/bootstrap-vcpkg.bat
         ./vcpkg/vcpkg.exe install freetype --triplet ${{ matrix.vcpkg-triplet }}
+
+    - name: Install Emscripten
+      if: matrix.arch == 'wasm'
+      run: |
+        git clone https://github.com/emscripten-core/emsdk.git tmp/emsdk
+        ./tmp/emsdk/emsdk install 4.0.6
+        ./tmp/emsdk/emsdk activate 4.0.6
+        source ./tmp/emsdk/emsdk_env.sh
 
     - name: Configure cimgui with CMake for ARM64 on Linux
       if: matrix.os == 'ubuntu-latest' && matrix.arch == 'arm64'
@@ -94,6 +106,12 @@ jobs:
       run: | 
         cd cimgui
         cmake -S ./ -B ./build -A ${{ matrix.cmake-arch }} -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }} -DIMGUI_WCHAR32=ON -DIMGUI_FREETYPE=ON
+
+    - name: Configure cimgui with CMake for Wasm
+      if: matrix.arch == 'wasm'
+      run: |
+        cd cimgui
+        cmake -S ./ -B ./build -DCMAKE_TOOLCHAIN_FILE="./tmp/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake" -DCMAKE_CROSSCOMPILING_EMULATOR="./tmp/emsdk/node/20.18.0_64bit/bin/node.exe" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }} -DIMGUI_WCHAR32=ON -DIMGUI_FREETYPE=ON -GNinja -DCMAKE_BUILD_TYPE=Release 
 
     - name: Build cimgui
       run: cmake --build cimgui/build --config Release
