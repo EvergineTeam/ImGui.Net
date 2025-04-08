@@ -110,7 +110,7 @@ jobs:
       if: matrix.arch == 'wasm'
       run: |
         cd cimgui
-        cmake -S ./ -B ./build -DCMAKE_TOOLCHAIN_FILE="./tmp/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake" -DCMAKE_CROSSCOMPILING_EMULATOR="./tmp/emsdk/node/20.18.0_64bit/bin/node.exe" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }} -DIMGUI_WCHAR32=ON -DIMGUI_FREETYPE=ON -GNinja -DCMAKE_BUILD_TYPE=Release 
+        cmake -S ./ -B ./build -DCMAKE_TOOLCHAIN_FILE="./tmp/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake" -DCMAKE_CROSSCOMPILING_EMULATOR="./tmp/emsdk/node/20.18.0_64bit/bin/node.exe" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }} -DIMGUI_WCHAR32=ON -DIMGUI_FREETYPE=ON -DCMAKE_BUILD_TYPE=Release 
 
     - name: Build cimgui
       run: cmake --build cimgui/build --config Release
