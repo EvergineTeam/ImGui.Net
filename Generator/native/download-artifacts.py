@@ -22,7 +22,8 @@ ARCH_MAPPING = {
     'ubuntu-latest-x86_64': 'linux-x64',
     'windows-latest-arm64': 'win-arm64',
     'windows-latest-x86_64': 'win-x64',
-    'windows-latest-x86': 'win-x86'
+    'windows-latest-x86': 'win-x86',
+    'ubuntu-latest-wasm': 'browser-wasm'
 }
 
 def get_headers(token):
