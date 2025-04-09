@@ -66,5 +66,11 @@
 		<PackagePath>runtimes/win-x86/native</PackagePath>
 		<Pack>true</Pack>
 	</None>
+	<None Include="..\native\browser-wasm\cimgui.a">
+		<Link>runtimes\browser-wasm\native\%(RecursiveDir)%(Filename)%(Extension)</Link>
+		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		<PackagePath>runtimes/browser-wasm/native</PackagePath>
+		<Pack>true</Pack>
+	</None>
 	</ItemGroup>
 </Project>
