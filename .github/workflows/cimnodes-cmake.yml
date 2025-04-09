@@ -29,6 +29,9 @@ jobs:
           - os: macos-latest
             arch: arm64
             cmake-arch: arm64
+          - os: ubuntu-latest
+            arch: wasm
+            cmake-arch: wasm
     steps:
     - uses: actions/checkout@v4.1.7
       with:
@@ -54,6 +57,13 @@ jobs:
       if: matrix.os == 'ubuntu-latest' && matrix.arch == 'arm64'
       run: |
         sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+      
+    - name: Install Emscripten
+      if: matrix.arch == 'wasm'
+      uses: mymindstorm/setup-emsdk@v14
+      with:
+        version: 4.0.6
+        actions-cache-folder: 'emsdk-cache'
 
     - name: Configure cimnodes with CMake for ARM64 on Linux
       if: matrix.os == 'ubuntu-latest' && matrix.arch == 'arm64'
@@ -71,6 +81,10 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: cmake -S cimnodes -B cimnodes/build -A ${{ matrix.cmake-arch }} -DIMGUI_WCHAR32=ON
 
+    - name: Configure cimgui with CMake for Wasm
+      if: matrix.arch == 'wasm'
+      run: cmake -S cimnodes -B cimnodes/build -DCMAKE_TOOLCHAIN_FILE="$EMSDK/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake" -DCMAKE_CROSSCOMPILING_EMULATOR="$EMSDK/node/20.18.0_64bit/bin/node.exe" -DIMGUI_WCHAR32=ON -DCMAKE_BUILD_TYPE=Release
+
     - name: Build cimnodes
       run: cmake --build cimnodes/build --config Release
 
@@ -87,4 +101,5 @@ jobs:
           cimnodes/build/*.dll
           cimnodes/build/*.so
           cimnodes/build/*.dylib
+          cimnodes/build/*.a
         if-no-files-found: ignore # 'warn' or 'ignore' or 'error'
