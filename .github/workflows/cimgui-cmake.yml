@@ -136,4 +136,5 @@ jobs:
           cimgui/build/*.dll
           cimgui/build/*.so
           cimgui/build/*.dylib
+          cimgui/build/*.a
         if-no-files-found: ignore # 'warn' or 'ignore' or 'error'
