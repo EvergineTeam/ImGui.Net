@@ -83,7 +83,7 @@ jobs:
 
     - name: Configure cimgui with CMake for Wasm
       if: matrix.arch == 'wasm'
-      run: cmake -S cimnodes -B cimnodes/build -DCMAKE_TOOLCHAIN_FILE="$EMSDK/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake" -DCMAKE_CROSSCOMPILING_EMULATOR="$EMSDK/node/20.18.0_64bit/bin/node.exe" -DIMGUI_WCHAR32=ON -DCMAKE_BUILD_TYPE=Release
+      run: cmake -S cimnodes -B cimnodes/build -DCMAKE_TOOLCHAIN_FILE="$EMSDK/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake" -DCMAKE_CROSSCOMPILING_EMULATOR="$EMSDK/node/20.18.0_64bit/bin/node.exe" -DIMGUI_WCHAR32=ON -DCMAKE_BUILD_TYPE=Debug
 
     - name: Build cimnodes
       run: cmake --build cimnodes/build --config Release
