@@ -4,7 +4,7 @@
 	It should automatically pick up the native libraries following the folders naming conventions.
 	This is only needed because the is an issue in dotnet -->
 	<ItemGroup Condition="$(RuntimeIdentifier) == 'browser-wasm'">
-	    <NativeFileReference Include="$(MSBuildThisFileDirectory)..\runtimes\browser-wasm\native\*.a" ScanForPInvokes="true" />
+	    <NativeFileReference Include="$(MSBuildThisFileDirectory)..\runtimes\browser-wasm\native\cimnodes.a" ScanForPInvokes="true" />
 	</ItemGroup>
 
 </Project>
