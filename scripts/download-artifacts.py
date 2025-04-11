@@ -56,17 +56,17 @@ def download_and_extract_artifact(session, artifact):
 
     with zipfile.ZipFile(io.BytesIO(response.content)) as z:
         print(f"Artifact {name} contains: {z.namelist()}")
-        TMP_PATH = "./tmp"
+        scripts_dir = os.path.dirname(os.path.abspath(__file__))
+        tmp_dir = os.path.join(scripts_dir, "tmp")
 
         for key, folder in ARCH_MAPPING.items():
             if key in name:
-                extract_path = os.path.join(TMP_PATH, folder)
+                extract_path = os.path.join(tmp_dir, folder)
                 print(f"Extracting to: {extract_path}")
                 os.makedirs(extract_path, exist_ok=True)
                 z.extractall(path=extract_path)
                 print(f"Extraction completed for: {name}")
                 matched = True
-                shutil.rmtree(TMP_PATH, ignore_errors=True)
                 return f"{folder}/{z.namelist()[0]}"
 
         print(f"No matching folder mapping found for artifact: {name}")
@@ -78,13 +78,13 @@ def main():
 
     session = requests.Session()
     session.headers.update(get_headers(args.token))
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-
+    scripts_dir = os.path.dirname(os.path.abspath(__file__))
+    tmp_dir = os.path.join(scripts_dir, "tmp")
 
     for lib_name in LIB_NAMES:
         workflow_filename = f'c{lib_name.lower()}-cmake.yml'
         project_name = f'Evergine.Bindings.{lib_name}'
-        project_dir = os.path.join(current_dir, "..", project_name)
+        project_dir = os.path.join(scripts_dir, "..", "Generator", project_name)
         project_runtimes_dir = os.path.join(project_dir, "runtimes")
         print(f"\nProcessing workflow: {workflow_filename}")
         run_id = get_latest_successful_run(session, workflow_filename)
@@ -92,9 +92,11 @@ def main():
         shutil.rmtree(project_runtimes_dir, ignore_errors=True)
         for artifact in artifacts:
             lib_path = download_and_extract_artifact(session, artifact)
+            src_path = os.path.join(tmp_dir, lib_path)
             dst_path = os.path.join(project_runtimes_dir, lib_path.split("/")[0], "native")
             os.makedirs(dst_path, exist_ok=True)
-            shutil.copy(f"{lib_path}", dst_path)
+            shutil.copy(src_path, dst_path)
+            shutil.rmtree(tmp_dir, ignore_errors=True)
 
 
 if __name__ == '__main__':
