@@ -29,12 +29,7 @@
 
 	<ItemGroup>
 		<Content Include="build\**" PackagePath="build" Visible="true" />
-		<None Include="..\native\**\cimplot.*">
-			<Link>runtimes\%(RecursiveDir)\native\%(Filename)%(Extension)</Link>
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-			<Pack>true</Pack>
-			<PackagePath>runtimes\%(RecursiveDir)native\%(Filename)%(Extension)</PackagePath>
-		</None>
+		<Content Include="runtimes\**" PackagePath="runtimes" Visible="true" CopyToOutputDirectory="PreserveNewest" />
 	</ItemGroup>
 
 </Project>
