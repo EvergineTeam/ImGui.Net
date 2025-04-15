@@ -100,6 +100,7 @@ namespace Common
                 case "ImS32*":
                     return "int*";
                 case "ImU64":
+                case "ImTextureID":
                     return "ulong";
                 case "ImU64*":
                     return "ulong*";
@@ -156,7 +157,6 @@ namespace Common
                 case "ImNodesMiniMapNodeHoveringCallback":
                 case "ImNodesMiniMapNodeHoveringCallbackUserData":
                 case "ImDrawListSharedData*":
-                case "ImTextureID":
                 case "ImFontBuilderIO*":
                 case "ImDrawCallback":
                 case "ImGuiWindow*":
