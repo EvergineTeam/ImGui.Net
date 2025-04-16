@@ -47,7 +47,7 @@ namespace ExampleEvergine.Managers
         private int windowHeight;
         private Vector2 scaleFactor;
 
-        private IntPtr fontAtlasID;
+        private UInt64 fontAtlasID;
         private Surface surface;
         private FrameBuffer framebuffer;
 
@@ -56,10 +56,10 @@ namespace ExampleEvergine.Managers
 
         private struct ResourceSetInfo
         {
-            public readonly IntPtr ImGuiBinding;
+            public readonly UInt64 ImGuiBinding;
             public readonly ResourceSet ResourceSet;
 
-            public ResourceSetInfo(IntPtr imGuiBinding, ResourceSet resourceSet)
+            public ResourceSetInfo(UInt64 imGuiBinding, ResourceSet resourceSet)
             {
                 this.ImGuiBinding = imGuiBinding;
                 this.ResourceSet = resourceSet;
@@ -67,7 +67,7 @@ namespace ExampleEvergine.Managers
         }
 
         private readonly Dictionary<Texture, ResourceSetInfo> resourceByTexture = new Dictionary<Texture, ResourceSetInfo>();
-        private readonly Dictionary<IntPtr, ResourceSetInfo> resourceById = new Dictionary<IntPtr, ResourceSetInfo>();
+        private readonly Dictionary<UInt64, ResourceSetInfo> resourceById = new Dictionary<UInt64, ResourceSetInfo>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ImGuiManager"/> class.
@@ -75,7 +75,7 @@ namespace ExampleEvergine.Managers
         public ImGuiManager()
         {
             this.scaleFactor = Vector2.One;
-            this.fontAtlasID = (IntPtr)1;
+            this.fontAtlasID = 1;
         }
 
         private void Display_DisplayFrameBufferChanged(object sender, EventArgs e)
@@ -428,6 +428,9 @@ namespace ExampleEvergine.Managers
                 case GraphicsBackend.OpenGL:
                     shaderCode = stage == ShaderStages.Vertex ? Shaders.GLSLVertexShader : Shaders.GLSLPixelShader;
                     break;
+                case GraphicsBackend.WebGL2:
+                    shaderCode = stage == ShaderStages.Vertex ? Shaders.WEBGLVertexShader : Shaders.WEBGLPixelShader;
+                    break;
                 case GraphicsBackend.Metal:
                     shaderCode = stage == ShaderStages.Vertex ? Shaders.MSLVertexShader : Shaders.MSLPixelShader;
                     break;
@@ -437,8 +440,10 @@ namespace ExampleEvergine.Managers
                     break;
                 case GraphicsBackend.DirectX12:
                 case GraphicsBackend.DirectX11:
-                default:
                     shaderCode = stage == ShaderStages.Vertex ? Shaders.HLSLVertexShader : Shaders.HLSLPixelShader;
+                    break;
+                default:
+                    Debug.Assert(false);
                     break;
             }
 
@@ -465,7 +470,7 @@ namespace ExampleEvergine.Managers
         /// </summary>
         /// <param name="texture">The texture to bind.</param>
         /// <returns>The binding pointer.</returns>
-        public IntPtr CreateImGuiBinding(Texture texture)
+        public UInt64 CreateImGuiBinding(Texture texture)
         {
             if (!this.resourceByTexture.TryGetValue(texture, out ResourceSetInfo info))
             {
@@ -494,13 +499,13 @@ namespace ExampleEvergine.Managers
             }
         }
 
-        private IntPtr GetNextImGuiBindingID()
+        private UInt64 GetNextImGuiBindingID()
         {
             int newID = this.lastAssignedID++;
-            return (IntPtr)newID;
+            return (UInt64)newID;
         }
 
-        private ResourceSet GetImageResourceSet(IntPtr textureId)
+        private ResourceSet GetImageResourceSet(UInt64 textureId)
         {
             if (this.resourceById.TryGetValue(textureId, out ResourceSetInfo rsi))
             {
@@ -608,7 +613,7 @@ namespace ExampleEvergine.Managers
                 {
                     ImDrawCmd* cmd = (ImDrawCmd*)((long)cmdListPtr->CmdBuffer.Data + i*(sizeof(ImDrawCmd)));
 
-                    if (cmd->TextureId != IntPtr.Zero)
+                    if (cmd->TextureId != 0)
                     {
                         if (cmd->TextureId == this.fontAtlasID)
                         {
