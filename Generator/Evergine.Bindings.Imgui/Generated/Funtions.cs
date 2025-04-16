@@ -14,7 +14,7 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImColor_SetHSV(ImColor* self, float h, float s, float v, float a);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern IntPtr ImDrawCmd_GetTexID(ImDrawCmd* self);
+		public static extern ulong ImDrawCmd_GetTexID(ImDrawCmd* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImDrawData_AddDrawList(ImDrawData* self, ImDrawList* draw_list);
@@ -74,13 +74,13 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImDrawList_AddEllipseFilled(ImDrawList* self, Vector2 center, Vector2 radius, uint col, float rot, int num_segments);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImDrawList_AddImage(ImDrawList* self, IntPtr user_texture_id, Vector2 p_min, Vector2 p_max, Vector2 uv_min, Vector2 uv_max, uint col);
+		public static extern void ImDrawList_AddImage(ImDrawList* self, ulong user_texture_id, Vector2 p_min, Vector2 p_max, Vector2 uv_min, Vector2 uv_max, uint col);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImDrawList_AddImageQuad(ImDrawList* self, IntPtr user_texture_id, Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 uv1, Vector2 uv2, Vector2 uv3, Vector2 uv4, uint col);
+		public static extern void ImDrawList_AddImageQuad(ImDrawList* self, ulong user_texture_id, Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 uv1, Vector2 uv2, Vector2 uv3, Vector2 uv4, uint col);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImDrawList_AddImageRounded(ImDrawList* self, IntPtr user_texture_id, Vector2 p_min, Vector2 p_max, Vector2 uv_min, Vector2 uv_max, uint col, float rounding, ImDrawFlags flags);
+		public static extern void ImDrawList_AddImageRounded(ImDrawList* self, ulong user_texture_id, Vector2 p_min, Vector2 p_max, Vector2 uv_min, Vector2 uv_max, uint col, float rounding, ImDrawFlags flags);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImDrawList_AddLine(ImDrawList* self, Vector2 p1, Vector2 p2, uint col, float thickness);
@@ -212,7 +212,7 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImDrawList_PushClipRectFullScreen(ImDrawList* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImDrawList_PushTextureID(ImDrawList* self, IntPtr texture_id);
+		public static extern void ImDrawList_PushTextureID(ImDrawList* self, ulong texture_id);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int ImDrawList__CalcCircleAutoSegmentCount(ImDrawList* self, float radius);
@@ -242,7 +242,7 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImDrawList__ResetForNewFrame(ImDrawList* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImDrawList__SetTextureID(ImDrawList* self, IntPtr texture_id);
+		public static extern void ImDrawList__SetTextureID(ImDrawList* self, ulong texture_id);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImDrawList__TryMergeDrawCmds(ImDrawList* self);
@@ -335,7 +335,7 @@ namespace Evergine.Bindings.Imgui
 		public static extern bool ImFontAtlas_IsBuilt(ImFontAtlas* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImFontAtlas_SetTexID(ImFontAtlas* self, IntPtr id);
+		public static extern void ImFontAtlas_SetTexID(ImFontAtlas* self, ulong id);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImFontGlyphRangesBuilder_AddChar(ImFontGlyphRangesBuilder* self, ushort c);
@@ -1155,14 +1155,14 @@ namespace Evergine.Bindings.Imgui
 		public static extern float igGetWindowWidth();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void igImage(IntPtr user_texture_id, Vector2 image_size, Vector2 uv0, Vector2 uv1);
+		public static extern void igImage(ulong user_texture_id, Vector2 image_size, Vector2 uv0, Vector2 uv1);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.I1)]
-		public static extern bool igImageButton([MarshalAs(UnmanagedType.LPUTF8Str)] string str_id, IntPtr user_texture_id, Vector2 image_size, Vector2 uv0, Vector2 uv1, Vector4 bg_col, Vector4 tint_col);
+		public static extern bool igImageButton([MarshalAs(UnmanagedType.LPUTF8Str)] string str_id, ulong user_texture_id, Vector2 image_size, Vector2 uv0, Vector2 uv1, Vector4 bg_col, Vector4 tint_col);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void igImageWithBg(IntPtr user_texture_id, Vector2 image_size, Vector2 uv0, Vector2 uv1, Vector4 bg_col, Vector4 tint_col);
+		public static extern void igImageWithBg(ulong user_texture_id, Vector2 image_size, Vector2 uv0, Vector2 uv1, Vector4 bg_col, Vector4 tint_col);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igIndent(float indent_w);

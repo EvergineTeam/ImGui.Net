@@ -36,7 +36,7 @@ namespace Evergine.Bindings.Imgui
 	public unsafe partial struct ImDrawCmd
 	{
 		public Vector4 ClipRect;
-		public IntPtr TextureId;
+		public ulong TextureId;
 		public uint VtxOffset;
 		public uint IdxOffset;
 		public uint ElemCount;
@@ -45,7 +45,7 @@ namespace Evergine.Bindings.Imgui
 		public int UserCallbackDataSize;
 		public int UserCallbackDataOffset;
 
-		public IntPtr GetTexID()
+		public ulong GetTexID()
 		{
 			return ImguiNative.ImDrawCmd_GetTexID(self);
 		}
@@ -57,7 +57,7 @@ namespace Evergine.Bindings.Imgui
 	public unsafe partial struct ImDrawCmdHeader
 	{
 		public Vector4 ClipRect;
-		public IntPtr TextureId;
+		public ulong TextureId;
 		public uint VtxOffset;
 	}
 
@@ -166,17 +166,17 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddEllipseFilled(self, center, radius, col, rot, num_segments);
 		}
 
-		public void AddImage(IntPtr user_texture_id, Vector2 p_min, Vector2 p_max, Vector2 uv_min, Vector2 uv_max, uint col = 4294967295)
+		public void AddImage(ulong user_texture_id, Vector2 p_min, Vector2 p_max, Vector2 uv_min, Vector2 uv_max, uint col = 4294967295)
 		{
 			ImguiNative.ImDrawList_AddImage(self, user_texture_id, p_min, p_max, uv_min, uv_max, col);
 		}
 
-		public void AddImageQuad(IntPtr user_texture_id, Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 uv1, Vector2 uv2, Vector2 uv3, Vector2 uv4, uint col = 4294967295)
+		public void AddImageQuad(ulong user_texture_id, Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 uv1, Vector2 uv2, Vector2 uv3, Vector2 uv4, uint col = 4294967295)
 		{
 			ImguiNative.ImDrawList_AddImageQuad(self, user_texture_id, p1, p2, p3, p4, uv1, uv2, uv3, uv4, col);
 		}
 
-		public void AddImageRounded(IntPtr user_texture_id, Vector2 p_min, Vector2 p_max, Vector2 uv_min, Vector2 uv_max, uint col, float rounding, ImDrawFlags flags = 0)
+		public void AddImageRounded(ulong user_texture_id, Vector2 p_min, Vector2 p_max, Vector2 uv_min, Vector2 uv_max, uint col, float rounding, ImDrawFlags flags = 0)
 		{
 			ImguiNative.ImDrawList_AddImageRounded(self, user_texture_id, p_min, p_max, uv_min, uv_max, col, rounding, flags);
 		}
@@ -402,7 +402,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_PushClipRectFullScreen(self);
 		}
 
-		public void PushTextureID(IntPtr texture_id)
+		public void PushTextureID(ulong texture_id)
 		{
 			ImguiNative.ImDrawList_PushTextureID(self, texture_id);
 		}
@@ -452,7 +452,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList__ResetForNewFrame(self);
 		}
 
-		public void _SetTextureID(IntPtr texture_id)
+		public void _SetTextureID(ulong texture_id)
 		{
 			ImguiNative.ImDrawList__SetTextureID(self, texture_id);
 		}
@@ -616,7 +616,7 @@ namespace Evergine.Bindings.Imgui
 	public unsafe partial struct ImFontAtlas
 	{
 		public ImFontAtlasFlags Flags;
-		public IntPtr TexID;
+		public ulong TexID;
 		public int TexDesiredWidth;
 		public int TexGlyphPadding;
 		public void* UserData;
@@ -805,7 +805,7 @@ namespace Evergine.Bindings.Imgui
 			return ImguiNative.ImFontAtlas_IsBuilt(self);
 		}
 
-		public void SetTexID(IntPtr id)
+		public void SetTexID(ulong id)
 		{
 			ImguiNative.ImFontAtlas_SetTexID(self, id);
 		}

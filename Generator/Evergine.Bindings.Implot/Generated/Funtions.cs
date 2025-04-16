@@ -530,7 +530,7 @@ namespace Evergine.Bindings.Implot
 		public static extern double ImPlot_PlotHistogram2D_U64Ptr([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, ulong* xs, ulong* ys, int count, int x_bins, int y_bins, ImPlotRect range, ImPlotHistogramFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotImage([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, IntPtr user_texture_id, ImPlotPoint bounds_min, ImPlotPoint bounds_max, Vector2 uv0, Vector2 uv1, Vector4 tint_col, ImPlotImageFlags flags);
+		public static extern void ImPlot_PlotImage([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, ulong user_texture_id, ImPlotPoint bounds_min, ImPlotPoint bounds_max, Vector2 uv0, Vector2 uv1, Vector4 tint_col, ImPlotImageFlags flags);
 
 		[DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_PlotInfLines_FloatPtr([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, float* values, int count, ImPlotInfLinesFlags flags, int offset, int stride);

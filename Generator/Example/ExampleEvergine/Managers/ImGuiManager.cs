@@ -1,17 +1,12 @@
 ﻿using Evergine.Bindings.Imgui;
-using Evergine.Bindings.Imguizmo;
-using Evergine.Bindings.Imnodes;
-using Evergine.Bindings.Implot;
 using Evergine.Common.Graphics;
 using Evergine.Common.Input.Keyboard;
 using Evergine.Common.Input.Mouse;
-using Evergine.Framework;
-using Evergine.Framework.Graphics;
 using Evergine.Framework.Managers;
 using Evergine.Framework.Services;
 using Evergine.Mathematics;
-using SharpYaml.Tokens;
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Buffer = Evergine.Common.Graphics.Buffer;
