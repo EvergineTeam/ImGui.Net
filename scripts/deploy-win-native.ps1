@@ -10,7 +10,7 @@
 #>
 
 param (
-  [ValidateSet('Debug', 'Release')][string]$buildConfig = "Debug",
+  [ValidateSet('Debug', 'Release')][string]$buildConfig = "Release",
   [switch]$buildImgui = $false,
   [switch]$buildExtensions = $false
 )
