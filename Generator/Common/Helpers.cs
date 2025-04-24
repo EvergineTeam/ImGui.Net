@@ -115,7 +115,7 @@ namespace Common
                     switch (family)
                     {
                         case Family.param:
-                            return "[MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[]";
+                            return "[MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPUTF8Str)] string[]";
                         case Family.ret:
                             return "string[]";
                         case Family.field:
