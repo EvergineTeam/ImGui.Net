@@ -117,7 +117,7 @@ namespace ExampleEvergine.Managers
             }
 
             ImguiNative.igNewFrame();
-            ImguizmoNative.ImGuizmo_BeginFrame();
+            //ImguizmoNative.ImGuizmo_BeginFrame();
         }
 
         public unsafe void Initialize(GraphicsPresenter presenter, GraphicsContext context, BaseRenderManager renderManager)
@@ -138,17 +138,17 @@ namespace ExampleEvergine.Managers
             // Create imgui context            
             imguiContext = ImguiNative.igCreateContext((ImFontAtlas*)null);
             ImguiNative.igSetCurrentContext(imguiContext);
-            ImplotNative.ImPlot_SetImGuiContext(imguiContext);
-            ImnodesNative.imnodes_SetImGuiContext(imguiContext);
-            ImguizmoNative.ImGuizmo_SetImGuiContext(imguiContext);
+            //ImplotNative.ImPlot_SetImGuiContext(imguiContext);
+            //ImnodesNative.imnodes_SetImGuiContext(imguiContext);
+            //ImguizmoNative.ImGuizmo_SetImGuiContext(imguiContext);
 
-            // Create implot context
-            implotContext = ImplotNative.ImPlot_CreateContext();
-            ImplotNative.ImPlot_SetCurrentContext(implotContext);
+            //// Create implot context
+            //implotContext = ImplotNative.ImPlot_CreateContext();
+            //ImplotNative.ImPlot_SetCurrentContext(implotContext);
 
-            // Create imnodes context
-            imnodesContext = ImnodesNative.imnodes_CreateContext();
-            ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
+            //// Create imnodes context
+            //imnodesContext = ImnodesNative.imnodes_CreateContext();
+            //ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
 
             this.io = ImguiNative.igGetIO_Nil();
             this.io->Fonts->AddFontDefault(null);
@@ -245,7 +245,7 @@ namespace ExampleEvergine.Managers
             byte* pixels = null;
             this.io->Fonts->GetTexDataAsRGBA32(&pixels, &width, &height, &bytesPerPixel);
 
-            this.io->Fonts->SetTexID(this.fontAtlasID);
+            //this.io->Fonts->SetTexID((nint)this.fontAtlasID);
 
             var fontTextureDescription = new TextureDescription()
             {
@@ -610,13 +610,13 @@ namespace ExampleEvergine.Managers
 
                     if (cmd->TextureId != 0)
                     {
-                        if (cmd->TextureId == this.fontAtlasID)
+                        if ((UInt64)cmd->TextureId == this.fontAtlasID)
                         {
                             commandBuffer.SetResourceSet(this.resourceSet);
                         }
                         else
                         {
-                            commandBuffer.SetResourceSet(this.GetImageResourceSet(cmd->TextureId), 1);
+                            commandBuffer.SetResourceSet(this.GetImageResourceSet((UInt64)cmd->TextureId), 1);
                         }
                     }
 
@@ -656,14 +656,14 @@ namespace ExampleEvergine.Managers
             display.DisplayFrameBufferChanged -= this.Display_DisplayFrameBufferChanged;
             this.renderManager.ActiveCamera3D.DrawContext.OnPostRender -= this.PostRender;
 
-            ImplotNative.ImPlot_SetCurrentContext(IntPtr.Zero);
-            ImplotNative.ImPlot_SetImGuiContext(IntPtr.Zero);
+            //ImplotNative.ImPlot_SetCurrentContext(IntPtr.Zero);
+            //ImplotNative.ImPlot_SetImGuiContext(IntPtr.Zero);
 
-            ImnodesNative.imnodes_SetCurrentContext(IntPtr.Zero);
-            ImnodesNative.imnodes_SetImGuiContext(IntPtr.Zero);
+            //ImnodesNative.imnodes_SetCurrentContext(IntPtr.Zero);
+            //ImnodesNative.imnodes_SetImGuiContext(IntPtr.Zero);
 
-            ImplotNative.ImPlot_DestroyContext(implotContext);
-            ImnodesNative.imnodes_DestroyContext(imnodesContext);
+            //ImplotNative.ImPlot_DestroyContext(implotContext);
+            //ImnodesNative.imnodes_DestroyContext(imnodesContext);
 
             foreach (var rsi in this.resourceById)
             {
