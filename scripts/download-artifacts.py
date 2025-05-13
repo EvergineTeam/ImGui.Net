@@ -6,7 +6,7 @@ import argparse
 import shutil
 
 # === CONFIGURATION ===
-REPO = 'tuket/cimgui_all'  # GitHub repository path
+REPO = 'EvergineTeam/ImGui.Net'  # GitHub repository path
 
 def get_headers(token):
     return {
