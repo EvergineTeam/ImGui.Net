@@ -69,5 +69,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: cimgui-${{ matrix.target }}-artifacts 
-        path: build/OUT/*
+        path: NativeLibraries/build/OUT/*
         if-no-files-found: warn # 'warn' or 'ignore' or 'error'
