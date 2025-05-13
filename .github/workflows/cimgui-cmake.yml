@@ -10,49 +10,40 @@ jobs:
         include:
           - os: ubuntu-latest
             arch: x86_64
-            cmake-arch: x64
-            vcpkg-triplet: x64-linux
+            target: linux-x64
           - os: ubuntu-latest
             arch: arm64
-            cmake-arch: aarch64
-            vcpkg-triplet: arm64-linux
+            target: linux-arm64
           - os: windows-latest
             arch: x86_64
-            cmake-arch: x64
-            vcpkg-triplet: x64-windows-static
-          - os: windows-latest
-            arch: x86
-            cmake-arch: win32
-            vcpkg-triplet: x86-windows-static
+            target: win-x64
+          # - os: windows-latest
+          #   arch: x86
+          #   target: win-x86
           - os: windows-latest
             arch: arm64
-            cmake-arch: arm64
-            vcpkg-triplet: arm64-windows-static
+            target: win-arm64
           - os: macos-latest
             arch: x86_64
-            cmake-arch: x86_64
-            vcpkg-triplet: x64-osx
+            target: osx-x64
           - os: macos-latest
             arch: arm64
-            cmake-arch: arm64
-            vcpkg-triplet: arm64-osx
+            target: osx-arm64
           - os: ubuntu-latest
             arch: wasm
-            cmake-arch: wasm
-            vcpkg-triplet: wasm32-emscripten
+            target: browser-wasm
     steps:
     - uses: actions/checkout@v4.1.7
       with:
-        repository: 'EvergineTeam/cimgui'
+        repository: ${{ github.repository }}
         ref: 'master'
-        path: 'cimgui'
-        submodules: true
+        submodules: recursive
 
     - name: Install dependencies on Ubuntu
       if: matrix.os == 'ubuntu-latest'
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential cmake
+        sudo apt-get install -y build-essential cmake pkg-config zip
 
     - name: Setup Ninja
       if: matrix.os == 'ubuntu-latest'
@@ -70,67 +61,14 @@ jobs:
         version: 4.0.6
         actions-cache-folder: 'emsdk-cache'
 
-    - name: Install vcpkg on Linux and macOS
-      if: runner.os != 'Windows'
+    - name: Build
       run: |
-        cd cimgui 
-        git clone https://github.com/microsoft/vcpkg.git
-        ./vcpkg/bootstrap-vcpkg.sh
-        ./vcpkg/vcpkg install freetype --triplet ${{ matrix.vcpkg-triplet }}
-
-    - name: Install vcpkg on Windows
-      if: runner.os == 'Windows'
-      run: |
-        cd cimgui 
-        git clone https://github.com/microsoft/vcpkg.git
-        ./vcpkg/bootstrap-vcpkg.bat
-        ./vcpkg/vcpkg.exe install freetype --triplet ${{ matrix.vcpkg-triplet }}
-
-    - name: Configure cimgui with CMake for ARM64 on Linux
-      if: matrix.os == 'ubuntu-latest' && matrix.arch == 'arm64'
-      run: |
-        cd cimgui
-        cmake -S ./ -B ./build -DCMAKE_BUILD_TYPE=Release -DCMAKE_SYSTEM_PROCESSOR=aarch64 -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++ -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }} -DIMGUI_WCHAR32=ON -DIMGUI_FREETYPE=ON
-
-    - name: Configure cimgui with CMake on Linux (x86_64)
-      if: matrix.os == 'ubuntu-latest' && matrix.arch == 'x86_64'
-      run: |
-        cd cimgui
-        cmake -S ./ -B ./build -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DIMGUI_WCHAR32=ON -DIMGUI_FREETYPE=ON
-
-    - name: Configure cimgui with CMake for macOS
-      if: matrix.os == 'macos-latest'
-      run: | 
-        cd cimgui
-        cmake -S ./ -B ./build -DCMAKE_OSX_ARCHITECTURES=${{ matrix.cmake-arch }} -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DIMGUI_WCHAR32=ON -DIMGUI_FREETYPE=ON
-
-    - name: Configure cimgui with CMake for Windows
-      if: matrix.os == 'windows-latest'
-      run: | 
-        cd cimgui
-        cmake -S ./ -B ./build -A ${{ matrix.cmake-arch }} -DCMAKE_TOOLCHAIN_FILE="./vcpkg/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }} -DIMGUI_WCHAR32=ON -DIMGUI_FREETYPE=ON
-
-    - name: Configure cimgui with CMake for Wasm
-      if: matrix.arch == 'wasm'
-      run: |
-        cd cimgui
-        cmake -S ./ -B ./build -DCMAKE_TOOLCHAIN_FILE="$EMSDK/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake" -DCMAKE_CROSSCOMPILING_EMULATOR="$EMSDK/node/20.18.0_64bit/bin/node.exe" -DVCPKG_TARGET_TRIPLET=${{ matrix.vcpkg-triplet }} -DIMGUI_WCHAR32=ON -DCMAKE_BUILD_TYPE=Release -DIMGUI_FREETYPE=OFF -DCMAKE_CXX_FLAGS="-s USE_FREETYPE=0 -s WASM=1" -DCMAKE_C_FLAGS="-s USE_FREETYPE=0 -s WASM=1" -DCMAKE_LD_FLAGS="-s USE_FREETYPE=0"
-
-    - name: Build cimgui
-      run: cmake --build cimgui/build --config Release
-
-    - name: Move Windows binaries
-      if: matrix.os == 'windows-latest'
-      run: |
-        mv cimgui/build/Release/*.dll cimgui/build/
+        cd NativeLibraries
+        python3 build.py ${{matrix.target}}
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v4.3.4
+      uses: actions/upload-artifact@v4
       with:
-        name: cimgui-${{ matrix.os }}-${{ matrix.arch }}-artifacts 
-        path: |
-          cimgui/build/*.dll
-          cimgui/build/*.so
-          cimgui/build/*.dylib
-          cimgui/build/*.a
-        if-no-files-found: ignore # 'warn' or 'ignore' or 'error'
+        name: cimgui-${{ matrix.target }}-artifacts 
+        path: build/OUT/*
+        if-no-files-found: warn # 'warn' or 'ignore' or 'error'
