@@ -6,19 +6,7 @@ import argparse
 import shutil
 
 # === CONFIGURATION ===
-REPO = 'EvergineTeam/ImGui.Net'  # GitHub repository path
-LIB_NAMES = [ "Imgui", "Imguizmo", "Imnodes", "Implot" ]
-# Mapping from artifact substrings to folder names
-ARCH_MAPPING = {
-    'macos-latest-arm64': 'osx-arm64',
-    'macos-latest-x86_64': 'osx-x64',
-    'ubuntu-latest-arm64': 'linux-arm64',
-    'ubuntu-latest-x86_64': 'linux-x64',
-    'windows-latest-arm64': 'win-arm64',
-    'windows-latest-x86_64': 'win-x64',
-    'windows-latest-x86': 'win-x86',
-    'ubuntu-latest-wasm': 'browser-wasm'
-}
+REPO = 'tuket/cimgui_all'  # GitHub repository path
 
 def get_headers(token):
     return {
@@ -54,22 +42,29 @@ def download_and_extract_artifact(session, artifact):
     response = session.get(download_url)
     response.raise_for_status()
 
+    scripts_dir = os.path.dirname(os.path.abspath(__file__))
+    runtimes_dir = os.path.join(scripts_dir, "..", "Generator", "Evergine.Bindings.Imgui", "runtimes")
+
     with zipfile.ZipFile(io.BytesIO(response.content)) as z:
-        print(f"Artifact {name} contains: {z.namelist()}")
-        scripts_dir = os.path.dirname(os.path.abspath(__file__))
-        tmp_dir = os.path.join(scripts_dir, "tmp")
+        z.extractall(path=runtimes_dir)
 
-        for key, folder in ARCH_MAPPING.items():
-            if key in name:
-                extract_path = os.path.join(tmp_dir, folder)
-                print(f"Extracting to: {extract_path}")
-                os.makedirs(extract_path, exist_ok=True)
-                z.extractall(path=extract_path)
-                print(f"Extraction completed for: {name}")
-                matched = True
-                return f"{folder}/{z.namelist()[0]}"
 
-        print(f"No matching folder mapping found for artifact: {name}")
+    # with zipfile.ZipFile(io.BytesIO(response.content)) as z:
+    #     print(f"Artifact {name} contains: {z.namelist()}")
+    #     scripts_dir = os.path.dirname(os.path.abspath(__file__))
+    #     tmp_dir = os.path.join(scripts_dir, "tmp")
+
+    #     for key, folder in ARCH_MAPPING.items():
+    #         if key in name:
+    #             extract_path = os.path.join(tmp_dir, folder)
+    #             print(f"Extracting to: {extract_path}")
+    #             os.makedirs(extract_path, exist_ok=True)
+    #             z.extractall(path=extract_path)
+    #             print(f"Extraction completed for: {name}")
+    #             matched = True
+    #             return f"{folder}/{z.namelist()[0]}"
+
+    #     print(f"No matching folder mapping found for artifact: {name}")
 
 def main():
     parser = argparse.ArgumentParser(description='Download and extract GitHub Actions artifacts.')
@@ -81,22 +76,16 @@ def main():
     scripts_dir = os.path.dirname(os.path.abspath(__file__))
     tmp_dir = os.path.join(scripts_dir, "tmp")
 
-    for lib_name in LIB_NAMES:
-        workflow_filename = f'c{lib_name.lower()}-cmake.yml'
-        project_name = f'Evergine.Bindings.{lib_name}'
-        project_dir = os.path.join(scripts_dir, "..", "Generator", project_name)
-        project_runtimes_dir = os.path.join(project_dir, "runtimes")
-        print(f"\nProcessing workflow: {workflow_filename}")
-        run_id = get_latest_successful_run(session, workflow_filename)
-        artifacts = get_artifacts(session, run_id)
-        shutil.rmtree(project_runtimes_dir, ignore_errors=True)
-        for artifact in artifacts:
-            lib_path = download_and_extract_artifact(session, artifact)
-            src_path = os.path.join(tmp_dir, lib_path)
-            dst_path = os.path.join(project_runtimes_dir, lib_path.split("/")[0], "native")
-            os.makedirs(dst_path, exist_ok=True)
-            shutil.copy(src_path, dst_path)
-            shutil.rmtree(tmp_dir, ignore_errors=True)
+    workflow_filename = 'build.yml'
+    project_name = f'Evergine.Bindings.Imgui'
+    project_dir = os.path.join(scripts_dir, "..", "Generator", project_name)
+    project_runtimes_dir = os.path.join(project_dir, "runtimes")
+    print(f"\nProcessing workflow: {workflow_filename}")
+    run_id = get_latest_successful_run(session, workflow_filename)
+    artifacts = get_artifacts(session, run_id)
+    shutil.rmtree(project_runtimes_dir, ignore_errors=True)
+    for artifact in artifacts:
+        download_and_extract_artifact(session, artifact)
 
 
 if __name__ == '__main__':

@@ -94,7 +94,7 @@ def compile_for_win(libName="cimgui"):
     subprocess.call(["cmake",
         "-S", srcPath,
         "-B", buildPath,
-        #f"-DVCPKG_TARGET_TRIPLET={triplet}",
+        # f"-DVCPKG_TARGET_TRIPLET={triplet}",
         "-DIMGUI_WCHAR32=ON",
         f"-DCMAKE_BUILD_TYPE={ReleaseMode}",
         "-DIMGUI_FREETYPE=OFF",

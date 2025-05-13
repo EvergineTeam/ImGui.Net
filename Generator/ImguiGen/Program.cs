@@ -7,7 +7,7 @@ namespace ImguiGen
     {
         static void Main(string[] args)
         {
-            string outputPath = "..\\..\\..\\..\\Evergine.Bindings.ImGui\\Generated";
+            string outputPath = "..\\..\\..\\..\\Evergine.Bindings.ImGui\\Imgui";
 
             string structs_and_enums_json = "Jsons/structs_and_enums.json";
             string definitions_json = "Jsons/definitions.json";
