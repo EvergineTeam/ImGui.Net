@@ -97,7 +97,9 @@ jobs:
         submodules: recursive
 
     - name: Download Compiled Native Libraries
-      run: python3 scripts/download-artifacts.py
+      run: |
+        pip install requests
+        python3 scripts/download-artifacts.py
 
     - name: Verify changes
       id: verify-changed-files
