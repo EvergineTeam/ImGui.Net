@@ -3,15 +3,9 @@ name: CI Imgui
 on:
   push:
     paths:
-      - "Generator/ImguiGen/**"
-      - "Generator/ImguizmoGen/**"
-      - "Generator/ImnodesGen/**"
-      - "Generator/ImplotGen/**"
-      - "NativeLibraries/cimgui/**"
-      - "NativeLibraries/extensions/**"
-      - "scripts/deploy-win-native.ps1"
-      - "scripts/generate-bindings.ps1"
-      - "scripts/generate-nugets.ps1"
+      - "Generator/**"
+      - "NativeLibraries/**"
+      - "scripts/**"
 
 jobs:
   build_imgui_win:

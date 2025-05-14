@@ -11,7 +11,8 @@ REPO = 'EvergineTeam/ImGui.Net'  # GitHub repository path
 def get_headers(token):
     return {
         'Authorization': f'token {token}',
-        'Accept': 'application/vnd.github+json'
+        'Accept': 'application/vnd.github+json',
+        'User-Agent': 'request'
     }
 
 def get_latest_successful_run(session, workflow_filename):
@@ -48,24 +49,6 @@ def download_and_extract_artifact(session, artifact):
     with zipfile.ZipFile(io.BytesIO(response.content)) as z:
         z.extractall(path=runtimes_dir)
 
-
-    # with zipfile.ZipFile(io.BytesIO(response.content)) as z:
-    #     print(f"Artifact {name} contains: {z.namelist()}")
-    #     scripts_dir = os.path.dirname(os.path.abspath(__file__))
-    #     tmp_dir = os.path.join(scripts_dir, "tmp")
-
-    #     for key, folder in ARCH_MAPPING.items():
-    #         if key in name:
-    #             extract_path = os.path.join(tmp_dir, folder)
-    #             print(f"Extracting to: {extract_path}")
-    #             os.makedirs(extract_path, exist_ok=True)
-    #             z.extractall(path=extract_path)
-    #             print(f"Extraction completed for: {name}")
-    #             matched = True
-    #             return f"{folder}/{z.namelist()[0]}"
-
-    #     print(f"No matching folder mapping found for artifact: {name}")
-
 def main():
     parser = argparse.ArgumentParser(description='Download and extract GitHub Actions artifacts.')
     parser.add_argument('--token', required=True, help='GitHub Personal Access Token')
@@ -74,9 +57,8 @@ def main():
     session = requests.Session()
     session.headers.update(get_headers(args.token))
     scripts_dir = os.path.dirname(os.path.abspath(__file__))
-    tmp_dir = os.path.join(scripts_dir, "tmp")
 
-    workflow_filename = 'build.yml'
+    workflow_filename = 'cimgui-cmake.yml'
     project_name = f'Evergine.Bindings.Imgui'
     project_dir = os.path.join(scripts_dir, "..", "Generator", project_name)
     project_runtimes_dir = os.path.join(project_dir, "runtimes")
