@@ -99,7 +99,7 @@ jobs:
     - name: Download Compiled Native Libraries
       run: |
         pip install requests
-        python3 scripts/download-artifacts.py
+        python3 scripts/download-artifacts.py --token ${{ secrets.EVERGINE_NUGETORG_TOKEN }}
 
     - name: Verify changes
       id: verify-changed-files
