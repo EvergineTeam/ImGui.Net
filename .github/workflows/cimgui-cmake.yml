@@ -86,7 +86,7 @@ jobs:
 
   # --- Generate Nugets ---
   generate-bindings:
-    depends-on: build-native-libs
+    needs: build-native-libs
     runs-on: windows-latest
     steps:
 
