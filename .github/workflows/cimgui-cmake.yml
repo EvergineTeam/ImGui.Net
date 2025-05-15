@@ -106,9 +106,9 @@ jobs:
       shell: pwsh
       run: ./scripts/verify-changes.ps1
 
-    - name: Commit Changes
-      if: steps.verify-changed-files.outputs.files_changed == 'true'
-      uses: EndBug/add-and-commit@v9
+    # - name: Commit Changes
+    #   if: steps.verify-changed-files.outputs.files_changed == 'true'
+    #   uses: EndBug/add-and-commit@v9
 
     - name: Generate Nugets
       if: steps.verify-changed-files.outputs.files_changed == 'true'
