@@ -49,6 +49,15 @@ def download_and_extract_artifact(session, artifact):
     with zipfile.ZipFile(io.BytesIO(response.content)) as z:
         z.extractall(path=runtimes_dir)
 
+def list_files(startpath):
+    for root, dirs, files in os.walk(startpath):
+        level = root.replace(startpath, '').count(os.sep)
+        indent = ' ' * 4 * (level)
+        print('{}{}/'.format(indent, os.path.basename(root)))
+        subindent = ' ' * 4 * (level + 1)
+        for f in files:
+            print('{}{}'.format(subindent, f))
+
 def main():
     parser = argparse.ArgumentParser(description='Download and extract GitHub Actions artifacts.')
     parser.add_argument('--token', required=True, help='GitHub Personal Access Token')
@@ -68,6 +77,9 @@ def main():
     shutil.rmtree(project_runtimes_dir, ignore_errors=True)
     for artifact in artifacts:
         download_and_extract_artifact(session, artifact)
+
+    print("RUNTIMES DIR:")
+    list_files(project_runtimes_dir)
 
 
 if __name__ == '__main__':
