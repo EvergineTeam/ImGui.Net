@@ -39,6 +39,7 @@ def common_cmake_args(target, buildMode, freetype = False):
         "-B", build_path(target),
         "-DIMGUI_WCHAR32=ON",
         "-DIMGUI_FREETYPE=" + ("ON" if freetype else "OFF"),
+        "-DCIMGUI_VARGS0=ON",
         f"-DCMAKE_BUILD_TYPE={buildMode}",
     ]
 
