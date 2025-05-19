@@ -56,7 +56,7 @@ add_library(cimgui SHARED
     cimguizmo/ImGuizmo/ImSequencer.cpp
 )
 
-target_compile_definitions(cimgui PRIVATE IMNODES_NAMESPACE=imnodes IMGUI_DISABLE_OBSOLETE_FUNCTIONS=1)
+target_compile_definitions(cimgui PRIVATE IMNODES_NAMESPACE=imnodes IMGUI_DISABLE_OBSOLETE_FUNCTIONS=1 CIMGUI_VARGS0)
 target_include_directories(cimgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cimgui)
 target_include_directories(cimgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cimgui/imgui)
 target_include_directories(cimgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cimplot)
@@ -65,7 +65,3 @@ target_include_directories(cimgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cimnodes)
 target_include_directories(cimgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cimnodes/imnodes)
 target_include_directories(cimgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cimguizmo)
 target_include_directories(cimgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cimguizmo/imguizmo)
-
-if(CIMGUI_VARGS0)
-	target_compile_definitions(cimgui PUBLIC CIMGUI_VARGS0)
-endif(CIMGUI_VARGS0)
