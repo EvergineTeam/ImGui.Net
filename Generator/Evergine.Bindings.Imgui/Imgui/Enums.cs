@@ -50,6 +50,9 @@ namespace Evergine.Bindings.Imgui
 		HasMouseCursors = 2,
 		HasSetMousePos = 4,
 		RendererHasVtxOffset = 8,
+		PlatformHasViewports = 1024,
+		HasMouseHoveredViewport = 2048,
+		RendererHasViewports = 4096,
 	}
 
 	[Flags]
@@ -120,23 +123,25 @@ namespace Evergine.Bindings.Imgui
 		TabDimmed = 37,
 		TabDimmedSelected = 38,
 		TabDimmedSelectedOverline = 39,
-		PlotLines = 40,
-		PlotLinesHovered = 41,
-		PlotHistogram = 42,
-		PlotHistogramHovered = 43,
-		TableHeaderBg = 44,
-		TableBorderStrong = 45,
-		TableBorderLight = 46,
-		TableRowBg = 47,
-		TableRowBgAlt = 48,
-		TextLink = 49,
-		TextSelectedBg = 50,
-		DragDropTarget = 51,
-		NavCursor = 52,
-		NavWindowingHighlight = 53,
-		NavWindowingDimBg = 54,
-		ModalWindowDimBg = 55,
-		COUNT = 56,
+		DockingPreview = 40,
+		DockingEmptyBg = 41,
+		PlotLines = 42,
+		PlotLinesHovered = 43,
+		PlotHistogram = 44,
+		PlotHistogramHovered = 45,
+		TableHeaderBg = 46,
+		TableBorderStrong = 47,
+		TableBorderLight = 48,
+		TableRowBg = 49,
+		TableRowBgAlt = 50,
+		TextLink = 51,
+		TextSelectedBg = 52,
+		DragDropTarget = 53,
+		NavCursor = 54,
+		NavWindowingHighlight = 55,
+		NavWindowingDimBg = 56,
+		ModalWindowDimBg = 57,
+		COUNT = 58,
 	}
 
 	[Flags]
@@ -208,6 +213,10 @@ namespace Evergine.Bindings.Imgui
 		NoMouse = 16,
 		NoMouseCursorChange = 32,
 		NoKeyboard = 64,
+		DockingEnable = 128,
+		ViewportsEnable = 1024,
+		DpiEnableScaleViewports = 16384,
+		DpiEnableScaleFonts = 32768,
 		IsSRGB = 1048576,
 		IsTouchScreen = 2097152,
 	}
@@ -240,6 +249,19 @@ namespace Evergine.Bindings.Imgui
 	}
 
 	[Flags]
+	public enum ImGuiDockNodeFlags
+	{
+		None = 0,
+		KeepAliveOnly = 1,
+		NoDockingOverCentralNode = 4,
+		PassthruCentralNode = 8,
+		NoDockingSplit = 16,
+		NoResize = 32,
+		AutoHideTabBar = 64,
+		NoUndocking = 128,
+	}
+
+	[Flags]
 	public enum ImGuiDragDropFlags
 	{
 		None = 0,
@@ -265,6 +287,7 @@ namespace Evergine.Bindings.Imgui
 		RootWindow = 2,
 		AnyWindow = 4,
 		NoPopupHierarchy = 8,
+		DockHierarchy = 16,
 		RootAndChildWindows = 3,
 	}
 
@@ -292,6 +315,7 @@ namespace Evergine.Bindings.Imgui
 		RootWindow = 2,
 		AnyWindow = 4,
 		NoPopupHierarchy = 8,
+		DockHierarchy = 16,
 		AllowWhenBlockedByPopup = 32,
 		AllowWhenBlockedByActiveItem = 128,
 		AllowWhenOverlappedByItem = 256,
@@ -685,7 +709,8 @@ namespace Evergine.Bindings.Imgui
 		SeparatorTextBorderSize = 31,
 		SeparatorTextAlign = 32,
 		SeparatorTextPadding = 33,
-		COUNT = 34,
+		DockingSeparatorSize = 34,
+		COUNT = 35,
 	}
 
 	[Flags]
@@ -841,6 +866,17 @@ namespace Evergine.Bindings.Imgui
 		IsPlatformWindow = 1,
 		IsPlatformMonitor = 2,
 		OwnedByApp = 4,
+		NoDecoration = 8,
+		NoTaskBarIcon = 16,
+		NoFocusOnAppearing = 32,
+		NoFocusOnClick = 64,
+		NoInputs = 128,
+		NoRendererClear = 256,
+		NoAutoMerge = 512,
+		TopMost = 1024,
+		CanHostOtherWindows = 2048,
+		IsMinimized = 4096,
+		IsFocused = 8192,
 	}
 
 	[Flags]
@@ -866,9 +902,11 @@ namespace Evergine.Bindings.Imgui
 		NoNavInputs = 65536,
 		NoNavFocus = 131072,
 		UnsavedDocument = 262144,
+		NoDocking = 524288,
 		NoNav = 196608,
 		NoDecoration = 43,
 		NoInputs = 197120,
+		DockNodeHost = 8388608,
 		ChildWindow = 16777216,
 		Tooltip = 33554432,
 		Popup = 67108864,

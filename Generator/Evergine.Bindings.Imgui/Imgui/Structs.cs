@@ -940,6 +940,14 @@ namespace Evergine.Bindings.Imgui
 		public byte ConfigNavEscapeClearFocusWindow;
 		public byte ConfigNavCursorVisibleAuto;
 		public byte ConfigNavCursorVisibleAlways;
+		public byte ConfigDockingNoSplit;
+		public byte ConfigDockingWithShift;
+		public byte ConfigDockingAlwaysTabBar;
+		public byte ConfigDockingTransparentPayload;
+		public byte ConfigViewportsNoAutoMerge;
+		public byte ConfigViewportsNoTaskBarIcon;
+		public byte ConfigViewportsNoDecoration;
+		public byte ConfigViewportsNoDefaultParent;
 		public byte MouseDrawCursor;
 		public byte ConfigMacOSXBehaviors;
 		public byte ConfigInputTrickleEventQueue;
@@ -991,6 +999,7 @@ namespace Evergine.Bindings.Imgui
 		public float MouseWheel;
 		public float MouseWheelH;
 		public ImGuiMouseSource MouseSource;
+		public uint MouseHoveredViewport;
 		public byte KeyCtrl;
 		public byte KeyShift;
 		public byte KeyAlt;
@@ -1171,6 +1180,11 @@ namespace Evergine.Bindings.Imgui
 		public byte MouseCtrlLeftAsRightClick;
 		public fixed float MouseDownDuration[5];
 		public fixed float MouseDownDurationPrev[5];
+		public Vector2 MouseDragMaxDistanceAbs_0;
+		public Vector2 MouseDragMaxDistanceAbs_1;
+		public Vector2 MouseDragMaxDistanceAbs_2;
+		public Vector2 MouseDragMaxDistanceAbs_3;
+		public Vector2 MouseDragMaxDistanceAbs_4;
 		public fixed float MouseDragMaxDistanceSqr[5];
 		public float PenPressure;
 		public byte AppFocusLost;
@@ -1221,6 +1235,11 @@ namespace Evergine.Bindings.Imgui
 		public void AddMouseSourceEvent(ImGuiMouseSource source)
 		{
 			ImguiNative.ImGuiIO_AddMouseSourceEvent(self, source);
+		}
+
+		public void AddMouseViewportEvent(uint id)
+		{
+			ImguiNative.ImGuiIO_AddMouseViewportEvent(self, id);
 		}
 
 		public void AddMouseWheelEvent(float wheel_x, float wheel_y)
@@ -1416,6 +1435,32 @@ namespace Evergine.Bindings.Imgui
 		public void* Platform_ImeUserData;
 		public ushort Platform_LocaleDecimalPoint;
 		public void* Renderer_RenderState;
+		public void(*)(ImGuiViewport* vp) Platform_CreateWindow;
+		public void(*)(ImGuiViewport* vp) Platform_DestroyWindow;
+		public void(*)(ImGuiViewport* vp) Platform_ShowWindow;
+		public void(*)(ImGuiViewport* vp,ImVec2 pos) Platform_SetWindowPos;
+		public ImVec2(*)(ImGuiViewport* vp) Platform_GetWindowPos;
+		public void(*)(ImGuiViewport* vp,ImVec2 size) Platform_SetWindowSize;
+		public ImVec2(*)(ImGuiViewport* vp) Platform_GetWindowSize;
+		public void(*)(ImGuiViewport* vp) Platform_SetWindowFocus;
+		public bool(*)(ImGuiViewport* vp) Platform_GetWindowFocus;
+		public bool(*)(ImGuiViewport* vp) Platform_GetWindowMinimized;
+		public void(*)(ImGuiViewport* vp,char* str) Platform_SetWindowTitle;
+		public void(*)(ImGuiViewport* vp,float alpha) Platform_SetWindowAlpha;
+		public void(*)(ImGuiViewport* vp) Platform_UpdateWindow;
+		public void(*)(ImGuiViewport* vp,void* render_arg) Platform_RenderWindow;
+		public void(*)(ImGuiViewport* vp,void* render_arg) Platform_SwapBuffers;
+		public float(*)(ImGuiViewport* vp) Platform_GetWindowDpiScale;
+		public void(*)(ImGuiViewport* vp) Platform_OnChangedViewport;
+		public ImVec4(*)(ImGuiViewport* vp) Platform_GetWindowWorkAreaInsets;
+		public int(*)(ImGuiViewport* vp,ImU64 vk_inst,void* vk_allocators,ImU64* out_vk_surface) Platform_CreateVkSurface;
+		public void(*)(ImGuiViewport* vp) Renderer_CreateWindow;
+		public void(*)(ImGuiViewport* vp) Renderer_DestroyWindow;
+		public void(*)(ImGuiViewport* vp,ImVec2 size) Renderer_SetWindowSize;
+		public void(*)(ImGuiViewport* vp,void* render_arg) Renderer_RenderWindow;
+		public void(*)(ImGuiViewport* vp,void* render_arg) Renderer_SwapBuffers;
+		public ImVector Monitors;
+		public ImVector Viewports;
 	}
 
 	public unsafe partial struct ImGuiPlatformImeData
@@ -1423,6 +1468,16 @@ namespace Evergine.Bindings.Imgui
 		public byte WantVisible;
 		public Vector2 InputPos;
 		public float InputLineHeight;
+	}
+
+	public unsafe partial struct ImGuiPlatformMonitor
+	{
+		public Vector2 MainPos;
+		public Vector2 MainSize;
+		public Vector2 WorkPos;
+		public Vector2 WorkSize;
+		public float DpiScale;
+		public void* PlatformHandle;
 	}
 
 	public unsafe partial struct ImGuiSelectionBasicStorage
@@ -1633,6 +1688,7 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 SeparatorTextPadding;
 		public Vector2 DisplayWindowPadding;
 		public Vector2 DisplaySafeAreaPadding;
+		public float DockingSeparatorSize;
 		public float MouseCursorScale;
 		public byte AntiAliasedLines;
 		public byte AntiAliasedLinesUseTex;
@@ -1695,6 +1751,8 @@ namespace Evergine.Bindings.Imgui
 		public Vector4 Colors_53;
 		public Vector4 Colors_54;
 		public Vector4 Colors_55;
+		public Vector4 Colors_56;
+		public Vector4 Colors_57;
 		public float HoverStationaryDelay;
 		public float HoverDelayShort;
 		public float HoverDelayNormal;
@@ -1737,11 +1795,6 @@ namespace Evergine.Bindings.Imgui
 		public void appendf( char* fmt)
 		{
 			ImguiNative.ImGuiTextBuffer_appendf(self, fmt);
-		}
-
-		public void appendf0( char* fmt)
-		{
-			ImguiNative.ImGuiTextBuffer_appendf0(self, fmt);
 		}
 
 		public string begin()
@@ -1850,8 +1903,17 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 Size;
 		public Vector2 WorkPos;
 		public Vector2 WorkSize;
+		public float DpiScale;
+		public uint ParentViewportId;
+		public ImDrawData* DrawData;
+		public void* RendererUserData;
+		public void* PlatformUserData;
 		public void* PlatformHandle;
 		public void* PlatformHandleRaw;
+		public byte PlatformWindowCreated;
+		public byte PlatformRequestMove;
+		public byte PlatformRequestResize;
+		public byte PlatformRequestClose;
 
 		public Vector2 GetCenter()
 		{
@@ -1871,6 +1933,19 @@ namespace Evergine.Bindings.Imgui
 
 		public ImGuiViewport* self => (ImGuiViewport*)Unsafe.AsPointer(ref this);
 
+	}
+
+	public unsafe partial struct ImGuiWindowClass
+	{
+		public uint ClassId;
+		public uint ParentViewportId;
+		public uint FocusRouteParentWindowId;
+		public ImGuiViewportFlags ViewportFlagsOverrideSet;
+		public ImGuiViewportFlags ViewportFlagsOverrideClear;
+		public ImGuiTabItemFlags TabItemFlagsOverrideSet;
+		public ImGuiDockNodeFlags DockNodeFlagsOverrideSet;
+		public byte DockingAlwaysTabBar;
+		public byte DockingAllowUnclassed;
 	}
 
 	public unsafe partial struct ImVec2
