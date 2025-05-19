@@ -19,6 +19,9 @@ namespace Common
             if (!type.Equals("const char*"))
                 type = type.Replace("const ", "");
 
+            if (type.Contains("(*)")) // Delegates
+                return "IntPtr";
+
             switch (type)
             {
                 case "char":
@@ -164,14 +167,6 @@ namespace Common
                 case "ImGuiMemFreeFunc":
                 case "ImGuiPlatformIO*":
                 case "ImPlotTransform":
-                // Delegates
-                case "ImGuiID(*)(ImGuiSelectionBasicStorage* self,int idx)":
-                case "void(*)(ImGuiSelectionExternalStorage* self,int idx,bool selected)":
-                case "void(*)(void* ptr,void* user_data)":
-                case "void*(*)(size_t sz,void* user_data)":
-                case "char*(*)(void* user_data,int idx)":
-                case "float(*)(void* data,int idx)":
-                    return "IntPtr";
                 case "ImGuiMemAllocFunc*":
                 case "ImGuiMemFreeFunc*":
                     return "IntPtr*";

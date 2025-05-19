@@ -40,7 +40,7 @@ namespace Evergine.Bindings.Imgui
 		public uint VtxOffset;
 		public uint IdxOffset;
 		public uint ElemCount;
-		public IntPtr UserCallback;
+		public IntPtr* UserCallback;
 		public void* UserCallbackData;
 		public int UserCallbackDataSize;
 		public int UserCallbackDataOffset;
@@ -104,7 +104,7 @@ namespace Evergine.Bindings.Imgui
 		public ImVector VtxBuffer;
 		public ImDrawListFlags Flags;
 		public uint _VtxCurrentIdx;
-		public IntPtr _Data;
+		public IntPtr* _Data;
 		public ImDrawVert* _VtxWritePtr;
 		public ushort* _IdxWritePtr;
 		public ImVector _Path;
@@ -126,7 +126,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddBezierQuadratic(self, p1, p2, p3, col, thickness, num_segments);
 		}
 
-		public void AddCallback(IntPtr callback, void* userdata, uint userdata_size = 0)
+		public void AddCallback(IntPtr* callback, void* userdata, uint userdata_size = 0)
 		{
 			ImguiNative.ImDrawList_AddCallback(self, callback, userdata, userdata_size);
 		}
@@ -665,7 +665,7 @@ namespace Evergine.Bindings.Imgui
 		public Vector4 TexUvLines_30;
 		public Vector4 TexUvLines_31;
 		public Vector4 TexUvLines_32;
-		public IntPtr FontBuilderIO;
+		public IntPtr* FontBuilderIO;
 		public uint FontBuilderFlags;
 		public int PackIdMouseCursors;
 		public int PackIdLines;
@@ -993,7 +993,7 @@ namespace Evergine.Bindings.Imgui
 		public int MetricsRenderWindows;
 		public int MetricsActiveWindows;
 		public Vector2 MouseDelta;
-		public IntPtr Ctx;
+		public IntPtr* Ctx;
 		public Vector2 MousePos;
 		public fixed byte MouseDown[5];
 		public float MouseWheel;
@@ -1278,7 +1278,7 @@ namespace Evergine.Bindings.Imgui
 
 	public unsafe partial struct ImGuiInputTextCallbackData
 	{
-		public IntPtr Ctx;
+		public IntPtr* Ctx;
 		public ImGuiInputTextFlags EventFlag;
 		public ImGuiInputTextFlags Flags;
 		public void* UserData;
@@ -1331,7 +1331,7 @@ namespace Evergine.Bindings.Imgui
 
 	public unsafe partial struct ImGuiListClipper
 	{
-		public IntPtr Ctx;
+		public IntPtr* Ctx;
 		public int DisplayStart;
 		public int DisplayEnd;
 		public int ItemsCount;
@@ -1435,30 +1435,30 @@ namespace Evergine.Bindings.Imgui
 		public void* Platform_ImeUserData;
 		public ushort Platform_LocaleDecimalPoint;
 		public void* Renderer_RenderState;
-		public void(*)(ImGuiViewport* vp) Platform_CreateWindow;
-		public void(*)(ImGuiViewport* vp) Platform_DestroyWindow;
-		public void(*)(ImGuiViewport* vp) Platform_ShowWindow;
-		public void(*)(ImGuiViewport* vp,ImVec2 pos) Platform_SetWindowPos;
-		public ImVec2(*)(ImGuiViewport* vp) Platform_GetWindowPos;
-		public void(*)(ImGuiViewport* vp,ImVec2 size) Platform_SetWindowSize;
-		public ImVec2(*)(ImGuiViewport* vp) Platform_GetWindowSize;
-		public void(*)(ImGuiViewport* vp) Platform_SetWindowFocus;
-		public bool(*)(ImGuiViewport* vp) Platform_GetWindowFocus;
-		public bool(*)(ImGuiViewport* vp) Platform_GetWindowMinimized;
-		public void(*)(ImGuiViewport* vp,char* str) Platform_SetWindowTitle;
-		public void(*)(ImGuiViewport* vp,float alpha) Platform_SetWindowAlpha;
-		public void(*)(ImGuiViewport* vp) Platform_UpdateWindow;
-		public void(*)(ImGuiViewport* vp,void* render_arg) Platform_RenderWindow;
-		public void(*)(ImGuiViewport* vp,void* render_arg) Platform_SwapBuffers;
-		public float(*)(ImGuiViewport* vp) Platform_GetWindowDpiScale;
-		public void(*)(ImGuiViewport* vp) Platform_OnChangedViewport;
-		public ImVec4(*)(ImGuiViewport* vp) Platform_GetWindowWorkAreaInsets;
-		public int(*)(ImGuiViewport* vp,ImU64 vk_inst,void* vk_allocators,ImU64* out_vk_surface) Platform_CreateVkSurface;
-		public void(*)(ImGuiViewport* vp) Renderer_CreateWindow;
-		public void(*)(ImGuiViewport* vp) Renderer_DestroyWindow;
-		public void(*)(ImGuiViewport* vp,ImVec2 size) Renderer_SetWindowSize;
-		public void(*)(ImGuiViewport* vp,void* render_arg) Renderer_RenderWindow;
-		public void(*)(ImGuiViewport* vp,void* render_arg) Renderer_SwapBuffers;
+		public IntPtr Platform_CreateWindow;
+		public IntPtr Platform_DestroyWindow;
+		public IntPtr Platform_ShowWindow;
+		public IntPtr Platform_SetWindowPos;
+		public IntPtr Platform_GetWindowPos;
+		public IntPtr Platform_SetWindowSize;
+		public IntPtr Platform_GetWindowSize;
+		public IntPtr Platform_SetWindowFocus;
+		public IntPtr Platform_GetWindowFocus;
+		public IntPtr Platform_GetWindowMinimized;
+		public IntPtr Platform_SetWindowTitle;
+		public IntPtr Platform_SetWindowAlpha;
+		public IntPtr Platform_UpdateWindow;
+		public IntPtr Platform_RenderWindow;
+		public IntPtr Platform_SwapBuffers;
+		public IntPtr Platform_GetWindowDpiScale;
+		public IntPtr Platform_OnChangedViewport;
+		public IntPtr Platform_GetWindowWorkAreaInsets;
+		public IntPtr Platform_CreateVkSurface;
+		public IntPtr Renderer_CreateWindow;
+		public IntPtr Renderer_DestroyWindow;
+		public IntPtr Renderer_SetWindowSize;
+		public IntPtr Renderer_RenderWindow;
+		public IntPtr Renderer_SwapBuffers;
 		public ImVector Monitors;
 		public ImVector Viewports;
 	}

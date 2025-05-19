@@ -50,7 +50,7 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImDrawList_AddBezierQuadratic(ImDrawList* self, Vector2 p1, Vector2 p2, Vector2 p3, uint col, float thickness, int num_segments);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImDrawList_AddCallback(ImDrawList* self, IntPtr callback, void* userdata, uint userdata_size);
+		public static extern void ImDrawList_AddCallback(ImDrawList* self, IntPtr* callback, void* userdata, uint userdata_size);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImDrawList_AddCircle(ImDrawList* self, Vector2 center, float radius, uint col, int num_segments, float thickness);
@@ -409,7 +409,7 @@ namespace Evergine.Bindings.Imgui
 		public static extern void ImFont_RenderText(ImFont* self, ImDrawList* draw_list, float size, Vector2 pos, uint col, Vector4 clip_rect, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_begin, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_end, float wrap_width, [MarshalAs(UnmanagedType.I1)] bool cpu_fine_clip);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern IntPtr ImGuiFreeType_GetBuilderForFreeType();
+		public static extern IntPtr* ImGuiFreeType_GetBuilderForFreeType();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuiFreeType_SetAllocatorFunctions(IntPtr alloc_func, IntPtr free_func, void* user_data);
@@ -838,7 +838,7 @@ namespace Evergine.Bindings.Imgui
 		public static extern bool igCombo_FnStrPtr([MarshalAs(UnmanagedType.LPUTF8Str)] string label, int* current_item, IntPtr getter, void* user_data, int items_count, int popup_max_height_in_items);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern IntPtr igCreateContext(ImFontAtlas* shared_font_atlas);
+		public static extern IntPtr* igCreateContext(ImFontAtlas* shared_font_atlas);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.I1)]
@@ -857,7 +857,7 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igDebugTextEncoding([MarshalAs(UnmanagedType.LPUTF8Str)] string text);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void igDestroyContext(IntPtr ctx);
+		public static extern void igDestroyContext(IntPtr* ctx);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igDestroyPlatformWindows();
@@ -1014,7 +1014,7 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igGetContentRegionAvail(Vector2* pOut);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern IntPtr igGetCurrentContext();
+		public static extern IntPtr* igGetCurrentContext();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igGetCursorPos(Vector2* pOut);
@@ -1038,7 +1038,7 @@ namespace Evergine.Bindings.Imgui
 		public static extern ImDrawData* igGetDrawData();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern IntPtr igGetDrawListSharedData();
+		public static extern IntPtr* igGetDrawListSharedData();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern ImFont* igGetFont();
@@ -1114,7 +1114,7 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igGetMousePosOnOpeningCurrentPopup(Vector2* pOut);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern IntPtr igGetPlatformIO_Nil();
+		public static extern IntPtr* igGetPlatformIO_Nil();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern float igGetScrollMaxX();
@@ -1587,7 +1587,7 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igSeparatorText([MarshalAs(UnmanagedType.LPUTF8Str)] string label);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void igSetAllocatorFunctions(IntPtr alloc_func, IntPtr free_func, void* user_data);
+		public static extern void igSetAllocatorFunctions(IntPtr* alloc_func, IntPtr* free_func, void* user_data);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igSetClipboardText([MarshalAs(UnmanagedType.LPUTF8Str)] string text);
@@ -1602,7 +1602,7 @@ namespace Evergine.Bindings.Imgui
 		public static extern void igSetColumnWidth(int column_index, float width);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void igSetCurrentContext(IntPtr ctx);
+		public static extern void igSetCurrentContext(IntPtr* ctx);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igSetCursorPos(Vector2 local_pos);
