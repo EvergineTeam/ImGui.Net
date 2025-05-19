@@ -590,7 +590,7 @@ namespace Evergine.Bindings.Imgui
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuiTextBuffer_append(ImGuiTextBuffer* self, [MarshalAs(UnmanagedType.LPUTF8Str)] string str, [MarshalAs(UnmanagedType.LPUTF8Str)] string str_end);
 
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = ImGuiTextBuffer_appendf0)]
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ImGuiTextBuffer_appendf0")]
 		public static extern void ImGuiTextBuffer_appendf(ImGuiTextBuffer* self,  char* fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
@@ -754,7 +754,7 @@ namespace Evergine.Bindings.Imgui
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igBullet();
 
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = igBulletText0)]
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = "igBulletText0")]
 		public static extern void igBulletText([MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
@@ -847,7 +847,7 @@ namespace Evergine.Bindings.Imgui
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igDebugFlashStyleColor(ImGuiCol idx);
 
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = igDebugLog0)]
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = "igDebugLog0")]
 		public static extern void igDebugLog([MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
@@ -1394,7 +1394,7 @@ namespace Evergine.Bindings.Imgui
 		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool igIsWindowHovered(ImGuiHoveredFlags flags);
 
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = igLabelText0)]
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = "igLabelText0")]
 		public static extern void igLabelText([MarshalAs(UnmanagedType.LPUTF8Str)] string label, [MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
@@ -1417,7 +1417,7 @@ namespace Evergine.Bindings.Imgui
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igLogFinish();
 
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = igLogText0)]
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = "igLogText0")]
 		public static extern void igLogText([MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
@@ -1626,7 +1626,7 @@ namespace Evergine.Bindings.Imgui
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igSetItemKeyOwner_Nil(ImGuiKey key);
 
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = igSetItemTooltip0)]
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = "igSetItemTooltip0")]
 		public static extern void igSetItemTooltip([MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
@@ -1719,7 +1719,7 @@ namespace Evergine.Bindings.Imgui
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igSetTabItemClosed([MarshalAs(UnmanagedType.LPUTF8Str)] string tab_or_docked_window_label);
 
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = igSetTooltip0)]
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = "igSetTooltip0")]
 		public static extern void igSetTooltip([MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
@@ -1899,13 +1899,13 @@ namespace Evergine.Bindings.Imgui
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igTableSetupScrollFreeze(int cols, int rows);
 
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = igText0)]
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = "igText0")]
 		public static extern void igText([MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
 
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = igTextColored0)]
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = "igTextColored0")]
 		public static extern void igTextColored(Vector4 col, [MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
 
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = igTextDisabled0)]
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = "igTextDisabled0")]
 		public static extern void igTextDisabled([MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
@@ -1918,18 +1918,18 @@ namespace Evergine.Bindings.Imgui
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void igTextUnformatted([MarshalAs(UnmanagedType.LPUTF8Str)] string text, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_end);
 
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = igTextWrapped0)]
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = "igTextWrapped0")]
 		public static extern void igTextWrapped([MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool igTreeNode_Str([MarshalAs(UnmanagedType.LPUTF8Str)] string label);
 
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = igTreeNode_StrStr0)]
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = "igTreeNode_StrStr0")]
 		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool igTreeNode_StrStr([MarshalAs(UnmanagedType.LPUTF8Str)] string str_id, [MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
 
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = igTreeNode_Ptr0)]
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = "igTreeNode_Ptr0")]
 		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool igTreeNode_Ptr(void* ptr_id, [MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
 
@@ -1937,11 +1937,11 @@ namespace Evergine.Bindings.Imgui
 		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool igTreeNodeEx_Str([MarshalAs(UnmanagedType.LPUTF8Str)] string label, ImGuiTreeNodeFlags flags);
 
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = igTreeNodeEx_StrStr0)]
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = "igTreeNodeEx_StrStr0")]
 		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool igTreeNodeEx_StrStr([MarshalAs(UnmanagedType.LPUTF8Str)] string str_id, ImGuiTreeNodeFlags flags, [MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
 
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = igTreeNodeEx_Ptr0)]
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = "igTreeNodeEx_Ptr0")]
 		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool igTreeNodeEx_Ptr(void* ptr_id, ImGuiTreeNodeFlags flags, [MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
 

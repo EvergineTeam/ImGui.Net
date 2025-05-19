@@ -179,7 +179,7 @@ namespace Common
 
                             if (hasVargs)
                             {
-                                file.WriteLine($"\t\t[DllImport(\"{libraryName}\", CallingConvention = CallingConvention.Cdecl, EntryPoint = \"{o.FuncName}0)\"]");
+                                file.WriteLine($"\t\t[DllImport(\"{libraryName}\", CallingConvention = CallingConvention.Cdecl, EntryPoint = \"{o.FuncName}0\")]");
                             }
                             else
                             {
