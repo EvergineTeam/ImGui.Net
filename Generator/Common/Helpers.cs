@@ -167,6 +167,7 @@ namespace Common
                 case "ImGuiMemFreeFunc":
                 case "ImGuiPlatformIO*":
                 case "ImPlotTransform":
+                    return "IntPtr";
                 case "ImGuiMemAllocFunc*":
                 case "ImGuiMemFreeFunc*":
                     return "IntPtr*";
