@@ -40,7 +40,7 @@ namespace Evergine.Bindings.Imgui
 		public uint VtxOffset;
 		public uint IdxOffset;
 		public uint ElemCount;
-		public IntPtr* UserCallback;
+		public IntPtr UserCallback;
 		public void* UserCallbackData;
 		public int UserCallbackDataSize;
 		public int UserCallbackDataOffset;
@@ -104,7 +104,7 @@ namespace Evergine.Bindings.Imgui
 		public ImVector VtxBuffer;
 		public ImDrawListFlags Flags;
 		public uint _VtxCurrentIdx;
-		public IntPtr* _Data;
+		public IntPtr _Data;
 		public ImDrawVert* _VtxWritePtr;
 		public ushort* _IdxWritePtr;
 		public ImVector _Path;
@@ -126,7 +126,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddBezierQuadratic(self, p1, p2, p3, col, thickness, num_segments);
 		}
 
-		public void AddCallback(IntPtr* callback, void* userdata, uint userdata_size = 0)
+		public void AddCallback(IntPtr callback, void* userdata, uint userdata_size = 0)
 		{
 			ImguiNative.ImDrawList_AddCallback(self, callback, userdata, userdata_size);
 		}
@@ -665,7 +665,7 @@ namespace Evergine.Bindings.Imgui
 		public Vector4 TexUvLines_30;
 		public Vector4 TexUvLines_31;
 		public Vector4 TexUvLines_32;
-		public IntPtr* FontBuilderIO;
+		public IntPtr FontBuilderIO;
 		public uint FontBuilderFlags;
 		public int PackIdMouseCursors;
 		public int PackIdLines;
@@ -993,7 +993,7 @@ namespace Evergine.Bindings.Imgui
 		public int MetricsRenderWindows;
 		public int MetricsActiveWindows;
 		public Vector2 MouseDelta;
-		public IntPtr* Ctx;
+		public IntPtr Ctx;
 		public Vector2 MousePos;
 		public fixed byte MouseDown[5];
 		public float MouseWheel;
@@ -1278,7 +1278,7 @@ namespace Evergine.Bindings.Imgui
 
 	public unsafe partial struct ImGuiInputTextCallbackData
 	{
-		public IntPtr* Ctx;
+		public IntPtr Ctx;
 		public ImGuiInputTextFlags EventFlag;
 		public ImGuiInputTextFlags Flags;
 		public void* UserData;
@@ -1331,7 +1331,7 @@ namespace Evergine.Bindings.Imgui
 
 	public unsafe partial struct ImGuiListClipper
 	{
-		public IntPtr* Ctx;
+		public IntPtr Ctx;
 		public int DisplayStart;
 		public int DisplayEnd;
 		public int ItemsCount;
