@@ -1,4 +1,7 @@
 ﻿using Evergine.Bindings.Imgui;
+using Evergine.Bindings.Implot;
+using Evergine.Bindings.Imnodes;
+using Evergine.Bindings.Imguizmo;
 using Evergine.Common.Graphics;
 using Evergine.Common.Input.Keyboard;
 using Evergine.Common.Input.Mouse;
@@ -48,6 +51,12 @@ namespace ExampleEvergine.Managers
 
         private int lastAssignedID = 100;
         private Matrix4x4 mvp;
+
+        private bool invertedY =>
+            this.graphicsContext.BackendType == GraphicsBackend.OpenGL ||
+            this.graphicsContext.BackendType == GraphicsBackend.OpenGLES ||
+            this.graphicsContext.BackendType == GraphicsBackend.WebGL1 ||
+            this.graphicsContext.BackendType == GraphicsBackend.WebGL2;
 
         private struct ResourceSetInfo
         {
@@ -117,7 +126,7 @@ namespace ExampleEvergine.Managers
             }
 
             ImguiNative.igNewFrame();
-            //ImguizmoNative.ImGuizmo_BeginFrame();
+            ImguizmoNative.ImGuizmo_BeginFrame();
         }
 
         public unsafe void Initialize(GraphicsPresenter presenter, GraphicsContext context, BaseRenderManager renderManager)
@@ -138,20 +147,22 @@ namespace ExampleEvergine.Managers
             // Create imgui context            
             imguiContext = ImguiNative.igCreateContext((ImFontAtlas*)null);
             ImguiNative.igSetCurrentContext(imguiContext);
-            //ImplotNative.ImPlot_SetImGuiContext(imguiContext);
-            //ImnodesNative.imnodes_SetImGuiContext(imguiContext);
-            //ImguizmoNative.ImGuizmo_SetImGuiContext(imguiContext);
+            ImplotNative.ImPlot_SetImGuiContext(imguiContext);
+            ImnodesNative.imnodes_SetImGuiContext(imguiContext);
+            ImguizmoNative.ImGuizmo_SetImGuiContext(imguiContext);
 
-            //// Create implot context
-            //implotContext = ImplotNative.ImPlot_CreateContext();
-            //ImplotNative.ImPlot_SetCurrentContext(implotContext);
+            // Create implot context
+            implotContext = ImplotNative.ImPlot_CreateContext();
+            ImplotNative.ImPlot_SetCurrentContext(implotContext);
 
-            //// Create imnodes context
-            //imnodesContext = ImnodesNative.imnodes_CreateContext();
-            //ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
+            // Create imnodes context
+            imnodesContext = ImnodesNative.imnodes_CreateContext();
+            ImnodesNative.imnodes_SetCurrentContext(imnodesContext);
 
             this.io = ImguiNative.igGetIO_Nil();
             this.io->Fonts->AddFontDefault(null);
+            this.io->ConfigErrorRecoveryEnableAssert = 0;
+            this.io->ConfigErrorRecoveryEnableTooltip = 0;
 
             // Compile shaders.
             var vsCode = this.NativeAPICompiler(ShaderStages.Vertex);
@@ -244,8 +255,7 @@ namespace ExampleEvergine.Managers
             int bytesPerPixel;
             byte* pixels = null;
             this.io->Fonts->GetTexDataAsRGBA32(&pixels, &width, &height, &bytesPerPixel);
-
-            //this.io->Fonts->SetTexID((nint)this.fontAtlasID);
+            this.io->Fonts->SetTexID(this.fontAtlasID);
 
             var fontTextureDescription = new TextureDescription()
             {
@@ -293,7 +303,7 @@ namespace ExampleEvergine.Managers
                 switch (e.Button)
                 {
                     case MouseButtons.Left:
-                        this.io->AddMouseButtonEvent((int)ImGuiMouseButton.Left, true);   
+                        this.io->AddMouseButtonEvent((int)ImGuiMouseButton.Left, true);
                         break;
                     case MouseButtons.Right:
                         this.io->AddMouseButtonEvent((int)ImGuiMouseButton.Right, true);
@@ -335,7 +345,7 @@ namespace ExampleEvergine.Managers
             var keyboardDispatcher = this.surface.KeyboardDispatcher;
             keyboardDispatcher.KeyDown += (s, e) =>
             {
-                if(TryMapKey(e.Key, out ImGuiKey imguiKey))
+                if (TryMapKey(e.Key, out ImGuiKey imguiKey))
                 {
                     this.io->AddKeyEvent(imguiKey, true);
                 }
@@ -575,6 +585,13 @@ namespace ExampleEvergine.Managers
                 var iOffset = indexOffsetInElements * sizeof(ushort);
                 Unsafe.CopyBlock((void*)((long)iResource.Data + iOffset), (void*)cmdListPtr->IdxBuffer.Data, (uint)(cmdListPtr->IdxBuffer.Size * sizeof(ushort)));
 
+                // FIX FOR WEBGL
+                UInt16* indexPtr = (UInt16*)((long)iResource.Data + iOffset);
+                for (int j = 0; j < cmdListPtr->IdxBuffer.Size; j++)
+                {
+                    indexPtr[j] += (UInt16)vertexOffsetInVertices;
+                }
+
                 vertexOffsetInVertices += (uint)cmdListPtr->VtxBuffer.Size;
                 indexOffsetInElements += (uint)cmdListPtr->IdxBuffer.Size;
             }
@@ -606,17 +623,17 @@ namespace ExampleEvergine.Managers
 
                 for (int i = 0; i < cmdListPtr->CmdBuffer.Size; i++)
                 {
-                    ImDrawCmd* cmd = (ImDrawCmd*)((long)cmdListPtr->CmdBuffer.Data + i*(sizeof(ImDrawCmd)));
+                    ImDrawCmd* cmd = (ImDrawCmd*)((long)cmdListPtr->CmdBuffer.Data + i * (sizeof(ImDrawCmd)));
 
                     if (cmd->TextureId != 0)
                     {
-                        if ((UInt64)cmd->TextureId == this.fontAtlasID)
+                        if (cmd->TextureId == this.fontAtlasID)
                         {
                             commandBuffer.SetResourceSet(this.resourceSet);
                         }
                         else
                         {
-                            commandBuffer.SetResourceSet(this.GetImageResourceSet((UInt64)cmd->TextureId), 1);
+                            commandBuffer.SetResourceSet(this.GetImageResourceSet(cmd->TextureId), 1);
                         }
                     }
 
@@ -628,10 +645,14 @@ namespace ExampleEvergine.Managers
                         (int)(cmd->ClipRect.Z - cmd->ClipRect.X),
                         (int)(cmd->ClipRect.W - cmd->ClipRect.Y)),
                     };
+                    if (invertedY)
+                    {
+                        scissors[0].Y = this.windowHeight - (int)cmd->ClipRect.W;
+                    }
 
                     commandBuffer.SetScissorRectangles(scissors);
 
-                    commandBuffer.DrawIndexedInstanced(cmd->ElemCount, 1, idx_offset, vtx_offset, 0);
+                    commandBuffer.DrawIndexed(cmd->ElemCount, idx_offset, 0);
 
                     idx_offset += cmd->ElemCount;
                 }
@@ -656,14 +677,14 @@ namespace ExampleEvergine.Managers
             display.DisplayFrameBufferChanged -= this.Display_DisplayFrameBufferChanged;
             this.renderManager.ActiveCamera3D.DrawContext.OnPostRender -= this.PostRender;
 
-            //ImplotNative.ImPlot_SetCurrentContext(IntPtr.Zero);
-            //ImplotNative.ImPlot_SetImGuiContext(IntPtr.Zero);
+            ImplotNative.ImPlot_SetCurrentContext(IntPtr.Zero);
+            ImplotNative.ImPlot_SetImGuiContext(IntPtr.Zero);
 
-            //ImnodesNative.imnodes_SetCurrentContext(IntPtr.Zero);
-            //ImnodesNative.imnodes_SetImGuiContext(IntPtr.Zero);
+            ImnodesNative.imnodes_SetCurrentContext(IntPtr.Zero);
+            ImnodesNative.imnodes_SetImGuiContext(IntPtr.Zero);
 
-            //ImplotNative.ImPlot_DestroyContext(implotContext);
-            //ImnodesNative.imnodes_DestroyContext(imnodesContext);
+            ImplotNative.ImPlot_DestroyContext(implotContext);
+            ImnodesNative.imnodes_DestroyContext(imnodesContext);
 
             foreach (var rsi in this.resourceById)
             {
