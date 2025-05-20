@@ -93,34 +93,40 @@ namespace ExampleEvergine.Managers
                 out_var_SV_Target = in_var_COLOR0 * texture(SPIRV_Cross_CombinedFontTextureFontSampler, in_var_TEXCOORD0);
             }";
 
-        internal static string WEBGLVertexShader = @"
-            #version 300 es
-            precision highp float;
-            layout (location = 0) in vec2 Position;
-            layout (location = 1) in vec2 UV;
-            layout (location = 2) in vec4 Color;
-            uniform mat4 ProjMtx;
-            out vec2 Frag_UV;
-            out vec4 Frag_Color;
+        internal static string WEBGLVertexShader = @"#version 300 
+            layout(std140) uniform type_Matrices
+            {
+                mat4 ProjectionMatrix;
+            } Matrices;
+
+            layout(location = 0) in vec2 in_var_POSITION0;
+            layout(location = 1) in vec2 in_var_TEXCOORD0;
+            layout(location = 2) in vec4 in_var_COLOR0;
+            out vec4 varying_COLOR0;
+            out vec2 varying_TEXCOORD0;
+
             void main()
             {
-                Frag_UV = UV;
-                Frag_Color = Color;
-                gl_Position = ProjMtx * vec4(Position.xy,0,1);
+                gl_Position = Matrices.ProjectionMatrix * vec4(in_var_POSITION0, 0.0, 1.0);
+                varying_COLOR0 = in_var_COLOR0;
+                varying_TEXCOORD0 = in_var_TEXCOORD0;
             }";
 
-        internal static string WEBGLPixelShader = @"
-            #version 300 es
+        internal static string WEBGLPixelShader = @"#version 300 es
             precision mediump float;
-            uniform sampler2D Texture;
-            in vec2 Frag_UV;
-            in vec4 Frag_Color;
-            layout (location = 0) out vec4 Out_Color;
+
+            uniform highp sampler2D SPIRV_Cross_CombinedFontTextureFontSampler;
+
+            in highp vec4 varying_COLOR0;
+            in highp vec2 varying_TEXCOORD0;
+            layout(location = 0) out highp vec4 out_var_SV_Target;
+
             void main()
             {
-                Out_Color = Frag_Color * texture(Texture, Frag_UV.st);
-            }
-        ";
+                vec4 vertColor = varying_COLOR0;
+                vec4 texColor = texture(SPIRV_Cross_CombinedFontTextureFontSampler, varying_TEXCOORD0);
+                out_var_SV_Target = vertColor * texColor;
+            }";
 
         internal static string MSLVertexShader = @"
             #include <metal_stdlib>
