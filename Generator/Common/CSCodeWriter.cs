@@ -175,7 +175,16 @@ namespace Common
                             if (o.IsConstructor || o.IsDestructor)
                                 continue;
 
-                            file.WriteLine($"\t\t[DllImport(\"{libraryName}\", CallingConvention = CallingConvention.Cdecl)]");
+                            bool hasVargs = o.Params.Count > 0 && o.Params[^1].Name == "...";
+
+                            if (hasVargs)
+                            {
+                                file.WriteLine($"\t\t[DllImport(\"{libraryName}\", CallingConvention = CallingConvention.Cdecl, EntryPoint = \"{o.FuncName}0\")]");
+                            }
+                            else
+                            {
+                                file.WriteLine($"\t\t[DllImport(\"{libraryName}\", CallingConvention = CallingConvention.Cdecl)]");
+                            }
 
                             string csType = Helpers.ConvertToCSharpType(o.ReturnType, Helpers.Family.ret);
                             string returnHeader = Helpers.GetReturnTypeHeader(csType);

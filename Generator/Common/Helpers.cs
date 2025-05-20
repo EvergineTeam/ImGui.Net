@@ -19,6 +19,9 @@ namespace Common
             if (!type.Equals("const char*"))
                 type = type.Replace("const ", "");
 
+            if (type.Contains("(*)")) // Delegates
+                return "IntPtr";
+
             switch (type)
             {
                 case "char":
@@ -100,6 +103,7 @@ namespace Common
                 case "ImS32*":
                     return "int*";
                 case "ImU64":
+                case "ImTextureID":
                     return "ulong";
                 case "ImU64*":
                     return "ulong*";
@@ -114,7 +118,7 @@ namespace Common
                     switch (family)
                     {
                         case Family.param:
-                            return "[MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[]";
+                            return "[MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPUTF8Str)] string[]";
                         case Family.ret:
                             return "string[]";
                         case Family.field:
@@ -156,7 +160,6 @@ namespace Common
                 case "ImNodesMiniMapNodeHoveringCallback":
                 case "ImNodesMiniMapNodeHoveringCallbackUserData":
                 case "ImDrawListSharedData*":
-                case "ImTextureID":
                 case "ImFontBuilderIO*":
                 case "ImDrawCallback":
                 case "ImGuiWindow*":
@@ -164,13 +167,6 @@ namespace Common
                 case "ImGuiMemFreeFunc":
                 case "ImGuiPlatformIO*":
                 case "ImPlotTransform":
-                // Delegates
-                case "ImGuiID(*)(ImGuiSelectionBasicStorage* self,int idx)":
-                case "void(*)(ImGuiSelectionExternalStorage* self,int idx,bool selected)":
-                case "void(*)(void* ptr,void* user_data)":
-                case "void*(*)(size_t sz,void* user_data)":
-                case "char*(*)(void* user_data,int idx)":
-                case "float(*)(void* data,int idx)":
                     return "IntPtr";
                 case "ImGuiMemAllocFunc*":
                 case "ImGuiMemFreeFunc*":

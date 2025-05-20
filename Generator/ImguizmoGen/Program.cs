@@ -11,12 +11,12 @@ namespace ImguizmoGen
     {
         static void Main(string[] args)
         {
-            string outputPath = "..\\..\\..\\..\\Evergine.Bindings.Imguizmo\\Generated";
+            string outputPath = "..\\..\\..\\..\\Evergine.Bindings.Imgui\\Imguizmo";
 
             string structs_and_enums_json = "Jsons/structs_and_enums.json";
             string definitions_json = "Jsons/definitions.json";
             string @namespace = "Imguizmo";
-            string libraryName = "cimguizmo";
+            string libraryName = "cimgui";
 
             var imguizmoVersion = Specification.FromFiles(structs_and_enums_json, definitions_json);
 

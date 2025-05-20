@@ -7,12 +7,12 @@ namespace ImplotGen
     {
         static void Main(string[] args)
         {
-            string outputPath = "..\\..\\..\\..\\Evergine.Bindings.ImPlot\\Generated";
+            string outputPath = "..\\..\\..\\..\\Evergine.Bindings.Imgui\\Implot";
 
             string structs_and_enums_json = "Jsons/structs_and_enums.json";
             string definitions_json = "Jsons/definitions.json";
             string @namespace = "Implot";
-            string libraryName = "cimplot";
+            string libraryName = "cimgui";
 
             var implotVersion = Specification.FromFiles(structs_and_enums_json, definitions_json);
 

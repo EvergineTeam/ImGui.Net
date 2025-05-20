@@ -14,10 +14,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Content Include="runtimes\**" PackagePath="runtimes" Visible="true" CopyToOutputDirectory="PreserveNewest" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Evergine.Mathematics" Version="2025.3.18.7" />
 		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
 	</ItemGroup>
@@ -27,5 +23,8 @@
 		<None Include="..\..\README.md" Pack="true" PackagePath="\" Visible="false" />
 	</ItemGroup>
 
-
+	<ItemGroup>
+		<Content Include="build\Evergine.Bindings.Imgui.targets" PackagePath="build" Visible="true" />
+		<Content Include="runtimes\**" PackagePath="runtimes" Visible="true" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
 </Project>

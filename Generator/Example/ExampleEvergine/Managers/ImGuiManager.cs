@@ -1,17 +1,15 @@
 ﻿using Evergine.Bindings.Imgui;
-using Evergine.Bindings.Imguizmo;
-using Evergine.Bindings.Imnodes;
 using Evergine.Bindings.Implot;
+using Evergine.Bindings.Imnodes;
+using Evergine.Bindings.Imguizmo;
 using Evergine.Common.Graphics;
 using Evergine.Common.Input.Keyboard;
 using Evergine.Common.Input.Mouse;
-using Evergine.Framework;
-using Evergine.Framework.Graphics;
 using Evergine.Framework.Managers;
 using Evergine.Framework.Services;
 using Evergine.Mathematics;
-using SharpYaml.Tokens;
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Buffer = Evergine.Common.Graphics.Buffer;
@@ -32,7 +30,6 @@ namespace ExampleEvergine.Managers
         private IntPtr imguiContext;
         private IntPtr implotContext;
         private IntPtr imnodesContext;
-        private IntPtr imguizmoContext;
 
         private Buffer[] vertexBuffers;
         private Buffer indexBuffer;
@@ -48,19 +45,25 @@ namespace ExampleEvergine.Managers
         private int windowHeight;
         private Vector2 scaleFactor;
 
-        private IntPtr fontAtlasID;
+        private UInt64 fontAtlasID;
         private Surface surface;
         private FrameBuffer framebuffer;
 
         private int lastAssignedID = 100;
         private Matrix4x4 mvp;
 
+        private bool invertedY =>
+            this.graphicsContext.BackendType == GraphicsBackend.OpenGL ||
+            this.graphicsContext.BackendType == GraphicsBackend.OpenGLES ||
+            this.graphicsContext.BackendType == GraphicsBackend.WebGL1 ||
+            this.graphicsContext.BackendType == GraphicsBackend.WebGL2;
+
         private struct ResourceSetInfo
         {
-            public readonly IntPtr ImGuiBinding;
+            public readonly UInt64 ImGuiBinding;
             public readonly ResourceSet ResourceSet;
 
-            public ResourceSetInfo(IntPtr imGuiBinding, ResourceSet resourceSet)
+            public ResourceSetInfo(UInt64 imGuiBinding, ResourceSet resourceSet)
             {
                 this.ImGuiBinding = imGuiBinding;
                 this.ResourceSet = resourceSet;
@@ -68,7 +71,7 @@ namespace ExampleEvergine.Managers
         }
 
         private readonly Dictionary<Texture, ResourceSetInfo> resourceByTexture = new Dictionary<Texture, ResourceSetInfo>();
-        private readonly Dictionary<IntPtr, ResourceSetInfo> resourceById = new Dictionary<IntPtr, ResourceSetInfo>();
+        private readonly Dictionary<UInt64, ResourceSetInfo> resourceById = new Dictionary<UInt64, ResourceSetInfo>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ImGuiManager"/> class.
@@ -76,7 +79,7 @@ namespace ExampleEvergine.Managers
         public ImGuiManager()
         {
             this.scaleFactor = Vector2.One;
-            this.fontAtlasID = (IntPtr)1;
+            this.fontAtlasID = 1;
         }
 
         private void Display_DisplayFrameBufferChanged(object sender, EventArgs e)
@@ -158,6 +161,8 @@ namespace ExampleEvergine.Managers
 
             this.io = ImguiNative.igGetIO_Nil();
             this.io->Fonts->AddFontDefault(null);
+            this.io->ConfigErrorRecoveryEnableAssert = 0;
+            this.io->ConfigErrorRecoveryEnableTooltip = 0;
 
             // Compile shaders.
             var vsCode = this.NativeAPICompiler(ShaderStages.Vertex);
@@ -250,7 +255,6 @@ namespace ExampleEvergine.Managers
             int bytesPerPixel;
             byte* pixels = null;
             this.io->Fonts->GetTexDataAsRGBA32(&pixels, &width, &height, &bytesPerPixel);
-
             this.io->Fonts->SetTexID(this.fontAtlasID);
 
             var fontTextureDescription = new TextureDescription()
@@ -299,7 +303,7 @@ namespace ExampleEvergine.Managers
                 switch (e.Button)
                 {
                     case MouseButtons.Left:
-                        this.io->AddMouseButtonEvent((int)ImGuiMouseButton.Left, true);   
+                        this.io->AddMouseButtonEvent((int)ImGuiMouseButton.Left, true);
                         break;
                     case MouseButtons.Right:
                         this.io->AddMouseButtonEvent((int)ImGuiMouseButton.Right, true);
@@ -341,7 +345,7 @@ namespace ExampleEvergine.Managers
             var keyboardDispatcher = this.surface.KeyboardDispatcher;
             keyboardDispatcher.KeyDown += (s, e) =>
             {
-                if(TryMapKey(e.Key, out ImGuiKey imguiKey))
+                if (TryMapKey(e.Key, out ImGuiKey imguiKey))
                 {
                     this.io->AddKeyEvent(imguiKey, true);
                 }
@@ -429,6 +433,9 @@ namespace ExampleEvergine.Managers
                 case GraphicsBackend.OpenGL:
                     shaderCode = stage == ShaderStages.Vertex ? Shaders.GLSLVertexShader : Shaders.GLSLPixelShader;
                     break;
+                case GraphicsBackend.WebGL2:
+                    shaderCode = stage == ShaderStages.Vertex ? Shaders.WEBGLVertexShader : Shaders.WEBGLPixelShader;
+                    break;
                 case GraphicsBackend.Metal:
                     shaderCode = stage == ShaderStages.Vertex ? Shaders.MSLVertexShader : Shaders.MSLPixelShader;
                     break;
@@ -438,8 +445,10 @@ namespace ExampleEvergine.Managers
                     break;
                 case GraphicsBackend.DirectX12:
                 case GraphicsBackend.DirectX11:
-                default:
                     shaderCode = stage == ShaderStages.Vertex ? Shaders.HLSLVertexShader : Shaders.HLSLPixelShader;
+                    break;
+                default:
+                    Debug.Assert(false);
                     break;
             }
 
@@ -466,7 +475,7 @@ namespace ExampleEvergine.Managers
         /// </summary>
         /// <param name="texture">The texture to bind.</param>
         /// <returns>The binding pointer.</returns>
-        public IntPtr CreateImGuiBinding(Texture texture)
+        public UInt64 CreateImGuiBinding(Texture texture)
         {
             if (!this.resourceByTexture.TryGetValue(texture, out ResourceSetInfo info))
             {
@@ -495,13 +504,13 @@ namespace ExampleEvergine.Managers
             }
         }
 
-        private IntPtr GetNextImGuiBindingID()
+        private UInt64 GetNextImGuiBindingID()
         {
             int newID = this.lastAssignedID++;
-            return (IntPtr)newID;
+            return (UInt64)newID;
         }
 
-        private ResourceSet GetImageResourceSet(IntPtr textureId)
+        private ResourceSet GetImageResourceSet(UInt64 textureId)
         {
             if (this.resourceById.TryGetValue(textureId, out ResourceSetInfo rsi))
             {
@@ -576,6 +585,13 @@ namespace ExampleEvergine.Managers
                 var iOffset = indexOffsetInElements * sizeof(ushort);
                 Unsafe.CopyBlock((void*)((long)iResource.Data + iOffset), (void*)cmdListPtr->IdxBuffer.Data, (uint)(cmdListPtr->IdxBuffer.Size * sizeof(ushort)));
 
+                // FIX FOR WEBGL
+                UInt16* indexPtr = (UInt16*)((long)iResource.Data + iOffset);
+                for (int j = 0; j < cmdListPtr->IdxBuffer.Size; j++)
+                {
+                    indexPtr[j] += (UInt16)vertexOffsetInVertices;
+                }
+
                 vertexOffsetInVertices += (uint)cmdListPtr->VtxBuffer.Size;
                 indexOffsetInElements += (uint)cmdListPtr->IdxBuffer.Size;
             }
@@ -607,9 +623,9 @@ namespace ExampleEvergine.Managers
 
                 for (int i = 0; i < cmdListPtr->CmdBuffer.Size; i++)
                 {
-                    ImDrawCmd* cmd = (ImDrawCmd*)((long)cmdListPtr->CmdBuffer.Data + i*(sizeof(ImDrawCmd)));
+                    ImDrawCmd* cmd = (ImDrawCmd*)((long)cmdListPtr->CmdBuffer.Data + i * (sizeof(ImDrawCmd)));
 
-                    if (cmd->TextureId != IntPtr.Zero)
+                    if (cmd->TextureId != 0)
                     {
                         if (cmd->TextureId == this.fontAtlasID)
                         {
@@ -629,10 +645,14 @@ namespace ExampleEvergine.Managers
                         (int)(cmd->ClipRect.Z - cmd->ClipRect.X),
                         (int)(cmd->ClipRect.W - cmd->ClipRect.Y)),
                     };
+                    if (invertedY)
+                    {
+                        scissors[0].Y = this.windowHeight - (int)cmd->ClipRect.W;
+                    }
 
                     commandBuffer.SetScissorRectangles(scissors);
 
-                    commandBuffer.DrawIndexedInstanced(cmd->ElemCount, 1, idx_offset, vtx_offset, 0);
+                    commandBuffer.DrawIndexed(cmd->ElemCount, idx_offset, 0);
 
                     idx_offset += cmd->ElemCount;
                 }

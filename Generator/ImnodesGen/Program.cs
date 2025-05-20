@@ -7,12 +7,12 @@ namespace ImnodesGen
     {
         static void Main(string[] args)
         {
-            string outputPath = "..\\..\\..\\..\\Evergine.Bindings.Imnodes\\Generated";
+            string outputPath = "..\\..\\..\\..\\Evergine.Bindings.Imgui\\Imnodes";
 
             string structs_and_enums_json = "Jsons/structs_and_enums.json";
             string definitions_json = "Jsons/definitions.json";
             string @namespace = "Imnodes";
-            string libraryName = "cimnodes";
+            string libraryName = "cimgui";
 
             var imnodesVersion = Specification.FromFiles(structs_and_enums_json, definitions_json);
 
