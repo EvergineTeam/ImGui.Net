@@ -1,0 +1,132 @@
+name: Build cimgui Libraries
+
+on:
+  workflow_dispatch:
+    inputs:
+      publishEnabled:
+        description: "Publish to Nuget.org"
+        type: boolean
+        required: false
+        default: false
+
+env:
+  nugetsPath: "nupkgs"
+
+jobs:
+  # --- Build Native Libraries ---
+  build-native-libs:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            arch: x86_64
+            target: linux-x64
+          - os: ubuntu-latest
+            arch: arm64
+            target: linux-arm64
+          - os: windows-latest
+            arch: x86_64
+            target: win-x64
+          # - os: windows-latest
+          #   arch: x86
+          #   target: win-x86
+          - os: windows-latest
+            arch: arm64
+            target: win-arm64
+          - os: macos-latest
+            arch: x86_64
+            target: osx-x64
+          - os: macos-latest
+            arch: arm64
+            target: osx-arm64
+          - os: ubuntu-latest
+            arch: wasm
+            target: browser-wasm
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        repository: ${{ github.repository }}
+        submodules: recursive
+
+    - name: Install dependencies on Ubuntu
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake pkg-config zip
+
+    - name: Setup Ninja
+      if: matrix.os == 'ubuntu-latest'
+      uses: ashutoshvarma/setup-ninja@v1.1
+        
+    - name: Install Cross-Compilation Tools for ARM64
+      if: matrix.os == 'ubuntu-latest' && matrix.arch == 'arm64'
+      run: |
+        sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+
+    - name: Install Emscripten
+      if: matrix.arch == 'wasm'
+      uses: mymindstorm/setup-emsdk@v14
+      with:
+        version: 4.0.6
+        actions-cache-folder: 'emsdk-cache'
+
+    - name: Build
+      run: |
+        cd NativeLibraries
+        python3 build.py ${{matrix.target}}
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: cimgui-${{ matrix.target }}-artifacts 
+        path: NativeLibraries/build/OUT/*
+        if-no-files-found: warn # 'warn' or 'ignore' or 'error'
+
+
+  # --- Generate Nugets ---
+  generate-bindings:
+    needs: build-native-libs
+    runs-on: windows-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        repository: ${{ github.repository }}
+        submodules: recursive
+
+    - name: Download Compiled Native Libraries
+      run: |
+        pip install requests
+        python3 scripts/download-artifacts.py --token ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Verify changes
+      id: verify-changed-files
+      shell: pwsh
+      run: ./scripts/verify-changes.ps1
+
+    - name: Commit Changes
+      if: steps.verify-changed-files.outputs.files_changed == 'true'
+      uses: EndBug/add-and-commit@v9
+
+    - name: Generate Nugets
+      if: steps.verify-changed-files.outputs.files_changed == 'true'
+      shell: pwsh
+      run: ./scripts/generate-nugets.ps1
+
+    - name: Upload Nuget Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: nugets
+        path: ${{ env.nugetsPath }}
+        if-no-files-found: warn # 'warn' or 'ignore' or 'error'
+
+    - name: Publish Nugets
+      if: github.event.inputs.publishEnabled == 'true'
+      uses: ./.github/actions/publish-nugets
+      with:
+        NugetsPath: ${{ env.nugetsPath }}
+        Token: ${{ secrets.EVERGINE_NUGETORG_TOKEN }}
+
+

@@ -2,11 +2,11 @@
 	path = NativeLibraries/cimgui
 	url = https://github.com/cimgui/cimgui
 [submodule "NativeLibraries/extensions/cimguizmo"]
-	path = NativeLibraries/extensions/cimguizmo
+	path = NativeLibraries/cimguizmo
 	url = https://github.com/cimgui/cimguizmo
 [submodule "NativeLibraries/extensions/cimplot"]
-	path = NativeLibraries/extensions/cimplot
+	path = NativeLibraries/cimplot
 	url = https://github.com/cimgui/cimplot.git
 [submodule "NativeLibraries/extensions/cimnodes"]
-	path = NativeLibraries/extensions/cimnodes
+	path = NativeLibraries/cimnodes
 	url = https://github.com/cimgui/cimnodes.git

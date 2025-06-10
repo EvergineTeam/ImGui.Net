@@ -11,7 +11,6 @@
 #>
 
 param (
-    [string[]]$ImX = @('Imgui', 'Imguizmo', 'Imnodes', 'Implot'),
     [string]$outputFolderBase = "nupkgs",
     [string]$buildVerbosity = "normal",
     [string]$buildConfiguration = "Release",
@@ -57,18 +56,15 @@ if ($buildConfiguration -eq "Debug") {
 
 Set-Location .\Generator
 
-# Iterate over each ImX value and generate packages
-foreach ($item in $ImX) {
-    LogDebug "START packaging process for $item"
-    $csprojPath = "Evergine.Bindings.$($item)\Evergine.Bindings.$($item).csproj"
-    dotnet pack "$csprojPath" -v:$buildVerbosity -p:Configuration=$buildConfiguration -p:PackageOutputPath="$absoluteOutputFolder" -p:IncludeSymbols=$symbols -p:Version=$version
-    if ($?) {
-        LogDebug "END packaging process for $item"
-    }
-    else {
-        LogDebug "ERROR; packaging failed for $item"
-        exit -1
-    }
+LogDebug "START packaging process for Imgui"
+$csprojPath = "Evergine.Bindings.Imgui\Evergine.Bindings.Imgui.csproj"
+dotnet pack "$csprojPath" -v:$buildVerbosity -p:Configuration=$buildConfiguration -p:PackageOutputPath="$absoluteOutputFolder" -p:IncludeSymbols=$symbols -p:Version=$version
+if ($?) {
+    LogDebug "END packaging process for Imgui"
+}
+else {
+    LogDebug "ERROR; packaging failed for Imgui"
+    exit -1
 }
 
 Pop-Location
