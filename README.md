@@ -53,6 +53,6 @@ We are working to add support to all this plaforms:
 - [x] Windows x86, x64
 - [x] Linux x64
 - [x] MacOS
+- [x] WebAssembly
 - [ ] iOS
 - [ ] Android
-- [x] WebAssembly
