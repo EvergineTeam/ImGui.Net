@@ -1,4 +1,4 @@
-name: Build cimgui Libraries
+name: Build ImGui.Net
 
 on:
   workflow_dispatch:
@@ -111,7 +111,6 @@ jobs:
       uses: EndBug/add-and-commit@v9
 
     - name: Generate Nugets
-      if: steps.verify-changed-files.outputs.files_changed == 'true'
       shell: pwsh
       run: ./scripts/generate-nugets.ps1
 
