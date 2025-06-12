@@ -9,9 +9,6 @@ You will find c# bindings of the most popular imgui libraries as well, Imguizmo,
 | Project | Nuget |
 | :-- | :-- |
 | Imgui  | [![Nuget](https://img.shields.io/nuget/v/Evergine.Bindings.Imgui?logo=nuget)](https://www.nuget.org/packages/Evergine.Bindings.Imgui) |
-| Imguizmo | [![Nuget](https://img.shields.io/nuget/v/Evergine.Bindings.Imguizmo?logo=nuget)](https://www.nuget.org/packages/Evergine.Bindings.Imguizmo) |
-| Implot | [![Nuget](https://img.shields.io/nuget/v/Evergine.Bindings.Implot?logo=nuget)](https://www.nuget.org/packages/Evergine.Bindings.Implot) |
-| Imnodes | [![Nuget](https://img.shields.io/nuget/v/Evergine.Bindings.Imnodes?logo=nuget)](https://www.nuget.org/packages/Evergine.Bindings.Imnodes) |
 
 ## How it works
 
