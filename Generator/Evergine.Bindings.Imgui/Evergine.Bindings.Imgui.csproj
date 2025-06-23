@@ -24,7 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="build\Evergine.Bindings.Imgui.targets" PackagePath="build" Visible="true" />
+		<Content Include="buildTransitive\Evergine.Bindings.Imgui.targets" PackagePath="buildTransitive" Visible="true" />
 		<Content Include="runtimes\**" PackagePath="runtimes" Visible="true" CopyToOutputDirectory="PreserveNewest" />
 	</ItemGroup>
 </Project>
