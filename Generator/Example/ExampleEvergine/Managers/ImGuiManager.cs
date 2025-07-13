@@ -613,7 +613,6 @@ namespace ExampleEvergine.Managers
             drawData->ScaleClipRects(this.io->DisplayFramebufferScale);
 
             // Render command lists
-            uint vtx_offset = 0;
             uint idx_offset = 0;
 
             for (int n = 0; n < drawData->CmdListsCount; n++)
@@ -656,8 +655,6 @@ namespace ExampleEvergine.Managers
 
                     idx_offset += cmd->ElemCount;
                 }
-
-                vtx_offset += (uint)cmdListPtr->VtxBuffer.Size;
             }
 
             commandBuffer.EndDebugMarker();
