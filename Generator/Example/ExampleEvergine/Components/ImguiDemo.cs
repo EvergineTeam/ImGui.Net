@@ -17,6 +17,7 @@ namespace ExampleEvergine.Components
         [BindService]
         protected GraphicsPresenter graphicsPresenter;
         Vector4 my_color = new Vector4(1, 0, 0, 1);
+        int selected = -1;
 
         protected override void Update(TimeSpan gameTime)
         {
@@ -58,6 +59,12 @@ namespace ExampleEvergine.Components
                 samples[n] = (float)Math.Sin(n * 0.5d + ImguiNative.igGetTime() * 1.5d);
 
             ImguiNative.igPlotLines_FloatPtr("Samples", samples, 100, 0, "", -1, 1, new Vector2(200, 20), sizeof(float));
+
+            // Combo box test
+            string[] strings = { "Item 1ñ", "Item 2@", "Item 3$" };
+            int t = selected;
+            ImguiNative.igCombo_Str_arr("Combo Box", &t, strings, strings.Length, 5);
+            selected = t;
 
             // Display contents in a scrolling region
             ImguiNative.igTextColored(new Vector4(1, 1, 0, 1), "Important Stuff");
