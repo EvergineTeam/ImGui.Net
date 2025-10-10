@@ -68,7 +68,7 @@ jobs:
       if: matrix.arch == 'wasm'
       uses: mymindstorm/setup-emsdk@v14
       with:
-        version: 4.0.6
+        version: 3.1.34
         actions-cache-folder: 'emsdk-cache'
 
     - name: Build
