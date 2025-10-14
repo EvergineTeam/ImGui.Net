@@ -95,11 +95,6 @@ jobs:
       with:
         repository: ${{ github.repository }}
         submodules: recursive
-
-    - name: Download Compiled Native Libraries
-      run: |
-        pip install requests
-        python3 scripts/download-artifacts.py --token ${{ secrets.GITHUB_TOKEN }}
     
     - name: Download all artifacts
       uses: actions/download-artifact@v4
