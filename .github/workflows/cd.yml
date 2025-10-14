@@ -100,6 +100,21 @@ jobs:
       run: |
         pip install requests
         python3 scripts/download-artifacts.py --token ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Download all artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: artifacts
+          
+    - name: Copy artifacts to respective directories
+      run: |
+        cp -r artifacts/cimgui-browser-wasm-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
+        cp -r artifacts/cimgui-linux-arm64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
+        cp -r artifacts/cimgui-linux-x64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
+        cp -r artifacts/cimgui-osx-arm64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
+        cp -r artifacts/cimgui-osx-x64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
+        cp -r artifacts/cimgui-win-arm64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
+        cp -r artifacts/cimgui-win-x64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
 
     - name: Verify changes
       id: verify-changed-files
