@@ -68,7 +68,7 @@ jobs:
       if: matrix.arch == 'wasm'
       uses: mymindstorm/setup-emsdk@v14
       with:
-        version: 4.0.6
+        version: 3.1.34
         actions-cache-folder: 'emsdk-cache'
 
     - name: Build
@@ -95,11 +95,24 @@ jobs:
       with:
         repository: ${{ github.repository }}
         submodules: recursive
-
-    - name: Download Compiled Native Libraries
+    
+    - name: Download all artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: artifacts
+          
+    - name: Copy artifacts to respective directories
       run: |
-        pip install requests
-        python3 scripts/download-artifacts.py --token ${{ secrets.GITHUB_TOKEN }}
+        Copy-Item -Recurse -Force -Path artifacts/cimgui-browser-wasm-artifacts/* -Destination Generator/Evergine.Bindings.Imgui/runtimes/
+        Copy-Item -Recurse -Force -Path artifacts/cimgui-linux-arm64-artifacts/* -Destination Generator/Evergine.Bindings.Imgui/runtimes/
+        Copy-Item -Recurse -Force -Path artifacts/cimgui-linux-x64-artifacts/* -Destination Generator/Evergine.Bindings.Imgui/runtimes/
+        Copy-Item -Recurse -Force -Path artifacts/cimgui-osx-arm64-artifacts/* -Destination Generator/Evergine.Bindings.Imgui/runtimes/
+        Copy-Item -Recurse -Force -Path artifacts/cimgui-osx-x64-artifacts/* -Destination Generator/Evergine.Bindings.Imgui/runtimes/
+        Copy-Item -Recurse -Force -Path artifacts/cimgui-win-arm64-artifacts/* -Destination Generator/Evergine.Bindings.Imgui/runtimes/
+        Copy-Item -Recurse -Force -Path artifacts/cimgui-win-x64-artifacts/* -Destination Generator/Evergine.Bindings.Imgui/runtimes/
+
+    - name: Remove artifacts directory
+      run: Remove-Item -Recurse -Force artifacts
 
     - name: Verify changes
       id: verify-changed-files
