@@ -112,7 +112,7 @@ jobs:
         cp -r artifacts/cimgui-win-x64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
 
     - name: Remove artifacts directory
-      run: rm -rf artifacts
+      run: Remove-Item -Recurse -Force artifacts
 
     - name: Verify changes
       id: verify-changed-files
