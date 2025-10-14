@@ -103,13 +103,13 @@ jobs:
           
     - name: Copy artifacts to respective directories
       run: |
-        cp -r artifacts/cimgui-browser-wasm-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
-        cp -r artifacts/cimgui-linux-arm64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
-        cp -r artifacts/cimgui-linux-x64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
-        cp -r artifacts/cimgui-osx-arm64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
-        cp -r artifacts/cimgui-osx-x64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
-        cp -r artifacts/cimgui-win-arm64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
-        cp -r artifacts/cimgui-win-x64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
+        cp -rf artifacts/cimgui-browser-wasm-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
+        cp -rf artifacts/cimgui-linux-arm64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
+        cp -rf artifacts/cimgui-linux-x64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
+        cp -rf artifacts/cimgui-osx-arm64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
+        cp -rf artifacts/cimgui-osx-x64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
+        cp -rf artifacts/cimgui-win-arm64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
+        cp -rf artifacts/cimgui-win-x64-artifacts/* Generator/Evergine.Bindings.Imgui/runtimes/
 
     - name: Remove artifacts directory
       run: Remove-Item -Recurse -Force artifacts
