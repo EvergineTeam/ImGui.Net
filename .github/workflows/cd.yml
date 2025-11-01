@@ -150,6 +150,4 @@ jobs:
       run: |
         cd ${{ env.nugetsPath }}
         ls *.nupkg
-        dotnet nuget push "**/*.nupkg" --skip-duplicate --no-symbols -k "$env:token" -s https://api.nuget.org/v3/index.json
-
-
+# dotnet nuget push "**/*.nupkg" --skip-duplicate --no-symbols -k "$env:token" -s https://api.nuget.org/v3/index.json
