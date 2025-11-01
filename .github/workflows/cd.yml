@@ -3,7 +3,7 @@ name: Build ImGui.Net
 on:
   workflow_dispatch:
     inputs:
-      publishEnabled:
+      publish-enabled:
         description: "Publish to Nuget.org"
         type: boolean
         required: false
@@ -44,7 +44,7 @@ jobs:
             arch: wasm
             target: browser-wasm
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
       with:
         repository: ${{ github.repository }}
         submodules: recursive
@@ -91,13 +91,13 @@ jobs:
     steps:
 
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         repository: ${{ github.repository }}
         submodules: recursive
     
     - name: Download all artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
       with:
         path: artifacts
           
@@ -114,18 +114,29 @@ jobs:
     - name: Remove artifacts directory
       run: Remove-Item -Recurse -Force artifacts
 
-    - name: Verify changes
-      id: verify-changed-files
+    - name: Generate Bindings
       shell: pwsh
-      run: ./scripts/verify-changes.ps1
+      run: ./build/scripts/Generate-All-Bindings.ps1
 
-    - name: Commit Changes
-      if: steps.verify-changed-files.outputs.files_changed == 'true'
-      uses: EndBug/add-and-commit@v9
+    - name: Commit changes (if any)
+      uses: EvergineTeam/evergine-standards/.github/actions/commit-and-push-or-pr-update@main
+      with:
+        commit_message: "Updating runtimes"
+        mode: auto
+        labels: update
 
-    - name: Generate Nugets
-      shell: pwsh
-      run: ./scripts/generate-nugets.ps1
+    - name: Generate NuGets
+      uses: EvergineTeam/evergine-standards/.github/actions/binding-generate-nugets-dotnet@main
+      with:
+        script-path: './build/scripts/Generate-NuGets-DotNet.ps1'
+        helpers-path: './build/scripts/Helpers.ps1'
+        projects: './Generator/Evergine.Bindings.Imgui/Evergine.Bindings.Imgui.csproj'
+        output-folder: ${{ env.nugetsPath }}
+        revision: ${{ github.run_number }}
+
+    - name: List generated NuGets
+      run: |
+        ls ${{ env.nugetsPath }}/*.nupkg
 
     - name: Upload Nuget Artifacts
       uses: actions/upload-artifact@v4
@@ -134,11 +145,11 @@ jobs:
         path: ${{ env.nugetsPath }}
         if-no-files-found: warn # 'warn' or 'ignore' or 'error'
 
-    - name: Publish Nugets
-      if: github.event.inputs.publishEnabled == 'true'
-      uses: ./.github/actions/publish-nugets
-      with:
-        NugetsPath: ${{ env.nugetsPath }}
-        Token: ${{ secrets.EVERGINE_NUGETORG_TOKEN }}
-
-
+    - name: Publish NuGet
+      if: ${{ success() && inputs.publish-enabled == true }}
+      env:
+        token: ${{ secrets.EVERGINE_NUGETORG_TOKEN }}
+      run: |
+        cd ${{ env.nugetsPath }}
+        ls *.nupkg
+        dotnet nuget push "**/*.nupkg" --skip-duplicate --no-symbols -k "$env:token" -s https://api.nuget.org/v3/index.json
