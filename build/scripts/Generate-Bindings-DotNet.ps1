@@ -44,9 +44,9 @@ function Get-BuildOutputPath {
         [string]$TargetFramework,
         [string]$RuntimeIdentifier
     )
-    $buildPath = "$GeneratorDir\bin\$BuildConfiguration\$TargetFramework"
+    $buildPath = Join-Path $GeneratorDir "bin" $BuildConfiguration $TargetFramework
     if (-not [string]::IsNullOrWhiteSpace($RuntimeIdentifier)) {
-        $buildPath += "\$RuntimeIdentifier"
+        $buildPath = Join-Path $buildPath $RuntimeIdentifier
     }
     return $buildPath
 }
@@ -99,7 +99,14 @@ if (-not (Test-Path $GeneratorProject)) {
 
 # Compile generator
 LogDebug "START $GeneratorName generator build process"
-dotnet publish -v:$BuildVerbosity -p:Configuration=$BuildConfiguration $GeneratorProject
+
+if (-not [string]::IsNullOrWhiteSpace($RuntimeIdentifier)) {
+    dotnet publish -v:$BuildVerbosity -p:Configuration=$BuildConfiguration -r $RuntimeIdentifier $GeneratorProject
+}
+else {
+    dotnet publish -v:$BuildVerbosity -p:Configuration=$BuildConfiguration $GeneratorProject
+}
+
 if ($LASTEXITCODE -eq 0) {
     LogDebug "END $GeneratorName generator build process"
 }
@@ -117,7 +124,14 @@ $buildPath = Get-BuildOutputPath $generatorDir $BuildConfiguration $TargetFramew
 
 Push-Location $buildPath
 try {
-    & ".\publish\$projectName.exe"
+    # Detect platform and set executable path
+    if ($IsWindows -or ($env:OS -eq "Windows_NT")) {
+        $exePath = "./publish/$projectName.exe"
+    }
+    else {
+        $exePath = "./publish/$projectName"
+    }
+    & $exePath
     if ($LASTEXITCODE -eq 0) {
         LogDebug "END $GeneratorName binding generator process"
     }
