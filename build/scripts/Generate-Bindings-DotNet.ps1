@@ -13,7 +13,7 @@
 .PARAMETER GeneratorName
 	Name of the generator (used for display and executable name)
 .PARAMETER TargetFramework
-	Target framework for the generator (default: net8.0)
+	Target framework for the generator (default: net10.0)
 .PARAMETER RuntimeIdentifier
 	Runtime identifier for the generator (e.g., win-x64)
 .EXAMPLE
@@ -27,7 +27,7 @@ param (
     [string]$BuildConfiguration = "Release",   # Build configuration (Release/Debug)
     [string]$GeneratorProject = "",            # Path to the generator .csproj file
     [string]$GeneratorName = "",               # Generator name (used for display and executable name)
-    [string]$TargetFramework = "net8.0",       # Target framework for the generator (default: net8.0)
+    [string]$TargetFramework = "net10.0",      # Target framework for the generator (default: net10.0)
     [string]$RuntimeIdentifier = "win-x64",    # Runtime identifier for the generator (e.g., win-x64)
     [switch]$TestMode                           # Load only functions for testing, do not execute main logic
 )
