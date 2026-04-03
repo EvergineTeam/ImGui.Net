@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(powershell -Command ':*)",
-      "Bash(dotnet ImplotGen.dll)"
-    ]
-  }
-}
