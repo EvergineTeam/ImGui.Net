@@ -43,6 +43,15 @@ namespace Evergine.Bindings.Imgui
 	}
 
 	[Flags]
+	public enum ImFontFlags
+	{
+		None = 0,
+		NoLoadError = 2,
+		NoLoadGlyphs = 4,
+		LockBakedSizes = 8,
+	}
+
+	[Flags]
 	public enum ImGuiBackendFlags
 	{
 		None = 0,
@@ -50,9 +59,11 @@ namespace Evergine.Bindings.Imgui
 		HasMouseCursors = 2,
 		HasSetMousePos = 4,
 		RendererHasVtxOffset = 8,
-		PlatformHasViewports = 1024,
-		HasMouseHoveredViewport = 2048,
-		RendererHasViewports = 4096,
+		RendererHasTextures = 16,
+		RendererHasViewports = 1024,
+		PlatformHasViewports = 2048,
+		HasMouseHoveredViewport = 4096,
+		HasParentViewport = 8192,
 	}
 
 	[Flags]
@@ -116,32 +127,36 @@ namespace Evergine.Bindings.Imgui
 		ResizeGrip = 30,
 		ResizeGripHovered = 31,
 		ResizeGripActive = 32,
-		TabHovered = 33,
-		Tab = 34,
-		TabSelected = 35,
-		TabSelectedOverline = 36,
-		TabDimmed = 37,
-		TabDimmedSelected = 38,
-		TabDimmedSelectedOverline = 39,
-		DockingPreview = 40,
-		DockingEmptyBg = 41,
-		PlotLines = 42,
-		PlotLinesHovered = 43,
-		PlotHistogram = 44,
-		PlotHistogramHovered = 45,
-		TableHeaderBg = 46,
-		TableBorderStrong = 47,
-		TableBorderLight = 48,
-		TableRowBg = 49,
-		TableRowBgAlt = 50,
-		TextLink = 51,
-		TextSelectedBg = 52,
-		DragDropTarget = 53,
-		NavCursor = 54,
-		NavWindowingHighlight = 55,
-		NavWindowingDimBg = 56,
-		ModalWindowDimBg = 57,
-		COUNT = 58,
+		InputTextCursor = 33,
+		TabHovered = 34,
+		Tab = 35,
+		TabSelected = 36,
+		TabSelectedOverline = 37,
+		TabDimmed = 38,
+		TabDimmedSelected = 39,
+		TabDimmedSelectedOverline = 40,
+		DockingPreview = 41,
+		DockingEmptyBg = 42,
+		PlotLines = 43,
+		PlotLinesHovered = 44,
+		PlotHistogram = 45,
+		PlotHistogramHovered = 46,
+		TableHeaderBg = 47,
+		TableBorderStrong = 48,
+		TableBorderLight = 49,
+		TableRowBg = 50,
+		TableRowBgAlt = 51,
+		TextLink = 52,
+		TextSelectedBg = 53,
+		TreeLines = 54,
+		DragDropTarget = 55,
+		DragDropTargetBg = 56,
+		UnsavedMarker = 57,
+		NavCursor = 58,
+		NavWindowingHighlight = 59,
+		NavWindowingDimBg = 60,
+		ModalWindowDimBg = 61,
+		COUNT = 62,
 	}
 
 	[Flags]
@@ -158,10 +173,11 @@ namespace Evergine.Bindings.Imgui
 		NoSidePreview = 256,
 		NoDragDrop = 512,
 		NoBorder = 1024,
-		AlphaOpaque = 2048,
-		AlphaNoBg = 4096,
-		AlphaPreviewHalf = 8192,
-		AlphaBar = 65536,
+		NoColorMarkers = 2048,
+		AlphaOpaque = 4096,
+		AlphaNoBg = 8192,
+		AlphaPreviewHalf = 16384,
+		AlphaBar = 262144,
 		HDR = 524288,
 		DisplayRGB = 1048576,
 		DisplayHSV = 2097152,
@@ -173,7 +189,7 @@ namespace Evergine.Bindings.Imgui
 		InputRGB = 134217728,
 		InputHSV = 268435456,
 		DefaultOptions_ = 177209344,
-		AlphaMask_ = 14338,
+		AlphaMask_ = 28674,
 		DisplayMask_ = 7340032,
 		DataTypeMask_ = 25165824,
 		PickerMask_ = 100663296,
@@ -215,8 +231,6 @@ namespace Evergine.Bindings.Imgui
 		NoKeyboard = 64,
 		DockingEnable = 128,
 		ViewportsEnable = 1024,
-		DpiEnableScaleViewports = 16384,
-		DpiEnableScaleFonts = 32768,
 		IsSRGB = 1048576,
 		IsTouchScreen = 2097152,
 	}
@@ -276,6 +290,7 @@ namespace Evergine.Bindings.Imgui
 		AcceptBeforeDelivery = 1024,
 		AcceptNoDrawDefaultRect = 2048,
 		AcceptNoPreviewTooltip = 4096,
+		AcceptDrawAsHovered = 8192,
 		AcceptPeekOnly = 3072,
 	}
 
@@ -292,7 +307,7 @@ namespace Evergine.Bindings.Imgui
 	}
 
 	[Flags]
-	public enum ImGuiFreeTypeBuilderFlags
+	public enum ImGuiFreeTypeLoaderFlags
 	{
 		None = 0,
 		NoHinting = 1,
@@ -377,6 +392,7 @@ namespace Evergine.Bindings.Imgui
 		CallbackCharFilter = 2097152,
 		CallbackResize = 4194304,
 		CallbackEdit = 8388608,
+		WordWrap = 16777216,
 	}
 
 	[Flags]
@@ -389,6 +405,7 @@ namespace Evergine.Bindings.Imgui
 		ButtonRepeat = 8,
 		AutoClosePopups = 16,
 		AllowDuplicateId = 32,
+		Disabled = 64,
 	}
 
 	public enum ImGuiKey
@@ -551,13 +568,20 @@ namespace Evergine.Bindings.Imgui
 		ReservedForModAlt = 665,
 		ReservedForModSuper = 666,
 		NamedKey_END = 667,
+		NamedKey_COUNT = 155,
 		ImGuiMod_None = 0,
 		ImGuiMod_Ctrl = 4096,
 		ImGuiMod_Shift = 8192,
 		ImGuiMod_Alt = 16384,
 		ImGuiMod_Super = 32768,
 		ImGuiMod_Mask_ = 61440,
-		NamedKey_COUNT = 155,
+	}
+
+	[Flags]
+	public enum ImGuiListClipperFlags
+	{
+		None = 0,
+		NoSetTableRowCounters = 1,
 	}
 
 	public enum ImGuiMouseButton
@@ -613,23 +637,25 @@ namespace Evergine.Bindings.Imgui
 		SelectOnClick = 8192,
 		SelectOnClickRelease = 16384,
 		NavWrapX = 65536,
+		NoSelectOnRightClick = 131072,
 	}
 
 	[Flags]
 	public enum ImGuiPopupFlags
 	{
 		None = 0,
-		MouseButtonLeft = 0,
-		MouseButtonRight = 1,
-		MouseButtonMiddle = 2,
-		MouseButtonMask_ = 31,
-		MouseButtonDefault_ = 1,
+		MouseButtonLeft = 4,
+		MouseButtonRight = 8,
+		MouseButtonMiddle = 12,
 		NoReopen = 32,
 		NoOpenOverExistingPopup = 128,
 		NoOpenOverItems = 256,
 		AnyPopupId = 1024,
 		AnyPopupLevel = 2048,
 		AnyPopup = 3072,
+		MouseButtonShift_ = 2,
+		MouseButtonMask_ = 12,
+		InvalidMask_ = 3,
 	}
 
 	[Flags]
@@ -642,6 +668,7 @@ namespace Evergine.Bindings.Imgui
 		Disabled = 8,
 		AllowOverlap = 16,
 		Highlight = 32,
+		SelectOnNav = 64,
 	}
 
 	public enum ImGuiSelectionRequestType
@@ -662,6 +689,7 @@ namespace Evergine.Bindings.Imgui
 		ClampOnInput = 512,
 		ClampZeroRange = 1024,
 		NoSpeedTweaks = 2048,
+		ColorMarkers = 4096,
 		AlwaysClamp = 1536,
 		InvalidMask_ = 1879048207,
 	}
@@ -695,22 +723,28 @@ namespace Evergine.Bindings.Imgui
 		CellPadding = 17,
 		ScrollbarSize = 18,
 		ScrollbarRounding = 19,
-		GrabMinSize = 20,
-		GrabRounding = 21,
-		ImageBorderSize = 22,
-		TabRounding = 23,
-		TabBorderSize = 24,
-		TabBarBorderSize = 25,
-		TabBarOverlineSize = 26,
-		TableAngledHeadersAngle = 27,
-		TableAngledHeadersTextAlign = 28,
-		ButtonTextAlign = 29,
-		SelectableTextAlign = 30,
-		SeparatorTextBorderSize = 31,
-		SeparatorTextAlign = 32,
-		SeparatorTextPadding = 33,
-		DockingSeparatorSize = 34,
-		COUNT = 35,
+		ScrollbarPadding = 20,
+		GrabMinSize = 21,
+		GrabRounding = 22,
+		ImageRounding = 23,
+		ImageBorderSize = 24,
+		TabRounding = 25,
+		TabBorderSize = 26,
+		TabMinWidthBase = 27,
+		TabMinWidthShrink = 28,
+		TabBarBorderSize = 29,
+		TabBarOverlineSize = 30,
+		TableAngledHeadersAngle = 31,
+		TableAngledHeadersTextAlign = 32,
+		TreeLinesSize = 33,
+		TreeLinesRounding = 34,
+		ButtonTextAlign = 35,
+		SelectableTextAlign = 36,
+		SeparatorTextBorderSize = 37,
+		SeparatorTextAlign = 38,
+		SeparatorTextPadding = 39,
+		DockingSeparatorSize = 40,
+		COUNT = 41,
 	}
 
 	[Flags]
@@ -724,9 +758,10 @@ namespace Evergine.Bindings.Imgui
 		NoTabListScrollingButtons = 16,
 		NoTooltip = 32,
 		DrawSelectedOverline = 64,
-		FittingPolicyResizeDown = 128,
-		FittingPolicyScroll = 256,
-		FittingPolicyMask_ = 384,
+		FittingPolicyMixed = 128,
+		FittingPolicyShrink = 256,
+		FittingPolicyScroll = 512,
+		FittingPolicyMask_ = 896,
 		FittingPolicyDefault_ = 128,
 	}
 
@@ -855,8 +890,11 @@ namespace Evergine.Bindings.Imgui
 		SpanLabelWidth = 8192,
 		SpanAllColumns = 16384,
 		LabelSpanAllColumns = 32768,
-		NavLeftJumpsBackHere = 131072,
+		NavLeftJumpsToParent = 131072,
 		CollapsingHeader = 26,
+		DrawLinesNone = 262144,
+		DrawLinesFull = 524288,
+		DrawLinesToNodes = 1048576,
 	}
 
 	[Flags]
@@ -912,6 +950,21 @@ namespace Evergine.Bindings.Imgui
 		Popup = 67108864,
 		Modal = 134217728,
 		ChildMenu = 268435456,
+	}
+
+	public enum ImTextureFormat
+	{
+		RGBA32 = 0,
+		Alpha8 = 1,
+	}
+
+	public enum ImTextureStatus
+	{
+		OK = 0,
+		Destroyed = 1,
+		WantCreate = 2,
+		WantUpdates = 3,
+		WantDestroy = 4,
 	}
 
 }

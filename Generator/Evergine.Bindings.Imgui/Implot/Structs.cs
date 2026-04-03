@@ -57,25 +57,19 @@ namespace Evergine.Bindings.Implot
 		public ImPlotRange X;
 		public ImPlotRange Y;
 
-		public ImPlotPoint Clamp_PlotPoInt(ImPlotPoint p)
+		public ImPlotPoint_c Clamp_PlotPoint(ImPlotPoint p)
 		{
-			ImPlotPoint pOut;
-			ImplotNative.ImPlotRect_Clamp_PlotPoInt(&pOut, self, p);
-
-			return pOut;
+			return ImplotNative.ImPlotRect_Clamp_PlotPoint(self, p);
 		}
 
-		public ImPlotPoint Clamp_double(double x, double y)
+		public ImPlotPoint_c Clamp_double(double x, double y)
 		{
-			ImPlotPoint pOut;
-			ImplotNative.ImPlotRect_Clamp_double(&pOut, self, x, y);
-
-			return pOut;
+			return ImplotNative.ImPlotRect_Clamp_double(self, x, y);
 		}
 
-		public bool Contains_PlotPoInt(ImPlotPoint p)
+		public bool Contains_PlotPoint(ImPlotPoint p)
 		{
-			return ImplotNative.ImPlotRect_Contains_PlotPoInt(self, p);
+			return ImplotNative.ImPlotRect_Contains_PlotPoint(self, p);
 		}
 
 		public bool Contains_double(double x, double y)
@@ -83,45 +77,103 @@ namespace Evergine.Bindings.Implot
 			return ImplotNative.ImPlotRect_Contains_double(self, x, y);
 		}
 
-		public ImPlotPoint Max()
+		public ImPlotPoint_c Max()
 		{
-			ImPlotPoint pOut;
-			ImplotNative.ImPlotRect_Max(&pOut, self);
-
-			return pOut;
+			return ImplotNative.ImPlotRect_Max(self);
 		}
 
-		public ImPlotPoint Min()
+		public ImPlotPoint_c Min()
 		{
-			ImPlotPoint pOut;
-			ImplotNative.ImPlotRect_Min(&pOut, self);
-
-			return pOut;
+			return ImplotNative.ImPlotRect_Min(self);
 		}
 
-		public ImPlotPoint Size()
+		public ImPlotPoint_c Size()
 		{
-			ImPlotPoint pOut;
-			ImplotNative.ImPlotRect_Size(&pOut, self);
-
-			return pOut;
+			return ImplotNative.ImPlotRect_Size(self);
 		}
 
 		public ImPlotRect* self => (ImPlotRect*)Unsafe.AsPointer(ref this);
 
 	}
 
+	public unsafe partial struct ImPlotSpec
+	{
+		public Vector4 LineColor;
+		public float LineWeight;
+		public Vector4 FillColor;
+		public float FillAlpha;
+		public ImPlotMarker Marker;
+		public float MarkerSize;
+		public Vector4 MarkerLineColor;
+		public Vector4 MarkerFillColor;
+		public float Size;
+		public int Offset;
+		public int Stride;
+		public ImPlotItemFlags Flags;
+
+		public void SetProp_Float(ImPlotProp prop, float v)
+		{
+			ImplotNative.ImPlotSpec_SetProp_Float(self, prop, v);
+		}
+
+		public void SetProp_double(ImPlotProp prop, double v)
+		{
+			ImplotNative.ImPlotSpec_SetProp_double(self, prop, v);
+		}
+
+		public void SetProp_S8(ImPlotProp prop, sbyte v)
+		{
+			ImplotNative.ImPlotSpec_SetProp_S8(self, prop, v);
+		}
+
+		public void SetProp_U8(ImPlotProp prop, byte v)
+		{
+			ImplotNative.ImPlotSpec_SetProp_U8(self, prop, v);
+		}
+
+		public void SetProp_S16(ImPlotProp prop, short v)
+		{
+			ImplotNative.ImPlotSpec_SetProp_S16(self, prop, v);
+		}
+
+		public void SetProp_U16(ImPlotProp prop, ushort v)
+		{
+			ImplotNative.ImPlotSpec_SetProp_U16(self, prop, v);
+		}
+
+		public void SetProp_S32(ImPlotProp prop, int v)
+		{
+			ImplotNative.ImPlotSpec_SetProp_S32(self, prop, v);
+		}
+
+		public void SetProp_U32(ImPlotProp prop, uint v)
+		{
+			ImplotNative.ImPlotSpec_SetProp_U32(self, prop, v);
+		}
+
+		public void SetProp_S64(ImPlotProp prop, long v)
+		{
+			ImplotNative.ImPlotSpec_SetProp_S64(self, prop, v);
+		}
+
+		public void SetProp_U64(ImPlotProp prop, ulong v)
+		{
+			ImplotNative.ImPlotSpec_SetProp_U64(self, prop, v);
+		}
+
+		public void SetProp_Vec4(ImPlotProp prop, Vector4 v)
+		{
+			ImplotNative.ImPlotSpec_SetProp_Vec4(self, prop, v);
+		}
+
+		public ImPlotSpec* self => (ImPlotSpec*)Unsafe.AsPointer(ref this);
+
+	}
+
 	public unsafe partial struct ImPlotStyle
 	{
-		public float LineWeight;
-		public int Marker;
-		public float MarkerSize;
-		public float MarkerWeight;
-		public float FillAlpha;
-		public float ErrorBarSize;
-		public float ErrorBarWeight;
-		public float DigitalBitHeight;
-		public float DigitalBitGap;
+		public Vector2 PlotDefaultSize;
+		public Vector2 PlotMinSize;
 		public float PlotBorderSize;
 		public float MinorAlpha;
 		public Vector2 MajorTickLen;
@@ -138,8 +190,8 @@ namespace Evergine.Bindings.Implot
 		public Vector2 MousePosPadding;
 		public Vector2 AnnotationPadding;
 		public Vector2 FitPadding;
-		public Vector2 PlotDefaultSize;
-		public Vector2 PlotMinSize;
+		public float DigitalPadding;
+		public float DigitalSpacing;
 		public Vector4 Colors_0;
 		public Vector4 Colors_1;
 		public Vector4 Colors_2;
@@ -156,11 +208,6 @@ namespace Evergine.Bindings.Implot
 		public Vector4 Colors_13;
 		public Vector4 Colors_14;
 		public Vector4 Colors_15;
-		public Vector4 Colors_16;
-		public Vector4 Colors_17;
-		public Vector4 Colors_18;
-		public Vector4 Colors_19;
-		public Vector4 Colors_20;
 		public ImPlotColormap Colormap;
 		public byte UseLocalTime;
 		public byte UseISO8601;

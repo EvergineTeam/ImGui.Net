@@ -10,12 +10,9 @@ namespace Evergine.Bindings.Imgui
 	{
 		public Vector4 Value;
 
-		public ImColor HSV(float h, float s, float v, float a = 1.0f)
+		public ImColor_c HSV(float h, float s, float v, float a = 1.0f)
 		{
-			ImColor pOut;
-			ImguiNative.ImColor_HSV(&pOut, h, s, v, a);
-
-			return pOut;
+			return ImguiNative.ImColor_HSV(h, s, v, a);
 		}
 
 		public void SetHSV(float h, float s, float v, float a = 1.0f)
@@ -36,7 +33,7 @@ namespace Evergine.Bindings.Imgui
 	public unsafe partial struct ImDrawCmd
 	{
 		public Vector4 ClipRect;
-		public ulong TextureId;
+		public ImTextureRef TexRef;
 		public uint VtxOffset;
 		public uint IdxOffset;
 		public uint ElemCount;
@@ -57,7 +54,7 @@ namespace Evergine.Bindings.Imgui
 	public unsafe partial struct ImDrawCmdHeader
 	{
 		public Vector4 ClipRect;
-		public ulong TextureId;
+		public ImTextureRef TexRef;
 		public uint VtxOffset;
 	}
 
@@ -72,6 +69,7 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 DisplaySize;
 		public Vector2 FramebufferScale;
 		public ImGuiViewport* OwnerViewport;
+		public ImVector_ImTextureDataPtr* Textures;
 
 		public void AddDrawList(ImDrawList* draw_list)
 		{
@@ -111,7 +109,7 @@ namespace Evergine.Bindings.Imgui
 		public ImDrawCmdHeader _CmdHeader;
 		public ImDrawListSplitter _Splitter;
 		public ImVector _ClipRectStack;
-		public ImVector _TextureIdStack;
+		public ImVector_ImTextureRef _TextureStack;
 		public ImVector _CallbacksDataBuf;
 		public float _FringeScale;
 		public byte* _OwnerName;
@@ -166,19 +164,19 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddEllipseFilled(self, center, radius, col, rot, num_segments);
 		}
 
-		public void AddImage(ulong user_texture_id, Vector2 p_min, Vector2 p_max, Vector2 uv_min, Vector2 uv_max, uint col = 4294967295)
+		public void AddImage(ImTextureRef tex_ref, Vector2 p_min, Vector2 p_max, Vector2 uv_min, Vector2 uv_max, uint col = 4294967295)
 		{
-			ImguiNative.ImDrawList_AddImage(self, user_texture_id, p_min, p_max, uv_min, uv_max, col);
+			ImguiNative.ImDrawList_AddImage(self, tex_ref, p_min, p_max, uv_min, uv_max, col);
 		}
 
-		public void AddImageQuad(ulong user_texture_id, Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 uv1, Vector2 uv2, Vector2 uv3, Vector2 uv4, uint col = 4294967295)
+		public void AddImageQuad(ImTextureRef tex_ref, Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, Vector2 uv1, Vector2 uv2, Vector2 uv3, Vector2 uv4, uint col = 4294967295)
 		{
-			ImguiNative.ImDrawList_AddImageQuad(self, user_texture_id, p1, p2, p3, p4, uv1, uv2, uv3, uv4, col);
+			ImguiNative.ImDrawList_AddImageQuad(self, tex_ref, p1, p2, p3, p4, uv1, uv2, uv3, uv4, col);
 		}
 
-		public void AddImageRounded(ulong user_texture_id, Vector2 p_min, Vector2 p_max, Vector2 uv_min, Vector2 uv_max, uint col, float rounding, ImDrawFlags flags = 0)
+		public void AddImageRounded(ImTextureRef tex_ref, Vector2 p_min, Vector2 p_max, Vector2 uv_min, Vector2 uv_max, uint col, float rounding, ImDrawFlags flags = 0)
 		{
-			ImguiNative.ImDrawList_AddImageRounded(self, user_texture_id, p_min, p_max, uv_min, uv_max, col, rounding, flags);
+			ImguiNative.ImDrawList_AddImageRounded(self, tex_ref, p_min, p_max, uv_min, uv_max, col, rounding, flags);
 		}
 
 		public void AddLine(Vector2 p1, Vector2 p2, uint col, float thickness = 1.0f)
@@ -266,20 +264,14 @@ namespace Evergine.Bindings.Imgui
 			return ImguiNative.ImDrawList_CloneOutput(self);
 		}
 
-		public Vector2 GetClipRectMax()
+		public ImVec2_c GetClipRectMax()
 		{
-			Vector2 pOut;
-			ImguiNative.ImDrawList_GetClipRectMax(&pOut, self);
-
-			return pOut;
+			return ImguiNative.ImDrawList_GetClipRectMax(self);
 		}
 
-		public Vector2 GetClipRectMin()
+		public ImVec2_c GetClipRectMin()
 		{
-			Vector2 pOut;
-			ImguiNative.ImDrawList_GetClipRectMin(&pOut, self);
-
-			return pOut;
+			return ImguiNative.ImDrawList_GetClipRectMin(self);
 		}
 
 		public void PathArcTo(Vector2 center, float radius, float a_min, float a_max, int num_segments = 0)
@@ -347,9 +339,9 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_PopClipRect(self);
 		}
 
-		public void PopTextureID()
+		public void PopTexture()
 		{
-			ImguiNative.ImDrawList_PopTextureID(self);
+			ImguiNative.ImDrawList_PopTexture(self);
 		}
 
 		public void PrimQuadUV(Vector2 a, Vector2 b, Vector2 c, Vector2 d, Vector2 uv_a, Vector2 uv_b, Vector2 uv_c, Vector2 uv_d, uint col)
@@ -402,9 +394,9 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_PushClipRectFullScreen(self);
 		}
 
-		public void PushTextureID(ulong texture_id)
+		public void PushTexture(ImTextureRef tex_ref)
 		{
-			ImguiNative.ImDrawList_PushTextureID(self, texture_id);
+			ImguiNative.ImDrawList_PushTexture(self, tex_ref);
 		}
 
 		public int _CalcCircleAutoSegmentCount(float radius)
@@ -422,9 +414,9 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList__OnChangedClipRect(self);
 		}
 
-		public void _OnChangedTextureID()
+		public void _OnChangedTexture()
 		{
-			ImguiNative.ImDrawList__OnChangedTextureID(self);
+			ImguiNative.ImDrawList__OnChangedTexture(self);
 		}
 
 		public void _OnChangedVtxOffset()
@@ -452,9 +444,14 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList__ResetForNewFrame(self);
 		}
 
-		public void _SetTextureID(ulong texture_id)
+		public void _SetDrawListSharedData(IntPtr data)
 		{
-			ImguiNative.ImDrawList__SetTextureID(self, texture_id);
+			ImguiNative.ImDrawList__SetDrawListSharedData(self, data);
+		}
+
+		public void _SetTexture(ImTextureRef tex_ref)
+		{
+			ImguiNative.ImDrawList__SetTexture(self, tex_ref);
 		}
 
 		public void _TryMergeDrawCmds()
@@ -510,53 +507,32 @@ namespace Evergine.Bindings.Imgui
 
 	public unsafe partial struct ImFont
 	{
-		public ImVector IndexAdvanceX;
-		public float FallbackAdvanceX;
-		public float FontSize;
-		public ImVector IndexLookup;
-		public ImVector Glyphs;
-		public ImFontGlyph* FallbackGlyph;
-		public ImFontAtlas* ContainerAtlas;
-		public ImFontConfig* Sources;
-		public short SourcesCount;
-		public short EllipsisCharCount;
+		public ImFontBaked* LastBaked;
+		public ImFontAtlas* OwnerAtlas;
+		public ImFontFlags Flags;
+		public float CurrentRasterizerDensity;
+		public uint FontId;
+		public float LegacySize;
+		public ImVector_ImFontConfigPtr Sources;
 		public ushort EllipsisChar;
 		public ushort FallbackChar;
-		public float EllipsisWidth;
-		public float EllipsisCharStep;
-		public float Scale;
-		public float Ascent;
-		public float Descent;
-		public int MetricsTotalSurface;
-		public byte DirtyLookupTables;
 		public fixed byte Used8kPagesMap[1];
+		public byte EllipsisAutoBake;
+		public ImGuiStorage RemapPairs;
 
-		public void AddGlyph(ImFontConfig* src_cfg, ushort c, float x0, float y0, float x1, float y1, float u0, float v0, float u1, float v1, float advance_x)
+		public void AddRemapChar(ushort from_codepoint, ushort to_codepoint)
 		{
-			ImguiNative.ImFont_AddGlyph(self, src_cfg, c, x0, y0, x1, y1, u0, v0, u1, v1, advance_x);
+			ImguiNative.ImFont_AddRemapChar(self, from_codepoint, to_codepoint);
 		}
 
-		public void AddRemapChar(ushort dst, ushort src, [MarshalAs(UnmanagedType.I1)] bool overwrite_dst = true)
+		public ImVec2_c CalcTextSizeA(float size, float max_width, float wrap_width, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_begin, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_end = null, char** out_remaining = null)
 		{
-			ImguiNative.ImFont_AddRemapChar(self, dst, src, overwrite_dst);
+			return ImguiNative.ImFont_CalcTextSizeA(self, size, max_width, wrap_width, text_begin, text_end, out_remaining);
 		}
 
-		public void BuildLookupTable()
+		public string CalcWordWrapPosition(float size, [MarshalAs(UnmanagedType.LPUTF8Str)] string text, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_end, float wrap_width)
 		{
-			ImguiNative.ImFont_BuildLookupTable(self);
-		}
-
-		public Vector2 CalcTextSizeA(float size, float max_width, float wrap_width, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_begin, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_end = null, char** remaining = null)
-		{
-			Vector2 pOut;
-			ImguiNative.ImFont_CalcTextSizeA(&pOut, self, size, max_width, wrap_width, text_begin, text_end, remaining);
-
-			return pOut;
-		}
-
-		public string CalcWordWrapPositionA(float scale, [MarshalAs(UnmanagedType.LPUTF8Str)] string text, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_end, float wrap_width)
-		{
-			return ImguiNative.ImFont_CalcWordWrapPositionA(self, scale, text, text_end, wrap_width);
+			return ImguiNative.ImFont_CalcWordWrapPosition(self, size, text, text_end, wrap_width);
 		}
 
 		public void ClearOutputData()
@@ -564,29 +540,19 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImFont_ClearOutputData(self);
 		}
 
-		public ImFontGlyph* FindGlyph(ushort c)
-		{
-			return ImguiNative.ImFont_FindGlyph(self, c);
-		}
-
-		public ImFontGlyph* FindGlyphNoFallback(ushort c)
-		{
-			return ImguiNative.ImFont_FindGlyphNoFallback(self, c);
-		}
-
-		public float GetCharAdvance(ushort c)
-		{
-			return ImguiNative.ImFont_GetCharAdvance(self, c);
-		}
-
 		public string GetDebugName()
 		{
 			return ImguiNative.ImFont_GetDebugName(self);
 		}
 
-		public void GrowIndex(int new_size)
+		public ImFontBaked* GetFontBaked(float font_size, float density = -1.0f)
 		{
-			ImguiNative.ImFont_GrowIndex(self, new_size);
+			return ImguiNative.ImFont_GetFontBaked(self, font_size, density);
+		}
+
+		public bool IsGlyphInFont(ushort c)
+		{
+			return ImguiNative.ImFont_IsGlyphInFont(self, c);
 		}
 
 		public bool IsGlyphRangeUnused(uint c_begin, uint c_last)
@@ -599,14 +565,14 @@ namespace Evergine.Bindings.Imgui
 			return ImguiNative.ImFont_IsLoaded(self);
 		}
 
-		public void RenderChar(ImDrawList* draw_list, float size, Vector2 pos, uint col, ushort c)
+		public void RenderChar(ImDrawList* draw_list, float size, Vector2 pos, uint col, ushort c, Vector4* cpu_fine_clip = null)
 		{
-			ImguiNative.ImFont_RenderChar(self, draw_list, size, pos, col, c);
+			ImguiNative.ImFont_RenderChar(self, draw_list, size, pos, col, c, cpu_fine_clip);
 		}
 
-		public void RenderText(ImDrawList* draw_list, float size, Vector2 pos, uint col, Vector4 clip_rect, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_begin, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_end, float wrap_width = 0.0f, [MarshalAs(UnmanagedType.I1)] bool cpu_fine_clip = true)
+		public void RenderText(ImDrawList* draw_list, float size, Vector2 pos, uint col, Vector4 clip_rect, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_begin, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_end, float wrap_width = 0.0f, ImDrawTextFlags flags = 0)
 		{
-			ImguiNative.ImFont_RenderText(self, draw_list, size, pos, col, clip_rect, text_begin, text_end, wrap_width, cpu_fine_clip);
+			ImguiNative.ImFont_RenderText(self, draw_list, size, pos, col, clip_rect, text_begin, text_end, wrap_width, flags);
 		}
 
 		public ImFont* self => (ImFont*)Unsafe.AsPointer(ref this);
@@ -616,21 +582,23 @@ namespace Evergine.Bindings.Imgui
 	public unsafe partial struct ImFontAtlas
 	{
 		public ImFontAtlasFlags Flags;
-		public ulong TexID;
-		public int TexDesiredWidth;
+		public ImTextureFormat TexDesiredFormat;
 		public int TexGlyphPadding;
+		public int TexMinWidth;
+		public int TexMinHeight;
+		public int TexMaxWidth;
+		public int TexMaxHeight;
 		public void* UserData;
+		public ImTextureRef TexRef;
+		public ImTextureData* TexData;
+		public ImVector_ImTextureDataPtr TexList;
 		public byte Locked;
-		public byte TexReady;
+		public byte RendererHasTextures;
+		public byte TexIsBuilt;
 		public byte TexPixelsUseColors;
-		public byte* TexPixelsAlpha8;
-		public uint* TexPixelsRGBA32;
-		public int TexWidth;
-		public int TexHeight;
 		public Vector2 TexUvScale;
 		public Vector2 TexUvWhitePixel;
 		public ImVector Fonts;
-		public ImVector CustomRects;
 		public ImVector Sources;
 		public Vector4 TexUvLines_0;
 		public Vector4 TexUvLines_1;
@@ -665,19 +633,20 @@ namespace Evergine.Bindings.Imgui
 		public Vector4 TexUvLines_30;
 		public Vector4 TexUvLines_31;
 		public Vector4 TexUvLines_32;
-		public IntPtr FontBuilderIO;
-		public uint FontBuilderFlags;
-		public int PackIdMouseCursors;
-		public int PackIdLines;
+		public int TexNextUniqueID;
+		public int FontNextUniqueID;
+		public ImVector_ImDrawListSharedDataPtr DrawListSharedDatas;
+		public ImFontAtlasBuilder* Builder;
+		public ImFontLoader* FontLoader;
+		public byte* FontLoaderName;
+		public void* FontLoaderData;
+		public uint FontLoaderFlags;
+		public int RefCount;
+		public IntPtr OwnerContext;
 
-		public int AddCustomRectFontGlyph(ImFont* font, ushort id, int width, int height, float advance_x, Vector2 offset)
+		public ImFontAtlasRectId AddCustomRect(int width, int height, ImFontAtlasRect* out_r = null)
 		{
-			return ImguiNative.ImFontAtlas_AddCustomRectFontGlyph(self, font, id, width, height, advance_x, offset);
-		}
-
-		public int AddCustomRectRegular(int width, int height)
-		{
-			return ImguiNative.ImFontAtlas_AddCustomRectRegular(self, width, height);
+			return ImguiNative.ImFontAtlas_AddCustomRect(self, width, height, out_r);
 		}
 
 		public ImFont* AddFont(ImFontConfig* font_cfg)
@@ -690,34 +659,34 @@ namespace Evergine.Bindings.Imgui
 			return ImguiNative.ImFontAtlas_AddFontDefault(self, font_cfg);
 		}
 
-		public ImFont* AddFontFromFileTTF([MarshalAs(UnmanagedType.LPUTF8Str)] string filename, float size_pixels, ImFontConfig* font_cfg = null, ushort* glyph_ranges = null)
+		public ImFont* AddFontDefaultBitmap(ImFontConfig* font_cfg = null)
+		{
+			return ImguiNative.ImFontAtlas_AddFontDefaultBitmap(self, font_cfg);
+		}
+
+		public ImFont* AddFontDefaultVector(ImFontConfig* font_cfg = null)
+		{
+			return ImguiNative.ImFontAtlas_AddFontDefaultVector(self, font_cfg);
+		}
+
+		public ImFont* AddFontFromFileTTF([MarshalAs(UnmanagedType.LPUTF8Str)] string filename, float size_pixels = 0.0f, ImFontConfig* font_cfg = null, ushort* glyph_ranges = null)
 		{
 			return ImguiNative.ImFontAtlas_AddFontFromFileTTF(self, filename, size_pixels, font_cfg, glyph_ranges);
 		}
 
-		public ImFont* AddFontFromMemoryCompressedBase85TTF([MarshalAs(UnmanagedType.LPUTF8Str)] string compressed_font_data_base85, float size_pixels, ImFontConfig* font_cfg = null, ushort* glyph_ranges = null)
+		public ImFont* AddFontFromMemoryCompressedBase85TTF([MarshalAs(UnmanagedType.LPUTF8Str)] string compressed_font_data_base85, float size_pixels = 0.0f, ImFontConfig* font_cfg = null, ushort* glyph_ranges = null)
 		{
 			return ImguiNative.ImFontAtlas_AddFontFromMemoryCompressedBase85TTF(self, compressed_font_data_base85, size_pixels, font_cfg, glyph_ranges);
 		}
 
-		public ImFont* AddFontFromMemoryCompressedTTF(void* compressed_font_data, int compressed_font_data_size, float size_pixels, ImFontConfig* font_cfg = null, ushort* glyph_ranges = null)
+		public ImFont* AddFontFromMemoryCompressedTTF(void* compressed_font_data, int compressed_font_data_size, float size_pixels = 0.0f, ImFontConfig* font_cfg = null, ushort* glyph_ranges = null)
 		{
 			return ImguiNative.ImFontAtlas_AddFontFromMemoryCompressedTTF(self, compressed_font_data, compressed_font_data_size, size_pixels, font_cfg, glyph_ranges);
 		}
 
-		public ImFont* AddFontFromMemoryTTF(void* font_data, int font_data_size, float size_pixels, ImFontConfig* font_cfg = null, ushort* glyph_ranges = null)
+		public ImFont* AddFontFromMemoryTTF(void* font_data, int font_data_size, float size_pixels = 0.0f, ImFontConfig* font_cfg = null, ushort* glyph_ranges = null)
 		{
 			return ImguiNative.ImFontAtlas_AddFontFromMemoryTTF(self, font_data, font_data_size, size_pixels, font_cfg, glyph_ranges);
-		}
-
-		public bool Build()
-		{
-			return ImguiNative.ImFontAtlas_Build(self);
-		}
-
-		public void CalcCustomRectUV(ImFontAtlasCustomRect* rect, Vector2* out_uv_min, Vector2* out_uv_max)
-		{
-			ImguiNative.ImFontAtlas_CalcCustomRectUV(self, rect, out_uv_min, out_uv_max);
 		}
 
 		public void Clear()
@@ -740,24 +709,14 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImFontAtlas_ClearTexData(self);
 		}
 
-		public ImFontAtlasCustomRect* GetCustomRectByIndex(int index)
+		public void CompactCache()
 		{
-			return ImguiNative.ImFontAtlas_GetCustomRectByIndex(self, index);
+			ImguiNative.ImFontAtlas_CompactCache(self);
 		}
 
-		public ushort* GetGlyphRangesChineseFull()
+		public bool GetCustomRect(ImFontAtlasRectId id, ImFontAtlasRect* out_r)
 		{
-			return ImguiNative.ImFontAtlas_GetGlyphRangesChineseFull(self);
-		}
-
-		public ushort* GetGlyphRangesChineseSimplifiedCommon()
-		{
-			return ImguiNative.ImFontAtlas_GetGlyphRangesChineseSimplifiedCommon(self);
-		}
-
-		public ushort* GetGlyphRangesCyrillic()
-		{
-			return ImguiNative.ImFontAtlas_GetGlyphRangesCyrillic(self);
+			return ImguiNative.ImFontAtlas_GetCustomRect(self, id, out_r);
 		}
 
 		public ushort* GetGlyphRangesDefault()
@@ -765,104 +724,118 @@ namespace Evergine.Bindings.Imgui
 			return ImguiNative.ImFontAtlas_GetGlyphRangesDefault(self);
 		}
 
-		public ushort* GetGlyphRangesGreek()
+		public void RemoveCustomRect(ImFontAtlasRectId id)
 		{
-			return ImguiNative.ImFontAtlas_GetGlyphRangesGreek(self);
+			ImguiNative.ImFontAtlas_RemoveCustomRect(self, id);
 		}
 
-		public ushort* GetGlyphRangesJapanese()
+		public void RemoveFont(ImFont* font)
 		{
-			return ImguiNative.ImFontAtlas_GetGlyphRangesJapanese(self);
+			ImguiNative.ImFontAtlas_RemoveFont(self, font);
 		}
 
-		public ushort* GetGlyphRangesKorean()
+		public void SetFontLoader(ImFontLoader* font_loader)
 		{
-			return ImguiNative.ImFontAtlas_GetGlyphRangesKorean(self);
-		}
-
-		public ushort* GetGlyphRangesThai()
-		{
-			return ImguiNative.ImFontAtlas_GetGlyphRangesThai(self);
-		}
-
-		public ushort* GetGlyphRangesVietnamese()
-		{
-			return ImguiNative.ImFontAtlas_GetGlyphRangesVietnamese(self);
-		}
-
-		public void GetTexDataAsAlpha8(byte** out_pixels, int* out_width, int* out_height, int* out_bytes_per_pixel = null)
-		{
-			ImguiNative.ImFontAtlas_GetTexDataAsAlpha8(self, out_pixels, out_width, out_height, out_bytes_per_pixel);
-		}
-
-		public void GetTexDataAsRGBA32(byte** out_pixels, int* out_width, int* out_height, int* out_bytes_per_pixel = null)
-		{
-			ImguiNative.ImFontAtlas_GetTexDataAsRGBA32(self, out_pixels, out_width, out_height, out_bytes_per_pixel);
-		}
-
-		public bool IsBuilt()
-		{
-			return ImguiNative.ImFontAtlas_IsBuilt(self);
-		}
-
-		public void SetTexID(ulong id)
-		{
-			ImguiNative.ImFontAtlas_SetTexID(self, id);
+			ImguiNative.ImFontAtlas_SetFontLoader(self, font_loader);
 		}
 
 		public ImFontAtlas* self => (ImFontAtlas*)Unsafe.AsPointer(ref this);
 
 	}
 
-	public unsafe partial struct ImFontAtlasCustomRect
+	public unsafe partial struct ImFontAtlasRect
 	{
-		public ushort X;
-		public ushort Y;
-		public ushort Width;
-		public ushort Height;
-		public uint GlyphID;
-		public uint GlyphColored;
-		public float GlyphAdvanceX;
-		public Vector2 GlyphOffset;
-		public ImFont* Font;
+		public ushort x;
+		public ushort y;
+		public ushort w;
+		public ushort h;
+		public Vector2 uv0;
+		public Vector2 uv1;
+	}
 
-		public bool IsPacked()
+	public unsafe partial struct ImFontBaked
+	{
+		public ImVector IndexAdvanceX;
+		public float FallbackAdvanceX;
+		public float Size;
+		public float RasterizerDensity;
+		public ImVector IndexLookup;
+		public ImVector Glyphs;
+		public int FallbackGlyphIndex;
+		public float Ascent;
+		public float Descent;
+		public uint MetricsTotalSurface;
+		public uint WantDestroy;
+		public uint LoadNoFallback;
+		public uint LoadNoRenderOnLayout;
+		public int LastUsedFrame;
+		public uint BakedId;
+		public ImFont* OwnerFont;
+		public void* FontLoaderDatas;
+
+		public void ClearOutputData()
 		{
-			return ImguiNative.ImFontAtlasCustomRect_IsPacked(self);
+			ImguiNative.ImFontBaked_ClearOutputData(self);
 		}
 
-		public ImFontAtlasCustomRect* self => (ImFontAtlasCustomRect*)Unsafe.AsPointer(ref this);
+		public ImFontGlyph* FindGlyph(ushort c)
+		{
+			return ImguiNative.ImFontBaked_FindGlyph(self, c);
+		}
+
+		public ImFontGlyph* FindGlyphNoFallback(ushort c)
+		{
+			return ImguiNative.ImFontBaked_FindGlyphNoFallback(self, c);
+		}
+
+		public float GetCharAdvance(ushort c)
+		{
+			return ImguiNative.ImFontBaked_GetCharAdvance(self, c);
+		}
+
+		public bool IsGlyphLoaded(ushort c)
+		{
+			return ImguiNative.ImFontBaked_IsGlyphLoaded(self, c);
+		}
+
+		public ImFontBaked* self => (ImFontBaked*)Unsafe.AsPointer(ref this);
 
 	}
 
 	public unsafe partial struct ImFontConfig
 	{
+		public fixed byte Name[40];
 		public void* FontData;
 		public int FontDataSize;
 		public byte FontDataOwnedByAtlas;
 		public byte MergeMode;
 		public byte PixelSnapH;
-		public int FontNo;
-		public int OversampleH;
-		public int OversampleV;
+		public sbyte OversampleH;
+		public sbyte OversampleV;
+		public ushort EllipsisChar;
 		public float SizePixels;
-		public Vector2 GlyphOffset;
 		public ushort* GlyphRanges;
+		public ushort* GlyphExcludeRanges;
+		public Vector2 GlyphOffset;
 		public float GlyphMinAdvanceX;
 		public float GlyphMaxAdvanceX;
 		public float GlyphExtraAdvanceX;
-		public uint FontBuilderFlags;
+		public uint FontNo;
+		public uint FontLoaderFlags;
 		public float RasterizerMultiply;
 		public float RasterizerDensity;
-		public ushort EllipsisChar;
-		public fixed byte Name[40];
+		public float ExtraSizeScale;
+		public ImFontFlags Flags;
 		public ImFont* DstFont;
+		public ImFontLoader* FontLoader;
+		public void* FontLoaderData;
 	}
 
 	public unsafe partial struct ImFontGlyph
 	{
 		public uint Colored;
 		public uint Visible;
+		public uint SourceIdx;
 		public uint Codepoint;
 		public float AdvanceX;
 		public float X0;
@@ -873,6 +846,7 @@ namespace Evergine.Bindings.Imgui
 		public float V0;
 		public float U1;
 		public float V1;
+		public int PackId;
 	}
 
 	public unsafe partial struct ImFontGlyphRangesBuilder
@@ -923,16 +897,15 @@ namespace Evergine.Bindings.Imgui
 		public ImGuiConfigFlags ConfigFlags;
 		public ImGuiBackendFlags BackendFlags;
 		public Vector2 DisplaySize;
+		public Vector2 DisplayFramebufferScale;
 		public float DeltaTime;
 		public float IniSavingRate;
 		public byte* IniFilename;
 		public byte* LogFilename;
 		public void* UserData;
 		public ImFontAtlas* Fonts;
-		public float FontGlobalScale;
-		public byte FontAllowUserScaling;
 		public ImFont* FontDefault;
-		public Vector2 DisplayFramebufferScale;
+		public byte FontAllowUserScaling;
 		public byte ConfigNavSwapGamepadButtons;
 		public byte ConfigNavMoveSetMousePos;
 		public byte ConfigNavCaptureKeyboard;
@@ -941,6 +914,7 @@ namespace Evergine.Bindings.Imgui
 		public byte ConfigNavCursorVisibleAuto;
 		public byte ConfigNavCursorVisibleAlways;
 		public byte ConfigDockingNoSplit;
+		public byte ConfigDockingNoDockingOver;
 		public byte ConfigDockingWithShift;
 		public byte ConfigDockingAlwaysTabBar;
 		public byte ConfigDockingTransparentPayload;
@@ -948,6 +922,9 @@ namespace Evergine.Bindings.Imgui
 		public byte ConfigViewportsNoTaskBarIcon;
 		public byte ConfigViewportsNoDecoration;
 		public byte ConfigViewportsNoDefaultParent;
+		public byte ConfigViewportsPlatformFocusSetsImGuiFocus;
+		public byte ConfigDpiScaleFonts;
+		public byte ConfigDpiScaleViewports;
 		public byte MouseDrawCursor;
 		public byte ConfigMacOSXBehaviors;
 		public byte ConfigInputTrickleEventQueue;
@@ -1282,12 +1259,14 @@ namespace Evergine.Bindings.Imgui
 		public ImGuiInputTextFlags EventFlag;
 		public ImGuiInputTextFlags Flags;
 		public void* UserData;
-		public ushort EventChar;
+		public uint ID;
 		public ImGuiKey EventKey;
+		public ushort EventChar;
+		public byte EventActivated;
+		public byte BufDirty;
 		public byte* Buf;
 		public int BufTextLen;
 		public int BufSize;
-		public byte BufDirty;
 		public int CursorPos;
 		public int SelectionStart;
 		public int SelectionEnd;
@@ -1317,6 +1296,11 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImGuiInputTextCallbackData_SelectAll(self);
 		}
 
+		public void SetSelection(int s, int e)
+		{
+			ImguiNative.ImGuiInputTextCallbackData_SetSelection(self, s, e);
+		}
+
 		public ImGuiInputTextCallbackData* self => (ImGuiInputTextCallbackData*)Unsafe.AsPointer(ref this);
 
 	}
@@ -1336,9 +1320,10 @@ namespace Evergine.Bindings.Imgui
 		public int DisplayEnd;
 		public int ItemsCount;
 		public float ItemsHeight;
-		public float StartPosY;
+		public double StartPosY;
 		public double StartSeekOffsetY;
 		public void* TempData;
+		public ImGuiListClipperFlags Flags;
 
 		public void Begin(int items_count, float items_height = -1.0f)
 		{
@@ -1434,6 +1419,8 @@ namespace Evergine.Bindings.Imgui
 		public IntPtr Platform_SetImeDataFn;
 		public void* Platform_ImeUserData;
 		public ushort Platform_LocaleDecimalPoint;
+		public int Renderer_TextureMaxWidth;
+		public int Renderer_TextureMaxHeight;
 		public void* Renderer_RenderState;
 		public IntPtr Platform_CreateWindow;
 		public IntPtr Platform_DestroyWindow;
@@ -1442,6 +1429,7 @@ namespace Evergine.Bindings.Imgui
 		public IntPtr Platform_GetWindowPos;
 		public IntPtr Platform_SetWindowSize;
 		public IntPtr Platform_GetWindowSize;
+		public IntPtr Platform_GetWindowFramebufferScale;
 		public IntPtr Platform_SetWindowFocus;
 		public IntPtr Platform_GetWindowFocus;
 		public IntPtr Platform_GetWindowMinimized;
@@ -1460,14 +1448,30 @@ namespace Evergine.Bindings.Imgui
 		public IntPtr Renderer_RenderWindow;
 		public IntPtr Renderer_SwapBuffers;
 		public ImVector Monitors;
+		public ImVector_ImTextureDataPtr Textures;
 		public ImVector Viewports;
+
+		public void ClearPlatformHandlers()
+		{
+			ImguiNative.ImGuiPlatformIO_ClearPlatformHandlers(self);
+		}
+
+		public void ClearRendererHandlers()
+		{
+			ImguiNative.ImGuiPlatformIO_ClearRendererHandlers(self);
+		}
+
+		public ImGuiPlatformIO* self => (ImGuiPlatformIO*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImGuiPlatformImeData
 	{
 		public byte WantVisible;
+		public byte WantTextInput;
 		public Vector2 InputPos;
 		public float InputLineHeight;
+		public uint ViewportId;
 	}
 
 	public unsafe partial struct ImGuiPlatformMonitor
@@ -1644,6 +1648,9 @@ namespace Evergine.Bindings.Imgui
 
 	public unsafe partial struct ImGuiStyle
 	{
+		public float FontSizeBase;
+		public float FontScaleMain;
+		public float FontScaleDpi;
 		public float Alpha;
 		public float DisabledAlpha;
 		public Vector2 WindowPadding;
@@ -1668,18 +1675,29 @@ namespace Evergine.Bindings.Imgui
 		public float ColumnsMinSpacing;
 		public float ScrollbarSize;
 		public float ScrollbarRounding;
+		public float ScrollbarPadding;
 		public float GrabMinSize;
 		public float GrabRounding;
 		public float LogSliderDeadzone;
+		public float ImageRounding;
 		public float ImageBorderSize;
 		public float TabRounding;
 		public float TabBorderSize;
+		public float TabMinWidthBase;
+		public float TabMinWidthShrink;
 		public float TabCloseButtonMinWidthSelected;
 		public float TabCloseButtonMinWidthUnselected;
 		public float TabBarBorderSize;
 		public float TabBarOverlineSize;
 		public float TableAngledHeadersAngle;
 		public Vector2 TableAngledHeadersTextAlign;
+		public ImGuiTreeNodeFlags TreeLinesFlags;
+		public float TreeLinesSize;
+		public float TreeLinesRounding;
+		public float DragDropTargetRounding;
+		public float DragDropTargetBorderSize;
+		public float DragDropTargetPadding;
+		public float ColorMarkerSize;
 		public ImGuiDir ColorButtonPosition;
 		public Vector2 ButtonTextAlign;
 		public Vector2 SelectableTextAlign;
@@ -1688,6 +1706,7 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 SeparatorTextPadding;
 		public Vector2 DisplayWindowPadding;
 		public Vector2 DisplaySafeAreaPadding;
+		public byte DockingNodeHasCloseButton;
 		public float DockingSeparatorSize;
 		public float MouseCursorScale;
 		public byte AntiAliasedLines;
@@ -1753,11 +1772,17 @@ namespace Evergine.Bindings.Imgui
 		public Vector4 Colors_55;
 		public Vector4 Colors_56;
 		public Vector4 Colors_57;
+		public Vector4 Colors_58;
+		public Vector4 Colors_59;
+		public Vector4 Colors_60;
+		public Vector4 Colors_61;
 		public float HoverStationaryDelay;
 		public float HoverDelayShort;
 		public float HoverDelayNormal;
 		public ImGuiHoveredFlags HoverFlagsForTooltipMouse;
 		public ImGuiHoveredFlags HoverFlagsForTooltipNav;
+		public float _MainScale;
+		public float _NextFrameFontSizeBase;
 
 		public void ScaleAllSizes(float scale_factor)
 		{
@@ -1901,10 +1926,12 @@ namespace Evergine.Bindings.Imgui
 		public ImGuiViewportFlags Flags;
 		public Vector2 Pos;
 		public Vector2 Size;
+		public Vector2 FramebufferScale;
 		public Vector2 WorkPos;
 		public Vector2 WorkSize;
 		public float DpiScale;
 		public uint ParentViewportId;
+		public ImGuiViewport* ParentViewport;
 		public ImDrawData* DrawData;
 		public void* RendererUserData;
 		public void* PlatformUserData;
@@ -1915,20 +1942,14 @@ namespace Evergine.Bindings.Imgui
 		public byte PlatformRequestResize;
 		public byte PlatformRequestClose;
 
-		public Vector2 GetCenter()
+		public ImVec2_c GetCenter()
 		{
-			Vector2 pOut;
-			ImguiNative.ImGuiViewport_GetCenter(&pOut, self);
-
-			return pOut;
+			return ImguiNative.ImGuiViewport_GetCenter(self);
 		}
 
-		public Vector2 GetWorkCenter()
+		public ImVec2_c GetWorkCenter()
 		{
-			Vector2 pOut;
-			ImguiNative.ImGuiViewport_GetWorkCenter(&pOut, self);
-
-			return pOut;
+			return ImguiNative.ImGuiViewport_GetWorkCenter(self);
 		}
 
 		public ImGuiViewport* self => (ImGuiViewport*)Unsafe.AsPointer(ref this);
@@ -1946,6 +1967,101 @@ namespace Evergine.Bindings.Imgui
 		public ImGuiDockNodeFlags DockNodeFlagsOverrideSet;
 		public byte DockingAlwaysTabBar;
 		public byte DockingAllowUnclassed;
+	}
+
+	public unsafe partial struct ImTextureData
+	{
+		public int UniqueID;
+		public ImTextureStatus Status;
+		public void* BackendUserData;
+		public ulong TexID;
+		public ImTextureFormat Format;
+		public int Width;
+		public int Height;
+		public int BytesPerPixel;
+		public byte* Pixels;
+		public ImTextureRect UsedRect;
+		public ImTextureRect UpdateRect;
+		public ImVector_ImTextureRect Updates;
+		public int UnusedFrames;
+		public ushort RefCount;
+		public byte UseColors;
+		public byte WantDestroyNextFrame;
+
+		public void Create(ImTextureFormat format, int w, int h)
+		{
+			ImguiNative.ImTextureData_Create(self, format, w, h);
+		}
+
+		public void DestroyPixels()
+		{
+			ImguiNative.ImTextureData_DestroyPixels(self);
+		}
+
+		public int GetPitch()
+		{
+			return ImguiNative.ImTextureData_GetPitch(self);
+		}
+
+		public void* GetPixels()
+		{
+			return ImguiNative.ImTextureData_GetPixels(self);
+		}
+
+		public void* GetPixelsAt(int x, int y)
+		{
+			return ImguiNative.ImTextureData_GetPixelsAt(self, x, y);
+		}
+
+		public int GetSizeInBytes()
+		{
+			return ImguiNative.ImTextureData_GetSizeInBytes(self);
+		}
+
+		public ulong GetTexID()
+		{
+			return ImguiNative.ImTextureData_GetTexID(self);
+		}
+
+		public ImTextureRef_c GetTexRef()
+		{
+			return ImguiNative.ImTextureData_GetTexRef(self);
+		}
+
+		public void SetStatus(ImTextureStatus status)
+		{
+			ImguiNative.ImTextureData_SetStatus(self, status);
+		}
+
+		public void SetTexID(ulong tex_id)
+		{
+			ImguiNative.ImTextureData_SetTexID(self, tex_id);
+		}
+
+		public ImTextureData* self => (ImTextureData*)Unsafe.AsPointer(ref this);
+
+	}
+
+	public unsafe partial struct ImTextureRect
+	{
+		public ushort x;
+		public ushort y;
+		public ushort w;
+		public ushort h;
+	}
+
+	public unsafe partial struct ImTextureRef
+	{
+		public ImTextureData* _TexData;
+		public ulong _TexID;
+
+		public ulong GetTexID()
+		{
+			return ImguiNative.ImTextureRef_GetTexID(self);
+		}
+
+		public ImTextureRef* self => (ImTextureRef*)Unsafe.AsPointer(ref this);
+
 	}
 
 	public unsafe partial struct ImVec2

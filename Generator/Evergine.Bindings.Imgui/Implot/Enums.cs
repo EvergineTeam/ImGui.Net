@@ -64,30 +64,31 @@ namespace Evergine.Bindings.Implot
 		Scott = -4,
 	}
 
+	[Flags]
+	public enum ImPlotBubblesFlags
+	{
+		None = 0,
+	}
+
 	public enum ImPlotCol
 	{
-		Line = 0,
-		Fill = 1,
-		MarkerOutline = 2,
-		MarkerFill = 3,
-		ErrorBar = 4,
-		FrameBg = 5,
-		PlotBg = 6,
-		PlotBorder = 7,
-		LegendBg = 8,
-		LegendBorder = 9,
-		LegendText = 10,
-		TitleText = 11,
-		InlayText = 12,
-		AxisText = 13,
-		AxisGrid = 14,
-		AxisTick = 15,
-		AxisBg = 16,
-		AxisBgHovered = 17,
-		AxisBgActive = 18,
-		Selection = 19,
-		Crosshairs = 20,
-		COUNT = 21,
+		FrameBg = 0,
+		PlotBg = 1,
+		PlotBorder = 2,
+		LegendBg = 3,
+		LegendBorder = 4,
+		LegendText = 5,
+		TitleText = 6,
+		InlayText = 7,
+		AxisText = 8,
+		AxisGrid = 9,
+		AxisTick = 10,
+		AxisBg = 11,
+		AxisBgHovered = 12,
+		AxisBgActive = 13,
+		Selection = 14,
+		Crosshairs = 15,
+		COUNT = 16,
 	}
 
 	[Flags]
@@ -221,6 +222,7 @@ namespace Evergine.Bindings.Implot
 		Outside = 16,
 		Horizontal = 32,
 		Sort = 64,
+		Reverse = 128,
 	}
 
 	[Flags]
@@ -249,7 +251,8 @@ namespace Evergine.Bindings.Implot
 
 	public enum ImPlotMarker
 	{
-		None = -1,
+		None = -2,
+		Auto = -1,
 		Circle = 0,
 		Square = 1,
 		Diamond = 2,
@@ -279,6 +282,22 @@ namespace Evergine.Bindings.Implot
 		Normalize = 1024,
 		IgnoreHidden = 2048,
 		Exploding = 4096,
+	}
+
+	public enum ImPlotProp
+	{
+		LineColor = 0,
+		LineWeight = 1,
+		FillColor = 2,
+		FillAlpha = 3,
+		Marker = 4,
+		MarkerSize = 5,
+		MarkerLineColor = 6,
+		MarkerFillColor = 7,
+		Size = 8,
+		Offset = 9,
+		Stride = 10,
+		Flags = 11,
 	}
 
 	public enum ImPlotScale
@@ -319,34 +338,27 @@ namespace Evergine.Bindings.Implot
 
 	public enum ImPlotStyleVar
 	{
-		LineWeight = 0,
-		Marker = 1,
-		MarkerSize = 2,
-		MarkerWeight = 3,
-		FillAlpha = 4,
-		ErrorBarSize = 5,
-		ErrorBarWeight = 6,
-		DigitalBitHeight = 7,
-		DigitalBitGap = 8,
-		PlotBorderSize = 9,
-		MinorAlpha = 10,
-		MajorTickLen = 11,
-		MinorTickLen = 12,
-		MajorTickSize = 13,
-		MinorTickSize = 14,
-		MajorGridSize = 15,
-		MinorGridSize = 16,
-		PlotPadding = 17,
-		LabelPadding = 18,
-		LegendPadding = 19,
-		LegendInnerPadding = 20,
-		LegendSpacing = 21,
-		MousePosPadding = 22,
-		AnnotationPadding = 23,
-		FitPadding = 24,
-		PlotDefaultSize = 25,
-		PlotMinSize = 26,
-		COUNT = 27,
+		PlotDefaultSize = 0,
+		PlotMinSize = 1,
+		PlotBorderSize = 2,
+		MinorAlpha = 3,
+		MajorTickLen = 4,
+		MinorTickLen = 5,
+		MajorTickSize = 6,
+		MinorTickSize = 7,
+		MajorGridSize = 8,
+		MinorGridSize = 9,
+		PlotPadding = 10,
+		LabelPadding = 11,
+		LegendPadding = 12,
+		LegendInnerPadding = 13,
+		LegendSpacing = 14,
+		MousePosPadding = 15,
+		AnnotationPadding = 16,
+		FitPadding = 17,
+		DigitalPadding = 18,
+		DigitalSpacing = 19,
+		COUNT = 20,
 	}
 
 	[Flags]
