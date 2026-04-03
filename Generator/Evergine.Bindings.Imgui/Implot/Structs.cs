@@ -57,12 +57,12 @@ namespace Evergine.Bindings.Implot
 		public ImPlotRange X;
 		public ImPlotRange Y;
 
-		public ImPlotPoint_c Clamp_PlotPoint(ImPlotPoint p)
+		public ImPlotPoint Clamp_PlotPoint(ImPlotPoint p)
 		{
 			return ImplotNative.ImPlotRect_Clamp_PlotPoint(self, p);
 		}
 
-		public ImPlotPoint_c Clamp_double(double x, double y)
+		public ImPlotPoint Clamp_double(double x, double y)
 		{
 			return ImplotNative.ImPlotRect_Clamp_double(self, x, y);
 		}
@@ -77,17 +77,17 @@ namespace Evergine.Bindings.Implot
 			return ImplotNative.ImPlotRect_Contains_double(self, x, y);
 		}
 
-		public ImPlotPoint_c Max()
+		public ImPlotPoint Max()
 		{
 			return ImplotNative.ImPlotRect_Max(self);
 		}
 
-		public ImPlotPoint_c Min()
+		public ImPlotPoint Min()
 		{
 			return ImplotNative.ImPlotRect_Min(self);
 		}
 
-		public ImPlotPoint_c Size()
+		public ImPlotPoint Size()
 		{
 			return ImplotNative.ImPlotRect_Size(self);
 		}

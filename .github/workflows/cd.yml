@@ -95,7 +95,12 @@ jobs:
       with:
         repository: ${{ github.repository }}
         submodules: recursive
-    
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.x
+
     - name: Download all artifacts
       uses: actions/download-artifact@v5
       with:

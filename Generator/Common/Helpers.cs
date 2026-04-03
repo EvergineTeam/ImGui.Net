@@ -55,6 +55,7 @@ namespace Common
                             return "byte*";
                     }
                 case "ImVec2":
+                case "ImVec2_c":
                     return "Vector2";
                 case "ImVec2*":
                     return "Vector2*";
@@ -63,8 +64,10 @@ namespace Common
                 case "ImVec3*":
                     return "Vector3*";
                 case "ImVec4":
+                case "ImVec4_c":
                     return "Vector4";
                 case "ImVec4*":
+                case "ImVec4_c*":
                     return "Vector4*";
                 case "ImU8":
                     return "byte";
@@ -148,9 +151,15 @@ namespace Common
                 case "ImVector_ImU32":
                 case "ImVector_ImGuiSelectionRequest":
                 case "ImVector_ImDrawListPtr":
+                case "ImVector_ImDrawListSharedDataPtr":
+                case "ImVector_ImFontConfigPtr":
+                case "ImVector_ImTextureDataPtr":
+                case "ImVector_ImTextureRef":
+                case "ImVector_ImTextureRect":
                     return "ImVector";
                 case "ImVector_ImWchar*":
                 case "ImVector_ImGuiTextRange*":
+                case "ImVector_ImTextureDataPtr*":
                     return "ImVector*";
                 case "ImGuiContext*":
                 case "ImNodesContext*":
@@ -161,12 +170,14 @@ namespace Common
                 case "ImNodesMiniMapNodeHoveringCallbackUserData":
                 case "ImDrawListSharedData*":
                 case "ImFontBuilderIO*":
+                case "ImFontAtlasBuilder*":
+                case "ImFontLoader*":
                 case "ImDrawCallback":
                 case "ImGuiWindow*":
                 case "ImGuiMemAllocFunc":
                 case "ImGuiMemFreeFunc":
-                case "ImGuiPlatformIO*":
                 case "ImPlotTransform":
+                case "ImPlotPoint_getter":
                     return "IntPtr";
                 case "ImGuiMemAllocFunc*":
                 case "ImGuiMemFreeFunc*":
@@ -186,6 +197,16 @@ namespace Common
                     return "void*";
                 case "ImPlotGetter":
                     return "ImPlotPoint*";
+                case "ImFontAtlasRectId":
+                    return "int";
+                case "ImColor_c":
+                    return "ImColor";
+                case "ImTextureRef_c":
+                    return "ImTextureRef";
+                case "ImPlotPoint_c":
+                    return "ImPlotPoint";
+                case "ImPlotRect_c":
+                    return "ImPlotRect";
                 case "ImGuiKeyChord":
                     return "ImGuiKey";
                 default:

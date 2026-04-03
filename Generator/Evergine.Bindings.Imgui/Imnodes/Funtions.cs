@@ -50,7 +50,7 @@ namespace Evergine.Bindings.Imnodes
 		public static extern void imnodes_EditorContextFree(IntPtr noname1);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImVec2_c imnodes_EditorContextGetPanning();
+		public static extern Vector2 imnodes_EditorContextGetPanning();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void imnodes_EditorContextMoveToNode(int node_id);
@@ -86,16 +86,16 @@ namespace Evergine.Bindings.Imnodes
 		public static extern ImNodesIO* imnodes_GetIO();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImVec2_c imnodes_GetNodeDimensions(int id);
+		public static extern Vector2 imnodes_GetNodeDimensions(int id);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImVec2_c imnodes_GetNodeEditorSpacePos(int node_id);
+		public static extern Vector2 imnodes_GetNodeEditorSpacePos(int node_id);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImVec2_c imnodes_GetNodeGridSpacePos(int node_id);
+		public static extern Vector2 imnodes_GetNodeGridSpacePos(int node_id);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImVec2_c imnodes_GetNodeScreenSpacePos(int node_id);
+		public static extern Vector2 imnodes_GetNodeScreenSpacePos(int node_id);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void imnodes_GetSelectedLinks(int* link_ids);

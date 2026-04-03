@@ -34,6 +34,15 @@ namespace Evergine.Bindings.Imgui
 	}
 
 	[Flags]
+	public enum ImDrawTextFlags
+	{
+		None = 0,
+		CpuFineClip = 1,
+		WrapKeepBlanks = 2,
+		StopOnNewLine = 4,
+	}
+
+	[Flags]
 	public enum ImFontAtlasFlags
 	{
 		None = 0,

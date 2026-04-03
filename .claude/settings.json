@@ -13,7 +13,9 @@
       "Bash(./ImguizmoGen.exe)",
       "Bash(./ImnodesGen.exe)",
       "Bash(./ImplotGen.exe)",
-      "Bash(git -C \"c:/repositories/ImGui.Net\" diff --stat HEAD)"
+      "Bash(git -C \"c:/repositories/ImGui.Net\" diff --stat HEAD)",
+      "Bash(python3 -c ':*)",
+      "Bash(node -e ':*)"
     ]
   }
 }

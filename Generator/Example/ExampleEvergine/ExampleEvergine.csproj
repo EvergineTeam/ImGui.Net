@@ -1,21 +1,21 @@
-<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<GenerateEvergineContent>True</GenerateEvergineContent>
-		<GenerateEvergineAssets>False</GenerateEvergineAssets>
-		<GenerateEvergineScenesCode>True</GenerateEvergineScenesCode>
-		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-	</PropertyGroup>
-	<ItemGroup>
-		<PackageReference Include="Evergine.Common" Version="2025.3.18.7" />
-		<PackageReference Include="Evergine.Components" Version="2025.3.18.7" />
-		<PackageReference Include="Evergine.Framework" Version="2025.3.18.7" />
-		<PackageReference Include="Evergine.Mathematics" Version="2025.3.18.7" />
-		<PackageReference Include="Evergine.Bullet" Version="2025.3.18.7" />
-		<PackageReference Include="Evergine.Targets" Version="2025.3.18.7" />
-		<PackageReference Include="Evergine.CodeScenes" Version="2025.3.18.7" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ProjectReference Include="..\..\Evergine.Bindings.Imgui\Evergine.Bindings.Imgui.csproj" />
-	</ItemGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <GenerateEvergineContent>True</GenerateEvergineContent>
+    <GenerateEvergineAssets>False</GenerateEvergineAssets>
+    <GenerateEvergineScenesCode>True</GenerateEvergineScenesCode>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Evergine.Common" Version="2025.10.21.3204" />
+    <PackageReference Include="Evergine.Components" Version="2025.10.21.3204" />
+    <PackageReference Include="Evergine.Framework" Version="2025.10.21.3204" />
+    <PackageReference Include="Evergine.Mathematics" Version="2025.10.21.3204" />
+    <PackageReference Include="Evergine.Bullet" Version="2025.10.21.3204" />
+    <PackageReference Include="Evergine.Targets" Version="2025.10.21.3204" />
+    <PackageReference Include="Evergine.CodeScenes" Version="2025.10.21.3204" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Evergine.Bindings.Imgui\Evergine.Bindings.Imgui.csproj" />
+  </ItemGroup>
 </Project>

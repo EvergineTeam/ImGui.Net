@@ -34,11 +34,13 @@ namespace Common
 
             var locations = typesJson["locations"];
             var customDefinedTypes = new[] { "ImGuiStoragePair" };
+            var internalEnumAllowList = new HashSet<string> { "ImDrawTextFlags_" };
 
             // Enums
             spec.Enums = typesJson["enums"].Select(t =>
             {
-                if (locations?[((JProperty)t).Name]?.Value<string>().Contains("internal") ?? false)
+                var name = ((JProperty)t).Name;
+                if (!internalEnumAllowList.Contains(name) && (locations?[name]?.Value<string>().Contains("internal") ?? false))
                     return null;
 
                 return EnumDefinition.FromJson((JProperty)t);

@@ -33,6 +33,10 @@ Check at `Generator\Test` an Evergine project created with the default template 
 ![capture1](https://user-images.githubusercontent.com/1783366/177344719-8b570a1a-efea-43c6-ae5f-1143bd0643b6.png)
 ![capture3](https://user-images.githubusercontent.com/1783366/177344724-b2018558-9bc1-44dc-a694-26210924a07e.png)
 
+## Requirements
+
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
+
 ## Development
 
 - Optionally, update all submodules.

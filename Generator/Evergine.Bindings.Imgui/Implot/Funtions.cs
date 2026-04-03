@@ -18,10 +18,10 @@ namespace Evergine.Bindings.Implot
 		public static extern double ImPlotRange_Size(ImPlotRange* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImPlotPoint_c ImPlotRect_Clamp_PlotPoint(ImPlotRect* self, ImPlotPoint p);
+		public static extern ImPlotPoint ImPlotRect_Clamp_PlotPoint(ImPlotRect* self, ImPlotPoint p);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImPlotPoint_c ImPlotRect_Clamp_double(ImPlotRect* self, double x, double y);
+		public static extern ImPlotPoint ImPlotRect_Clamp_double(ImPlotRect* self, double x, double y);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.I1)]
@@ -32,13 +32,13 @@ namespace Evergine.Bindings.Implot
 		public static extern bool ImPlotRect_Contains_double(ImPlotRect* self, double x, double y);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImPlotPoint_c ImPlotRect_Max(ImPlotRect* self);
+		public static extern ImPlotPoint ImPlotRect_Max(ImPlotRect* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImPlotPoint_c ImPlotRect_Min(ImPlotRect* self);
+		public static extern ImPlotPoint ImPlotRect_Min(ImPlotRect* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImPlotPoint_c ImPlotRect_Size(ImPlotRect* self);
+		public static extern ImPlotPoint ImPlotRect_Size(ImPlotRect* self);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlotSpec_SetProp_Float(ImPlotSpec* self, ImPlotProp prop, float v);
@@ -186,7 +186,7 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_EndSubplots();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImVec4_c ImPlot_GetColormapColor(int idx, ImPlotColormap cmap);
+		public static extern Vector4 ImPlot_GetColormapColor(int idx, ImPlotColormap cmap);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int ImPlot_GetColormapCount();
@@ -208,7 +208,7 @@ namespace Evergine.Bindings.Implot
 		public static extern ImPlotInputMap* ImPlot_GetInputMap();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImVec4_c ImPlot_GetLastItemColor();
+		public static extern Vector4 ImPlot_GetLastItemColor();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.LPUTF8Str)]
@@ -218,19 +218,19 @@ namespace Evergine.Bindings.Implot
 		public static extern ImDrawList* ImPlot_GetPlotDrawList();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImPlotRect_c ImPlot_GetPlotLimits(ImAxis x_axis, ImAxis y_axis);
+		public static extern ImPlotRect ImPlot_GetPlotLimits(ImAxis x_axis, ImAxis y_axis);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImPlotPoint_c ImPlot_GetPlotMousePos(ImAxis x_axis, ImAxis y_axis);
+		public static extern ImPlotPoint ImPlot_GetPlotMousePos(ImAxis x_axis, ImAxis y_axis);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImVec2_c ImPlot_GetPlotPos();
+		public static extern Vector2 ImPlot_GetPlotPos();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImPlotRect_c ImPlot_GetPlotSelection(ImAxis x_axis, ImAxis y_axis);
+		public static extern ImPlotRect ImPlot_GetPlotSelection(ImAxis x_axis, ImAxis y_axis);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImVec2_c ImPlot_GetPlotSize();
+		public static extern Vector2 ImPlot_GetPlotSize();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern ImPlotStyle* ImPlot_GetStyle();
@@ -275,16 +275,16 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_MapInputReverse(ImPlotInputMap* dst);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImVec4_c ImPlot_NextColormapColor();
+		public static extern Vector4 ImPlot_NextColormapColor();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern ImPlotMarker ImPlot_NextMarker();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImPlotPoint_c ImPlot_PixelsToPlot_Vec2(Vector2 pix, ImAxis x_axis, ImAxis y_axis);
+		public static extern ImPlotPoint ImPlot_PixelsToPlot_Vec2(Vector2 pix, ImAxis x_axis, ImAxis y_axis);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImPlotPoint_c ImPlot_PixelsToPlot_Float(float x, float y, ImAxis x_axis, ImAxis y_axis);
+		public static extern ImPlotPoint ImPlot_PixelsToPlot_Float(float x, float y, ImAxis x_axis, ImAxis y_axis);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_PlotBarGroups_FloatPtr([MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(Utf8StringArrayMarshaler))] string[] label_ids, float* values, int item_count, int group_count, double group_size, double shift, ImPlotSpec spec);
@@ -380,7 +380,7 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_PlotBarsG([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, ImPlotPoint* getter, void* data, int count, double bar_size, ImPlotSpec spec);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotBarsG_LJ([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, ImPlotPoint_getter getter, void* data, int count, double bar_size, ImPlotSpec spec);
+		public static extern void ImPlot_PlotBarsG_LJ([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, IntPtr getter, void* data, int count, double bar_size, ImPlotSpec spec);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_PlotBubbles_FloatPtrFloatPtrInt([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, float* values, float* szs, int count, double xscale, double xstart, ImPlotSpec spec);
@@ -476,7 +476,7 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_PlotDigitalG([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, ImPlotPoint* getter, void* data, int count, ImPlotSpec spec);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotDigitalG_LJ([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, ImPlotPoint_getter getter, void* data, int count, ImPlotSpec spec);
+		public static extern void ImPlot_PlotDigitalG_LJ([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, IntPtr getter, void* data, int count, ImPlotSpec spec);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_PlotDummy([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, ImPlotSpec spec);
@@ -728,7 +728,7 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_PlotLineG([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, ImPlotPoint* getter, void* data, int count, ImPlotSpec spec);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotLineG_LJ([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, ImPlotPoint_getter getter, void* data, int count, ImPlotSpec spec);
+		public static extern void ImPlot_PlotLineG_LJ([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, IntPtr getter, void* data, int count, ImPlotSpec spec);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_PlotPieChart_FloatPtrPlotFormatter([MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(Utf8StringArrayMarshaler))] string[] label_ids, float* values, int count, double x, double y, double radius, void* fmt, void* fmt_data, double angle0, ImPlotSpec spec);
@@ -854,7 +854,7 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_PlotScatterG([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, ImPlotPoint* getter, void* data, int count, ImPlotSpec spec);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotScatterG_LJ([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, ImPlotPoint_getter getter, void* data, int count, ImPlotSpec spec);
+		public static extern void ImPlot_PlotScatterG_LJ([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, IntPtr getter, void* data, int count, ImPlotSpec spec);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_PlotShaded_FloatPtrInt([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, float* values, int count, double yref, double xscale, double xstart, ImPlotSpec spec);
@@ -950,7 +950,7 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_PlotShadedG([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, ImPlotPoint* getter1, void* data1, ImPlotPoint* getter2, void* data2, int count, ImPlotSpec spec);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotShadedG_LJ([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, ImPlotPoint_getter getter1, void* data1, ImPlotPoint_getter getter2, void* data2, int count, ImPlotSpec spec);
+		public static extern void ImPlot_PlotShadedG_LJ([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, IntPtr getter1, void* data1, IntPtr getter2, void* data2, int count, ImPlotSpec spec);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_PlotStairs_FloatPtrInt([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, float* values, int count, double xscale, double xstart, ImPlotSpec spec);
@@ -1016,7 +1016,7 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_PlotStairsG([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, ImPlotPoint* getter, void* data, int count, ImPlotSpec spec);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotStairsG_LJ([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, ImPlotPoint_getter getter, void* data, int count, ImPlotSpec spec);
+		public static extern void ImPlot_PlotStairsG_LJ([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, IntPtr getter, void* data, int count, ImPlotSpec spec);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_PlotStems_FloatPtrInt([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, float* values, int count, double @ref, double scale, double start, ImPlotSpec spec);
@@ -1082,10 +1082,10 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_PlotText([MarshalAs(UnmanagedType.LPUTF8Str)] string text, double x, double y, Vector2 pix_offset, ImPlotSpec spec);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImVec2_c ImPlot_PlotToPixels_PlotPoint(ImPlotPoint plt, ImAxis x_axis, ImAxis y_axis);
+		public static extern Vector2 ImPlot_PlotToPixels_PlotPoint(ImPlotPoint plt, ImAxis x_axis, ImAxis y_axis);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImVec2_c ImPlot_PlotToPixels_double(double x, double y, ImAxis x_axis, ImAxis y_axis);
+		public static extern Vector2 ImPlot_PlotToPixels_double(double x, double y, ImAxis x_axis, ImAxis y_axis);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_PopColormap(int count);
@@ -1124,7 +1124,7 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_PushStyleVar_Vec2(ImPlotStyleVar idx, Vector2 val);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern ImVec4_c ImPlot_SampleColormap(float t, ImPlotColormap cmap);
+		public static extern Vector4 ImPlot_SampleColormap(float t, ImPlotColormap cmap);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_SetAxes(ImAxis x_axis, ImAxis y_axis);

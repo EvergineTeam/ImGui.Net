@@ -10,7 +10,7 @@ namespace Evergine.Bindings.Imgui
 	{
 		public Vector4 Value;
 
-		public ImColor_c HSV(float h, float s, float v, float a = 1.0f)
+		public ImColor HSV(float h, float s, float v, float a = 1.0f)
 		{
 			return ImguiNative.ImColor_HSV(h, s, v, a);
 		}
@@ -69,7 +69,7 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 DisplaySize;
 		public Vector2 FramebufferScale;
 		public ImGuiViewport* OwnerViewport;
-		public ImVector_ImTextureDataPtr* Textures;
+		public ImVector* Textures;
 
 		public void AddDrawList(ImDrawList* draw_list)
 		{
@@ -109,7 +109,7 @@ namespace Evergine.Bindings.Imgui
 		public ImDrawCmdHeader _CmdHeader;
 		public ImDrawListSplitter _Splitter;
 		public ImVector _ClipRectStack;
-		public ImVector_ImTextureRef _TextureStack;
+		public ImVector _TextureStack;
 		public ImVector _CallbacksDataBuf;
 		public float _FringeScale;
 		public byte* _OwnerName;
@@ -264,12 +264,12 @@ namespace Evergine.Bindings.Imgui
 			return ImguiNative.ImDrawList_CloneOutput(self);
 		}
 
-		public ImVec2_c GetClipRectMax()
+		public Vector2 GetClipRectMax()
 		{
 			return ImguiNative.ImDrawList_GetClipRectMax(self);
 		}
 
-		public ImVec2_c GetClipRectMin()
+		public Vector2 GetClipRectMin()
 		{
 			return ImguiNative.ImDrawList_GetClipRectMin(self);
 		}
@@ -513,7 +513,7 @@ namespace Evergine.Bindings.Imgui
 		public float CurrentRasterizerDensity;
 		public uint FontId;
 		public float LegacySize;
-		public ImVector_ImFontConfigPtr Sources;
+		public ImVector Sources;
 		public ushort EllipsisChar;
 		public ushort FallbackChar;
 		public fixed byte Used8kPagesMap[1];
@@ -525,7 +525,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImFont_AddRemapChar(self, from_codepoint, to_codepoint);
 		}
 
-		public ImVec2_c CalcTextSizeA(float size, float max_width, float wrap_width, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_begin, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_end = null, char** out_remaining = null)
+		public Vector2 CalcTextSizeA(float size, float max_width, float wrap_width, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_begin, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_end = null, char** out_remaining = null)
 		{
 			return ImguiNative.ImFont_CalcTextSizeA(self, size, max_width, wrap_width, text_begin, text_end, out_remaining);
 		}
@@ -591,7 +591,7 @@ namespace Evergine.Bindings.Imgui
 		public void* UserData;
 		public ImTextureRef TexRef;
 		public ImTextureData* TexData;
-		public ImVector_ImTextureDataPtr TexList;
+		public ImVector TexList;
 		public byte Locked;
 		public byte RendererHasTextures;
 		public byte TexIsBuilt;
@@ -635,16 +635,16 @@ namespace Evergine.Bindings.Imgui
 		public Vector4 TexUvLines_32;
 		public int TexNextUniqueID;
 		public int FontNextUniqueID;
-		public ImVector_ImDrawListSharedDataPtr DrawListSharedDatas;
-		public ImFontAtlasBuilder* Builder;
-		public ImFontLoader* FontLoader;
+		public ImVector DrawListSharedDatas;
+		public IntPtr Builder;
+		public IntPtr FontLoader;
 		public byte* FontLoaderName;
 		public void* FontLoaderData;
 		public uint FontLoaderFlags;
 		public int RefCount;
 		public IntPtr OwnerContext;
 
-		public ImFontAtlasRectId AddCustomRect(int width, int height, ImFontAtlasRect* out_r = null)
+		public int AddCustomRect(int width, int height, ImFontAtlasRect* out_r = null)
 		{
 			return ImguiNative.ImFontAtlas_AddCustomRect(self, width, height, out_r);
 		}
@@ -714,7 +714,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImFontAtlas_CompactCache(self);
 		}
 
-		public bool GetCustomRect(ImFontAtlasRectId id, ImFontAtlasRect* out_r)
+		public bool GetCustomRect(int id, ImFontAtlasRect* out_r)
 		{
 			return ImguiNative.ImFontAtlas_GetCustomRect(self, id, out_r);
 		}
@@ -724,7 +724,7 @@ namespace Evergine.Bindings.Imgui
 			return ImguiNative.ImFontAtlas_GetGlyphRangesDefault(self);
 		}
 
-		public void RemoveCustomRect(ImFontAtlasRectId id)
+		public void RemoveCustomRect(int id)
 		{
 			ImguiNative.ImFontAtlas_RemoveCustomRect(self, id);
 		}
@@ -734,7 +734,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImFontAtlas_RemoveFont(self, font);
 		}
 
-		public void SetFontLoader(ImFontLoader* font_loader)
+		public void SetFontLoader(IntPtr font_loader)
 		{
 			ImguiNative.ImFontAtlas_SetFontLoader(self, font_loader);
 		}
@@ -827,7 +827,7 @@ namespace Evergine.Bindings.Imgui
 		public float ExtraSizeScale;
 		public ImFontFlags Flags;
 		public ImFont* DstFont;
-		public ImFontLoader* FontLoader;
+		public IntPtr FontLoader;
 		public void* FontLoaderData;
 	}
 
@@ -1448,7 +1448,7 @@ namespace Evergine.Bindings.Imgui
 		public IntPtr Renderer_RenderWindow;
 		public IntPtr Renderer_SwapBuffers;
 		public ImVector Monitors;
-		public ImVector_ImTextureDataPtr Textures;
+		public ImVector Textures;
 		public ImVector Viewports;
 
 		public void ClearPlatformHandlers()
@@ -1942,12 +1942,12 @@ namespace Evergine.Bindings.Imgui
 		public byte PlatformRequestResize;
 		public byte PlatformRequestClose;
 
-		public ImVec2_c GetCenter()
+		public Vector2 GetCenter()
 		{
 			return ImguiNative.ImGuiViewport_GetCenter(self);
 		}
 
-		public ImVec2_c GetWorkCenter()
+		public Vector2 GetWorkCenter()
 		{
 			return ImguiNative.ImGuiViewport_GetWorkCenter(self);
 		}
@@ -1982,7 +1982,7 @@ namespace Evergine.Bindings.Imgui
 		public byte* Pixels;
 		public ImTextureRect UsedRect;
 		public ImTextureRect UpdateRect;
-		public ImVector_ImTextureRect Updates;
+		public ImVector Updates;
 		public int UnusedFrames;
 		public ushort RefCount;
 		public byte UseColors;
@@ -2023,7 +2023,7 @@ namespace Evergine.Bindings.Imgui
 			return ImguiNative.ImTextureData_GetTexID(self);
 		}
 
-		public ImTextureRef_c GetTexRef()
+		public ImTextureRef GetTexRef()
 		{
 			return ImguiNative.ImTextureData_GetTexRef(self);
 		}

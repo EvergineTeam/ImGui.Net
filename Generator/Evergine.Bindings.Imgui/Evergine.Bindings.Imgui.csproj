@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFramework>net10.0</TargetFramework>
 		<Copyright>Copyright (c) Evergine 2025</Copyright>
 		<Authors>Evergine Team</Authors>
 		<Company>Plain Concepts</Company>
@@ -14,7 +14,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Evergine.Mathematics" Version="2025.3.18.7" />
+		<PackageReference Include="Evergine.Mathematics" Version="2025.10.21.3204" />
 		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
 	</ItemGroup>
 

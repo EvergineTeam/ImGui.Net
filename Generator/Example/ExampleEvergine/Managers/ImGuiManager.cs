@@ -250,12 +250,12 @@ namespace ExampleEvergine.Managers
             this.constantBuffer = this.graphicsContext.Factory.CreateBuffer(ref constantBufferDescription);
 
             // Create Font Texture
-            int width;
-            int height;
-            int bytesPerPixel;
-            byte* pixels = null;
-            this.io->Fonts->GetTexDataAsRGBA32(&pixels, &width, &height, &bytesPerPixel);
-            this.io->Fonts->SetTexID(this.fontAtlasID);
+            var texData = this.io->Fonts->TexData;
+            var pixels = (byte*)texData->GetPixels();
+            var width = texData->Width;
+            var height = texData->Height;
+            var bytesPerPixel = texData->BytesPerPixel;
+            texData->SetTexID(this.fontAtlasID);
 
             var fontTextureDescription = new TextureDescription()
             {
@@ -624,15 +624,16 @@ namespace ExampleEvergine.Managers
                 {
                     ImDrawCmd* cmd = (ImDrawCmd*)((long)cmdListPtr->CmdBuffer.Data + i * (sizeof(ImDrawCmd)));
 
-                    if (cmd->TextureId != 0)
+                    ulong texId = cmd->GetTexID();
+                    if (texId != 0)
                     {
-                        if (cmd->TextureId == this.fontAtlasID)
+                        if (texId == this.fontAtlasID)
                         {
                             commandBuffer.SetResourceSet(this.resourceSet);
                         }
                         else
                         {
-                            commandBuffer.SetResourceSet(this.GetImageResourceSet(cmd->TextureId), 1);
+                            commandBuffer.SetResourceSet(this.GetImageResourceSet(texId), 1);
                         }
                     }
 
