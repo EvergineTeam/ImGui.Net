@@ -34,18 +34,15 @@ namespace ExampleEvergine.Managers
         private Buffer[] vertexBuffers;
         private Buffer indexBuffer;
         private Buffer constantBuffer;
-        private Texture fontTexture;
         private SamplerState sampler;
         private GraphicsPipelineState pipelineState;
         private ResourceLayout layout;
-        private ResourceSet resourceSet;
         private ImGuiIO* io;
 
         private int windowWidth;
         private int windowHeight;
         private Vector2 scaleFactor;
 
-        private UInt64 fontAtlasID;
         private Surface surface;
         private FrameBuffer framebuffer;
 
@@ -72,6 +69,7 @@ namespace ExampleEvergine.Managers
 
         private readonly Dictionary<Texture, ResourceSetInfo> resourceByTexture = new Dictionary<Texture, ResourceSetInfo>();
         private readonly Dictionary<UInt64, ResourceSetInfo> resourceById = new Dictionary<UInt64, ResourceSetInfo>();
+        private readonly Dictionary<IntPtr, Texture> texDataGpuTextures = new Dictionary<IntPtr, Texture>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ImGuiManager"/> class.
@@ -79,7 +77,6 @@ namespace ExampleEvergine.Managers
         public ImGuiManager()
         {
             this.scaleFactor = Vector2.One;
-            this.fontAtlasID = 1;
         }
 
         private void Display_DisplayFrameBufferChanged(object sender, EventArgs e)
@@ -125,6 +122,7 @@ namespace ExampleEvergine.Managers
                 this.mvp.M22 *= -1;
             }
 
+            this.UpdateTextures();
             ImguiNative.igNewFrame();
             ImguizmoNative.ImGuizmo_BeginFrame();
         }
@@ -161,6 +159,7 @@ namespace ExampleEvergine.Managers
 
             this.io = ImguiNative.igGetIO_Nil();
             this.io->Fonts->AddFontDefault(null);
+            this.io->BackendFlags |= ImGuiBackendFlags.RendererHasTextures;
             this.io->ConfigErrorRecoveryEnableAssert = 0;
             this.io->ConfigErrorRecoveryEnableTooltip = 0;
 
@@ -249,33 +248,6 @@ namespace ExampleEvergine.Managers
             var constantBufferDescription = new BufferDescription((uint)Unsafe.SizeOf<Matrix4x4>(), BufferFlags.ConstantBuffer, ResourceUsage.Default);
             this.constantBuffer = this.graphicsContext.Factory.CreateBuffer(ref constantBufferDescription);
 
-            // Create Font Texture
-            var texData = this.io->Fonts->TexData;
-            var pixels = (byte*)texData->GetPixels();
-            var width = texData->Width;
-            var height = texData->Height;
-            var bytesPerPixel = texData->BytesPerPixel;
-            texData->SetTexID(this.fontAtlasID);
-
-            var fontTextureDescription = new TextureDescription()
-            {
-                Type = TextureType.Texture2D,
-                Width = (uint)width,
-                Height = (uint)height,
-                Format = PixelFormat.R8G8B8A8_UNorm,
-                Usage = ResourceUsage.Default,
-                Depth = 1,
-                Faces = 1,
-                ArraySize = 1,
-                MipLevels = 1,
-                SampleCount = TextureSampleCount.None,
-                CpuAccess = ResourceCpuAccess.Write,
-                Flags = TextureFlags.ShaderResource,
-            };
-
-            this.fontTexture = this.graphicsContext.Factory.CreateTexture(ref fontTextureDescription);
-            this.graphicsContext.UpdateTextureData(this.fontTexture, (IntPtr)pixels, (uint)(bytesPerPixel * width * height), 0);
-
             SamplerStateDescription samplerDescription = new SamplerStateDescription()
             {
                 Filter = TextureFilter.MinLinear_MagLinear_MipLinear,
@@ -290,11 +262,6 @@ namespace ExampleEvergine.Managers
             };
 
             this.sampler = this.graphicsContext.Factory.CreateSamplerState(ref samplerDescription);
-
-            var resourceSetDescription = new ResourceSetDescription(this.layout, this.constantBuffer, this.fontTexture, this.sampler);
-            this.resourceSet = this.graphicsContext.Factory.CreateResourceSet(ref resourceSetDescription);
-
-            this.io->Fonts->ClearTexData();
 
             // Register input events
             var mouseDispatcher = this.surface.MouseDispatcher;
@@ -470,6 +437,87 @@ namespace ExampleEvergine.Managers
             return byteCode;
         }
 
+        private void UpdateTextures()
+        {
+            var fonts = this.io->Fonts;
+            var texList = new ImVector<IntPtr>(fonts->TexList);
+
+            for (int i = 0; i < texList.Size; i++)
+            {
+                ImTextureData* texData = (ImTextureData*)texList[i];
+
+                if (texData->Status == ImTextureStatus.WantCreate)
+                {
+                    var pixels = (byte*)texData->GetPixels();
+                    var width = texData->Width;
+                    var height = texData->Height;
+                    var bytesPerPixel = texData->BytesPerPixel;
+
+                    var textureDescription = new TextureDescription()
+                    {
+                        Type = TextureType.Texture2D,
+                        Width = (uint)width,
+                        Height = (uint)height,
+                        Format = PixelFormat.R8G8B8A8_UNorm,
+                        Usage = ResourceUsage.Default,
+                        Depth = 1,
+                        Faces = 1,
+                        ArraySize = 1,
+                        MipLevels = 1,
+                        SampleCount = TextureSampleCount.None,
+                        CpuAccess = ResourceCpuAccess.Write,
+                        Flags = TextureFlags.ShaderResource,
+                    };
+
+                    var gpuTexture = this.graphicsContext.Factory.CreateTexture(ref textureDescription);
+                    this.graphicsContext.UpdateTextureData(gpuTexture, (IntPtr)pixels, (uint)(bytesPerPixel * width * height), 0);
+
+                    var resourceSetDesc = new ResourceSetDescription(this.layout, this.constantBuffer, gpuTexture, this.sampler);
+                    var newResourceSet = this.graphicsContext.Factory.CreateResourceSet(ref resourceSetDesc);
+
+                    UInt64 texId = this.GetNextImGuiBindingID();
+                    texData->SetTexID(texId);
+
+                    var info = new ResourceSetInfo(texId, newResourceSet);
+                    this.resourceById.Add(texId, info);
+                    this.texDataGpuTextures.Add((IntPtr)texData, gpuTexture);
+
+                    texData->SetStatus(ImTextureStatus.OK);
+                }
+                else if (texData->Status == ImTextureStatus.WantUpdates)
+                {
+                    var key = (IntPtr)texData;
+                    if (this.texDataGpuTextures.TryGetValue(key, out var gpuTexture))
+                    {
+                        var pixels = (byte*)texData->GetPixels();
+                        var bytesPerPixel = texData->BytesPerPixel;
+                        this.graphicsContext.UpdateTextureData(gpuTexture, (IntPtr)pixels, (uint)(bytesPerPixel * texData->Width * texData->Height), 0);
+                    }
+
+                    texData->SetStatus(ImTextureStatus.OK);
+                }
+                else if (texData->Status == ImTextureStatus.WantDestroy)
+                {
+                    var key = (IntPtr)texData;
+                    ulong texId = texData->GetTexID();
+
+                    if (this.resourceById.TryGetValue(texId, out var info))
+                    {
+                        info.ResourceSet.Dispose();
+                        this.resourceById.Remove(texId);
+                    }
+
+                    if (this.texDataGpuTextures.TryGetValue(key, out var gpuTexture))
+                    {
+                        gpuTexture.Dispose();
+                        this.texDataGpuTextures.Remove(key);
+                    }
+
+                    texData->SetStatus(ImTextureStatus.Destroyed);
+                }
+            }
+        }
+
         /// <summary>
         /// Gets or Creates a new ImGui texture binding.
         /// </summary>
@@ -627,13 +675,10 @@ namespace ExampleEvergine.Managers
                     ulong texId = cmd->GetTexID();
                     if (texId != 0)
                     {
-                        if (texId == this.fontAtlasID)
+                        var rs = this.GetImageResourceSet(texId);
+                        if (rs != null)
                         {
-                            commandBuffer.SetResourceSet(this.resourceSet);
-                        }
-                        else
-                        {
-                            commandBuffer.SetResourceSet(this.GetImageResourceSet(texId), 1);
+                            commandBuffer.SetResourceSet(rs);
                         }
                     }
 
@@ -692,13 +737,19 @@ namespace ExampleEvergine.Managers
             this.resourceByTexture.Clear();
             this.resourceById.Clear();
 
+            foreach (var kvp in this.texDataGpuTextures)
+            {
+                kvp.Value.Dispose();
+            }
+
+            this.texDataGpuTextures.Clear();
+
             ImguiNative.igDestroyContext(IntPtr.Zero);
             this.vertexBuffers[0].Dispose();
             this.vertexBuffers = null;
             this.indexBuffer.Dispose();
             this.constantBuffer.Dispose();
             this.layout.Dispose();
-            this.resourceSet.Dispose();
         }
     }
 }

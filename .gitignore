@@ -5,3 +5,4 @@ Generator/NativeLibraries/build
 *.nupkg
 tmp/
 .claude
+.vscode
