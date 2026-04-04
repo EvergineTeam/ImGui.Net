@@ -22,4 +22,9 @@ jobs:
         dotnet-version: 10.x
 
     - name: Build
-      run: dotnet build Generator/Generator.sln
+      run: |
+        dotnet build Generator/ImguiGen/ImguiGen.csproj
+        dotnet build Generator/ImguizmoGen/ImguizmoGen.csproj
+        dotnet build Generator/ImnodesGen/ImnodesGen.csproj
+        dotnet build Generator/ImplotGen/ImplotGen.csproj
+        dotnet build Generator/Evergine.Bindings.Imgui/Evergine.Bindings.Imgui.csproj
