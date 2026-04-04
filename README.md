@@ -5,6 +5,7 @@ You will find c# bindings of the most popular imgui libraries as well, Imguizmo,
 
 ## Build Status
 [![CI](https://github.com/EvergineTeam/ImGui.Net/actions/workflows/ci.yml/badge.svg)](https://github.com/EvergineTeam/ImGui.Net/actions/workflows/ci.yml)
+[![CD](https://github.com/EvergineTeam/ImGui.Net/actions/workflows/cd.yml/badge.svg)](https://github.com/EvergineTeam/ImGui.Net/actions/workflows/cd.yml)
 [![Nuget](https://img.shields.io/nuget/v/Evergine.Bindings.Imgui?logo=nuget)](https://www.nuget.org/packages/Evergine.Bindings.Imgui)
 
 ## How it works
