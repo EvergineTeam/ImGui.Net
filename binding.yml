@@ -1,0 +1,104 @@
+# Binding manifest — see https://github.com/EvergineTeam/Evergine.Bindings
+# Schema: https://github.com/EvergineTeam/Evergine.Bindings/blob/main/binding.schema.json
+toolbox: 1.14.0
+
+package:
+  id: Evergine.Bindings.Imgui
+  project: Generator/Evergine.Bindings.Imgui/Evergine.Bindings.Imgui.csproj
+  target-framework: net10.0
+  runtime-identifier: win-x64
+
+upstream:
+  kind: git-submodule
+  language: cpp
+  project: https://github.com/cimgui/cimgui
+  version-from: submodule-sha
+
+  # The four move as one set. They compile into a single native library, they share
+  # ImGui's C++ headers, and the cimgui organisation releases them together -- three of
+  # the four pointers below were recorded from commits made on the same day with the
+  # same message. A partial bump is a combination upstream has never built.
+  bump: together
+
+  # `exports` copies each project's generated definitions out of its submodule after
+  # the bump. Those JSON files are what the four C# generators read, and the same
+  # revision is what gets compiled into cimgui.dll, so taking them from the submodule
+  # is what makes it impossible for the two to disagree.
+  #
+  # Until this existed, refreshing them was step 1.4 of a manual procedure written down
+  # in pipelines.md, and nothing failed when it was skipped.
+  sources:
+    - repo: cimgui/cimgui
+      path: NativeLibraries/cimgui
+      format: c-header
+      exports:
+        - from: generator/output/definitions.json
+          to: Generator/ImguiGen/Jsons/definitions.json
+        - from: generator/output/impl_definitions.json
+          to: Generator/ImguiGen/Jsons/impl_definitions.json
+        - from: generator/output/structs_and_enums.json
+          to: Generator/ImguiGen/Jsons/structs_and_enums.json
+        - from: generator/output/typedefs_dict.json
+          to: Generator/ImguiGen/Jsons/typedefs_dict.json
+
+    - repo: cimgui/cimguizmo
+      path: NativeLibraries/cimguizmo
+      format: c-header
+      exports:
+        - from: generator/output/definitions.json
+          to: Generator/ImguizmoGen/Jsons/definitions.json
+        - from: generator/output/structs_and_enums.json
+          to: Generator/ImguizmoGen/Jsons/structs_and_enums.json
+
+    - repo: cimgui/cimnodes
+      path: NativeLibraries/cimnodes
+      format: c-header
+      exports:
+        - from: generator/output/definitions.json
+          to: Generator/ImnodesGen/Jsons/definitions.json
+        - from: generator/output/structs_and_enums.json
+          to: Generator/ImnodesGen/Jsons/structs_and_enums.json
+        - from: generator/output/typedefs_dict.json
+          to: Generator/ImnodesGen/Jsons/typedefs_dict.json
+
+    - repo: cimgui/cimplot
+      path: NativeLibraries/cimplot
+      format: c-header
+      exports:
+        - from: generator/output/definitions.json
+          to: Generator/ImplotGen/Jsons/definitions.json
+        - from: generator/output/structs_and_enums.json
+          to: Generator/ImplotGen/Jsons/structs_and_enums.json
+        - from: generator/output/typedefs_dict.json
+          to: Generator/ImplotGen/Jsons/typedefs_dict.json
+
+generator:
+  project: Generator/ImguiGen/ImguiGen.csproj
+  name: Imgui
+  # Four generators, one per upstream project, all writing into the same binding
+  # project. `build/scripts/Generate-All-Bindings.ps1` runs them in order; the entry
+  # above names only the first because the manifest schema describes a single
+  # generator, which is what every other binding in the fleet has.
+  output:
+    - Generator/Evergine.Bindings.Imgui/Imgui
+    - Generator/Evergine.Bindings.Imgui/Imguizmo
+    - Generator/Evergine.Bindings.Imgui/Imnodes
+    - Generator/Evergine.Bindings.Imgui/Implot
+
+# NOTE — this package ships native binaries for seven platforms under
+# Generator/Evergine.Bindings.Imgui/runtimes, all built from the four submodules by
+# NativeLibraries/build.py.
+#
+# Three things about this repository are not obvious and have bitten before:
+#
+# 1. The generators are Windows-only by construction. Their output paths use backslash
+#    separators, and ImguiGen writes to "Evergine.Bindings.ImGui" while the directory
+#    is "Evergine.Bindings.Imgui" -- which only resolves because Windows is
+#    case-insensitive. Keep CI and CD on windows-latest.
+#
+# 2. The wasm target must be built with the Emscripten the .NET SDK links with,
+#    currently 3.1.56 (LLVM 19). Do not raise it past what dotnet/emsdk pins.
+#
+# 3. The exported definitions above and the native binaries must come from the same
+#    revision. check-exports-fresh.py enforces it, and the CD refuses to publish if it
+#    fails.

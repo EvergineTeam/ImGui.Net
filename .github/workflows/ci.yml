@@ -1,3 +1,8 @@
+# Windows on purpose. The four generators resolve their output with backslash
+# separators, and ImguiGen writes to "Evergine.Bindings.ImGui" while the directory is
+# "Evergine.Bindings.Imgui" -- which only lands in the right place because Windows is
+# case-insensitive. A CI on another platform would validate a build nobody ships.
+
 name: CI
 
 on:
@@ -8,7 +13,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  ci:
+  build:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v5
@@ -28,3 +33,13 @@ jobs:
         dotnet build Generator/ImnodesGen/ImnodesGen.csproj
         dotnet build Generator/ImplotGen/ImplotGen.csproj
         dotnet build Generator/Evergine.Bindings.Imgui/Evergine.Bindings.Imgui.csproj
+
+  # The definitions the four generators read are copies of files produced inside the
+  # submodules, and the native library is compiled from those same submodules. If the
+  # copies fall behind, the managed layer describes one revision while the binary is
+  # another -- and both halves still build, which is why this needs checking rather
+  # than assuming. Refreshing them used to be a manual step nobody was reminded of.
+  definitions:
+    uses: EvergineTeam/Evergine.Bindings/.github/workflows/binding-native-coherence.yml@v1
+    with:
+      checkout-submodules: 'true'
