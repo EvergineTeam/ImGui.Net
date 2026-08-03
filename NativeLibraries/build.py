@@ -131,8 +131,20 @@ def build_wasm():
         emsdkPath = input("Please enter the path to your Emscripten SDK: ")
 
     emsdkToolchain = os.path.join(emsdkPath, "upstream", "emscripten", "cmake", "Modules", "Platform", "Emscripten.cmake")
-    emsdkNodePath = os.path.join(emsdkPath, "node")
-    emsdkNodePath = os.path.join(emsdkNodePath, os.listdir(emsdkPath)[0])
+
+    # The node directory holds one versioned folder whose name changes with the SDK,
+    # so it has to be discovered rather than written down. This used to list the emsdk
+    # *root* and join the result onto emsdk/node, producing paths like
+    # <emsdk>/node/.circleci -- and since os.listdir has no defined order, a different
+    # wrong path each time. Only harmless because building a static archive never
+    # invokes the emulator; bumping the SDK is exactly when that stops being true.
+    nodeRoot = os.path.join(emsdkPath, "node")
+    nodeDirs = sorted(d for d in os.listdir(nodeRoot)
+                      if os.path.isdir(os.path.join(nodeRoot, d)))
+    if not nodeDirs:
+        raise RuntimeError(f"no node installation found under {nodeRoot}")
+    nodeExe = "node.exe" if inWindows() else "node"
+    emsdkNodePath = os.path.join(nodeRoot, nodeDirs[-1], "bin", nodeExe)
     useNinja = not inWindows() or shutil.which("ninja.exe") != None
     buildPath = build_path(target)
 
