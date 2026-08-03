@@ -32,6 +32,11 @@ on:
         required: false
         type: boolean
         default: false
+      publish-only:
+        description: 'Publish main exactly as it stands, without looking at upstream'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   # Reads binding.yml and reports how far each of the four submodules is behind.
@@ -42,7 +47,10 @@ jobs:
 
   natives:
     needs: resolve
-    if: needs.resolve.outputs.ref_moved == 'true' || inputs.force-natives
+    # publish-only ships what is already committed, and these libraries are committed,
+    # so rebuilding them would replace binaries somebody has run with binaries nobody
+    # has. That is the opposite of the point.
+    if: (needs.resolve.outputs.ref_moved == 'true' || inputs.force-natives) && !inputs.publish-only
     uses: ./.github/workflows/build-native-libs.yml
     with:
       # The revisions the cd job is about to commit, not the ones recorded now. Without
@@ -84,6 +92,7 @@ jobs:
       # fails the download and takes the publish with it.
       natives-artifact-pattern: ${{ needs.natives.result == 'success' && 'cimgui-*' || '' }}
       force-publish: ${{ inputs.force-publish || false }}
+      publish-only: ${{ inputs.publish-only || false }}
       publish-enabled: ${{ !inputs.skip-assets-publishing }}
       enable-email-notifications: true
     secrets:
