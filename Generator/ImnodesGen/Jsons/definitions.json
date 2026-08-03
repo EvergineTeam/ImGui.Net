@@ -11,7 +11,6 @@
       "defaults": {},
       "funcname": "EmulateThreeButtonMouse",
       "location": "imnodes:114",
-      "namespace": "ImNodesIO::EmulateThreeButtonMouse",
       "ov_cimguiname": "EmulateThreeButtonMouse_EmulateThreeButtonMouse",
       "signature": "()",
       "stname": "EmulateThreeButtonMouse"
@@ -49,7 +48,6 @@
       "defaults": {},
       "funcname": "ImNodesIO",
       "location": "imnodes:162",
-      "namespace": "ImNodesIO",
       "ov_cimguiname": "ImNodesIO_ImNodesIO",
       "signature": "()",
       "stname": "ImNodesIO"
@@ -87,7 +85,6 @@
       "defaults": {},
       "funcname": "ImNodesStyle",
       "location": "imnodes:208",
-      "namespace": "ImNodesStyle",
       "ov_cimguiname": "ImNodesStyle_ImNodesStyle",
       "signature": "()",
       "stname": "ImNodesStyle"
@@ -125,7 +122,6 @@
       "defaults": {},
       "funcname": "LinkDetachWithModifierClick",
       "location": "imnodes:126",
-      "namespace": "ImNodesIO::LinkDetachWithModifierClick",
       "ov_cimguiname": "LinkDetachWithModifierClick_LinkDetachWithModifierClick",
       "signature": "()",
       "stname": "LinkDetachWithModifierClick"
@@ -163,7 +159,6 @@
       "defaults": {},
       "funcname": "MultipleSelectModifier",
       "location": "imnodes:142",
-      "namespace": "ImNodesIO::MultipleSelectModifier",
       "ov_cimguiname": "MultipleSelectModifier_MultipleSelectModifier",
       "signature": "()",
       "stname": "MultipleSelectModifier"

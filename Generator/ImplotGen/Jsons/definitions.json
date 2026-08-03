@@ -15,7 +15,6 @@
       "defaults": {},
       "funcname": "Begin",
       "location": "implot_internal:958",
-      "namespace": "ImPlotAlignmentData",
       "ov_cimguiname": "ImPlotAlignmentData_Begin",
       "ret": "void",
       "signature": "()",
@@ -38,7 +37,6 @@
       "defaults": {},
       "funcname": "End",
       "location": "implot_internal:966",
-      "namespace": "ImPlotAlignmentData",
       "ov_cimguiname": "ImPlotAlignmentData_End",
       "ret": "void",
       "signature": "()",
@@ -57,7 +55,6 @@
       "defaults": {},
       "funcname": "ImPlotAlignmentData",
       "location": "implot_internal:954",
-      "namespace": "ImPlotAlignmentData",
       "ov_cimguiname": "ImPlotAlignmentData_ImPlotAlignmentData",
       "signature": "()",
       "stname": "ImPlotAlignmentData"
@@ -79,7 +76,6 @@
       "defaults": {},
       "funcname": "Reset",
       "location": "implot_internal:967",
-      "namespace": "ImPlotAlignmentData",
       "ov_cimguiname": "ImPlotAlignmentData_Reset",
       "ret": "void",
       "signature": "()",
@@ -122,7 +118,6 @@
       "defaults": {},
       "funcname": "Update",
       "location": "implot_internal:959",
-      "namespace": "ImPlotAlignmentData",
       "ov_cimguiname": "ImPlotAlignmentData_Update",
       "ret": "void",
       "signature": "(float*,float*,float*,float*)",
@@ -194,7 +189,6 @@
       "funcname": "Append",
       "isvararg": "...)",
       "location": "implot_internal:477",
-      "namespace": "ImPlotAnnotationCollection",
       "ov_cimguiname": "ImPlotAnnotationCollection_Append",
       "ret": "void",
       "signature": "(const ImVec2,const ImVec2,ImU32,ImU32,bool,const char*,...)",
@@ -245,7 +239,6 @@
       "defaults": {},
       "funcname": "AppendV",
       "location": "implot_internal:464",
-      "namespace": "ImPlotAnnotationCollection",
       "ov_cimguiname": "ImPlotAnnotationCollection_AppendV",
       "ret": "void",
       "signature": "(const ImVec2,const ImVec2,ImU32,ImU32,bool,const char*,va_list)",
@@ -272,7 +265,6 @@
       "defaults": {},
       "funcname": "GetText",
       "location": "implot_internal:484",
-      "namespace": "ImPlotAnnotationCollection",
       "ov_cimguiname": "ImPlotAnnotationCollection_GetText",
       "ret": "const char*",
       "signature": "(int)",
@@ -291,7 +283,6 @@
       "defaults": {},
       "funcname": "ImPlotAnnotationCollection",
       "location": "implot_internal:462",
-      "namespace": "ImPlotAnnotationCollection",
       "ov_cimguiname": "ImPlotAnnotationCollection_ImPlotAnnotationCollection",
       "signature": "()",
       "stname": "ImPlotAnnotationCollection"
@@ -313,7 +304,6 @@
       "defaults": {},
       "funcname": "Reset",
       "location": "implot_internal:488",
-      "namespace": "ImPlotAnnotationCollection",
       "ov_cimguiname": "ImPlotAnnotationCollection_Reset",
       "ret": "void",
       "signature": "()",
@@ -352,7 +342,6 @@
       "defaults": {},
       "funcname": "ImPlotAnnotation",
       "location": "implot_internal:448",
-      "namespace": "ImPlotAnnotation",
       "ov_cimguiname": "ImPlotAnnotation_ImPlotAnnotation",
       "signature": "()",
       "stname": "ImPlotAnnotation"
@@ -398,7 +387,6 @@
       "defaults": {},
       "funcname": "ApplyFit",
       "location": "implot_internal:886",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_ApplyFit",
       "ret": "void",
       "signature": "(float)",
@@ -421,7 +409,6 @@
       "defaults": {},
       "funcname": "CanInitFit",
       "location": "implot_internal:911",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_CanInitFit",
       "ret": "bool",
       "signature": "()const",
@@ -444,7 +431,6 @@
       "defaults": {},
       "funcname": "Constrain",
       "location": "implot_internal:816",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_Constrain",
       "ret": "void",
       "signature": "()",
@@ -471,7 +457,6 @@
       "defaults": {},
       "funcname": "ExtendFit",
       "location": "implot_internal:870",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_ExtendFit",
       "ret": "void",
       "signature": "(double)",
@@ -507,7 +492,6 @@
       "defaults": {},
       "funcname": "ExtendFitWith",
       "location": "implot_internal:877",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_ExtendFitWith",
       "ret": "void",
       "signature": "(ImPlotAxis*,double,double)",
@@ -530,7 +514,6 @@
       "defaults": {},
       "funcname": "GetAspect",
       "location": "implot_internal:814",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_GetAspect",
       "ret": "double",
       "signature": "()const",
@@ -553,7 +536,6 @@
       "defaults": {},
       "funcname": "HasGridLines",
       "location": "implot_internal:903",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_HasGridLines",
       "ret": "bool",
       "signature": "()const",
@@ -576,7 +558,6 @@
       "defaults": {},
       "funcname": "HasLabel",
       "location": "implot_internal:902",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_HasLabel",
       "ret": "bool",
       "signature": "()const",
@@ -599,7 +580,6 @@
       "defaults": {},
       "funcname": "HasMenus",
       "location": "implot_internal:919",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_HasMenus",
       "ret": "bool",
       "signature": "()const",
@@ -622,7 +602,6 @@
       "defaults": {},
       "funcname": "HasTickLabels",
       "location": "implot_internal:904",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_HasTickLabels",
       "ret": "bool",
       "signature": "()const",
@@ -645,7 +624,6 @@
       "defaults": {},
       "funcname": "HasTickMarks",
       "location": "implot_internal:905",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_HasTickMarks",
       "ret": "bool",
       "signature": "()const",
@@ -664,7 +642,6 @@
       "defaults": {},
       "funcname": "ImPlotAxis",
       "location": "implot_internal:701",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_ImPlotAxis",
       "signature": "()",
       "stname": "ImPlotAxis"
@@ -686,7 +663,6 @@
       "defaults": {},
       "funcname": "IsAutoFitting",
       "location": "implot_internal:910",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_IsAutoFitting",
       "ret": "bool",
       "signature": "()const",
@@ -709,7 +685,6 @@
       "defaults": {},
       "funcname": "IsForeground",
       "location": "implot_internal:909",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_IsForeground",
       "ret": "bool",
       "signature": "()const",
@@ -732,7 +707,6 @@
       "defaults": {},
       "funcname": "IsInputLocked",
       "location": "implot_internal:918",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_IsInputLocked",
       "ret": "bool",
       "signature": "()const",
@@ -755,7 +729,6 @@
       "defaults": {},
       "funcname": "IsInputLockedMax",
       "location": "implot_internal:917",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_IsInputLockedMax",
       "ret": "bool",
       "signature": "()const",
@@ -778,7 +751,6 @@
       "defaults": {},
       "funcname": "IsInputLockedMin",
       "location": "implot_internal:916",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_IsInputLockedMin",
       "ret": "bool",
       "signature": "()const",
@@ -801,7 +773,6 @@
       "defaults": {},
       "funcname": "IsInverted",
       "location": "implot_internal:908",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_IsInverted",
       "ret": "bool",
       "signature": "()const",
@@ -824,7 +795,6 @@
       "defaults": {},
       "funcname": "IsLocked",
       "location": "implot_internal:915",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_IsLocked",
       "ret": "bool",
       "signature": "()const",
@@ -847,7 +817,6 @@
       "defaults": {},
       "funcname": "IsLockedMax",
       "location": "implot_internal:914",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_IsLockedMax",
       "ret": "bool",
       "signature": "()const",
@@ -870,7 +839,6 @@
       "defaults": {},
       "funcname": "IsLockedMin",
       "location": "implot_internal:913",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_IsLockedMin",
       "ret": "bool",
       "signature": "()const",
@@ -893,7 +861,6 @@
       "defaults": {},
       "funcname": "IsOpposite",
       "location": "implot_internal:907",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_IsOpposite",
       "ret": "bool",
       "signature": "()const",
@@ -920,7 +887,6 @@
       "defaults": {},
       "funcname": "IsPanLocked",
       "location": "implot_internal:921",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_IsPanLocked",
       "ret": "bool",
       "signature": "(bool)",
@@ -943,7 +909,6 @@
       "defaults": {},
       "funcname": "IsRangeLocked",
       "location": "implot_internal:912",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_IsRangeLocked",
       "ret": "bool",
       "signature": "()const",
@@ -966,7 +931,6 @@
       "defaults": {},
       "funcname": "PixelSize",
       "location": "implot_internal:812",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_PixelSize",
       "ret": "float",
       "signature": "()const",
@@ -993,7 +957,6 @@
       "defaults": {},
       "funcname": "PixelsToPlot",
       "location": "implot_internal:860",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_PixelsToPlot",
       "ret": "double",
       "signature": "(float)const",
@@ -1020,7 +983,6 @@
       "defaults": {},
       "funcname": "PlotToPixels",
       "location": "implot_internal:850",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_PlotToPixels",
       "ret": "float",
       "signature": "(double)const",
@@ -1043,7 +1005,6 @@
       "defaults": {},
       "funcname": "PullLinks",
       "location": "implot_internal:940",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_PullLinks",
       "ret": "void",
       "signature": "()",
@@ -1066,7 +1027,6 @@
       "defaults": {},
       "funcname": "PushLinks",
       "location": "implot_internal:935",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_PushLinks",
       "ret": "void",
       "signature": "()",
@@ -1089,7 +1049,6 @@
       "defaults": {},
       "funcname": "Reset",
       "location": "implot_internal:728",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_Reset",
       "ret": "void",
       "signature": "()",
@@ -1116,7 +1075,6 @@
       "defaults": {},
       "funcname": "SetAspect",
       "location": "implot_internal:799",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_SetAspect",
       "ret": "void",
       "signature": "(double)",
@@ -1149,7 +1107,6 @@
       },
       "funcname": "SetMax",
       "location": "implot_internal:767",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_SetMax",
       "ret": "bool",
       "signature": "(double,bool)",
@@ -1182,7 +1139,6 @@
       },
       "funcname": "SetMin",
       "location": "implot_internal:748",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_SetMin",
       "ret": "bool",
       "signature": "(double,bool)",
@@ -1213,7 +1169,6 @@
       "defaults": {},
       "funcname": "SetRange",
       "location": "implot_internal:786",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_SetRange_double",
       "ret": "void",
       "signature": "(double,double)",
@@ -1238,7 +1193,6 @@
       "defaults": {},
       "funcname": "SetRange",
       "location": "implot_internal:795",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_SetRange_PlotRange",
       "ret": "void",
       "signature": "(const ImPlotRange)",
@@ -1261,7 +1215,6 @@
       "defaults": {},
       "funcname": "UpdateTransformCache",
       "location": "implot_internal:838",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_UpdateTransformCache",
       "ret": "void",
       "signature": "()",
@@ -1284,7 +1237,6 @@
       "defaults": {},
       "funcname": "WillRender",
       "location": "implot_internal:906",
-      "namespace": "ImPlotAxis",
       "ov_cimguiname": "ImPlotAxis_WillRender",
       "ret": "bool",
       "signature": "()const",
@@ -1343,7 +1295,6 @@
       "defaults": {},
       "funcname": "Append",
       "location": "implot_internal:345",
-      "namespace": "ImPlotColormapData",
       "ov_cimguiname": "ImPlotColormapData_Append",
       "ret": "int",
       "signature": "(const char*,const ImU32*,int,bool)",
@@ -1370,7 +1321,6 @@
       "defaults": {},
       "funcname": "GetIndex",
       "location": "implot_internal:412",
-      "namespace": "ImPlotColormapData",
       "ov_cimguiname": "ImPlotColormapData_GetIndex",
       "ret": "ImPlotColormap",
       "signature": "(const char*)const",
@@ -1401,7 +1351,6 @@
       "defaults": {},
       "funcname": "GetKeyColor",
       "location": "implot_internal:416",
-      "namespace": "ImPlotColormapData",
       "ov_cimguiname": "ImPlotColormapData_GetKeyColor",
       "ret": "ImU32",
       "signature": "(ImPlotColormap,int)const",
@@ -1428,7 +1377,6 @@
       "defaults": {},
       "funcname": "GetKeyCount",
       "location": "implot_internal:415",
-      "namespace": "ImPlotColormapData",
       "ov_cimguiname": "ImPlotColormapData_GetKeyCount",
       "ret": "int",
       "signature": "(ImPlotColormap)const",
@@ -1455,7 +1403,6 @@
       "defaults": {},
       "funcname": "GetKeys",
       "location": "implot_internal:414",
-      "namespace": "ImPlotColormapData",
       "ov_cimguiname": "ImPlotColormapData_GetKeys",
       "ret": "const ImU32*",
       "signature": "(ImPlotColormap)const",
@@ -1482,7 +1429,6 @@
       "defaults": {},
       "funcname": "GetName",
       "location": "implot_internal:411",
-      "namespace": "ImPlotColormapData",
       "ov_cimguiname": "ImPlotColormapData_GetName",
       "ret": "const char*",
       "signature": "(ImPlotColormap)const",
@@ -1509,7 +1455,6 @@
       "defaults": {},
       "funcname": "GetTable",
       "location": "implot_internal:419",
-      "namespace": "ImPlotColormapData",
       "ov_cimguiname": "ImPlotColormapData_GetTable",
       "ret": "const ImU32*",
       "signature": "(ImPlotColormap)const",
@@ -1540,7 +1485,6 @@
       "defaults": {},
       "funcname": "GetTableColor",
       "location": "implot_internal:421",
-      "namespace": "ImPlotColormapData",
       "ov_cimguiname": "ImPlotColormapData_GetTableColor",
       "ret": "ImU32",
       "signature": "(ImPlotColormap,int)const",
@@ -1567,7 +1511,6 @@
       "defaults": {},
       "funcname": "GetTableSize",
       "location": "implot_internal:420",
-      "namespace": "ImPlotColormapData",
       "ov_cimguiname": "ImPlotColormapData_GetTableSize",
       "ret": "int",
       "signature": "(ImPlotColormap)const",
@@ -1586,7 +1529,6 @@
       "defaults": {},
       "funcname": "ImPlotColormapData",
       "location": "implot_internal:343",
-      "namespace": "ImPlotColormapData",
       "ov_cimguiname": "ImPlotColormapData_ImPlotColormapData",
       "signature": "()",
       "stname": "ImPlotColormapData"
@@ -1612,7 +1554,6 @@
       "defaults": {},
       "funcname": "IsQual",
       "location": "implot_internal:410",
-      "namespace": "ImPlotColormapData",
       "ov_cimguiname": "ImPlotColormapData_IsQual",
       "ret": "bool",
       "signature": "(ImPlotColormap)const",
@@ -1643,7 +1584,6 @@
       "defaults": {},
       "funcname": "LerpTable",
       "location": "implot_internal:423",
-      "namespace": "ImPlotColormapData",
       "ov_cimguiname": "ImPlotColormapData_LerpTable",
       "ret": "ImU32",
       "signature": "(ImPlotColormap,float)const",
@@ -1666,7 +1606,6 @@
       "defaults": {},
       "funcname": "RebuildTables",
       "location": "implot_internal:402",
-      "namespace": "ImPlotColormapData",
       "ov_cimguiname": "ImPlotColormapData_RebuildTables",
       "ret": "void",
       "signature": "()",
@@ -1701,7 +1640,6 @@
       "defaults": {},
       "funcname": "SetKeyColor",
       "location": "implot_internal:417",
-      "namespace": "ImPlotColormapData",
       "ov_cimguiname": "ImPlotColormapData_SetKeyColor",
       "ret": "void",
       "signature": "(ImPlotColormap,int,ImU32)",
@@ -1728,7 +1666,6 @@
       "defaults": {},
       "funcname": "_AppendTable",
       "location": "implot_internal:363",
-      "namespace": "ImPlotColormapData",
       "ov_cimguiname": "ImPlotColormapData__AppendTable",
       "ret": "void",
       "signature": "(ImPlotColormap)",
@@ -1767,7 +1704,6 @@
       "defaults": {},
       "funcname": "ImPlotDateTimeSpec",
       "location": "implot_internal:290",
-      "namespace": "ImPlotDateTimeSpec",
       "ov_cimguiname": "ImPlotDateTimeSpec_ImPlotDateTimeSpec_Nil",
       "signature": "()",
       "stname": "ImPlotDateTimeSpec"
@@ -1803,7 +1739,6 @@
       },
       "funcname": "ImPlotDateTimeSpec",
       "location": "implot_internal:291",
-      "namespace": "ImPlotDateTimeSpec",
       "ov_cimguiname": "ImPlotDateTimeSpec_ImPlotDateTimeSpec_PlotDateFmt",
       "signature": "(ImPlotDateFmt,ImPlotTimeFmt,bool,bool)",
       "stname": "ImPlotDateTimeSpec"
@@ -1840,8 +1775,7 @@
       "constructor": true,
       "defaults": {},
       "funcname": "ImPlotInputMap",
-      "location": "implot:710",
-      "namespace": "ImPlotInputMap",
+      "location": "implot:671",
       "ov_cimguiname": "ImPlotInputMap_ImPlotInputMap",
       "signature": "()",
       "stname": "ImPlotInputMap"
@@ -1860,7 +1794,7 @@
       "cimguiname": "ImPlotInputMap_destroy",
       "defaults": {},
       "destructor": true,
-      "location": "implot:710",
+      "location": "implot:671",
       "ov_cimguiname": "ImPlotInputMap_destroy",
       "ret": "void",
       "signature": "(ImPlotInputMap*)",
@@ -1887,7 +1821,6 @@
       "defaults": {},
       "funcname": "GetItem",
       "location": "implot_internal:1035",
-      "namespace": "ImPlotItemGroup",
       "ov_cimguiname": "ImPlotItemGroup_GetItem_ID",
       "ret": "ImPlotItem*",
       "signature": "(ImGuiID)",
@@ -1912,7 +1845,6 @@
       "defaults": {},
       "funcname": "GetItem",
       "location": "implot_internal:1036",
-      "namespace": "ImPlotItemGroup",
       "ov_cimguiname": "ImPlotItemGroup_GetItem_Str",
       "ret": "ImPlotItem*",
       "signature": "(const char*)",
@@ -1939,7 +1871,6 @@
       "defaults": {},
       "funcname": "GetItemByIndex",
       "location": "implot_internal:1038",
-      "namespace": "ImPlotItemGroup",
       "ov_cimguiname": "ImPlotItemGroup_GetItemByIndex",
       "ret": "ImPlotItem*",
       "signature": "(int)",
@@ -1962,7 +1893,6 @@
       "defaults": {},
       "funcname": "GetItemCount",
       "location": "implot_internal:1033",
-      "namespace": "ImPlotItemGroup",
       "ov_cimguiname": "ImPlotItemGroup_GetItemCount",
       "ret": "int",
       "signature": "()const",
@@ -1989,7 +1919,6 @@
       "defaults": {},
       "funcname": "GetItemID",
       "location": "implot_internal:1034",
-      "namespace": "ImPlotItemGroup",
       "ov_cimguiname": "ImPlotItemGroup_GetItemID",
       "ret": "ImGuiID",
       "signature": "(const char*)",
@@ -2016,7 +1945,6 @@
       "defaults": {},
       "funcname": "GetItemIndex",
       "location": "implot_internal:1039",
-      "namespace": "ImPlotItemGroup",
       "ov_cimguiname": "ImPlotItemGroup_GetItemIndex",
       "ret": "int",
       "signature": "(ImPlotItem*)",
@@ -2039,7 +1967,6 @@
       "defaults": {},
       "funcname": "GetLegendCount",
       "location": "implot_internal:1040",
-      "namespace": "ImPlotItemGroup",
       "ov_cimguiname": "ImPlotItemGroup_GetLegendCount",
       "ret": "int",
       "signature": "()const",
@@ -2066,7 +1993,6 @@
       "defaults": {},
       "funcname": "GetLegendItem",
       "location": "implot_internal:1041",
-      "namespace": "ImPlotItemGroup",
       "ov_cimguiname": "ImPlotItemGroup_GetLegendItem",
       "ret": "ImPlotItem*",
       "signature": "(int)",
@@ -2093,7 +2019,6 @@
       "defaults": {},
       "funcname": "GetLegendLabel",
       "location": "implot_internal:1042",
-      "namespace": "ImPlotItemGroup",
       "ov_cimguiname": "ImPlotItemGroup_GetLegendLabel",
       "ret": "const char*",
       "signature": "(int)",
@@ -2120,7 +2045,6 @@
       "defaults": {},
       "funcname": "GetOrAddItem",
       "location": "implot_internal:1037",
-      "namespace": "ImPlotItemGroup",
       "ov_cimguiname": "ImPlotItemGroup_GetOrAddItem",
       "ret": "ImPlotItem*",
       "signature": "(ImGuiID)",
@@ -2139,7 +2063,6 @@
       "defaults": {},
       "funcname": "ImPlotItemGroup",
       "location": "implot_internal:1031",
-      "namespace": "ImPlotItemGroup",
       "ov_cimguiname": "ImPlotItemGroup_ImPlotItemGroup",
       "signature": "()",
       "stname": "ImPlotItemGroup"
@@ -2161,7 +2084,6 @@
       "defaults": {},
       "funcname": "Reset",
       "location": "implot_internal:1043",
-      "namespace": "ImPlotItemGroup",
       "ov_cimguiname": "ImPlotItemGroup_Reset",
       "ret": "void",
       "signature": "()",
@@ -2200,7 +2122,6 @@
       "defaults": {},
       "funcname": "ImPlotItem",
       "location": "implot_internal:982",
-      "namespace": "ImPlotItem",
       "ov_cimguiname": "ImPlotItem_ImPlotItem",
       "signature": "()",
       "stname": "ImPlotItem"
@@ -2239,7 +2160,6 @@
       "defaults": {},
       "funcname": "ImPlotLegend",
       "location": "implot_internal:1011",
-      "namespace": "ImPlotLegend",
       "ov_cimguiname": "ImPlotLegend_ImPlotLegend",
       "signature": "()",
       "stname": "ImPlotLegend"
@@ -2261,7 +2181,6 @@
       "defaults": {},
       "funcname": "Reset",
       "location": "implot_internal:1019",
-      "namespace": "ImPlotLegend",
       "ov_cimguiname": "ImPlotLegend_Reset",
       "ret": "void",
       "signature": "()",
@@ -2300,7 +2219,6 @@
       "defaults": {},
       "funcname": "ImPlotNextItemData",
       "location": "implot_internal:1219",
-      "namespace": "ImPlotNextItemData",
       "ov_cimguiname": "ImPlotNextItemData_ImPlotNextItemData",
       "signature": "()",
       "stname": "ImPlotNextItemData"
@@ -2322,7 +2240,6 @@
       "defaults": {},
       "funcname": "Reset",
       "location": "implot_internal:1220",
-      "namespace": "ImPlotNextItemData",
       "ov_cimguiname": "ImPlotNextItemData_Reset",
       "ret": "void",
       "signature": "()",
@@ -2361,7 +2278,6 @@
       "defaults": {},
       "funcname": "ImPlotNextPlotData",
       "location": "implot_internal:1196",
-      "namespace": "ImPlotNextPlotData",
       "ov_cimguiname": "ImPlotNextPlotData_ImPlotNextPlotData",
       "signature": "()",
       "stname": "ImPlotNextPlotData"
@@ -2383,7 +2299,6 @@
       "defaults": {},
       "funcname": "Reset",
       "location": "implot_internal:1198",
-      "namespace": "ImPlotNextPlotData",
       "ov_cimguiname": "ImPlotNextPlotData_Reset",
       "ret": "void",
       "signature": "()",
@@ -2426,7 +2341,6 @@
       "defaults": {},
       "funcname": "ClearTextBuffer",
       "location": "implot_internal:1105",
-      "namespace": "ImPlotPlot",
       "ov_cimguiname": "ImPlotPlot_ClearTextBuffer",
       "ret": "void",
       "signature": "()",
@@ -2449,7 +2363,6 @@
       "defaults": {},
       "funcname": "EnabledAxesX",
       "location": "implot_internal:1124",
-      "namespace": "ImPlotPlot",
       "ov_cimguiname": "ImPlotPlot_EnabledAxesX",
       "ret": "int",
       "signature": "()",
@@ -2472,7 +2385,6 @@
       "defaults": {},
       "funcname": "EnabledAxesY",
       "location": "implot_internal:1131",
-      "namespace": "ImPlotPlot",
       "ov_cimguiname": "ImPlotPlot_EnabledAxesY",
       "ret": "int",
       "signature": "()",
@@ -2499,7 +2411,6 @@
       "defaults": {},
       "funcname": "GetAxisLabel",
       "location": "implot_internal:1148",
-      "namespace": "ImPlotPlot",
       "ov_cimguiname": "ImPlotPlot_GetAxisLabel",
       "ret": "const char*",
       "signature": "(const ImPlotAxis)const",
@@ -2522,7 +2433,6 @@
       "defaults": {},
       "funcname": "GetTitle",
       "location": "implot_internal:1117",
-      "namespace": "ImPlotPlot",
       "ov_cimguiname": "ImPlotPlot_GetTitle",
       "ret": "const char*",
       "signature": "()const",
@@ -2545,7 +2455,6 @@
       "defaults": {},
       "funcname": "HasTitle",
       "location": "implot_internal:1116",
-      "namespace": "ImPlotPlot",
       "ov_cimguiname": "ImPlotPlot_HasTitle",
       "ret": "bool",
       "signature": "()const",
@@ -2564,7 +2473,6 @@
       "defaults": {},
       "funcname": "ImPlotPlot",
       "location": "implot_internal:1076",
-      "namespace": "ImPlotPlot",
       "ov_cimguiname": "ImPlotPlot_ImPlotPlot",
       "signature": "()",
       "stname": "ImPlotPlot"
@@ -2586,7 +2494,6 @@
       "defaults": {},
       "funcname": "IsInputLocked",
       "location": "implot_internal:1093",
-      "namespace": "ImPlotPlot",
       "ov_cimguiname": "ImPlotPlot_IsInputLocked",
       "ret": "bool",
       "signature": "()const",
@@ -2618,7 +2525,6 @@
       "defaults": {},
       "funcname": "SetAxisLabel",
       "location": "implot_internal:1138",
-      "namespace": "ImPlotPlot",
       "ov_cimguiname": "ImPlotPlot_SetAxisLabel",
       "ret": "void",
       "signature": "(ImPlotAxis*,const char*)",
@@ -2645,7 +2551,6 @@
       "defaults": {},
       "funcname": "SetTitle",
       "location": "implot_internal:1107",
-      "namespace": "ImPlotPlot",
       "ov_cimguiname": "ImPlotPlot_SetTitle",
       "ret": "void",
       "signature": "(const char*)",
@@ -2672,7 +2577,6 @@
       "defaults": {},
       "funcname": "XAxis",
       "location": "implot_internal:1119",
-      "namespace": "ImPlotPlot",
       "ov_cimguiname": "ImPlotPlot_XAxis_Nil",
       "ret": "ImPlotAxis*",
       "retref": "&",
@@ -2698,7 +2602,6 @@
       "defaults": {},
       "funcname": "XAxis",
       "location": "implot_internal:1120",
-      "namespace": "ImPlotPlot",
       "ov_cimguiname": "ImPlotPlot_XAxis__const",
       "ret": "const ImPlotAxis*",
       "retref": "&",
@@ -2726,7 +2629,6 @@
       "defaults": {},
       "funcname": "YAxis",
       "location": "implot_internal:1121",
-      "namespace": "ImPlotPlot",
       "ov_cimguiname": "ImPlotPlot_YAxis_Nil",
       "ret": "ImPlotAxis*",
       "retref": "&",
@@ -2752,7 +2654,6 @@
       "defaults": {},
       "funcname": "YAxis",
       "location": "implot_internal:1122",
-      "namespace": "ImPlotPlot",
       "ov_cimguiname": "ImPlotPlot_YAxis__const",
       "ret": "const ImPlotAxis*",
       "retref": "&",
@@ -2792,7 +2693,6 @@
       "defaults": {},
       "funcname": "ImPlotPointError",
       "location": "implot_internal:434",
-      "namespace": "ImPlotPointError",
       "ov_cimguiname": "ImPlotPointError_ImPlotPointError_Nil",
       "signature": "()",
       "stname": "ImPlotPointError"
@@ -2825,7 +2725,6 @@
       "defaults": {},
       "funcname": "ImPlotPointError",
       "location": "implot_internal:435",
-      "namespace": "ImPlotPointError",
       "ov_cimguiname": "ImPlotPointError_ImPlotPointError_double",
       "signature": "(double,double,double,double)",
       "stname": "ImPlotPointError"
@@ -2862,8 +2761,7 @@
       "constructor": true,
       "defaults": {},
       "funcname": "ImPlotPoint",
-      "location": "implot:610",
-      "namespace": "ImPlotPoint",
+      "location": "implot:571",
       "ov_cimguiname": "ImPlotPoint_ImPlotPoint_Nil",
       "signature": "()",
       "stname": "ImPlotPoint"
@@ -2887,8 +2785,7 @@
       "constructor": true,
       "defaults": {},
       "funcname": "ImPlotPoint",
-      "location": "implot:611",
-      "namespace": "ImPlotPoint",
+      "location": "implot:572",
       "ov_cimguiname": "ImPlotPoint_ImPlotPoint_double",
       "signature": "(double,double)",
       "stname": "ImPlotPoint"
@@ -2908,8 +2805,7 @@
       "constructor": true,
       "defaults": {},
       "funcname": "ImPlotPoint",
-      "location": "implot:612",
-      "namespace": "ImPlotPoint",
+      "location": "implot:573",
       "ov_cimguiname": "ImPlotPoint_ImPlotPoint_Vec2",
       "signature": "(const ImVec2)",
       "stname": "ImPlotPoint"
@@ -2928,7 +2824,7 @@
       "cimguiname": "ImPlotPoint_destroy",
       "defaults": {},
       "destructor": true,
-      "location": "implot:610",
+      "location": "implot:571",
       "ov_cimguiname": "ImPlotPoint_destroy",
       "ret": "void",
       "signature": "(ImPlotPoint*)",
@@ -2954,8 +2850,7 @@
       "cimguiname": "ImPlotRange_Clamp",
       "defaults": {},
       "funcname": "Clamp",
-      "location": "implot:629",
-      "namespace": "ImPlotRange",
+      "location": "implot:590",
       "ov_cimguiname": "ImPlotRange_Clamp",
       "ret": "double",
       "signature": "(double)const",
@@ -2981,8 +2876,7 @@
       "cimguiname": "ImPlotRange_Contains",
       "defaults": {},
       "funcname": "Contains",
-      "location": "implot:627",
-      "namespace": "ImPlotRange",
+      "location": "implot:588",
       "ov_cimguiname": "ImPlotRange_Contains",
       "ret": "bool",
       "signature": "(double)const",
@@ -3000,8 +2894,7 @@
       "constructor": true,
       "defaults": {},
       "funcname": "ImPlotRange",
-      "location": "implot:625",
-      "namespace": "ImPlotRange",
+      "location": "implot:586",
       "ov_cimguiname": "ImPlotRange_ImPlotRange_Nil",
       "signature": "()",
       "stname": "ImPlotRange"
@@ -3025,8 +2918,7 @@
       "constructor": true,
       "defaults": {},
       "funcname": "ImPlotRange",
-      "location": "implot:626",
-      "namespace": "ImPlotRange",
+      "location": "implot:587",
       "ov_cimguiname": "ImPlotRange_ImPlotRange_double",
       "signature": "(double,double)",
       "stname": "ImPlotRange"
@@ -3047,8 +2939,7 @@
       "cimguiname": "ImPlotRange_Size",
       "defaults": {},
       "funcname": "Size",
-      "location": "implot:628",
-      "namespace": "ImPlotRange",
+      "location": "implot:589",
       "ov_cimguiname": "ImPlotRange_Size",
       "ret": "double",
       "signature": "()const",
@@ -3068,7 +2959,7 @@
       "cimguiname": "ImPlotRange_destroy",
       "defaults": {},
       "destructor": true,
-      "location": "implot:625",
+      "location": "implot:586",
       "ov_cimguiname": "ImPlotRange_destroy",
       "ret": "void",
       "signature": "(ImPlotRange*)",
@@ -3095,8 +2986,7 @@
       "conv": "ImPlotPoint",
       "defaults": {},
       "funcname": "Clamp",
-      "location": "implot:640",
-      "namespace": "ImPlotRect",
+      "location": "implot:601",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlotRect_Clamp_PlotPoint",
       "ret": "ImPlotPoint_c",
@@ -3126,8 +3016,7 @@
       "conv": "ImPlotPoint",
       "defaults": {},
       "funcname": "Clamp",
-      "location": "implot:641",
-      "namespace": "ImPlotRect",
+      "location": "implot:602",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlotRect_Clamp_double",
       "ret": "ImPlotPoint_c",
@@ -3154,8 +3043,7 @@
       "cimguiname": "ImPlotRect_Contains",
       "defaults": {},
       "funcname": "Contains",
-      "location": "implot:637",
-      "namespace": "ImPlotRect",
+      "location": "implot:598",
       "ov_cimguiname": "ImPlotRect_Contains_PlotPoint",
       "ret": "bool",
       "signature": "(const ImPlotPoint)const",
@@ -3183,8 +3071,7 @@
       "cimguiname": "ImPlotRect_Contains",
       "defaults": {},
       "funcname": "Contains",
-      "location": "implot:638",
-      "namespace": "ImPlotRect",
+      "location": "implot:599",
       "ov_cimguiname": "ImPlotRect_Contains_double",
       "ret": "bool",
       "signature": "(double,double)const",
@@ -3202,8 +3089,7 @@
       "constructor": true,
       "defaults": {},
       "funcname": "ImPlotRect",
-      "location": "implot:635",
-      "namespace": "ImPlotRect",
+      "location": "implot:596",
       "ov_cimguiname": "ImPlotRect_ImPlotRect_Nil",
       "signature": "()",
       "stname": "ImPlotRect"
@@ -3235,8 +3121,7 @@
       "constructor": true,
       "defaults": {},
       "funcname": "ImPlotRect",
-      "location": "implot:636",
-      "namespace": "ImPlotRect",
+      "location": "implot:597",
       "ov_cimguiname": "ImPlotRect_ImPlotRect_double",
       "signature": "(double,double,double,double)",
       "stname": "ImPlotRect"
@@ -3258,8 +3143,7 @@
       "conv": "ImPlotPoint",
       "defaults": {},
       "funcname": "Max",
-      "location": "implot:643",
-      "namespace": "ImPlotRect",
+      "location": "implot:604",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlotRect_Max",
       "ret": "ImPlotPoint_c",
@@ -3283,8 +3167,7 @@
       "conv": "ImPlotPoint",
       "defaults": {},
       "funcname": "Min",
-      "location": "implot:642",
-      "namespace": "ImPlotRect",
+      "location": "implot:603",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlotRect_Min",
       "ret": "ImPlotPoint_c",
@@ -3308,8 +3191,7 @@
       "conv": "ImPlotPoint",
       "defaults": {},
       "funcname": "Size",
-      "location": "implot:639",
-      "namespace": "ImPlotRect",
+      "location": "implot:600",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlotRect_Size",
       "ret": "ImPlotPoint_c",
@@ -3330,7 +3212,7 @@
       "cimguiname": "ImPlotRect_destroy",
       "defaults": {},
       "destructor": true,
-      "location": "implot:635",
+      "location": "implot:596",
       "ov_cimguiname": "ImPlotRect_destroy",
       "ret": "void",
       "signature": "(ImPlotRect*)",
@@ -3348,8 +3230,7 @@
       "constructor": true,
       "defaults": {},
       "funcname": "ImPlotSpec",
-      "location": "implot:534",
-      "namespace": "ImPlotSpec",
+      "location": "implot:516",
       "ov_cimguiname": "ImPlotSpec_ImPlotSpec",
       "signature": "()",
       "stname": "ImPlotSpec"
@@ -3378,8 +3259,7 @@
       "cimguiname": "ImPlotSpec_SetProp",
       "defaults": {},
       "funcname": "SetProp",
-      "location": "implot:552",
-      "namespace": "ImPlotSpec",
+      "location": "implot:534",
       "ov_cimguiname": "ImPlotSpec_SetProp_Float",
       "ret": "void",
       "signature": "(ImPlotProp,float)",
@@ -3407,8 +3287,7 @@
       "cimguiname": "ImPlotSpec_SetProp",
       "defaults": {},
       "funcname": "SetProp",
-      "location": "implot:552",
-      "namespace": "ImPlotSpec",
+      "location": "implot:534",
       "ov_cimguiname": "ImPlotSpec_SetProp_double",
       "ret": "void",
       "signature": "(ImPlotProp,double)",
@@ -3436,8 +3315,7 @@
       "cimguiname": "ImPlotSpec_SetProp",
       "defaults": {},
       "funcname": "SetProp",
-      "location": "implot:552",
-      "namespace": "ImPlotSpec",
+      "location": "implot:534",
       "ov_cimguiname": "ImPlotSpec_SetProp_S8",
       "ret": "void",
       "signature": "(ImPlotProp,ImS8)",
@@ -3465,8 +3343,7 @@
       "cimguiname": "ImPlotSpec_SetProp",
       "defaults": {},
       "funcname": "SetProp",
-      "location": "implot:552",
-      "namespace": "ImPlotSpec",
+      "location": "implot:534",
       "ov_cimguiname": "ImPlotSpec_SetProp_U8",
       "ret": "void",
       "signature": "(ImPlotProp,ImU8)",
@@ -3494,8 +3371,7 @@
       "cimguiname": "ImPlotSpec_SetProp",
       "defaults": {},
       "funcname": "SetProp",
-      "location": "implot:552",
-      "namespace": "ImPlotSpec",
+      "location": "implot:534",
       "ov_cimguiname": "ImPlotSpec_SetProp_S16",
       "ret": "void",
       "signature": "(ImPlotProp,ImS16)",
@@ -3523,8 +3399,7 @@
       "cimguiname": "ImPlotSpec_SetProp",
       "defaults": {},
       "funcname": "SetProp",
-      "location": "implot:552",
-      "namespace": "ImPlotSpec",
+      "location": "implot:534",
       "ov_cimguiname": "ImPlotSpec_SetProp_U16",
       "ret": "void",
       "signature": "(ImPlotProp,ImU16)",
@@ -3552,8 +3427,7 @@
       "cimguiname": "ImPlotSpec_SetProp",
       "defaults": {},
       "funcname": "SetProp",
-      "location": "implot:552",
-      "namespace": "ImPlotSpec",
+      "location": "implot:534",
       "ov_cimguiname": "ImPlotSpec_SetProp_S32",
       "ret": "void",
       "signature": "(ImPlotProp,ImS32)",
@@ -3581,8 +3455,7 @@
       "cimguiname": "ImPlotSpec_SetProp",
       "defaults": {},
       "funcname": "SetProp",
-      "location": "implot:552",
-      "namespace": "ImPlotSpec",
+      "location": "implot:534",
       "ov_cimguiname": "ImPlotSpec_SetProp_U32",
       "ret": "void",
       "signature": "(ImPlotProp,ImU32)",
@@ -3610,8 +3483,7 @@
       "cimguiname": "ImPlotSpec_SetProp",
       "defaults": {},
       "funcname": "SetProp",
-      "location": "implot:552",
-      "namespace": "ImPlotSpec",
+      "location": "implot:534",
       "ov_cimguiname": "ImPlotSpec_SetProp_S64",
       "ret": "void",
       "signature": "(ImPlotProp,ImS64)",
@@ -3639,69 +3511,10 @@
       "cimguiname": "ImPlotSpec_SetProp",
       "defaults": {},
       "funcname": "SetProp",
-      "location": "implot:552",
-      "namespace": "ImPlotSpec",
+      "location": "implot:534",
       "ov_cimguiname": "ImPlotSpec_SetProp_U64",
       "ret": "void",
       "signature": "(ImPlotProp,ImU64)",
-      "stname": "ImPlotSpec"
-    },
-    {
-      "args": "(ImPlotSpec* self,ImPlotProp prop,ImU32* v)",
-      "argsT": [
-        {
-          "name": "self",
-          "type": "ImPlotSpec*"
-        },
-        {
-          "name": "prop",
-          "type": "ImPlotProp"
-        },
-        {
-          "name": "v",
-          "type": "ImU32*"
-        }
-      ],
-      "argsoriginal": "(ImPlotProp prop,ImU32* v)",
-      "call_args": "(prop,v)",
-      "call_args_old": "(prop,v)",
-      "cimguiname": "ImPlotSpec_SetProp",
-      "defaults": {},
-      "funcname": "SetProp",
-      "location": "implot:573",
-      "namespace": "ImPlotSpec",
-      "ov_cimguiname": "ImPlotSpec_SetProp_U32Ptr",
-      "ret": "void",
-      "signature": "(ImPlotProp,ImU32*)",
-      "stname": "ImPlotSpec"
-    },
-    {
-      "args": "(ImPlotSpec* self,ImPlotProp prop,float* v)",
-      "argsT": [
-        {
-          "name": "self",
-          "type": "ImPlotSpec*"
-        },
-        {
-          "name": "prop",
-          "type": "ImPlotProp"
-        },
-        {
-          "name": "v",
-          "type": "float*"
-        }
-      ],
-      "argsoriginal": "(ImPlotProp prop,float* v)",
-      "call_args": "(prop,v)",
-      "call_args_old": "(prop,v)",
-      "cimguiname": "ImPlotSpec_SetProp",
-      "defaults": {},
-      "funcname": "SetProp",
-      "location": "implot:585",
-      "namespace": "ImPlotSpec",
-      "ov_cimguiname": "ImPlotSpec_SetProp_FloatPtr",
-      "ret": "void",
-      "signature": "(ImPlotProp,float*)",
       "stname": "ImPlotSpec"
     },
     {
@@ -3726,8 +3539,7 @@
       "cimguiname": "ImPlotSpec_SetProp",
       "defaults": {},
       "funcname": "SetProp",
-      "location": "implot:594",
-      "namespace": "ImPlotSpec",
+      "location": "implot:555",
       "ov_cimguiname": "ImPlotSpec_SetProp_Vec4",
       "ret": "void",
       "signature": "(ImPlotProp,const ImVec4)",
@@ -3747,7 +3559,7 @@
       "cimguiname": "ImPlotSpec_destroy",
       "defaults": {},
       "destructor": true,
-      "location": "implot:534",
+      "location": "implot:516",
       "ov_cimguiname": "ImPlotSpec_destroy",
       "ret": "void",
       "signature": "(ImPlotSpec*)",
@@ -3765,8 +3577,7 @@
       "constructor": true,
       "defaults": {},
       "funcname": "ImPlotStyle",
-      "location": "implot:678",
-      "namespace": "ImPlotStyle",
+      "location": "implot:639",
       "ov_cimguiname": "ImPlotStyle_ImPlotStyle",
       "signature": "()",
       "stname": "ImPlotStyle"
@@ -3785,7 +3596,7 @@
       "cimguiname": "ImPlotStyle_destroy",
       "defaults": {},
       "destructor": true,
-      "location": "implot:678",
+      "location": "implot:639",
       "ov_cimguiname": "ImPlotStyle_destroy",
       "ret": "void",
       "signature": "(ImPlotStyle*)",
@@ -3804,7 +3615,6 @@
       "defaults": {},
       "funcname": "ImPlotSubplot",
       "location": "implot_internal:1173",
-      "namespace": "ImPlotSubplot",
       "ov_cimguiname": "ImPlotSubplot_ImPlotSubplot",
       "signature": "()",
       "stname": "ImPlotSubplot"
@@ -3871,7 +3681,6 @@
       "funcname": "Append",
       "isvararg": "...)",
       "location": "implot_internal:533",
-      "namespace": "ImPlotTagCollection",
       "ov_cimguiname": "ImPlotTagCollection_Append",
       "ret": "void",
       "signature": "(ImAxis,double,ImU32,ImU32,const char*,...)",
@@ -3918,7 +3727,6 @@
       "defaults": {},
       "funcname": "AppendV",
       "location": "implot_internal:519",
-      "namespace": "ImPlotTagCollection",
       "ov_cimguiname": "ImPlotTagCollection_AppendV",
       "ret": "void",
       "signature": "(ImAxis,double,ImU32,ImU32,const char*,va_list)",
@@ -3945,7 +3753,6 @@
       "defaults": {},
       "funcname": "GetText",
       "location": "implot_internal:540",
-      "namespace": "ImPlotTagCollection",
       "ov_cimguiname": "ImPlotTagCollection_GetText",
       "ret": "const char*",
       "signature": "(int)",
@@ -3964,7 +3771,6 @@
       "defaults": {},
       "funcname": "ImPlotTagCollection",
       "location": "implot_internal:517",
-      "namespace": "ImPlotTagCollection",
       "ov_cimguiname": "ImPlotTagCollection_ImPlotTagCollection",
       "signature": "()",
       "stname": "ImPlotTagCollection"
@@ -3986,7 +3792,6 @@
       "defaults": {},
       "funcname": "Reset",
       "location": "implot_internal:544",
-      "namespace": "ImPlotTagCollection",
       "ov_cimguiname": "ImPlotTagCollection_Reset",
       "ret": "void",
       "signature": "()",
@@ -4025,7 +3830,6 @@
       "defaults": {},
       "funcname": "ImPlotTag",
       "location": "implot_internal:502",
-      "namespace": "ImPlotTag",
       "ov_cimguiname": "ImPlotTag_ImPlotTag",
       "signature": "()",
       "stname": "ImPlotTag"
@@ -4063,7 +3867,6 @@
       "defaults": {},
       "funcname": "ImPlotTick",
       "location": "implot_internal:563",
-      "namespace": "ImPlotTick",
       "ov_cimguiname": "ImPlotTick_ImPlotTick_Nil",
       "signature": "()",
       "stname": "ImPlotTick"
@@ -4096,7 +3899,6 @@
       "defaults": {},
       "funcname": "ImPlotTick",
       "location": "implot_internal:574",
-      "namespace": "ImPlotTick",
       "ov_cimguiname": "ImPlotTick_ImPlotTick_double",
       "signature": "(double,bool,int,bool)",
       "stname": "ImPlotTick"
@@ -4158,7 +3960,6 @@
       "defaults": {},
       "funcname": "AddTick",
       "location": "implot_internal:596",
-      "namespace": "ImPlotTicker",
       "ov_cimguiname": "ImPlotTicker_AddTick_doubleStr",
       "ret": "ImPlotTick*",
       "retref": "&",
@@ -4204,7 +4005,6 @@
       "defaults": {},
       "funcname": "AddTick",
       "location": "implot_internal:606",
-      "namespace": "ImPlotTicker",
       "ov_cimguiname": "ImPlotTicker_AddTick_doublePlotFormatter",
       "ret": "ImPlotTick*",
       "retref": "&",
@@ -4230,7 +4030,6 @@
       "defaults": {},
       "funcname": "AddTick",
       "location": "implot_internal:618",
-      "namespace": "ImPlotTicker",
       "ov_cimguiname": "ImPlotTicker_AddTick_PlotTick",
       "ret": "ImPlotTick*",
       "retref": "&",
@@ -4258,7 +4057,6 @@
       "defaults": {},
       "funcname": "GetText",
       "location": "implot_internal:628",
-      "namespace": "ImPlotTicker",
       "ov_cimguiname": "ImPlotTicker_GetText_Int",
       "ret": "const char*",
       "signature": "(int)const",
@@ -4283,7 +4081,6 @@
       "defaults": {},
       "funcname": "GetText",
       "location": "implot_internal:632",
-      "namespace": "ImPlotTicker",
       "ov_cimguiname": "ImPlotTicker_GetText_PlotTick",
       "ret": "const char*",
       "signature": "(const ImPlotTick)",
@@ -4302,7 +4099,6 @@
       "defaults": {},
       "funcname": "ImPlotTicker",
       "location": "implot_internal:592",
-      "namespace": "ImPlotTicker",
       "ov_cimguiname": "ImPlotTicker_ImPlotTicker",
       "signature": "()",
       "stname": "ImPlotTicker"
@@ -4328,7 +4124,6 @@
       "defaults": {},
       "funcname": "OverrideSizeLate",
       "location": "implot_internal:636",
-      "namespace": "ImPlotTicker",
       "ov_cimguiname": "ImPlotTicker_OverrideSizeLate",
       "ret": "void",
       "signature": "(const ImVec2)",
@@ -4351,7 +4146,6 @@
       "defaults": {},
       "funcname": "Reset",
       "location": "implot_internal:641",
-      "namespace": "ImPlotTicker",
       "ov_cimguiname": "ImPlotTicker_Reset",
       "ret": "void",
       "signature": "()",
@@ -4374,7 +4168,6 @@
       "defaults": {},
       "funcname": "TickCount",
       "location": "implot_internal:649",
-      "namespace": "ImPlotTicker",
       "ov_cimguiname": "ImPlotTicker_TickCount",
       "ret": "int",
       "signature": "()const",
@@ -4419,7 +4212,6 @@
       "funcname": "FromDouble",
       "is_static_function": true,
       "location": "implot_internal:311",
-      "namespace": "ImPlotTime",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlotTime_FromDouble",
       "ret": "ImPlotTime_c",
@@ -4439,7 +4231,6 @@
       "defaults": {},
       "funcname": "ImPlotTime",
       "location": "implot_internal:307",
-      "namespace": "ImPlotTime",
       "ov_cimguiname": "ImPlotTime_ImPlotTime_Nil",
       "signature": "()",
       "stname": "ImPlotTime"
@@ -4466,7 +4257,6 @@
       },
       "funcname": "ImPlotTime",
       "location": "implot_internal:308",
-      "namespace": "ImPlotTime",
       "ov_cimguiname": "ImPlotTime_ImPlotTime_time_t",
       "signature": "(time_t,int)",
       "stname": "ImPlotTime"
@@ -4488,7 +4278,6 @@
       "defaults": {},
       "funcname": "RollOver",
       "location": "implot_internal:309",
-      "namespace": "ImPlotTime",
       "ov_cimguiname": "ImPlotTime_RollOver",
       "ret": "void",
       "signature": "()",
@@ -4511,7 +4300,6 @@
       "defaults": {},
       "funcname": "ToDouble",
       "location": "implot_internal:310",
-      "namespace": "ImPlotTime",
       "ov_cimguiname": "ImPlotTime_ToDouble",
       "ret": "double",
       "signature": "()const",
@@ -4567,7 +4355,7 @@
         "qual": "true"
       },
       "funcname": "AddColormap",
-      "location": "implot:1269",
+      "location": "implot:1227",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_AddColormap_Vec4Ptr",
       "ret": "ImPlotColormap",
@@ -4602,7 +4390,7 @@
         "qual": "true"
       },
       "funcname": "AddColormap",
-      "location": "implot:1270",
+      "location": "implot:1228",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_AddColormap_U32Ptr",
       "ret": "ImPlotColormap",
@@ -4789,7 +4577,7 @@
         "round": "false"
       },
       "funcname": "Annotation",
-      "location": "implot:1087",
+      "location": "implot:1045",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_Annotation_Bool",
       "ret": "void",
@@ -4835,7 +4623,7 @@
       "defaults": {},
       "funcname": "Annotation",
       "isvararg": "...)",
-      "location": "implot:1088",
+      "location": "implot:1046",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_Annotation_Str",
       "ret": "void",
@@ -4882,7 +4670,7 @@
       "cimguiname": "ImPlot_AnnotationV",
       "defaults": {},
       "funcname": "AnnotationV",
-      "location": "implot:1089",
+      "location": "implot:1047",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_AnnotationV",
       "ret": "void",
@@ -4992,7 +4780,7 @@
         "vertical": "true"
       },
       "funcname": "BeginAlignedPlots",
-      "location": "implot:1152",
+      "location": "implot:1110",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_BeginAlignedPlots",
       "ret": "bool",
@@ -5021,7 +4809,7 @@
         "flags": "0"
       },
       "funcname": "BeginDragDropSourceAxis",
-      "location": "implot:1186",
+      "location": "implot:1144",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_BeginDragDropSourceAxis",
       "ret": "bool",
@@ -5050,7 +4838,7 @@
         "flags": "0"
       },
       "funcname": "BeginDragDropSourceItem",
-      "location": "implot:1188",
+      "location": "implot:1146",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_BeginDragDropSourceItem",
       "ret": "bool",
@@ -5075,7 +4863,7 @@
         "flags": "0"
       },
       "funcname": "BeginDragDropSourcePlot",
-      "location": "implot:1184",
+      "location": "implot:1142",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_BeginDragDropSourcePlot",
       "ret": "bool",
@@ -5098,7 +4886,7 @@
       "cimguiname": "ImPlot_BeginDragDropTargetAxis",
       "defaults": {},
       "funcname": "BeginDragDropTargetAxis",
-      "location": "implot:1174",
+      "location": "implot:1132",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_BeginDragDropTargetAxis",
       "ret": "bool",
@@ -5116,7 +4904,7 @@
       "cimguiname": "ImPlot_BeginDragDropTargetLegend",
       "defaults": {},
       "funcname": "BeginDragDropTargetLegend",
-      "location": "implot:1176",
+      "location": "implot:1134",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_BeginDragDropTargetLegend",
       "ret": "bool",
@@ -5134,7 +4922,7 @@
       "cimguiname": "ImPlot_BeginDragDropTargetPlot",
       "defaults": {},
       "funcname": "BeginDragDropTargetPlot",
-      "location": "implot:1172",
+      "location": "implot:1130",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_BeginDragDropTargetPlot",
       "ret": "bool",
@@ -5202,7 +4990,7 @@
         "mouse_button": "1"
       },
       "funcname": "BeginLegendPopup",
-      "location": "implot:1161",
+      "location": "implot:1119",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_BeginLegendPopup",
       "ret": "bool",
@@ -5236,7 +5024,7 @@
         "size": "ImVec2(-1,0)"
       },
       "funcname": "BeginPlot",
-      "location": "implot:767",
+      "location": "implot:728",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_BeginPlot",
       "ret": "bool",
@@ -5287,7 +5075,7 @@
         "row_ratios": "nullptr"
       },
       "funcname": "BeginSubplots",
-      "location": "implot:823",
+      "location": "implot:784",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_BeginSubplots",
       "ret": "bool",
@@ -5312,7 +5100,7 @@
         "plot_title_id": "nullptr"
       },
       "funcname": "BustColorCache",
-      "location": "implot:1314",
+      "location": "implot:1272",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_BustColorCache",
       "ret": "void",
@@ -5496,7 +5284,7 @@
       "cimguiname": "ImPlot_CancelPlotSelection",
       "defaults": {},
       "funcname": "CancelPlotSelection",
-      "location": "implot:1139",
+      "location": "implot:1097",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_CancelPlotSelection",
       "ret": "void",
@@ -5628,7 +5416,7 @@
         "size": "ImVec2(0,0)"
       },
       "funcname": "ColormapButton",
-      "location": "implot:1305",
+      "location": "implot:1263",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_ColormapButton",
       "ret": "bool",
@@ -5651,7 +5439,7 @@
       "cimguiname": "ImPlot_ColormapIcon",
       "defaults": {},
       "funcname": "ColormapIcon",
-      "location": "implot:1335",
+      "location": "implot:1293",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_ColormapIcon",
       "ret": "void",
@@ -5703,7 +5491,7 @@
         "size": "ImVec2(0,0)"
       },
       "funcname": "ColormapScale",
-      "location": "implot:1301",
+      "location": "implot:1259",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_ColormapScale",
       "ret": "void",
@@ -5746,7 +5534,7 @@
         "out": "nullptr"
       },
       "funcname": "ColormapSlider",
-      "location": "implot:1303",
+      "location": "implot:1261",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_ColormapSlider",
       "ret": "bool",
@@ -5793,7 +5581,7 @@
       "cimguiname": "ImPlot_CreateContext",
       "defaults": {},
       "funcname": "CreateContext",
-      "location": "implot:733",
+      "location": "implot:694",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_CreateContext",
       "ret": "ImPlotContext*",
@@ -5818,7 +5606,7 @@
         "ctx": "nullptr"
       },
       "funcname": "DestroyContext",
-      "location": "implot:735",
+      "location": "implot:696",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_DestroyContext",
       "ret": "void",
@@ -5875,7 +5663,7 @@
         "thickness": "1"
       },
       "funcname": "DragLineX",
-      "location": "implot:1080",
+      "location": "implot:1038",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_DragLineX",
       "ret": "bool",
@@ -5932,7 +5720,7 @@
         "thickness": "1"
       },
       "funcname": "DragLineY",
-      "location": "implot:1082",
+      "location": "implot:1040",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_DragLineY",
       "ret": "bool",
@@ -5993,7 +5781,7 @@
         "size": "4"
       },
       "funcname": "DragPoint",
-      "location": "implot:1078",
+      "location": "implot:1036",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_DragPoint",
       "ret": "bool",
@@ -6057,7 +5845,7 @@
         "out_hovered": "nullptr"
       },
       "funcname": "DragRect",
-      "location": "implot:1084",
+      "location": "implot:1042",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_DragRect",
       "ret": "bool",
@@ -6075,7 +5863,7 @@
       "cimguiname": "ImPlot_EndAlignedPlots",
       "defaults": {},
       "funcname": "EndAlignedPlots",
-      "location": "implot:1154",
+      "location": "implot:1112",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_EndAlignedPlots",
       "ret": "void",
@@ -6093,7 +5881,7 @@
       "cimguiname": "ImPlot_EndDragDropSource",
       "defaults": {},
       "funcname": "EndDragDropSource",
-      "location": "implot:1190",
+      "location": "implot:1148",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_EndDragDropSource",
       "ret": "void",
@@ -6111,7 +5899,7 @@
       "cimguiname": "ImPlot_EndDragDropTarget",
       "defaults": {},
       "funcname": "EndDragDropTarget",
-      "location": "implot:1178",
+      "location": "implot:1136",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_EndDragDropTarget",
       "ret": "void",
@@ -6147,7 +5935,7 @@
       "cimguiname": "ImPlot_EndLegendPopup",
       "defaults": {},
       "funcname": "EndLegendPopup",
-      "location": "implot:1163",
+      "location": "implot:1121",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_EndLegendPopup",
       "ret": "void",
@@ -6165,7 +5953,7 @@
       "cimguiname": "ImPlot_EndPlot",
       "defaults": {},
       "funcname": "EndPlot",
-      "location": "implot:771",
+      "location": "implot:732",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_EndPlot",
       "ret": "void",
@@ -6183,7 +5971,7 @@
       "cimguiname": "ImPlot_EndSubplots",
       "defaults": {},
       "funcname": "EndSubplots",
-      "location": "implot:833",
+      "location": "implot:794",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_EndSubplots",
       "ret": "void",
@@ -6198,7 +5986,6 @@
         {
           "name": "buffer",
           "reftoptr": true,
-          "template_orig": "ImVector<float>& buffer",
           "type": "ImVector_float *"
         },
         {
@@ -6233,7 +6020,6 @@
         {
           "name": "buffer",
           "reftoptr": true,
-          "template_orig": "ImVector<double>& buffer",
           "type": "ImVector_double *"
         },
         {
@@ -6268,7 +6054,6 @@
         {
           "name": "buffer",
           "reftoptr": true,
-          "template_orig": "ImVector<ImS8>& buffer",
           "type": "ImVector_ImS8 *"
         },
         {
@@ -6303,7 +6088,6 @@
         {
           "name": "buffer",
           "reftoptr": true,
-          "template_orig": "ImVector<ImU8>& buffer",
           "type": "ImVector_ImU8 *"
         },
         {
@@ -6338,7 +6122,6 @@
         {
           "name": "buffer",
           "reftoptr": true,
-          "template_orig": "ImVector<ImS16>& buffer",
           "type": "ImVector_ImS16 *"
         },
         {
@@ -6373,7 +6156,6 @@
         {
           "name": "buffer",
           "reftoptr": true,
-          "template_orig": "ImVector<ImU16>& buffer",
           "type": "ImVector_ImU16 *"
         },
         {
@@ -6408,7 +6190,6 @@
         {
           "name": "buffer",
           "reftoptr": true,
-          "template_orig": "ImVector<ImS32>& buffer",
           "type": "ImVector_ImS32 *"
         },
         {
@@ -6443,7 +6224,6 @@
         {
           "name": "buffer",
           "reftoptr": true,
-          "template_orig": "ImVector<ImU32>& buffer",
           "type": "ImVector_ImU32 *"
         },
         {
@@ -6478,7 +6258,6 @@
         {
           "name": "buffer",
           "reftoptr": true,
-          "template_orig": "ImVector<ImS64>& buffer",
           "type": "ImVector_ImS64 *"
         },
         {
@@ -6513,7 +6292,6 @@
         {
           "name": "buffer",
           "reftoptr": true,
-          "template_orig": "ImVector<ImU64>& buffer",
           "type": "ImVector_ImU64 *"
         },
         {
@@ -6924,7 +6702,7 @@
         "cmap": "IMPLOT_AUTO"
       },
       "funcname": "GetColormapColor",
-      "location": "implot:1296",
+      "location": "implot:1254",
       "namespace": "ImPlot",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlot_GetColormapColor",
@@ -6970,7 +6748,7 @@
       "cimguiname": "ImPlot_GetColormapCount",
       "defaults": {},
       "funcname": "GetColormapCount",
-      "location": "implot:1273",
+      "location": "implot:1231",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_GetColormapCount",
       "ret": "int",
@@ -6993,7 +6771,7 @@
       "cimguiname": "ImPlot_GetColormapIndex",
       "defaults": {},
       "funcname": "GetColormapIndex",
-      "location": "implot:1277",
+      "location": "implot:1235",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_GetColormapIndex",
       "ret": "ImPlotColormap",
@@ -7016,7 +6794,7 @@
       "cimguiname": "ImPlot_GetColormapName",
       "defaults": {},
       "funcname": "GetColormapName",
-      "location": "implot:1275",
+      "location": "implot:1233",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_GetColormapName",
       "ret": "const char*",
@@ -7041,7 +6819,7 @@
         "cmap": "IMPLOT_AUTO"
       },
       "funcname": "GetColormapSize",
-      "location": "implot:1294",
+      "location": "implot:1252",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_GetColormapSize",
       "ret": "int",
@@ -7059,7 +6837,7 @@
       "cimguiname": "ImPlot_GetCurrentContext",
       "defaults": {},
       "funcname": "GetCurrentContext",
-      "location": "implot:737",
+      "location": "implot:698",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_GetCurrentContext",
       "ret": "ImPlotContext*",
@@ -7167,7 +6945,7 @@
       "cimguiname": "ImPlot_GetInputMap",
       "defaults": {},
       "funcname": "GetInputMap",
-      "location": "implot:1321",
+      "location": "implot:1279",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_GetInputMap",
       "ret": "ImPlotInputMap*",
@@ -7229,7 +7007,7 @@
       "conv": "ImVec4",
       "defaults": {},
       "funcname": "GetLastItemColor",
-      "location": "implot:1240",
+      "location": "implot:1198",
       "namespace": "ImPlot",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlot_GetLastItemColor",
@@ -7319,7 +7097,7 @@
       "cimguiname": "ImPlot_GetMarkerName",
       "defaults": {},
       "funcname": "GetMarkerName",
-      "location": "implot:1245",
+      "location": "implot:1203",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_GetMarkerName",
       "ret": "const char*",
@@ -7383,7 +7161,7 @@
       "cimguiname": "ImPlot_GetPlotDrawList",
       "defaults": {},
       "funcname": "GetPlotDrawList",
-      "location": "implot:1338",
+      "location": "implot:1296",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_GetPlotDrawList",
       "ret": "ImDrawList*",
@@ -7414,7 +7192,7 @@
         "y_axis": "IMPLOT_AUTO"
       },
       "funcname": "GetPlotLimits",
-      "location": "implot:1125",
+      "location": "implot:1083",
       "namespace": "ImPlot",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlot_GetPlotLimits",
@@ -7446,7 +7224,7 @@
         "y_axis": "IMPLOT_AUTO"
       },
       "funcname": "GetPlotMousePos",
-      "location": "implot:1123",
+      "location": "implot:1081",
       "namespace": "ImPlot",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlot_GetPlotMousePos",
@@ -7466,7 +7244,7 @@
       "conv": "ImVec2",
       "defaults": {},
       "funcname": "GetPlotPos",
-      "location": "implot:1118",
+      "location": "implot:1076",
       "namespace": "ImPlot",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlot_GetPlotPos",
@@ -7498,7 +7276,7 @@
         "y_axis": "IMPLOT_AUTO"
       },
       "funcname": "GetPlotSelection",
-      "location": "implot:1137",
+      "location": "implot:1095",
       "namespace": "ImPlot",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlot_GetPlotSelection",
@@ -7518,7 +7296,7 @@
       "conv": "ImVec2",
       "defaults": {},
       "funcname": "GetPlotSize",
-      "location": "implot:1120",
+      "location": "implot:1078",
       "namespace": "ImPlot",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlot_GetPlotSize",
@@ -7537,7 +7315,7 @@
       "cimguiname": "ImPlot_GetStyle",
       "defaults": {},
       "funcname": "GetStyle",
-      "location": "implot:1209",
+      "location": "implot:1167",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_GetStyle",
       "ret": "ImPlotStyle*",
@@ -7561,7 +7339,7 @@
       "cimguiname": "ImPlot_GetStyleColorName",
       "defaults": {},
       "funcname": "GetStyleColorName",
-      "location": "implot:1243",
+      "location": "implot:1201",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_GetStyleColorName",
       "ret": "const char*",
@@ -7689,7 +7467,7 @@
         "hidden": "true"
       },
       "funcname": "HideNextItem",
-      "location": "implot:1143",
+      "location": "implot:1101",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_HideNextItem",
       "ret": "void",
@@ -10672,7 +10450,7 @@
       "cimguiname": "ImPlot_IsAxisHovered",
       "defaults": {},
       "funcname": "IsAxisHovered",
-      "location": "implot:1130",
+      "location": "implot:1088",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_IsAxisHovered",
       "ret": "bool",
@@ -10762,7 +10540,7 @@
       "cimguiname": "ImPlot_IsLegendEntryHovered",
       "defaults": {},
       "funcname": "IsLegendEntryHovered",
-      "location": "implot:1165",
+      "location": "implot:1123",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_IsLegendEntryHovered",
       "ret": "bool",
@@ -10780,7 +10558,7 @@
       "cimguiname": "ImPlot_IsPlotHovered",
       "defaults": {},
       "funcname": "IsPlotHovered",
-      "location": "implot:1128",
+      "location": "implot:1086",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_IsPlotHovered",
       "ret": "bool",
@@ -10798,7 +10576,7 @@
       "cimguiname": "ImPlot_IsPlotSelected",
       "defaults": {},
       "funcname": "IsPlotSelected",
-      "location": "implot:1135",
+      "location": "implot:1093",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_IsPlotSelected",
       "ret": "bool",
@@ -10816,7 +10594,7 @@
       "cimguiname": "ImPlot_IsSubplotsHovered",
       "defaults": {},
       "funcname": "IsSubplotsHovered",
-      "location": "implot:1132",
+      "location": "implot:1090",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_IsSubplotsHovered",
       "ret": "bool",
@@ -10839,7 +10617,7 @@
       "cimguiname": "ImPlot_ItemIcon",
       "defaults": {},
       "funcname": "ItemIcon",
-      "location": "implot:1333",
+      "location": "implot:1291",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_ItemIcon_Vec4",
       "ret": "void",
@@ -10860,7 +10638,7 @@
       "cimguiname": "ImPlot_ItemIcon",
       "defaults": {},
       "funcname": "ItemIcon",
-      "location": "implot:1334",
+      "location": "implot:1292",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_ItemIcon_U32",
       "ret": "void",
@@ -11158,7 +10936,7 @@
         "dst": "nullptr"
       },
       "funcname": "MapInputDefault",
-      "location": "implot:1324",
+      "location": "implot:1282",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_MapInputDefault",
       "ret": "void",
@@ -11183,7 +10961,7 @@
         "dst": "nullptr"
       },
       "funcname": "MapInputReverse",
-      "location": "implot:1326",
+      "location": "implot:1284",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_MapInputReverse",
       "ret": "void",
@@ -11277,7 +11055,7 @@
       "conv": "ImVec4",
       "defaults": {},
       "funcname": "NextColormapColor",
-      "location": "implot:1288",
+      "location": "implot:1246",
       "namespace": "ImPlot",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlot_NextColormapColor",
@@ -11314,7 +11092,7 @@
       "cimguiname": "ImPlot_NextMarker",
       "defaults": {},
       "funcname": "NextMarker",
-      "location": "implot:1248",
+      "location": "implot:1206",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_NextMarker",
       "ret": "ImPlotMarker",
@@ -11442,7 +11220,7 @@
         "y_axis": "IMPLOT_AUTO"
       },
       "funcname": "PixelsToPlot",
-      "location": "implot:1110",
+      "location": "implot:1068",
       "namespace": "ImPlot",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlot_PixelsToPlot_Vec2",
@@ -11480,7 +11258,7 @@
         "y_axis": "IMPLOT_AUTO"
       },
       "funcname": "PixelsToPlot",
-      "location": "implot:1111",
+      "location": "implot:1069",
       "namespace": "ImPlot",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlot_PixelsToPlot_Float",
@@ -11532,7 +11310,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBarGroups",
-      "location": "implot:1022",
+      "location": "implot:980",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBarGroups_FloatPtr",
       "ret": "void",
@@ -11581,7 +11359,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBarGroups",
-      "location": "implot:1022",
+      "location": "implot:980",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBarGroups_doublePtr",
       "ret": "void",
@@ -11630,7 +11408,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBarGroups",
-      "location": "implot:1022",
+      "location": "implot:980",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBarGroups_S8Ptr",
       "ret": "void",
@@ -11679,7 +11457,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBarGroups",
-      "location": "implot:1022",
+      "location": "implot:980",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBarGroups_U8Ptr",
       "ret": "void",
@@ -11728,7 +11506,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBarGroups",
-      "location": "implot:1022",
+      "location": "implot:980",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBarGroups_S16Ptr",
       "ret": "void",
@@ -11777,7 +11555,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBarGroups",
-      "location": "implot:1022",
+      "location": "implot:980",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBarGroups_U16Ptr",
       "ret": "void",
@@ -11826,7 +11604,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBarGroups",
-      "location": "implot:1022",
+      "location": "implot:980",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBarGroups_S32Ptr",
       "ret": "void",
@@ -11875,7 +11653,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBarGroups",
-      "location": "implot:1022",
+      "location": "implot:980",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBarGroups_U32Ptr",
       "ret": "void",
@@ -11924,7 +11702,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBarGroups",
-      "location": "implot:1022",
+      "location": "implot:980",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBarGroups_S64Ptr",
       "ret": "void",
@@ -11973,7 +11751,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBarGroups",
-      "location": "implot:1022",
+      "location": "implot:980",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBarGroups_U64Ptr",
       "ret": "void",
@@ -12020,7 +11798,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1017",
+      "location": "implot:975",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_FloatPtrInt",
       "ret": "void",
@@ -12065,7 +11843,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1017",
+      "location": "implot:975",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_doublePtrInt",
       "ret": "void",
@@ -12110,7 +11888,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1017",
+      "location": "implot:975",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_S8PtrInt",
       "ret": "void",
@@ -12155,7 +11933,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1017",
+      "location": "implot:975",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_U8PtrInt",
       "ret": "void",
@@ -12200,7 +11978,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1017",
+      "location": "implot:975",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_S16PtrInt",
       "ret": "void",
@@ -12245,7 +12023,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1017",
+      "location": "implot:975",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_U16PtrInt",
       "ret": "void",
@@ -12290,7 +12068,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1017",
+      "location": "implot:975",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_S32PtrInt",
       "ret": "void",
@@ -12335,7 +12113,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1017",
+      "location": "implot:975",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_U32PtrInt",
       "ret": "void",
@@ -12380,7 +12158,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1017",
+      "location": "implot:975",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_S64PtrInt",
       "ret": "void",
@@ -12425,7 +12203,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1017",
+      "location": "implot:975",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_U64PtrInt",
       "ret": "void",
@@ -12468,7 +12246,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1018",
+      "location": "implot:976",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_FloatPtrFloatPtr",
       "ret": "void",
@@ -12511,7 +12289,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1018",
+      "location": "implot:976",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_doublePtrdoublePtr",
       "ret": "void",
@@ -12554,7 +12332,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1018",
+      "location": "implot:976",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_S8PtrS8Ptr",
       "ret": "void",
@@ -12597,7 +12375,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1018",
+      "location": "implot:976",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_U8PtrU8Ptr",
       "ret": "void",
@@ -12640,7 +12418,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1018",
+      "location": "implot:976",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_S16PtrS16Ptr",
       "ret": "void",
@@ -12683,7 +12461,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1018",
+      "location": "implot:976",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_U16PtrU16Ptr",
       "ret": "void",
@@ -12726,7 +12504,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1018",
+      "location": "implot:976",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_S32PtrS32Ptr",
       "ret": "void",
@@ -12769,7 +12547,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1018",
+      "location": "implot:976",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_U32PtrU32Ptr",
       "ret": "void",
@@ -12812,7 +12590,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1018",
+      "location": "implot:976",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_S64PtrS64Ptr",
       "ret": "void",
@@ -12855,7 +12633,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBars",
-      "location": "implot:1018",
+      "location": "implot:976",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBars_U64PtrU64Ptr",
       "ret": "void",
@@ -12900,7 +12678,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBarsG",
-      "location": "implot:1019",
+      "location": "implot:977",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBarsG",
       "ret": "void",
@@ -12945,7 +12723,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBarsG",
-      "location": "implot:1019",
+      "location": "implot:977",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBarsG_LJ",
       "ret": "void",
@@ -12996,7 +12774,7 @@
         "xstart": "0"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:999",
+      "location": "implot:960",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_FloatPtrFloatPtrInt",
       "ret": "void",
@@ -13045,7 +12823,7 @@
         "xstart": "0"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:999",
+      "location": "implot:960",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_doublePtrdoublePtrInt",
       "ret": "void",
@@ -13094,7 +12872,7 @@
         "xstart": "0"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:999",
+      "location": "implot:960",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_S8PtrS8PtrInt",
       "ret": "void",
@@ -13143,7 +12921,7 @@
         "xstart": "0"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:999",
+      "location": "implot:960",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_U8PtrU8PtrInt",
       "ret": "void",
@@ -13192,7 +12970,7 @@
         "xstart": "0"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:999",
+      "location": "implot:960",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_S16PtrS16PtrInt",
       "ret": "void",
@@ -13241,7 +13019,7 @@
         "xstart": "0"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:999",
+      "location": "implot:960",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_U16PtrU16PtrInt",
       "ret": "void",
@@ -13290,7 +13068,7 @@
         "xstart": "0"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:999",
+      "location": "implot:960",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_S32PtrS32PtrInt",
       "ret": "void",
@@ -13339,7 +13117,7 @@
         "xstart": "0"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:999",
+      "location": "implot:960",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_U32PtrU32PtrInt",
       "ret": "void",
@@ -13388,7 +13166,7 @@
         "xstart": "0"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:999",
+      "location": "implot:960",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_S64PtrS64PtrInt",
       "ret": "void",
@@ -13437,7 +13215,7 @@
         "xstart": "0"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:999",
+      "location": "implot:960",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_U64PtrU64PtrInt",
       "ret": "void",
@@ -13480,7 +13258,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:1000",
+      "location": "implot:961",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_FloatPtrFloatPtrFloatPtr",
       "ret": "void",
@@ -13523,7 +13301,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:1000",
+      "location": "implot:961",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_doublePtrdoublePtrdoublePtr",
       "ret": "void",
@@ -13566,7 +13344,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:1000",
+      "location": "implot:961",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_S8PtrS8PtrS8Ptr",
       "ret": "void",
@@ -13609,7 +13387,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:1000",
+      "location": "implot:961",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_U8PtrU8PtrU8Ptr",
       "ret": "void",
@@ -13652,7 +13430,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:1000",
+      "location": "implot:961",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_S16PtrS16PtrS16Ptr",
       "ret": "void",
@@ -13695,7 +13473,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:1000",
+      "location": "implot:961",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_U16PtrU16PtrU16Ptr",
       "ret": "void",
@@ -13738,7 +13516,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:1000",
+      "location": "implot:961",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_S32PtrS32PtrS32Ptr",
       "ret": "void",
@@ -13781,7 +13559,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:1000",
+      "location": "implot:961",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_U32PtrU32PtrU32Ptr",
       "ret": "void",
@@ -13824,7 +13602,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:1000",
+      "location": "implot:961",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_S64PtrS64PtrS64Ptr",
       "ret": "void",
@@ -13867,7 +13645,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotBubbles",
-      "location": "implot:1000",
+      "location": "implot:961",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotBubbles_U64PtrU64PtrU64Ptr",
       "ret": "void",
@@ -13908,7 +13686,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotDigital",
-      "location": "implot:1051",
+      "location": "implot:1009",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotDigital_FloatPtr",
       "ret": "void",
@@ -13947,7 +13725,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotDigital",
-      "location": "implot:1051",
+      "location": "implot:1009",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotDigital_doublePtr",
       "ret": "void",
@@ -13986,7 +13764,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotDigital",
-      "location": "implot:1051",
+      "location": "implot:1009",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotDigital_S8Ptr",
       "ret": "void",
@@ -14025,7 +13803,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotDigital",
-      "location": "implot:1051",
+      "location": "implot:1009",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotDigital_U8Ptr",
       "ret": "void",
@@ -14064,7 +13842,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotDigital",
-      "location": "implot:1051",
+      "location": "implot:1009",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotDigital_S16Ptr",
       "ret": "void",
@@ -14103,7 +13881,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotDigital",
-      "location": "implot:1051",
+      "location": "implot:1009",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotDigital_U16Ptr",
       "ret": "void",
@@ -14142,7 +13920,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotDigital",
-      "location": "implot:1051",
+      "location": "implot:1009",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotDigital_S32Ptr",
       "ret": "void",
@@ -14181,7 +13959,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotDigital",
-      "location": "implot:1051",
+      "location": "implot:1009",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotDigital_U32Ptr",
       "ret": "void",
@@ -14220,7 +13998,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotDigital",
-      "location": "implot:1051",
+      "location": "implot:1009",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotDigital_S64Ptr",
       "ret": "void",
@@ -14259,7 +14037,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotDigital",
-      "location": "implot:1051",
+      "location": "implot:1009",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotDigital_U64Ptr",
       "ret": "void",
@@ -14300,7 +14078,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotDigitalG",
-      "location": "implot:1052",
+      "location": "implot:1010",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotDigitalG",
       "ret": "void",
@@ -14341,7 +14119,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotDigitalG",
-      "location": "implot:1052",
+      "location": "implot:1010",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotDigitalG_LJ",
       "ret": "void",
@@ -14370,7 +14148,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotDummy",
-      "location": "implot:1065",
+      "location": "implot:1023",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotDummy",
       "ret": "void",
@@ -14415,7 +14193,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1025",
+      "location": "implot:983",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_FloatPtrFloatPtrFloatPtrInt",
       "ret": "void",
@@ -14458,7 +14236,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1025",
+      "location": "implot:983",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_doublePtrdoublePtrdoublePtrInt",
       "ret": "void",
@@ -14501,7 +14279,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1025",
+      "location": "implot:983",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_S8PtrS8PtrS8PtrInt",
       "ret": "void",
@@ -14544,7 +14322,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1025",
+      "location": "implot:983",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_U8PtrU8PtrU8PtrInt",
       "ret": "void",
@@ -14587,7 +14365,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1025",
+      "location": "implot:983",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_S16PtrS16PtrS16PtrInt",
       "ret": "void",
@@ -14630,7 +14408,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1025",
+      "location": "implot:983",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_U16PtrU16PtrU16PtrInt",
       "ret": "void",
@@ -14673,7 +14451,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1025",
+      "location": "implot:983",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_S32PtrS32PtrS32PtrInt",
       "ret": "void",
@@ -14716,7 +14494,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1025",
+      "location": "implot:983",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_U32PtrU32PtrU32PtrInt",
       "ret": "void",
@@ -14759,7 +14537,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1025",
+      "location": "implot:983",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_S64PtrS64PtrS64PtrInt",
       "ret": "void",
@@ -14802,7 +14580,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1025",
+      "location": "implot:983",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_U64PtrU64PtrU64PtrInt",
       "ret": "void",
@@ -14849,7 +14627,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1026",
+      "location": "implot:984",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_FloatPtrFloatPtrFloatPtrFloatPtr",
       "ret": "void",
@@ -14896,7 +14674,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1026",
+      "location": "implot:984",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_doublePtrdoublePtrdoublePtrdoublePtr",
       "ret": "void",
@@ -14943,7 +14721,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1026",
+      "location": "implot:984",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_S8PtrS8PtrS8PtrS8Ptr",
       "ret": "void",
@@ -14990,7 +14768,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1026",
+      "location": "implot:984",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_U8PtrU8PtrU8PtrU8Ptr",
       "ret": "void",
@@ -15037,7 +14815,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1026",
+      "location": "implot:984",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_S16PtrS16PtrS16PtrS16Ptr",
       "ret": "void",
@@ -15084,7 +14862,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1026",
+      "location": "implot:984",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_U16PtrU16PtrU16PtrU16Ptr",
       "ret": "void",
@@ -15131,7 +14909,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1026",
+      "location": "implot:984",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_S32PtrS32PtrS32PtrS32Ptr",
       "ret": "void",
@@ -15178,7 +14956,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1026",
+      "location": "implot:984",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_U32PtrU32PtrU32PtrU32Ptr",
       "ret": "void",
@@ -15225,7 +15003,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1026",
+      "location": "implot:984",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_S64PtrS64PtrS64PtrS64Ptr",
       "ret": "void",
@@ -15272,7 +15050,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotErrorBars",
-      "location": "implot:1026",
+      "location": "implot:984",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotErrorBars_U64PtrU64PtrU64PtrU64Ptr",
       "ret": "void",
@@ -15338,7 +15116,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHeatmap",
-      "location": "implot:1040",
+      "location": "implot:998",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHeatmap_FloatPtr",
       "ret": "void",
@@ -15402,7 +15180,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHeatmap",
-      "location": "implot:1040",
+      "location": "implot:998",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHeatmap_doublePtr",
       "ret": "void",
@@ -15466,7 +15244,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHeatmap",
-      "location": "implot:1040",
+      "location": "implot:998",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHeatmap_S8Ptr",
       "ret": "void",
@@ -15530,7 +15308,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHeatmap",
-      "location": "implot:1040",
+      "location": "implot:998",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHeatmap_U8Ptr",
       "ret": "void",
@@ -15594,7 +15372,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHeatmap",
-      "location": "implot:1040",
+      "location": "implot:998",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHeatmap_S16Ptr",
       "ret": "void",
@@ -15658,7 +15436,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHeatmap",
-      "location": "implot:1040",
+      "location": "implot:998",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHeatmap_U16Ptr",
       "ret": "void",
@@ -15722,7 +15500,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHeatmap",
-      "location": "implot:1040",
+      "location": "implot:998",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHeatmap_S32Ptr",
       "ret": "void",
@@ -15786,7 +15564,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHeatmap",
-      "location": "implot:1040",
+      "location": "implot:998",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHeatmap_U32Ptr",
       "ret": "void",
@@ -15850,7 +15628,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHeatmap",
-      "location": "implot:1040",
+      "location": "implot:998",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHeatmap_S64Ptr",
       "ret": "void",
@@ -15914,7 +15692,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHeatmap",
-      "location": "implot:1040",
+      "location": "implot:998",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHeatmap_U64Ptr",
       "ret": "void",
@@ -15966,7 +15744,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHistogram",
-      "location": "implot:1044",
+      "location": "implot:1002",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram_FloatPtr",
       "ret": "double",
@@ -16016,7 +15794,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHistogram",
-      "location": "implot:1044",
+      "location": "implot:1002",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram_doublePtr",
       "ret": "double",
@@ -16066,7 +15844,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHistogram",
-      "location": "implot:1044",
+      "location": "implot:1002",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram_S8Ptr",
       "ret": "double",
@@ -16116,7 +15894,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHistogram",
-      "location": "implot:1044",
+      "location": "implot:1002",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram_U8Ptr",
       "ret": "double",
@@ -16166,7 +15944,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHistogram",
-      "location": "implot:1044",
+      "location": "implot:1002",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram_S16Ptr",
       "ret": "double",
@@ -16216,7 +15994,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHistogram",
-      "location": "implot:1044",
+      "location": "implot:1002",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram_U16Ptr",
       "ret": "double",
@@ -16266,7 +16044,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHistogram",
-      "location": "implot:1044",
+      "location": "implot:1002",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram_S32Ptr",
       "ret": "double",
@@ -16316,7 +16094,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHistogram",
-      "location": "implot:1044",
+      "location": "implot:1002",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram_U32Ptr",
       "ret": "double",
@@ -16366,7 +16144,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHistogram",
-      "location": "implot:1044",
+      "location": "implot:1002",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram_S64Ptr",
       "ret": "double",
@@ -16416,7 +16194,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotHistogram",
-      "location": "implot:1044",
+      "location": "implot:1002",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram_U64Ptr",
       "ret": "double",
@@ -16472,7 +16250,7 @@
         "y_bins": "ImPlotBin_Sturges"
       },
       "funcname": "PlotHistogram2D",
-      "location": "implot:1048",
+      "location": "implot:1006",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram2D_FloatPtr",
       "ret": "double",
@@ -16526,7 +16304,7 @@
         "y_bins": "ImPlotBin_Sturges"
       },
       "funcname": "PlotHistogram2D",
-      "location": "implot:1048",
+      "location": "implot:1006",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram2D_doublePtr",
       "ret": "double",
@@ -16580,7 +16358,7 @@
         "y_bins": "ImPlotBin_Sturges"
       },
       "funcname": "PlotHistogram2D",
-      "location": "implot:1048",
+      "location": "implot:1006",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram2D_S8Ptr",
       "ret": "double",
@@ -16634,7 +16412,7 @@
         "y_bins": "ImPlotBin_Sturges"
       },
       "funcname": "PlotHistogram2D",
-      "location": "implot:1048",
+      "location": "implot:1006",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram2D_U8Ptr",
       "ret": "double",
@@ -16688,7 +16466,7 @@
         "y_bins": "ImPlotBin_Sturges"
       },
       "funcname": "PlotHistogram2D",
-      "location": "implot:1048",
+      "location": "implot:1006",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram2D_S16Ptr",
       "ret": "double",
@@ -16742,7 +16520,7 @@
         "y_bins": "ImPlotBin_Sturges"
       },
       "funcname": "PlotHistogram2D",
-      "location": "implot:1048",
+      "location": "implot:1006",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram2D_U16Ptr",
       "ret": "double",
@@ -16796,7 +16574,7 @@
         "y_bins": "ImPlotBin_Sturges"
       },
       "funcname": "PlotHistogram2D",
-      "location": "implot:1048",
+      "location": "implot:1006",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram2D_S32Ptr",
       "ret": "double",
@@ -16850,7 +16628,7 @@
         "y_bins": "ImPlotBin_Sturges"
       },
       "funcname": "PlotHistogram2D",
-      "location": "implot:1048",
+      "location": "implot:1006",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram2D_U32Ptr",
       "ret": "double",
@@ -16904,7 +16682,7 @@
         "y_bins": "ImPlotBin_Sturges"
       },
       "funcname": "PlotHistogram2D",
-      "location": "implot:1048",
+      "location": "implot:1006",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram2D_S64Ptr",
       "ret": "double",
@@ -16958,7 +16736,7 @@
         "y_bins": "ImPlotBin_Sturges"
       },
       "funcname": "PlotHistogram2D",
-      "location": "implot:1048",
+      "location": "implot:1006",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotHistogram2D_U64Ptr",
       "ret": "double",
@@ -17014,7 +16792,7 @@
         "uv1": "ImVec2(1,1)"
       },
       "funcname": "PlotImage",
-      "location": "implot:1056",
+      "location": "implot:1014",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotImage",
       "ret": "void",
@@ -17051,7 +16829,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotInfLines",
-      "location": "implot:1033",
+      "location": "implot:991",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotInfLines_FloatPtr",
       "ret": "void",
@@ -17086,7 +16864,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotInfLines",
-      "location": "implot:1033",
+      "location": "implot:991",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotInfLines_doublePtr",
       "ret": "void",
@@ -17121,7 +16899,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotInfLines",
-      "location": "implot:1033",
+      "location": "implot:991",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotInfLines_S8Ptr",
       "ret": "void",
@@ -17156,7 +16934,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotInfLines",
-      "location": "implot:1033",
+      "location": "implot:991",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotInfLines_U8Ptr",
       "ret": "void",
@@ -17191,7 +16969,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotInfLines",
-      "location": "implot:1033",
+      "location": "implot:991",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotInfLines_S16Ptr",
       "ret": "void",
@@ -17226,7 +17004,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotInfLines",
-      "location": "implot:1033",
+      "location": "implot:991",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotInfLines_U16Ptr",
       "ret": "void",
@@ -17261,7 +17039,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotInfLines",
-      "location": "implot:1033",
+      "location": "implot:991",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotInfLines_S32Ptr",
       "ret": "void",
@@ -17296,7 +17074,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotInfLines",
-      "location": "implot:1033",
+      "location": "implot:991",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotInfLines_U32Ptr",
       "ret": "void",
@@ -17331,7 +17109,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotInfLines",
-      "location": "implot:1033",
+      "location": "implot:991",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotInfLines_S64Ptr",
       "ret": "void",
@@ -17366,7 +17144,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotInfLines",
-      "location": "implot:1033",
+      "location": "implot:991",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotInfLines_U64Ptr",
       "ret": "void",
@@ -17413,7 +17191,7 @@
         "xstart": "0"
       },
       "funcname": "PlotLine",
-      "location": "implot:989",
+      "location": "implot:950",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_FloatPtrInt",
       "ret": "void",
@@ -17458,7 +17236,7 @@
         "xstart": "0"
       },
       "funcname": "PlotLine",
-      "location": "implot:989",
+      "location": "implot:950",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_doublePtrInt",
       "ret": "void",
@@ -17503,7 +17281,7 @@
         "xstart": "0"
       },
       "funcname": "PlotLine",
-      "location": "implot:989",
+      "location": "implot:950",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_S8PtrInt",
       "ret": "void",
@@ -17548,7 +17326,7 @@
         "xstart": "0"
       },
       "funcname": "PlotLine",
-      "location": "implot:989",
+      "location": "implot:950",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_U8PtrInt",
       "ret": "void",
@@ -17593,7 +17371,7 @@
         "xstart": "0"
       },
       "funcname": "PlotLine",
-      "location": "implot:989",
+      "location": "implot:950",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_S16PtrInt",
       "ret": "void",
@@ -17638,7 +17416,7 @@
         "xstart": "0"
       },
       "funcname": "PlotLine",
-      "location": "implot:989",
+      "location": "implot:950",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_U16PtrInt",
       "ret": "void",
@@ -17683,7 +17461,7 @@
         "xstart": "0"
       },
       "funcname": "PlotLine",
-      "location": "implot:989",
+      "location": "implot:950",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_S32PtrInt",
       "ret": "void",
@@ -17728,7 +17506,7 @@
         "xstart": "0"
       },
       "funcname": "PlotLine",
-      "location": "implot:989",
+      "location": "implot:950",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_U32PtrInt",
       "ret": "void",
@@ -17773,7 +17551,7 @@
         "xstart": "0"
       },
       "funcname": "PlotLine",
-      "location": "implot:989",
+      "location": "implot:950",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_S64PtrInt",
       "ret": "void",
@@ -17818,7 +17596,7 @@
         "xstart": "0"
       },
       "funcname": "PlotLine",
-      "location": "implot:989",
+      "location": "implot:950",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_U64PtrInt",
       "ret": "void",
@@ -17857,7 +17635,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotLine",
-      "location": "implot:990",
+      "location": "implot:951",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_FloatPtrFloatPtr",
       "ret": "void",
@@ -17896,7 +17674,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotLine",
-      "location": "implot:990",
+      "location": "implot:951",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_doublePtrdoublePtr",
       "ret": "void",
@@ -17935,7 +17713,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotLine",
-      "location": "implot:990",
+      "location": "implot:951",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_S8PtrS8Ptr",
       "ret": "void",
@@ -17974,7 +17752,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotLine",
-      "location": "implot:990",
+      "location": "implot:951",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_U8PtrU8Ptr",
       "ret": "void",
@@ -18013,7 +17791,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotLine",
-      "location": "implot:990",
+      "location": "implot:951",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_S16PtrS16Ptr",
       "ret": "void",
@@ -18052,7 +17830,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotLine",
-      "location": "implot:990",
+      "location": "implot:951",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_U16PtrU16Ptr",
       "ret": "void",
@@ -18091,7 +17869,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotLine",
-      "location": "implot:990",
+      "location": "implot:951",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_S32PtrS32Ptr",
       "ret": "void",
@@ -18130,7 +17908,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotLine",
-      "location": "implot:990",
+      "location": "implot:951",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_U32PtrU32Ptr",
       "ret": "void",
@@ -18169,7 +17947,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotLine",
-      "location": "implot:990",
+      "location": "implot:951",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_S64PtrS64Ptr",
       "ret": "void",
@@ -18208,7 +17986,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotLine",
-      "location": "implot:990",
+      "location": "implot:951",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLine_U64PtrU64Ptr",
       "ret": "void",
@@ -18249,7 +18027,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotLineG",
-      "location": "implot:991",
+      "location": "implot:952",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLineG",
       "ret": "void",
@@ -18290,7 +18068,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotLineG",
-      "location": "implot:991",
+      "location": "implot:952",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotLineG_LJ",
       "ret": "void",
@@ -18353,7 +18131,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1036",
+      "location": "implot:994",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_FloatPtrPlotFormatter",
       "ret": "void",
@@ -18414,7 +18192,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1036",
+      "location": "implot:994",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_doublePtrPlotFormatter",
       "ret": "void",
@@ -18475,7 +18253,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1036",
+      "location": "implot:994",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_S8PtrPlotFormatter",
       "ret": "void",
@@ -18536,7 +18314,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1036",
+      "location": "implot:994",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_U8PtrPlotFormatter",
       "ret": "void",
@@ -18597,7 +18375,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1036",
+      "location": "implot:994",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_S16PtrPlotFormatter",
       "ret": "void",
@@ -18658,7 +18436,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1036",
+      "location": "implot:994",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_U16PtrPlotFormatter",
       "ret": "void",
@@ -18719,7 +18497,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1036",
+      "location": "implot:994",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_S32PtrPlotFormatter",
       "ret": "void",
@@ -18780,7 +18558,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1036",
+      "location": "implot:994",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_U32PtrPlotFormatter",
       "ret": "void",
@@ -18841,7 +18619,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1036",
+      "location": "implot:994",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_S64PtrPlotFormatter",
       "ret": "void",
@@ -18902,7 +18680,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1036",
+      "location": "implot:994",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_U64PtrPlotFormatter",
       "ret": "void",
@@ -18959,7 +18737,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1037",
+      "location": "implot:995",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_FloatPtrStr",
       "ret": "void",
@@ -19016,7 +18794,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1037",
+      "location": "implot:995",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_doublePtrStr",
       "ret": "void",
@@ -19073,7 +18851,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1037",
+      "location": "implot:995",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_S8PtrStr",
       "ret": "void",
@@ -19130,7 +18908,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1037",
+      "location": "implot:995",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_U8PtrStr",
       "ret": "void",
@@ -19187,7 +18965,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1037",
+      "location": "implot:995",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_S16PtrStr",
       "ret": "void",
@@ -19244,7 +19022,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1037",
+      "location": "implot:995",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_U16PtrStr",
       "ret": "void",
@@ -19301,7 +19079,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1037",
+      "location": "implot:995",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_S32PtrStr",
       "ret": "void",
@@ -19358,7 +19136,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1037",
+      "location": "implot:995",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_U32PtrStr",
       "ret": "void",
@@ -19415,7 +19193,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1037",
+      "location": "implot:995",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_S64PtrStr",
       "ret": "void",
@@ -19472,403 +19250,11 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotPieChart",
-      "location": "implot:1037",
+      "location": "implot:995",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotPieChart_U64PtrStr",
       "ret": "void",
       "signature": "(const char* const[],const ImU64*,int,double,double,double,const char*,double,const ImPlotSpec)",
-      "stname": ""
-    }
-  ],
-  "ImPlot_PlotPolygon": [
-    {
-      "args": "(const char* label_id,const float* xs,const float* ys,int count,const ImPlotSpec_c spec)",
-      "argsT": [
-        {
-          "name": "label_id",
-          "type": "const char*"
-        },
-        {
-          "name": "xs",
-          "type": "const float*"
-        },
-        {
-          "name": "ys",
-          "type": "const float*"
-        },
-        {
-          "name": "count",
-          "type": "int"
-        },
-        {
-          "name": "spec",
-          "type": "const ImPlotSpec"
-        }
-      ],
-      "argsoriginal": "(const char* label_id,const float* xs,const float* ys,int count,const ImPlotSpec& spec=ImPlotSpec())",
-      "call_args": "(label_id,xs,ys,count,ConvertToCPP_ImPlotSpec(spec))",
-      "call_args_old": "(label_id,xs,ys,count,spec)",
-      "cimguiname": "ImPlot_PlotPolygon",
-      "defaults": {
-        "spec": "ImPlotSpec()"
-      },
-      "funcname": "PlotPolygon",
-      "location": "implot:1003",
-      "namespace": "ImPlot",
-      "ov_cimguiname": "ImPlot_PlotPolygon_FloatPtr",
-      "ret": "void",
-      "signature": "(const char*,const float*,const float*,int,const ImPlotSpec)",
-      "stname": ""
-    },
-    {
-      "args": "(const char* label_id,const double* xs,const double* ys,int count,const ImPlotSpec_c spec)",
-      "argsT": [
-        {
-          "name": "label_id",
-          "type": "const char*"
-        },
-        {
-          "name": "xs",
-          "type": "const double*"
-        },
-        {
-          "name": "ys",
-          "type": "const double*"
-        },
-        {
-          "name": "count",
-          "type": "int"
-        },
-        {
-          "name": "spec",
-          "type": "const ImPlotSpec"
-        }
-      ],
-      "argsoriginal": "(const char* label_id,const double* xs,const double* ys,int count,const ImPlotSpec& spec=ImPlotSpec())",
-      "call_args": "(label_id,xs,ys,count,ConvertToCPP_ImPlotSpec(spec))",
-      "call_args_old": "(label_id,xs,ys,count,spec)",
-      "cimguiname": "ImPlot_PlotPolygon",
-      "defaults": {
-        "spec": "ImPlotSpec()"
-      },
-      "funcname": "PlotPolygon",
-      "location": "implot:1003",
-      "namespace": "ImPlot",
-      "ov_cimguiname": "ImPlot_PlotPolygon_doublePtr",
-      "ret": "void",
-      "signature": "(const char*,const double*,const double*,int,const ImPlotSpec)",
-      "stname": ""
-    },
-    {
-      "args": "(const char* label_id,const ImS8* xs,const ImS8* ys,int count,const ImPlotSpec_c spec)",
-      "argsT": [
-        {
-          "name": "label_id",
-          "type": "const char*"
-        },
-        {
-          "name": "xs",
-          "type": "const ImS8*"
-        },
-        {
-          "name": "ys",
-          "type": "const ImS8*"
-        },
-        {
-          "name": "count",
-          "type": "int"
-        },
-        {
-          "name": "spec",
-          "type": "const ImPlotSpec"
-        }
-      ],
-      "argsoriginal": "(const char* label_id,const ImS8* xs,const ImS8* ys,int count,const ImPlotSpec& spec=ImPlotSpec())",
-      "call_args": "(label_id,xs,ys,count,ConvertToCPP_ImPlotSpec(spec))",
-      "call_args_old": "(label_id,xs,ys,count,spec)",
-      "cimguiname": "ImPlot_PlotPolygon",
-      "defaults": {
-        "spec": "ImPlotSpec()"
-      },
-      "funcname": "PlotPolygon",
-      "location": "implot:1003",
-      "namespace": "ImPlot",
-      "ov_cimguiname": "ImPlot_PlotPolygon_S8Ptr",
-      "ret": "void",
-      "signature": "(const char*,const ImS8*,const ImS8*,int,const ImPlotSpec)",
-      "stname": ""
-    },
-    {
-      "args": "(const char* label_id,const ImU8* xs,const ImU8* ys,int count,const ImPlotSpec_c spec)",
-      "argsT": [
-        {
-          "name": "label_id",
-          "type": "const char*"
-        },
-        {
-          "name": "xs",
-          "type": "const ImU8*"
-        },
-        {
-          "name": "ys",
-          "type": "const ImU8*"
-        },
-        {
-          "name": "count",
-          "type": "int"
-        },
-        {
-          "name": "spec",
-          "type": "const ImPlotSpec"
-        }
-      ],
-      "argsoriginal": "(const char* label_id,const ImU8* xs,const ImU8* ys,int count,const ImPlotSpec& spec=ImPlotSpec())",
-      "call_args": "(label_id,xs,ys,count,ConvertToCPP_ImPlotSpec(spec))",
-      "call_args_old": "(label_id,xs,ys,count,spec)",
-      "cimguiname": "ImPlot_PlotPolygon",
-      "defaults": {
-        "spec": "ImPlotSpec()"
-      },
-      "funcname": "PlotPolygon",
-      "location": "implot:1003",
-      "namespace": "ImPlot",
-      "ov_cimguiname": "ImPlot_PlotPolygon_U8Ptr",
-      "ret": "void",
-      "signature": "(const char*,const ImU8*,const ImU8*,int,const ImPlotSpec)",
-      "stname": ""
-    },
-    {
-      "args": "(const char* label_id,const ImS16* xs,const ImS16* ys,int count,const ImPlotSpec_c spec)",
-      "argsT": [
-        {
-          "name": "label_id",
-          "type": "const char*"
-        },
-        {
-          "name": "xs",
-          "type": "const ImS16*"
-        },
-        {
-          "name": "ys",
-          "type": "const ImS16*"
-        },
-        {
-          "name": "count",
-          "type": "int"
-        },
-        {
-          "name": "spec",
-          "type": "const ImPlotSpec"
-        }
-      ],
-      "argsoriginal": "(const char* label_id,const ImS16* xs,const ImS16* ys,int count,const ImPlotSpec& spec=ImPlotSpec())",
-      "call_args": "(label_id,xs,ys,count,ConvertToCPP_ImPlotSpec(spec))",
-      "call_args_old": "(label_id,xs,ys,count,spec)",
-      "cimguiname": "ImPlot_PlotPolygon",
-      "defaults": {
-        "spec": "ImPlotSpec()"
-      },
-      "funcname": "PlotPolygon",
-      "location": "implot:1003",
-      "namespace": "ImPlot",
-      "ov_cimguiname": "ImPlot_PlotPolygon_S16Ptr",
-      "ret": "void",
-      "signature": "(const char*,const ImS16*,const ImS16*,int,const ImPlotSpec)",
-      "stname": ""
-    },
-    {
-      "args": "(const char* label_id,const ImU16* xs,const ImU16* ys,int count,const ImPlotSpec_c spec)",
-      "argsT": [
-        {
-          "name": "label_id",
-          "type": "const char*"
-        },
-        {
-          "name": "xs",
-          "type": "const ImU16*"
-        },
-        {
-          "name": "ys",
-          "type": "const ImU16*"
-        },
-        {
-          "name": "count",
-          "type": "int"
-        },
-        {
-          "name": "spec",
-          "type": "const ImPlotSpec"
-        }
-      ],
-      "argsoriginal": "(const char* label_id,const ImU16* xs,const ImU16* ys,int count,const ImPlotSpec& spec=ImPlotSpec())",
-      "call_args": "(label_id,xs,ys,count,ConvertToCPP_ImPlotSpec(spec))",
-      "call_args_old": "(label_id,xs,ys,count,spec)",
-      "cimguiname": "ImPlot_PlotPolygon",
-      "defaults": {
-        "spec": "ImPlotSpec()"
-      },
-      "funcname": "PlotPolygon",
-      "location": "implot:1003",
-      "namespace": "ImPlot",
-      "ov_cimguiname": "ImPlot_PlotPolygon_U16Ptr",
-      "ret": "void",
-      "signature": "(const char*,const ImU16*,const ImU16*,int,const ImPlotSpec)",
-      "stname": ""
-    },
-    {
-      "args": "(const char* label_id,const ImS32* xs,const ImS32* ys,int count,const ImPlotSpec_c spec)",
-      "argsT": [
-        {
-          "name": "label_id",
-          "type": "const char*"
-        },
-        {
-          "name": "xs",
-          "type": "const ImS32*"
-        },
-        {
-          "name": "ys",
-          "type": "const ImS32*"
-        },
-        {
-          "name": "count",
-          "type": "int"
-        },
-        {
-          "name": "spec",
-          "type": "const ImPlotSpec"
-        }
-      ],
-      "argsoriginal": "(const char* label_id,const ImS32* xs,const ImS32* ys,int count,const ImPlotSpec& spec=ImPlotSpec())",
-      "call_args": "(label_id,xs,ys,count,ConvertToCPP_ImPlotSpec(spec))",
-      "call_args_old": "(label_id,xs,ys,count,spec)",
-      "cimguiname": "ImPlot_PlotPolygon",
-      "defaults": {
-        "spec": "ImPlotSpec()"
-      },
-      "funcname": "PlotPolygon",
-      "location": "implot:1003",
-      "namespace": "ImPlot",
-      "ov_cimguiname": "ImPlot_PlotPolygon_S32Ptr",
-      "ret": "void",
-      "signature": "(const char*,const ImS32*,const ImS32*,int,const ImPlotSpec)",
-      "stname": ""
-    },
-    {
-      "args": "(const char* label_id,const ImU32* xs,const ImU32* ys,int count,const ImPlotSpec_c spec)",
-      "argsT": [
-        {
-          "name": "label_id",
-          "type": "const char*"
-        },
-        {
-          "name": "xs",
-          "type": "const ImU32*"
-        },
-        {
-          "name": "ys",
-          "type": "const ImU32*"
-        },
-        {
-          "name": "count",
-          "type": "int"
-        },
-        {
-          "name": "spec",
-          "type": "const ImPlotSpec"
-        }
-      ],
-      "argsoriginal": "(const char* label_id,const ImU32* xs,const ImU32* ys,int count,const ImPlotSpec& spec=ImPlotSpec())",
-      "call_args": "(label_id,xs,ys,count,ConvertToCPP_ImPlotSpec(spec))",
-      "call_args_old": "(label_id,xs,ys,count,spec)",
-      "cimguiname": "ImPlot_PlotPolygon",
-      "defaults": {
-        "spec": "ImPlotSpec()"
-      },
-      "funcname": "PlotPolygon",
-      "location": "implot:1003",
-      "namespace": "ImPlot",
-      "ov_cimguiname": "ImPlot_PlotPolygon_U32Ptr",
-      "ret": "void",
-      "signature": "(const char*,const ImU32*,const ImU32*,int,const ImPlotSpec)",
-      "stname": ""
-    },
-    {
-      "args": "(const char* label_id,const ImS64* xs,const ImS64* ys,int count,const ImPlotSpec_c spec)",
-      "argsT": [
-        {
-          "name": "label_id",
-          "type": "const char*"
-        },
-        {
-          "name": "xs",
-          "type": "const ImS64*"
-        },
-        {
-          "name": "ys",
-          "type": "const ImS64*"
-        },
-        {
-          "name": "count",
-          "type": "int"
-        },
-        {
-          "name": "spec",
-          "type": "const ImPlotSpec"
-        }
-      ],
-      "argsoriginal": "(const char* label_id,const ImS64* xs,const ImS64* ys,int count,const ImPlotSpec& spec=ImPlotSpec())",
-      "call_args": "(label_id,xs,ys,count,ConvertToCPP_ImPlotSpec(spec))",
-      "call_args_old": "(label_id,xs,ys,count,spec)",
-      "cimguiname": "ImPlot_PlotPolygon",
-      "defaults": {
-        "spec": "ImPlotSpec()"
-      },
-      "funcname": "PlotPolygon",
-      "location": "implot:1003",
-      "namespace": "ImPlot",
-      "ov_cimguiname": "ImPlot_PlotPolygon_S64Ptr",
-      "ret": "void",
-      "signature": "(const char*,const ImS64*,const ImS64*,int,const ImPlotSpec)",
-      "stname": ""
-    },
-    {
-      "args": "(const char* label_id,const ImU64* xs,const ImU64* ys,int count,const ImPlotSpec_c spec)",
-      "argsT": [
-        {
-          "name": "label_id",
-          "type": "const char*"
-        },
-        {
-          "name": "xs",
-          "type": "const ImU64*"
-        },
-        {
-          "name": "ys",
-          "type": "const ImU64*"
-        },
-        {
-          "name": "count",
-          "type": "int"
-        },
-        {
-          "name": "spec",
-          "type": "const ImPlotSpec"
-        }
-      ],
-      "argsoriginal": "(const char* label_id,const ImU64* xs,const ImU64* ys,int count,const ImPlotSpec& spec=ImPlotSpec())",
-      "call_args": "(label_id,xs,ys,count,ConvertToCPP_ImPlotSpec(spec))",
-      "call_args_old": "(label_id,xs,ys,count,spec)",
-      "cimguiname": "ImPlot_PlotPolygon",
-      "defaults": {
-        "spec": "ImPlotSpec()"
-      },
-      "funcname": "PlotPolygon",
-      "location": "implot:1003",
-      "namespace": "ImPlot",
-      "ov_cimguiname": "ImPlot_PlotPolygon_U64Ptr",
-      "ret": "void",
-      "signature": "(const char*,const ImU64*,const ImU64*,int,const ImPlotSpec)",
       "stname": ""
     }
   ],
@@ -19911,7 +19297,7 @@
         "xstart": "0"
       },
       "funcname": "PlotScatter",
-      "location": "implot:994",
+      "location": "implot:955",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_FloatPtrInt",
       "ret": "void",
@@ -19956,7 +19342,7 @@
         "xstart": "0"
       },
       "funcname": "PlotScatter",
-      "location": "implot:994",
+      "location": "implot:955",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_doublePtrInt",
       "ret": "void",
@@ -20001,7 +19387,7 @@
         "xstart": "0"
       },
       "funcname": "PlotScatter",
-      "location": "implot:994",
+      "location": "implot:955",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_S8PtrInt",
       "ret": "void",
@@ -20046,7 +19432,7 @@
         "xstart": "0"
       },
       "funcname": "PlotScatter",
-      "location": "implot:994",
+      "location": "implot:955",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_U8PtrInt",
       "ret": "void",
@@ -20091,7 +19477,7 @@
         "xstart": "0"
       },
       "funcname": "PlotScatter",
-      "location": "implot:994",
+      "location": "implot:955",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_S16PtrInt",
       "ret": "void",
@@ -20136,7 +19522,7 @@
         "xstart": "0"
       },
       "funcname": "PlotScatter",
-      "location": "implot:994",
+      "location": "implot:955",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_U16PtrInt",
       "ret": "void",
@@ -20181,7 +19567,7 @@
         "xstart": "0"
       },
       "funcname": "PlotScatter",
-      "location": "implot:994",
+      "location": "implot:955",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_S32PtrInt",
       "ret": "void",
@@ -20226,7 +19612,7 @@
         "xstart": "0"
       },
       "funcname": "PlotScatter",
-      "location": "implot:994",
+      "location": "implot:955",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_U32PtrInt",
       "ret": "void",
@@ -20271,7 +19657,7 @@
         "xstart": "0"
       },
       "funcname": "PlotScatter",
-      "location": "implot:994",
+      "location": "implot:955",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_S64PtrInt",
       "ret": "void",
@@ -20316,7 +19702,7 @@
         "xstart": "0"
       },
       "funcname": "PlotScatter",
-      "location": "implot:994",
+      "location": "implot:955",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_U64PtrInt",
       "ret": "void",
@@ -20355,7 +19741,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotScatter",
-      "location": "implot:995",
+      "location": "implot:956",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_FloatPtrFloatPtr",
       "ret": "void",
@@ -20394,7 +19780,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotScatter",
-      "location": "implot:995",
+      "location": "implot:956",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_doublePtrdoublePtr",
       "ret": "void",
@@ -20433,7 +19819,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotScatter",
-      "location": "implot:995",
+      "location": "implot:956",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_S8PtrS8Ptr",
       "ret": "void",
@@ -20472,7 +19858,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotScatter",
-      "location": "implot:995",
+      "location": "implot:956",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_U8PtrU8Ptr",
       "ret": "void",
@@ -20511,7 +19897,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotScatter",
-      "location": "implot:995",
+      "location": "implot:956",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_S16PtrS16Ptr",
       "ret": "void",
@@ -20550,7 +19936,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotScatter",
-      "location": "implot:995",
+      "location": "implot:956",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_U16PtrU16Ptr",
       "ret": "void",
@@ -20589,7 +19975,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotScatter",
-      "location": "implot:995",
+      "location": "implot:956",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_S32PtrS32Ptr",
       "ret": "void",
@@ -20628,7 +20014,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotScatter",
-      "location": "implot:995",
+      "location": "implot:956",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_U32PtrU32Ptr",
       "ret": "void",
@@ -20667,7 +20053,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotScatter",
-      "location": "implot:995",
+      "location": "implot:956",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_S64PtrS64Ptr",
       "ret": "void",
@@ -20706,7 +20092,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotScatter",
-      "location": "implot:995",
+      "location": "implot:956",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatter_U64PtrU64Ptr",
       "ret": "void",
@@ -20747,7 +20133,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotScatterG",
-      "location": "implot:996",
+      "location": "implot:957",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatterG",
       "ret": "void",
@@ -20788,7 +20174,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotScatterG",
-      "location": "implot:996",
+      "location": "implot:957",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotScatterG_LJ",
       "ret": "void",
@@ -20840,7 +20226,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1011",
+      "location": "implot:969",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_FloatPtrInt",
       "ret": "void",
@@ -20890,7 +20276,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1011",
+      "location": "implot:969",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_doublePtrInt",
       "ret": "void",
@@ -20940,7 +20326,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1011",
+      "location": "implot:969",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_S8PtrInt",
       "ret": "void",
@@ -20990,7 +20376,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1011",
+      "location": "implot:969",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_U8PtrInt",
       "ret": "void",
@@ -21040,7 +20426,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1011",
+      "location": "implot:969",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_S16PtrInt",
       "ret": "void",
@@ -21090,7 +20476,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1011",
+      "location": "implot:969",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_U16PtrInt",
       "ret": "void",
@@ -21140,7 +20526,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1011",
+      "location": "implot:969",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_S32PtrInt",
       "ret": "void",
@@ -21190,7 +20576,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1011",
+      "location": "implot:969",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_U32PtrInt",
       "ret": "void",
@@ -21240,7 +20626,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1011",
+      "location": "implot:969",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_S64PtrInt",
       "ret": "void",
@@ -21290,7 +20676,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1011",
+      "location": "implot:969",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_U64PtrInt",
       "ret": "void",
@@ -21334,7 +20720,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1012",
+      "location": "implot:970",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_FloatPtrFloatPtrInt",
       "ret": "void",
@@ -21378,7 +20764,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1012",
+      "location": "implot:970",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_doublePtrdoublePtrInt",
       "ret": "void",
@@ -21422,7 +20808,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1012",
+      "location": "implot:970",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_S8PtrS8PtrInt",
       "ret": "void",
@@ -21466,7 +20852,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1012",
+      "location": "implot:970",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_U8PtrU8PtrInt",
       "ret": "void",
@@ -21510,7 +20896,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1012",
+      "location": "implot:970",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_S16PtrS16PtrInt",
       "ret": "void",
@@ -21554,7 +20940,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1012",
+      "location": "implot:970",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_U16PtrU16PtrInt",
       "ret": "void",
@@ -21598,7 +20984,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1012",
+      "location": "implot:970",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_S32PtrS32PtrInt",
       "ret": "void",
@@ -21642,7 +21028,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1012",
+      "location": "implot:970",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_U32PtrU32PtrInt",
       "ret": "void",
@@ -21686,7 +21072,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1012",
+      "location": "implot:970",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_S64PtrS64PtrInt",
       "ret": "void",
@@ -21730,7 +21116,7 @@
         "yref": "0"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1012",
+      "location": "implot:970",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_U64PtrU64PtrInt",
       "ret": "void",
@@ -21773,7 +21159,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1013",
+      "location": "implot:971",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_FloatPtrFloatPtrFloatPtr",
       "ret": "void",
@@ -21816,7 +21202,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1013",
+      "location": "implot:971",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_doublePtrdoublePtrdoublePtr",
       "ret": "void",
@@ -21859,7 +21245,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1013",
+      "location": "implot:971",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_S8PtrS8PtrS8Ptr",
       "ret": "void",
@@ -21902,7 +21288,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1013",
+      "location": "implot:971",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_U8PtrU8PtrU8Ptr",
       "ret": "void",
@@ -21945,7 +21331,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1013",
+      "location": "implot:971",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_S16PtrS16PtrS16Ptr",
       "ret": "void",
@@ -21988,7 +21374,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1013",
+      "location": "implot:971",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_U16PtrU16PtrU16Ptr",
       "ret": "void",
@@ -22031,7 +21417,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1013",
+      "location": "implot:971",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_S32PtrS32PtrS32Ptr",
       "ret": "void",
@@ -22074,7 +21460,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1013",
+      "location": "implot:971",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_U32PtrU32PtrU32Ptr",
       "ret": "void",
@@ -22117,7 +21503,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1013",
+      "location": "implot:971",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_S64PtrS64PtrS64Ptr",
       "ret": "void",
@@ -22160,7 +21546,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotShaded",
-      "location": "implot:1013",
+      "location": "implot:971",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShaded_U64PtrU64PtrU64Ptr",
       "ret": "void",
@@ -22209,7 +21595,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotShadedG",
-      "location": "implot:1014",
+      "location": "implot:972",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShadedG",
       "ret": "void",
@@ -22258,7 +21644,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotShadedG",
-      "location": "implot:1014",
+      "location": "implot:972",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotShadedG_LJ",
       "ret": "void",
@@ -22305,7 +21691,7 @@
         "xstart": "0"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1006",
+      "location": "implot:964",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_FloatPtrInt",
       "ret": "void",
@@ -22350,7 +21736,7 @@
         "xstart": "0"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1006",
+      "location": "implot:964",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_doublePtrInt",
       "ret": "void",
@@ -22395,7 +21781,7 @@
         "xstart": "0"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1006",
+      "location": "implot:964",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_S8PtrInt",
       "ret": "void",
@@ -22440,7 +21826,7 @@
         "xstart": "0"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1006",
+      "location": "implot:964",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_U8PtrInt",
       "ret": "void",
@@ -22485,7 +21871,7 @@
         "xstart": "0"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1006",
+      "location": "implot:964",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_S16PtrInt",
       "ret": "void",
@@ -22530,7 +21916,7 @@
         "xstart": "0"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1006",
+      "location": "implot:964",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_U16PtrInt",
       "ret": "void",
@@ -22575,7 +21961,7 @@
         "xstart": "0"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1006",
+      "location": "implot:964",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_S32PtrInt",
       "ret": "void",
@@ -22620,7 +22006,7 @@
         "xstart": "0"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1006",
+      "location": "implot:964",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_U32PtrInt",
       "ret": "void",
@@ -22665,7 +22051,7 @@
         "xstart": "0"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1006",
+      "location": "implot:964",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_S64PtrInt",
       "ret": "void",
@@ -22710,7 +22096,7 @@
         "xstart": "0"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1006",
+      "location": "implot:964",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_U64PtrInt",
       "ret": "void",
@@ -22749,7 +22135,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1007",
+      "location": "implot:965",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_FloatPtrFloatPtr",
       "ret": "void",
@@ -22788,7 +22174,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1007",
+      "location": "implot:965",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_doublePtrdoublePtr",
       "ret": "void",
@@ -22827,7 +22213,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1007",
+      "location": "implot:965",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_S8PtrS8Ptr",
       "ret": "void",
@@ -22866,7 +22252,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1007",
+      "location": "implot:965",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_U8PtrU8Ptr",
       "ret": "void",
@@ -22905,7 +22291,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1007",
+      "location": "implot:965",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_S16PtrS16Ptr",
       "ret": "void",
@@ -22944,7 +22330,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1007",
+      "location": "implot:965",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_U16PtrU16Ptr",
       "ret": "void",
@@ -22983,7 +22369,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1007",
+      "location": "implot:965",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_S32PtrS32Ptr",
       "ret": "void",
@@ -23022,7 +22408,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1007",
+      "location": "implot:965",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_U32PtrU32Ptr",
       "ret": "void",
@@ -23061,7 +22447,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1007",
+      "location": "implot:965",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_S64PtrS64Ptr",
       "ret": "void",
@@ -23100,7 +22486,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStairs",
-      "location": "implot:1007",
+      "location": "implot:965",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairs_U64PtrU64Ptr",
       "ret": "void",
@@ -23141,7 +22527,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStairsG",
-      "location": "implot:1008",
+      "location": "implot:966",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairsG",
       "ret": "void",
@@ -23182,7 +22568,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStairsG",
-      "location": "implot:1008",
+      "location": "implot:966",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStairsG_LJ",
       "ret": "void",
@@ -23234,7 +22620,7 @@
         "start": "0"
       },
       "funcname": "PlotStems",
-      "location": "implot:1029",
+      "location": "implot:987",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_FloatPtrInt",
       "ret": "void",
@@ -23284,7 +22670,7 @@
         "start": "0"
       },
       "funcname": "PlotStems",
-      "location": "implot:1029",
+      "location": "implot:987",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_doublePtrInt",
       "ret": "void",
@@ -23334,7 +22720,7 @@
         "start": "0"
       },
       "funcname": "PlotStems",
-      "location": "implot:1029",
+      "location": "implot:987",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_S8PtrInt",
       "ret": "void",
@@ -23384,7 +22770,7 @@
         "start": "0"
       },
       "funcname": "PlotStems",
-      "location": "implot:1029",
+      "location": "implot:987",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_U8PtrInt",
       "ret": "void",
@@ -23434,7 +22820,7 @@
         "start": "0"
       },
       "funcname": "PlotStems",
-      "location": "implot:1029",
+      "location": "implot:987",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_S16PtrInt",
       "ret": "void",
@@ -23484,7 +22870,7 @@
         "start": "0"
       },
       "funcname": "PlotStems",
-      "location": "implot:1029",
+      "location": "implot:987",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_U16PtrInt",
       "ret": "void",
@@ -23534,7 +22920,7 @@
         "start": "0"
       },
       "funcname": "PlotStems",
-      "location": "implot:1029",
+      "location": "implot:987",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_S32PtrInt",
       "ret": "void",
@@ -23584,7 +22970,7 @@
         "start": "0"
       },
       "funcname": "PlotStems",
-      "location": "implot:1029",
+      "location": "implot:987",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_U32PtrInt",
       "ret": "void",
@@ -23634,7 +23020,7 @@
         "start": "0"
       },
       "funcname": "PlotStems",
-      "location": "implot:1029",
+      "location": "implot:987",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_S64PtrInt",
       "ret": "void",
@@ -23684,7 +23070,7 @@
         "start": "0"
       },
       "funcname": "PlotStems",
-      "location": "implot:1029",
+      "location": "implot:987",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_U64PtrInt",
       "ret": "void",
@@ -23728,7 +23114,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStems",
-      "location": "implot:1030",
+      "location": "implot:988",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_FloatPtrFloatPtr",
       "ret": "void",
@@ -23772,7 +23158,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStems",
-      "location": "implot:1030",
+      "location": "implot:988",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_doublePtrdoublePtr",
       "ret": "void",
@@ -23816,7 +23202,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStems",
-      "location": "implot:1030",
+      "location": "implot:988",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_S8PtrS8Ptr",
       "ret": "void",
@@ -23860,7 +23246,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStems",
-      "location": "implot:1030",
+      "location": "implot:988",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_U8PtrU8Ptr",
       "ret": "void",
@@ -23904,7 +23290,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStems",
-      "location": "implot:1030",
+      "location": "implot:988",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_S16PtrS16Ptr",
       "ret": "void",
@@ -23948,7 +23334,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStems",
-      "location": "implot:1030",
+      "location": "implot:988",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_U16PtrU16Ptr",
       "ret": "void",
@@ -23992,7 +23378,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStems",
-      "location": "implot:1030",
+      "location": "implot:988",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_S32PtrS32Ptr",
       "ret": "void",
@@ -24036,7 +23422,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStems",
-      "location": "implot:1030",
+      "location": "implot:988",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_U32PtrU32Ptr",
       "ret": "void",
@@ -24080,7 +23466,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStems",
-      "location": "implot:1030",
+      "location": "implot:988",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_S64PtrS64Ptr",
       "ret": "void",
@@ -24124,7 +23510,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotStems",
-      "location": "implot:1030",
+      "location": "implot:988",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotStems_U64PtrU64Ptr",
       "ret": "void",
@@ -24166,7 +23552,7 @@
         "spec": "ImPlotSpec()"
       },
       "funcname": "PlotText",
-      "location": "implot:1062",
+      "location": "implot:1020",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PlotText",
       "ret": "void",
@@ -24201,7 +23587,7 @@
         "y_axis": "IMPLOT_AUTO"
       },
       "funcname": "PlotToPixels",
-      "location": "implot:1114",
+      "location": "implot:1072",
       "namespace": "ImPlot",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlot_PlotToPixels_PlotPoint",
@@ -24239,7 +23625,7 @@
         "y_axis": "IMPLOT_AUTO"
       },
       "funcname": "PlotToPixels",
-      "location": "implot:1115",
+      "location": "implot:1073",
       "namespace": "ImPlot",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlot_PlotToPixels_double",
@@ -24265,7 +23651,7 @@
         "count": "1"
       },
       "funcname": "PopColormap",
-      "location": "implot:1284",
+      "location": "implot:1242",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PopColormap",
       "ret": "void",
@@ -24283,7 +23669,7 @@
       "cimguiname": "ImPlot_PopPlotClipRect",
       "defaults": {},
       "funcname": "PopPlotClipRect",
-      "location": "implot:1342",
+      "location": "implot:1300",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PopPlotClipRect",
       "ret": "void",
@@ -24308,7 +23694,7 @@
         "count": "1"
       },
       "funcname": "PopStyleColor",
-      "location": "implot:1228",
+      "location": "implot:1186",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PopStyleColor",
       "ret": "void",
@@ -24333,7 +23719,7 @@
         "count": "1"
       },
       "funcname": "PopStyleVar",
-      "location": "implot:1237",
+      "location": "implot:1195",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PopStyleVar",
       "ret": "void",
@@ -24379,7 +23765,7 @@
       "cimguiname": "ImPlot_PushColormap",
       "defaults": {},
       "funcname": "PushColormap",
-      "location": "implot:1280",
+      "location": "implot:1238",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PushColormap_PlotColormap",
       "ret": "void",
@@ -24400,7 +23786,7 @@
       "cimguiname": "ImPlot_PushColormap",
       "defaults": {},
       "funcname": "PushColormap",
-      "location": "implot:1282",
+      "location": "implot:1240",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PushColormap_Str",
       "ret": "void",
@@ -24425,7 +23811,7 @@
         "expand": "0"
       },
       "funcname": "PushPlotClipRect",
-      "location": "implot:1340",
+      "location": "implot:1298",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PushPlotClipRect",
       "ret": "void",
@@ -24452,7 +23838,7 @@
       "cimguiname": "ImPlot_PushStyleColor",
       "defaults": {},
       "funcname": "PushStyleColor",
-      "location": "implot:1225",
+      "location": "implot:1183",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PushStyleColor_U32",
       "ret": "void",
@@ -24477,7 +23863,7 @@
       "cimguiname": "ImPlot_PushStyleColor",
       "defaults": {},
       "funcname": "PushStyleColor",
-      "location": "implot:1226",
+      "location": "implot:1184",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PushStyleColor_Vec4",
       "ret": "void",
@@ -24504,7 +23890,7 @@
       "cimguiname": "ImPlot_PushStyleVar",
       "defaults": {},
       "funcname": "PushStyleVar",
-      "location": "implot:1231",
+      "location": "implot:1189",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PushStyleVar_Float",
       "ret": "void",
@@ -24529,7 +23915,7 @@
       "cimguiname": "ImPlot_PushStyleVar",
       "defaults": {},
       "funcname": "PushStyleVar",
-      "location": "implot:1233",
+      "location": "implot:1191",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PushStyleVar_Int",
       "ret": "void",
@@ -24554,7 +23940,7 @@
       "cimguiname": "ImPlot_PushStyleVar",
       "defaults": {},
       "funcname": "PushStyleVar",
-      "location": "implot:1235",
+      "location": "implot:1193",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_PushStyleVar_Vec2",
       "ret": "void",
@@ -24817,7 +24203,7 @@
         "cmap": "IMPLOT_AUTO"
       },
       "funcname": "SampleColormap",
-      "location": "implot:1298",
+      "location": "implot:1256",
       "namespace": "ImPlot",
       "nonUDT": 1,
       "ov_cimguiname": "ImPlot_SampleColormap",
@@ -24872,7 +24258,7 @@
       "cimguiname": "ImPlot_SetAxes",
       "defaults": {},
       "funcname": "SetAxes",
-      "location": "implot:1107",
+      "location": "implot:1065",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetAxes",
       "ret": "void",
@@ -24895,7 +24281,7 @@
       "cimguiname": "ImPlot_SetAxis",
       "defaults": {},
       "funcname": "SetAxis",
-      "location": "implot:1106",
+      "location": "implot:1064",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetAxis",
       "ret": "void",
@@ -24918,7 +24304,7 @@
       "cimguiname": "ImPlot_SetCurrentContext",
       "defaults": {},
       "funcname": "SetCurrentContext",
-      "location": "implot:739",
+      "location": "implot:700",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetCurrentContext",
       "ret": "void",
@@ -24941,7 +24327,7 @@
       "cimguiname": "ImPlot_SetImGuiContext",
       "defaults": {},
       "funcname": "SetImGuiContext",
-      "location": "implot:745",
+      "location": "implot:706",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetImGuiContext",
       "ret": "void",
@@ -24982,7 +24368,7 @@
         "cond": "ImPlotCond_Once"
       },
       "funcname": "SetNextAxesLimits",
-      "location": "implot:932",
+      "location": "implot:893",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetNextAxesLimits",
       "ret": "void",
@@ -25000,7 +24386,7 @@
       "cimguiname": "ImPlot_SetNextAxesToFit",
       "defaults": {},
       "funcname": "SetNextAxesToFit",
-      "location": "implot:934",
+      "location": "implot:895",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetNextAxesToFit",
       "ret": "void",
@@ -25037,7 +24423,7 @@
         "cond": "ImPlotCond_Once"
       },
       "funcname": "SetNextAxisLimits",
-      "location": "implot:925",
+      "location": "implot:886",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetNextAxisLimits",
       "ret": "void",
@@ -25068,7 +24454,7 @@
       "cimguiname": "ImPlot_SetNextAxisLinks",
       "defaults": {},
       "funcname": "SetNextAxisLinks",
-      "location": "implot:927",
+      "location": "implot:888",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetNextAxisLinks",
       "ret": "void",
@@ -25091,7 +24477,7 @@
       "cimguiname": "ImPlot_SetNextAxisToFit",
       "defaults": {},
       "funcname": "SetNextAxisToFit",
-      "location": "implot:929",
+      "location": "implot:890",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetNextAxisToFit",
       "ret": "void",
@@ -25129,7 +24515,7 @@
         "y_flags": "0"
       },
       "funcname": "SetupAxes",
-      "location": "implot:888",
+      "location": "implot:849",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetupAxes",
       "ret": "void",
@@ -25170,7 +24556,7 @@
         "cond": "ImPlotCond_Once"
       },
       "funcname": "SetupAxesLimits",
-      "location": "implot:890",
+      "location": "implot:851",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetupAxesLimits",
       "ret": "void",
@@ -25204,7 +24590,7 @@
         "label": "nullptr"
       },
       "funcname": "SetupAxis",
-      "location": "implot:865",
+      "location": "implot:826",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetupAxis",
       "ret": "void",
@@ -25231,7 +24617,7 @@
       "cimguiname": "ImPlot_SetupAxisFormat",
       "defaults": {},
       "funcname": "SetupAxisFormat",
-      "location": "implot:871",
+      "location": "implot:832",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetupAxisFormat_Str",
       "ret": "void",
@@ -25262,7 +24648,7 @@
         "data": "nullptr"
       },
       "funcname": "SetupAxisFormat",
-      "location": "implot:873",
+      "location": "implot:834",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetupAxisFormat_PlotFormatter",
       "ret": "void",
@@ -25299,7 +24685,7 @@
         "cond": "ImPlotCond_Once"
       },
       "funcname": "SetupAxisLimits",
-      "location": "implot:867",
+      "location": "implot:828",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetupAxisLimits",
       "ret": "void",
@@ -25330,7 +24716,7 @@
       "cimguiname": "ImPlot_SetupAxisLimitsConstraints",
       "defaults": {},
       "funcname": "SetupAxisLimitsConstraints",
-      "location": "implot:883",
+      "location": "implot:844",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetupAxisLimitsConstraints",
       "ret": "void",
@@ -25361,7 +24747,7 @@
       "cimguiname": "ImPlot_SetupAxisLinks",
       "defaults": {},
       "funcname": "SetupAxisLinks",
-      "location": "implot:869",
+      "location": "implot:830",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetupAxisLinks",
       "ret": "void",
@@ -25388,7 +24774,7 @@
       "cimguiname": "ImPlot_SetupAxisScale",
       "defaults": {},
       "funcname": "SetupAxisScale",
-      "location": "implot:879",
+      "location": "implot:840",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetupAxisScale_PlotScale",
       "ret": "void",
@@ -25423,7 +24809,7 @@
         "data": "nullptr"
       },
       "funcname": "SetupAxisScale",
-      "location": "implot:881",
+      "location": "implot:842",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetupAxisScale_PlotTransform",
       "ret": "void",
@@ -25465,7 +24851,7 @@
         "labels": "nullptr"
       },
       "funcname": "SetupAxisTicks",
-      "location": "implot:875",
+      "location": "implot:836",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetupAxisTicks_doublePtr",
       "ret": "void",
@@ -25509,7 +24895,7 @@
         "labels": "nullptr"
       },
       "funcname": "SetupAxisTicks",
-      "location": "implot:877",
+      "location": "implot:838",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetupAxisTicks_double",
       "ret": "void",
@@ -25540,7 +24926,7 @@
       "cimguiname": "ImPlot_SetupAxisZoomConstraints",
       "defaults": {},
       "funcname": "SetupAxisZoomConstraints",
-      "location": "implot:885",
+      "location": "implot:846",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetupAxisZoomConstraints",
       "ret": "void",
@@ -25558,7 +24944,7 @@
       "cimguiname": "ImPlot_SetupFinish",
       "defaults": {},
       "funcname": "SetupFinish",
-      "location": "implot:899",
+      "location": "implot:860",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetupFinish",
       "ret": "void",
@@ -25587,7 +24973,7 @@
         "flags": "0"
       },
       "funcname": "SetupLegend",
-      "location": "implot:893",
+      "location": "implot:854",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetupLegend",
       "ret": "void",
@@ -25634,7 +25020,7 @@
         "flags": "0"
       },
       "funcname": "SetupMouseText",
-      "location": "implot:895",
+      "location": "implot:856",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_SetupMouseText",
       "ret": "void",
@@ -25730,7 +25116,7 @@
       "cimguiname": "ImPlot_ShowColormapSelector",
       "defaults": {},
       "funcname": "ShowColormapSelector",
-      "location": "implot:1347",
+      "location": "implot:1305",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_ShowColormapSelector",
       "ret": "bool",
@@ -25797,7 +25183,7 @@
         "p_open": "nullptr"
       },
       "funcname": "ShowDemoWindow",
-      "location": "implot:1362",
+      "location": "implot:1320",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_ShowDemoWindow",
       "ret": "void",
@@ -25820,7 +25206,7 @@
       "cimguiname": "ImPlot_ShowInputMapSelector",
       "defaults": {},
       "funcname": "ShowInputMapSelector",
-      "location": "implot:1349",
+      "location": "implot:1307",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_ShowInputMapSelector",
       "ret": "bool",
@@ -25922,7 +25308,7 @@
         "p_popen": "nullptr"
       },
       "funcname": "ShowMetricsWindow",
-      "location": "implot:1355",
+      "location": "implot:1313",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_ShowMetricsWindow",
       "ret": "void",
@@ -25971,7 +25357,7 @@
         "ref": "nullptr"
       },
       "funcname": "ShowStyleEditor",
-      "location": "implot:1351",
+      "location": "implot:1309",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_ShowStyleEditor",
       "ret": "void",
@@ -25994,7 +25380,7 @@
       "cimguiname": "ImPlot_ShowStyleSelector",
       "defaults": {},
       "funcname": "ShowStyleSelector",
-      "location": "implot:1345",
+      "location": "implot:1303",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_ShowStyleSelector",
       "ret": "bool",
@@ -26063,7 +25449,7 @@
       "cimguiname": "ImPlot_ShowUserGuide",
       "defaults": {},
       "funcname": "ShowUserGuide",
-      "location": "implot:1353",
+      "location": "implot:1311",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_ShowUserGuide",
       "ret": "void",
@@ -26088,7 +25474,7 @@
         "dst": "nullptr"
       },
       "funcname": "StyleColorsAuto",
-      "location": "implot:1212",
+      "location": "implot:1170",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_StyleColorsAuto",
       "ret": "void",
@@ -26113,7 +25499,7 @@
         "dst": "nullptr"
       },
       "funcname": "StyleColorsClassic",
-      "location": "implot:1214",
+      "location": "implot:1172",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_StyleColorsClassic",
       "ret": "void",
@@ -26138,7 +25524,7 @@
         "dst": "nullptr"
       },
       "funcname": "StyleColorsDark",
-      "location": "implot:1216",
+      "location": "implot:1174",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_StyleColorsDark",
       "ret": "void",
@@ -26163,7 +25549,7 @@
         "dst": "nullptr"
       },
       "funcname": "StyleColorsLight",
-      "location": "implot:1218",
+      "location": "implot:1176",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_StyleColorsLight",
       "ret": "void",
@@ -26214,7 +25600,7 @@
         "round": "false"
       },
       "funcname": "TagX",
-      "location": "implot:1092",
+      "location": "implot:1050",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_TagX_Bool",
       "ret": "void",
@@ -26248,7 +25634,7 @@
       "defaults": {},
       "funcname": "TagX",
       "isvararg": "...)",
-      "location": "implot:1093",
+      "location": "implot:1051",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_TagX_Str",
       "ret": "void",
@@ -26283,7 +25669,7 @@
       "cimguiname": "ImPlot_TagXV",
       "defaults": {},
       "funcname": "TagXV",
-      "location": "implot:1094",
+      "location": "implot:1052",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_TagXV",
       "ret": "void",
@@ -26316,7 +25702,7 @@
         "round": "false"
       },
       "funcname": "TagY",
-      "location": "implot:1097",
+      "location": "implot:1055",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_TagY_Bool",
       "ret": "void",
@@ -26350,7 +25736,7 @@
       "defaults": {},
       "funcname": "TagY",
       "isvararg": "...)",
-      "location": "implot:1098",
+      "location": "implot:1056",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_TagY_Str",
       "ret": "void",
@@ -26385,7 +25771,7 @@
       "cimguiname": "ImPlot_TagYV",
       "defaults": {},
       "funcname": "TagYV",
-      "location": "implot:1099",
+      "location": "implot:1057",
       "namespace": "ImPlot",
       "ov_cimguiname": "ImPlot_TagYV",
       "ret": "void",

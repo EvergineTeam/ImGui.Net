@@ -71,12 +71,6 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlotSpec_SetProp_U64(ImPlotSpec* self, ImPlotProp prop, ulong v);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlotSpec_SetProp_U32Ptr(ImPlotSpec* self, ImPlotProp prop, uint* v);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlotSpec_SetProp_FloatPtr(ImPlotSpec* self, ImPlotProp prop, float* v);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlotSpec_SetProp_Vec4(ImPlotSpec* self, ImPlotProp prop, Vector4 v);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
@@ -795,36 +789,6 @@ namespace Evergine.Bindings.Implot
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_PlotPieChart_U64PtrStr([MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(Utf8StringArrayMarshaler))] string[] label_ids, ulong* values, int count, double x, double y, double radius, [MarshalAs(UnmanagedType.LPUTF8Str)] string label_fmt, double angle0, ImPlotSpec spec);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPolygon_FloatPtr([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, float* xs, float* ys, int count, ImPlotSpec spec);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPolygon_doublePtr([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, double* xs, double* ys, int count, ImPlotSpec spec);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPolygon_S8Ptr([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, sbyte* xs, sbyte* ys, int count, ImPlotSpec spec);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPolygon_U8Ptr([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, byte* xs, byte* ys, int count, ImPlotSpec spec);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPolygon_S16Ptr([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, short* xs, short* ys, int count, ImPlotSpec spec);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPolygon_U16Ptr([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, ushort* xs, ushort* ys, int count, ImPlotSpec spec);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPolygon_S32Ptr([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, int* xs, int* ys, int count, ImPlotSpec spec);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPolygon_U32Ptr([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, uint* xs, uint* ys, int count, ImPlotSpec spec);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPolygon_S64Ptr([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, long* xs, long* ys, int count, ImPlotSpec spec);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImPlot_PlotPolygon_U64Ptr([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, ulong* xs, ulong* ys, int count, ImPlotSpec spec);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_PlotScatter_FloatPtrInt([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id, float* values, int count, double xscale, double xstart, ImPlotSpec spec);

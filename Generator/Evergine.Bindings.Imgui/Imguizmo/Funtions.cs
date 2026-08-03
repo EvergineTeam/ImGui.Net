@@ -14,13 +14,7 @@ namespace Evergine.Bindings.Imguizmo
 		public static extern void ImGuizmo_BeginFrame();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuizmo_ComputeMouseRay(float* view, float* projection, Vector2 mousePosition, Vector2 rectPosition, Vector2 rectSize, float* rayOrigin, float* rayDirection);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuizmo_DecomposeMatrixToComponents(float* matrix, float* translation, float* rotation, float* scale);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuizmo_DrawAxes(float* view, float* projection, float* matrices, int matrixCount);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuizmo_DrawCubes(float* view, float* projection, float* matrices, int matrixCount);
@@ -29,25 +23,7 @@ namespace Evergine.Bindings.Imguizmo
 		public static extern void ImGuizmo_DrawGrid(float* view, float* projection, float* matrix, float gridSize);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuizmo_DrawGridCustom(float* view, float* projection, float* matrix, float gridSize, float majorStep, uint subdivision);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void ImGuizmo_DrawGridCustomColor(float* view, float* projection, float* matrix, float gridSize, float majorStep, uint subdivision, uint majorCol, uint minorCol, uint centerCol);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuizmo_Enable([MarshalAs(UnmanagedType.I1)] bool enable);
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern MOVETYPE ImGuizmo_GetActiveHandleType();
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern MOVETYPE ImGuizmo_GetActiveMoveType();
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern MOVETYPE ImGuizmo_GetHoveredHandleType();
-
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
-		public static extern MOVETYPE ImGuizmo_GetHoveredMoveType();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern uint ImGuizmo_GetID_Str([MarshalAs(UnmanagedType.LPUTF8Str)] string str_id);

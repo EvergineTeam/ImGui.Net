@@ -282,35 +282,22 @@ namespace Evergine.Bindings.Implot
 		Normalize = 1024,
 		IgnoreHidden = 2048,
 		Exploding = 4096,
-		NoSliceBorder = 8192,
-	}
-
-	[Flags]
-	public enum ImPlotPolygonFlags
-	{
-		None = 0,
-		Concave = 1024,
 	}
 
 	public enum ImPlotProp
 	{
 		LineColor = 0,
-		LineColors = 1,
-		LineWeight = 2,
-		FillColor = 3,
-		FillColors = 4,
-		FillAlpha = 5,
-		Marker = 6,
-		MarkerSize = 7,
-		MarkerSizes = 8,
-		MarkerLineColor = 9,
-		MarkerLineColors = 10,
-		MarkerFillColor = 11,
-		MarkerFillColors = 12,
-		Size = 13,
-		Offset = 14,
-		Stride = 15,
-		Flags = 16,
+		LineWeight = 1,
+		FillColor = 2,
+		FillAlpha = 3,
+		Marker = 4,
+		MarkerSize = 5,
+		MarkerLineColor = 6,
+		MarkerFillColor = 7,
+		Size = 8,
+		Offset = 9,
+		Stride = 10,
+		Flags = 11,
 	}
 
 	public enum ImPlotScale

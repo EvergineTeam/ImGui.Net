@@ -99,18 +99,13 @@ namespace Evergine.Bindings.Implot
 	public unsafe partial struct ImPlotSpec
 	{
 		public Vector4 LineColor;
-		public uint* LineColors;
 		public float LineWeight;
 		public Vector4 FillColor;
-		public uint* FillColors;
 		public float FillAlpha;
 		public ImPlotMarker Marker;
 		public float MarkerSize;
-		public float* MarkerSizes;
 		public Vector4 MarkerLineColor;
-		public uint* MarkerLineColors;
 		public Vector4 MarkerFillColor;
-		public uint* MarkerFillColors;
 		public float Size;
 		public int Offset;
 		public int Stride;
@@ -164,16 +159,6 @@ namespace Evergine.Bindings.Implot
 		public void SetProp_U64(ImPlotProp prop, ulong v)
 		{
 			ImplotNative.ImPlotSpec_SetProp_U64(self, prop, v);
-		}
-
-		public void SetProp_U32Ptr(ImPlotProp prop, uint* v)
-		{
-			ImplotNative.ImPlotSpec_SetProp_U32Ptr(self, prop, v);
-		}
-
-		public void SetProp_FloatPtr(ImPlotProp prop, float* v)
-		{
-			ImplotNative.ImPlotSpec_SetProp_FloatPtr(self, prop, v);
 		}
 
 		public void SetProp_Vec4(ImPlotProp prop, Vector4 v)
