@@ -73,10 +73,14 @@ if(IMGUI_FREETYPE)
         target_link_libraries(cimgui PRIVATE Freetype::Freetype)
     endif()
     target_sources(cimgui PRIVATE cimgui/imgui/misc/freetype/imgui_freetype.cpp)
-    # cimgui guards the ImGuiFreeType_* wrappers on this, and imgui itself needs it to
-    # expose the rasteriser. Setting one without the other yields a library that
-    # compiles and exports nothing new.
-    target_compile_definitions(cimgui PRIVATE IMGUI_ENABLE_FREETYPE)
+    # Both loaders, deliberately. imgui guards each behind its own flag, and defining
+    # only IMGUI_ENABLE_FREETYPE drops the stb_truetype one -- while cimgui still emits
+    # a wrapper calling ImFontAtlasGetFontLoaderForStbTruetype, so the library stops
+    # compiling. That is what the first attempt at this did.
+    #
+    # Keeping both is also what a binding wants: ImGuiFreeType_GetFontLoader exists so
+    # the consumer can choose at runtime, which requires both to be present.
+    target_compile_definitions(cimgui PRIVATE IMGUI_ENABLE_FREETYPE IMGUI_ENABLE_STB_TRUETYPE)
 endif()
 
 target_compile_definitions(cimgui PRIVATE IMNODES_NAMESPACE=imnodes IMGUI_DISABLE_OBSOLETE_FUNCTIONS=1 CIMGUI_VARGS0)
