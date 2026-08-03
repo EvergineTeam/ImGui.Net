@@ -56,6 +56,29 @@ add_library(cimgui SHARED
     cimguizmo/ImGuizmo/ImSequencer.cpp
 )
 
+# FreeType. build.py has always passed -DIMGUI_FREETYPE, and nothing here read it, so
+# the option was accepted and ignored: imgui_freetype.cpp was never compiled and the
+# three ImGuiFreeType_* functions the generator emits were exported by no platform.
+# Every call to them threw, on all seven.
+option(IMGUI_FREETYPE "Build the FreeType font rasteriser" OFF)
+
+if(IMGUI_FREETYPE)
+    if(EMSCRIPTEN)
+        # Emscripten ships FreeType as a port, so there is nothing to find: the flag
+        # both compiles it and links it.
+        target_compile_options(cimgui PRIVATE -sUSE_FREETYPE=1)
+        target_link_options(cimgui PRIVATE -sUSE_FREETYPE=1)
+    else()
+        find_package(Freetype REQUIRED)
+        target_link_libraries(cimgui PRIVATE Freetype::Freetype)
+    endif()
+    target_sources(cimgui PRIVATE cimgui/imgui/misc/freetype/imgui_freetype.cpp)
+    # cimgui guards the ImGuiFreeType_* wrappers on this, and imgui itself needs it to
+    # expose the rasteriser. Setting one without the other yields a library that
+    # compiles and exports nothing new.
+    target_compile_definitions(cimgui PRIVATE IMGUI_ENABLE_FREETYPE)
+endif()
+
 target_compile_definitions(cimgui PRIVATE IMNODES_NAMESPACE=imnodes IMGUI_DISABLE_OBSOLETE_FUNCTIONS=1 CIMGUI_VARGS0)
 target_include_directories(cimgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cimgui)
 target_include_directories(cimgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cimgui/imgui)
