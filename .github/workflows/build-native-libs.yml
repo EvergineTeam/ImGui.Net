@@ -55,11 +55,16 @@ jobs:
       run: |
         sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 
+    # Matches the Emscripten the .NET SDK links with, which is what makes the static
+    # archive we ship usable. dotnet/emsdk pins 3.1.56 on release/9.0, release/10.0 and
+    # .NET 11 through preview 5; 3.1.56 expects LLVM 19, while the 3.1.34 previously
+    # used here expects LLVM 17 -- and the published cimgui.a did declare clang 17,
+    # two generations behind the linker. Do not raise this past what the SDK pins.
     - name: Install Emscripten
       if: matrix.arch == 'wasm'
       uses: mymindstorm/setup-emsdk@v14
       with:
-        version: 3.1.34
+        version: 3.1.56
         actions-cache-folder: 'emsdk-cache'
 
     - name: Build
