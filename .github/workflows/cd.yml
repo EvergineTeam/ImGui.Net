@@ -1,93 +1,89 @@
+# Keeps this binding current with the four cimgui projects it wraps: definitions,
+# generated C# and native libraries, all from the same revision.
+#
+# Three jobs, because the halves cannot share a runner. The seven native libraries need
+# a matrix across Linux, Windows and macOS; the generators and the packaging need one
+# Windows machine holding the whole tree.
+#
+# `resolve` runs first and alone so exactly one place decides which revision the run is
+# about. It also decides whether there is anything to do at all: seven platform builds
+# plus a vcpkg bootstrap is not something to spend on a maybe.
+
 name: CD
 
 on:
+  schedule:
+    # Monthly, in step with the rest of the fleet.
+    - cron: '0 2 1 * *'
   workflow_dispatch:
     inputs:
-      publish-enabled:
-        description: "Publish to Nuget.org"
-        type: boolean
+      skip-assets-publishing:
+        description: 'Skip assets publishing'
         required: false
+        type: boolean
+        default: false
+      force-natives:
+        description: 'Rebuild the seven native libraries even if no submodule moved'
+        required: false
+        type: boolean
+        default: false
+      force-publish:
+        description: 'Publish even when the generated code is unchanged'
+        required: false
+        type: boolean
         default: false
 
-env:
-  nugetsPath: "nupkgs"
-
 jobs:
-  # --- Build Native Libraries ---
-  build-native-libs:
+  # Reads binding.yml and reports how far each of the four submodules is behind.
+  # Reports only: `resolve-only` writes nothing to the tree.
+  resolve:
+    if: github.event_name != 'schedule' || github.ref == 'refs/heads/main'
+    uses: EvergineTeam/Evergine.Bindings/.github/workflows/binding-resolve-upstream.yml@v1
+
+  natives:
+    needs: resolve
+    if: needs.resolve.outputs.ref_moved == 'true' || inputs.force-natives
     uses: ./.github/workflows/build-native-libs.yml
 
-  # --- Generate Bindings and NuGets ---
-  generate-bindings:
-    needs: build-native-libs
-    runs-on: windows-latest
-    steps:
-
-    - name: Checkout
-      uses: actions/checkout@v5
-      with:
-        repository: ${{ github.repository }}
-        submodules: recursive
-
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 10.x
-
-    - name: Download all artifacts
-      uses: actions/download-artifact@v5
-      with:
-        path: artifacts
-
-    - name: Copy artifacts to respective directories
-      run: |
-        Copy-Item -Recurse -Force -Path artifacts/cimgui-browser-wasm-artifacts/* -Destination Generator/Evergine.Bindings.Imgui/runtimes/
-        Copy-Item -Recurse -Force -Path artifacts/cimgui-linux-arm64-artifacts/* -Destination Generator/Evergine.Bindings.Imgui/runtimes/
-        Copy-Item -Recurse -Force -Path artifacts/cimgui-linux-x64-artifacts/* -Destination Generator/Evergine.Bindings.Imgui/runtimes/
-        Copy-Item -Recurse -Force -Path artifacts/cimgui-osx-arm64-artifacts/* -Destination Generator/Evergine.Bindings.Imgui/runtimes/
-        Copy-Item -Recurse -Force -Path artifacts/cimgui-osx-x64-artifacts/* -Destination Generator/Evergine.Bindings.Imgui/runtimes/
-        Copy-Item -Recurse -Force -Path artifacts/cimgui-win-arm64-artifacts/* -Destination Generator/Evergine.Bindings.Imgui/runtimes/
-        Copy-Item -Recurse -Force -Path artifacts/cimgui-win-x64-artifacts/* -Destination Generator/Evergine.Bindings.Imgui/runtimes/
-
-    - name: Remove artifacts directory
-      run: Remove-Item -Recurse -Force artifacts
-
-    - name: Generate Bindings
-      shell: pwsh
-      run: ./build/scripts/Generate-All-Bindings.ps1
-
-    - name: Commit changes (if any)
-      uses: EvergineTeam/evergine-standards/.github/actions/commit-and-push-or-pr-update@main
-      with:
-        commit_message: "Updating runtimes"
-        mode: auto
-        labels: update
-
-    - name: Generate NuGets
-      uses: EvergineTeam/evergine-standards/.github/actions/binding-generate-nugets-dotnet@main
-      with:
-        script-path: './build/scripts/Generate-NuGets-DotNet.ps1'
-        helpers-path: './build/scripts/Helpers.ps1'
-        projects: './Generator/Evergine.Bindings.Imgui/Evergine.Bindings.Imgui.csproj'
-        output-folder: ${{ env.nugetsPath }}
-        revision: ${{ github.run_number }}
-
-    - name: List generated NuGets
-      run: |
-        ls ${{ env.nugetsPath }}/*.nupkg
-
-    - name: Upload Nuget Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: nugets
-        path: ${{ env.nugetsPath }}
-        if-no-files-found: warn
-
-    - name: Publish NuGet
-      if: ${{ success() && inputs.publish-enabled == true }}
-      env:
-        token: ${{ secrets.EVERGINE_NUGETORG_TOKEN }}
-      run: |
-        cd ${{ env.nugetsPath }}
-        ls *.nupkg
-        dotnet nuget push "**/*.nupkg" --skip-duplicate --no-symbols -k "$env:token" -s https://api.nuget.org/v3/index.json
+  cd:
+    needs: [resolve, natives]
+    # `natives` is skipped whenever nothing moved, and a skipped dependency would
+    # otherwise take this job with it. The run still has to reach the CD so it can
+    # report the no-op.
+    if: always() && needs.resolve.result == 'success' && needs.natives.result != 'failure' && !cancelled()
+    uses: EvergineTeam/Evergine.Bindings/.github/workflows/binding-tracked-cd.yml@v1
+    with:
+      # Windows, because the four generators resolve their output with backslash
+      # separators and ImguiGen writes to a path whose casing only matches on a
+      # case-insensitive filesystem.
+      runner-os: windows-latest
+      # Needed to move the four pointers: bumping a submodule means fetching inside it,
+      # and there is nothing to fetch in if it was never checked out. Not recursive --
+      # the definitions we export sit at the top level of each one.
+      checkout-submodules: 'true'
+      generator-project: "Generator/ImguiGen/ImguiGen.csproj"
+      generator-name: "Imgui"
+      binding-project: "Generator/Evergine.Bindings.Imgui/Evergine.Bindings.Imgui.csproj"
+      target-framework: "net10.0"
+      dotnet-version: "10.x"
+      nuget-version: "6.x"
+      runtime-identifier: ""
+      build-configuration: "Release"
+      revision: ${{ github.run_number }}
+      # Four generators, so the orchestrator rather than the single-generator script the
+      # toolbox defaults to. It also applies the variadic entry point mapping, without
+      # which regenerating rebinds ImGui.Text to a variadic symbol -- fine on x64, wrong
+      # on the three ARM64 targets.
+      bindings-script-path: 'build/scripts/Generate-All-Bindings.ps1'
+      # Asked for only when the job that builds them actually ran. It is skipped
+      # whenever no submodule moved, and requesting artifacts that were never produced
+      # fails the download and takes the publish with it.
+      natives-artifact-pattern: ${{ needs.natives.result == 'success' && 'cimgui-*' || '' }}
+      force-publish: ${{ inputs.force-publish || false }}
+      publish-enabled: ${{ !inputs.skip-assets-publishing }}
+      enable-email-notifications: true
+    secrets:
+      NUGET_UPLOAD_TOKEN: ${{ secrets.EVERGINE_NUGETORG_TOKEN }}
+      WAVE_SENDGRID_TOKEN: ${{ secrets.WAVE_SENDGRID_TOKEN }}
+      EVERGINE_EMAILREPORT_LIST: ${{ secrets.EVERGINE_EMAILREPORT_LIST }}
+      EVERGINE_EMAIL: ${{ secrets.EVERGINE_EMAIL }}
