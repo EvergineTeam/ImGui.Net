@@ -3,6 +3,19 @@ name: Build native libs
 on:
   workflow_dispatch:
   workflow_call:
+    inputs:
+      submodule-heads:
+        description: >-
+          JSON object of submodule path to the SHA to build, as produced by the
+          toolbox's resolve step.
+
+          Without it this job builds whatever the recorded pointers say -- and when the
+          caller is about to bump them, those are the old ones, so the libraries belong
+          to the revision being replaced. That combination passes every gate and is the
+          exact mismatch they exist to catch.
+        required: false
+        type: string
+        default: ''
 
 jobs:
   build-native-libs:
@@ -39,6 +52,29 @@ jobs:
       with:
         repository: ${{ github.repository }}
         submodules: recursive
+
+    # Moved to the revisions the caller is about to commit, before anything is compiled.
+    # Recursive, because each of the four carries its own submodule -- imgui, implot,
+    # imnodes, ImGuizmo -- and those move with it. Skipping that is how a build compiled
+    # new cimgui sources against an old imgui.
+    - name: Check out the submodule revisions being built
+      if: inputs.submodule-heads != ''
+      shell: bash
+      env:
+        HEADS: ${{ inputs.submodule-heads }}
+      run: |
+        set -euo pipefail
+        python - <<'PY'
+        import json, os, subprocess
+        for path, sha in json.loads(os.environ["HEADS"]).items():
+            print(f"{path} -> {sha}")
+            subprocess.run(["git", "fetch", "--depth", "1", "origin", sha],
+                           cwd=path, check=True)
+            subprocess.run(["git", "checkout", "--detach", sha], cwd=path, check=True)
+            subprocess.run(["git", "submodule", "update", "--init", "--recursive",
+                            "--depth", "1"], cwd=path, check=True)
+        PY
+        git submodule status --recursive | head -20
 
     - name: Install dependencies on Ubuntu
       if: matrix.os == 'ubuntu-latest'
