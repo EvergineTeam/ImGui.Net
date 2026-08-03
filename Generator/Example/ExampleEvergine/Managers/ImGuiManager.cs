@@ -582,7 +582,7 @@ namespace ExampleEvergine.Managers
 
             ImDrawData* drawData = ImguiNative.igGetDrawData();
 
-            if (drawData->CmdListsCount == 0)
+            if (drawData->CmdLists.Size == 0)
             {
                 return;
             }
@@ -620,7 +620,7 @@ namespace ExampleEvergine.Managers
             var vResource = this.graphicsContext.MapMemory(this.vertexBuffers[0], MapMode.Write);
             var iResource = this.graphicsContext.MapMemory(this.indexBuffer, MapMode.Write);
 
-            for (int i = 0; i < drawData->CmdListsCount; i++)
+            for (int i = 0; i < drawData->CmdLists.Size; i++)
             {
                 ImVector<IntPtr> cmdList = new ImVector<IntPtr>(drawData->CmdLists);
                 ImDrawList* cmdListPtr = (ImDrawList*)cmdList[i];
@@ -663,7 +663,7 @@ namespace ExampleEvergine.Managers
             // Render command lists
             uint idx_offset = 0;
 
-            for (int n = 0; n < drawData->CmdListsCount; n++)
+            for (int n = 0; n < drawData->CmdLists.Size; n++)
             {
                 ImVector<IntPtr> cmdList = new ImVector<IntPtr>(drawData->CmdLists);
                 ImDrawList* cmdListPtr = (ImDrawList*)cmdList[n];

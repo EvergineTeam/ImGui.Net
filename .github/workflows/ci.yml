@@ -34,6 +34,14 @@ jobs:
         dotnet build Generator/ImplotGen/ImplotGen.csproj
         dotnet build Generator/Evergine.Bindings.Imgui/Evergine.Bindings.Imgui.csproj
 
+    # The sample is the only thing here that consumes the binding the way a user does,
+    # so it is the only thing that notices a source-breaking change. The five projects
+    # above all still built after the February-to-July bump while the sample did not:
+    # ImDrawData.CmdListsCount had become FrameCount upstream. Building the binding
+    # proves it is well-formed, not that anybody can still call it.
+    - name: Build the sample
+      run: dotnet build Generator/Example/ExampleEvergine.Windows/ExampleEvergine.Windows.csproj
+
   # The definitions the four generators read are copies of files produced inside the
   # submodules, and the native library is compiled from those same submodules. If the
   # copies fall behind, the managed layer describes one revision while the binary is
