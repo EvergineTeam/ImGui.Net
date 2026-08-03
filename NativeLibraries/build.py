@@ -83,7 +83,12 @@ def build_mac(target):
     buildPath = build_path(target)
     isArm64 = target == "osx-arm64"
     cmake_cmd = ["cmake",
-        "-DCMAKE_OSX_ARCHITECTURES=", "arm64" if isArm64 else "x86_64",
+        # One argument, not two. Split across a comma this passed an empty
+        # -DCMAKE_OSX_ARCHITECTURES= followed by a stray "x86_64", so the architecture
+        # was never set and both macOS jobs built for whatever the runner is -- arm64,
+        # since macos-latest moved to Apple silicon. The osx-x64 dylib currently
+        # published is an arm64 binary, which no Intel Mac can load.
+        "-DCMAKE_OSX_ARCHITECTURES=" + ("arm64" if isArm64 else "x86_64"),
         f'-DCMAKE_TOOLCHAIN_FILE={vckg_toolchain}',
         f"-DVCPKG_TARGET_TRIPLET={triplet}",
     ] + common_cmake_args(target, buildMode, True)
@@ -151,10 +156,17 @@ def build_wasm():
     cmake_cmd = ["cmake",
         "-DCMAKE_TOOLCHAIN_FILE=" + emsdkToolchain,
         "-DCMAKE_CROSSCOMPILING_EMULATOR=" + emsdkNodePath,
-        "-DCMAKE_CXX_FLAGS=-s USE_FREETYPE=0 -s WASM=1",
-        "-DCMAKE_C_FLAGS=-s USE_FREETYPE=0 -s WASM=1",
-        "-DCMAKE_LD_FLAGS=-s USE_FREETYPE=0",
-    ] + common_cmake_args(target, buildMode, False)
+        # FreeType is no longer disabled here. The CMakeLists asks Emscripten for its
+        # own port when IMGUI_FREETYPE is on, which is what makes the three
+        # ImGuiFreeType_* functions exist on this platform too -- they were declared in
+        # the bindings and exported by none of the seven.
+        #
+        # CMAKE_LD_FLAGS, which used to carry the same flag, is not a variable CMake
+        # reads; the linker ones are CMAKE_SHARED_LINKER_FLAGS and friends. It was
+        # doing nothing, so it is gone rather than corrected.
+        "-DCMAKE_CXX_FLAGS=-s WASM=1",
+        "-DCMAKE_C_FLAGS=-s WASM=1",
+    ] + common_cmake_args(target, buildMode, True)
     if useNinja: # will will try to use ninja (even in windows) if available
         cmake_cmd.append("-GNinja")
     subprocess.call(cmake_cmd)
