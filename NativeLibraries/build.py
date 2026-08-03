@@ -83,7 +83,12 @@ def build_mac(target):
     buildPath = build_path(target)
     isArm64 = target == "osx-arm64"
     cmake_cmd = ["cmake",
-        "-DCMAKE_OSX_ARCHITECTURES=", "arm64" if isArm64 else "x86_64",
+        # One argument, not two. Split across a comma this passed an empty
+        # -DCMAKE_OSX_ARCHITECTURES= followed by a stray "x86_64", so the architecture
+        # was never set and both macOS jobs built for whatever the runner is -- arm64,
+        # since macos-latest moved to Apple silicon. The osx-x64 dylib currently
+        # published is an arm64 binary, which no Intel Mac can load.
+        "-DCMAKE_OSX_ARCHITECTURES=" + ("arm64" if isArm64 else "x86_64"),
         f'-DCMAKE_TOOLCHAIN_FILE={vckg_toolchain}',
         f"-DVCPKG_TARGET_TRIPLET={triplet}",
     ] + common_cmake_args(target, buildMode, True)
