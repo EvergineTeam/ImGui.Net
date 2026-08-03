@@ -72,9 +72,24 @@ jobs:
         cd NativeLibraries
         python3 build.py ${{matrix.target}}
 
+    # Staged at the path it will occupy in the repository, so whoever consumes this
+    # unpacks it over the working tree and is done. The CD used to carry seven
+    # Copy-Item lines doing this by hand, one per platform, which is seven places to
+    # forget when an eighth arrives.
+    - name: Stage into the runtimes layout
+      shell: bash
+      run: |
+        set -euo pipefail
+        dest="staged/Generator/Evergine.Bindings.Imgui/runtimes"
+        mkdir -p "$dest"
+        cp -r NativeLibraries/build/OUT/* "$dest/"
+        find staged -type f | sed 's/^/  /'
+
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: cimgui-${{ matrix.target }}-artifacts
-        path: NativeLibraries/build/OUT/*
-        if-no-files-found: warn
+        path: staged/
+        # Not `warn`. A platform that produced no library must stop the run: warning
+        # uploads an empty artifact, and the CD would commit the absence and publish it.
+        if-no-files-found: error
