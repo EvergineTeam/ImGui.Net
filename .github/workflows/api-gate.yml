@@ -1,0 +1,27 @@
+# Measures what a pull request does to the public contract of a package that wraps four
+# upstream projects and ships seven native libraries.
+#
+# Three things a diff of six thousand generated lines hides: which public symbols moved,
+# whether every P/Invoke still resolves in the libraries, and whether each library
+# matches the architecture its RID promises. The last two run inside the gate rather
+# than beside it, so the merge below depends on them.
+#
+# auto-merge stays off. Everything here was built today and the pipeline that produces
+# these pull requests has completed exactly once.
+
+name: API Gate
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  api:
+    uses: EvergineTeam/Evergine.Bindings/.github/workflows/binding-api-gate.yml@v1
+    with:
+      binding-project: "Generator/Evergine.Bindings.Imgui/Evergine.Bindings.Imgui.csproj"
+      auto-merge: false
+      native-coherence: true
+      # The freshness check compares each copied definition against the submodule it
+      # came from, and cannot tell fresh from stale without them.
+      coherence-submodules: 'true'

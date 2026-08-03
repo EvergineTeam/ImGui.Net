@@ -1,0 +1,24 @@
+{
+  "entries": {
+    "EvergineTeam/Evergine.Bindings/.github/actions/binding-fetch-upstream@v1": {
+      "repo": "EvergineTeam/Evergine.Bindings/.github/actions/binding-fetch-upstream",
+      "version": "v1",
+      "sha": "d59b6b98d80145932d36f6a0043f0828ca6c3266"
+    },
+    "actions/setup-dotnet@v5": {
+      "repo": "actions/setup-dotnet",
+      "version": "v5",
+      "sha": "26b0ec14cb23fa6904739307f278c14f94c95bf1"
+    },
+    "github/gh-aw-actions/setup-cli@v0.83.4": {
+      "repo": "github/gh-aw-actions/setup-cli",
+      "version": "v0.83.4",
+      "sha": "e89c65e17eb281bbd5ff2ff9e9199a03e96654c7"
+    },
+    "github/gh-aw-actions/setup@v0.83.4": {
+      "repo": "github/gh-aw-actions/setup",
+      "version": "v0.83.4",
+      "sha": "e89c65e17eb281bbd5ff2ff9e9199a03e96654c7"
+    }
+  }
+}
