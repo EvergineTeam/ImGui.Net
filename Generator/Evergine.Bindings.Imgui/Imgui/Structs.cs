@@ -1817,11 +1817,6 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImGuiTextBuffer_append(self, str, str_end);
 		}
 
-		public void appendf( char* fmt)
-		{
-			ImguiNative.ImGuiTextBuffer_appendf(self, fmt);
-		}
-
 		public string begin()
 		{
 			return ImguiNative.ImGuiTextBuffer_begin(self);

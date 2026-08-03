@@ -69,6 +69,51 @@ def available_companions(submodule, header, symbols):
     return {s for s in symbols if f"{s}0(" in text}
 
 
+def drop_wrappers(folder, symbol):
+    """Remove generated wrappers that call a native symbol we are dropping.
+
+    The generators emit a convenience method on the owning struct for each native
+    function, so removing only the import leaves that method calling something that no
+    longer exists and the project stops compiling. Both halves are generated, so both
+    come back on the next run if upstream starts emitting the companion.
+    """
+    removed = 0
+    for source in sorted((ROOT / "Generator" / "Evergine.Bindings.Imgui" / folder).glob("*.cs")):
+        raw = source.read_bytes()
+        bom = raw.startswith(b"\xef\xbb\xbf")
+        lines = raw.decode("utf-8-sig").splitlines(keepends=True)
+
+        call = f"ImguiNative.{symbol}("
+        target = next((i for i, line in enumerate(lines) if call in line), None)
+        if target is None:
+            continue
+
+        # Back up to the signature, then forward over the balanced body.
+        start = target
+        while start > 0 and "{" not in lines[start]:
+            start -= 1
+        while start > 0 and not lines[start - 1].strip().endswith(")"):
+            start -= 1
+        start -= 1
+
+        depth, end = 0, start
+        for index in range(start, len(lines)):
+            depth += lines[index].count("{") - lines[index].count("}")
+            if depth == 0 and index > start:
+                end = index
+                break
+
+        # Take the blank line that separated it, so the file does not grow gaps.
+        while start > 0 and not lines[start - 1].strip():
+            start -= 1
+
+        del lines[start:end + 1]
+        payload = "".join(lines).encode("utf-8")
+        source.write_bytes((b"\xef\xbb\xbf" + payload) if bom else payload)
+        removed += 1
+    return removed
+
+
 def process(folder, symbols, companions):
     mapped, dropped, unmapped = 0, 0, []
 
@@ -139,8 +184,11 @@ def main():
             continue
         companions = available_companions(submodule, header, symbols)
         mapped, dropped, unmapped = process(folder, symbols, companions)
+        wrappers = sum(drop_wrappers(folder, s) for s in (symbols & DROP))
         total_mapped += mapped
         total_dropped += dropped
+        if wrappers:
+            print(f"{folder}: removed {wrappers} wrapper(s) calling a dropped symbol.")
         risky += unmapped
         print(f"{folder}: {len(symbols)} variadic, {len(companions)} with a companion, "
               f"{mapped} mapped, {dropped} dropped.")
