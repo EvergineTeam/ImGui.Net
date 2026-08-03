@@ -30,6 +30,26 @@ namespace Evergine.Bindings.Imguizmo
 		WORLD = 1,
 	}
 
+	public enum MOVETYPE
+	{
+		MT_NONE = 0,
+		MT_MOVE_X = 1,
+		MT_MOVE_Y = 2,
+		MT_MOVE_Z = 3,
+		MT_MOVE_YZ = 4,
+		MT_MOVE_ZX = 5,
+		MT_MOVE_XY = 6,
+		MT_MOVE_SCREEN = 7,
+		MT_ROTATE_X = 8,
+		MT_ROTATE_Y = 9,
+		MT_ROTATE_Z = 10,
+		MT_ROTATE_SCREEN = 11,
+		MT_SCALE_X = 12,
+		MT_SCALE_Y = 13,
+		MT_SCALE_Z = 14,
+		MT_SCALE_XYZ = 15,
+	}
+
 	public enum OPERATION
 	{
 		None = 0,
