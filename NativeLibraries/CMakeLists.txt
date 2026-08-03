@@ -21,11 +21,11 @@ set(SOURCES
     cimnodes/imnodes/imnodes.cpp
 
     cimguizmo/cimguizmo.cpp
-    cimguizmo/ImGuizmo/ImGuizmo.cpp
-    cimguizmo/ImGuizmo/GraphEditor.cpp
-    cimguizmo/ImGuizmo/ImCurveEdit.cpp
-    cimguizmo/ImGuizmo/ImGradient.cpp
-    cimguizmo/ImGuizmo/ImSequencer.cpp
+    cimguizmo/ImGuizmo/src/ImGuizmo.cpp
+    cimguizmo/ImGuizmo/src/GraphEditor.cpp
+    cimguizmo/ImGuizmo/src/ImCurveEdit.cpp
+    cimguizmo/ImGuizmo/src/ImGradient.cpp
+    cimguizmo/ImGuizmo/src/ImSequencer.cpp
 )
 if(CIMGUI_INCLUDE_DEMOS)
     set(SOURCES ${SOURCES} cimplot/implot/imgui_demo.cpp)
@@ -49,11 +49,11 @@ add_library(cimgui SHARED
     cimnodes/imnodes/imnodes.cpp
 
     cimguizmo/cimguizmo.cpp
-    cimguizmo/ImGuizmo/ImGuizmo.cpp
-    cimguizmo/ImGuizmo/GraphEditor.cpp
-    cimguizmo/ImGuizmo/ImCurveEdit.cpp
-    cimguizmo/ImGuizmo/ImGradient.cpp
-    cimguizmo/ImGuizmo/ImSequencer.cpp
+    cimguizmo/ImGuizmo/src/ImGuizmo.cpp
+    cimguizmo/ImGuizmo/src/GraphEditor.cpp
+    cimguizmo/ImGuizmo/src/ImCurveEdit.cpp
+    cimguizmo/ImGuizmo/src/ImGradient.cpp
+    cimguizmo/ImGuizmo/src/ImSequencer.cpp
 )
 
 # FreeType. build.py has always passed -DIMGUI_FREETYPE, and nothing here read it, so
@@ -91,4 +91,4 @@ target_include_directories(cimgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cimplot/imp
 target_include_directories(cimgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cimnodes)
 target_include_directories(cimgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cimnodes/imnodes)
 target_include_directories(cimgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cimguizmo)
-target_include_directories(cimgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cimguizmo/imguizmo)
+target_include_directories(cimgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/cimguizmo/ImGuizmo/src)

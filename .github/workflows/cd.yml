@@ -44,6 +44,10 @@ jobs:
     needs: resolve
     if: needs.resolve.outputs.ref_moved == 'true' || inputs.force-natives
     uses: ./.github/workflows/build-native-libs.yml
+    with:
+      # The revisions the cd job is about to commit, not the ones recorded now. Without
+      # this the libraries would be built from the sources being replaced.
+      submodule-heads: ${{ needs.resolve.outputs.submodule_heads }}
 
   cd:
     needs: [resolve, natives]

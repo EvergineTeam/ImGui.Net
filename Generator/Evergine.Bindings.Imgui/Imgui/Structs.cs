@@ -61,7 +61,7 @@ namespace Evergine.Bindings.Imgui
 	public unsafe partial struct ImDrawData
 	{
 		public byte Valid;
-		public int CmdListsCount;
+		public int FrameCount;
 		public int TotalIdxCount;
 		public int TotalVtxCount;
 		public ImVector CmdLists;
@@ -124,7 +124,7 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddBezierQuadratic(self, p1, p2, p3, col, thickness, num_segments);
 		}
 
-		public void AddCallback(IntPtr callback, void* userdata, uint userdata_size = 0)
+		public void AddCallback(IntPtr callback, void* userdata = null, uint userdata_size = 0)
 		{
 			ImguiNative.ImDrawList_AddCallback(self, callback, userdata, userdata_size);
 		}
@@ -184,6 +184,16 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddLine(self, p1, p2, col, thickness);
 		}
 
+		public void AddLineH(float min_x, float max_x, float y, uint col, float thickness = 1.0f)
+		{
+			ImguiNative.ImDrawList_AddLineH(self, min_x, max_x, y, col, thickness);
+		}
+
+		public void AddLineV(float x, float min_y, float max_y, uint col, float thickness = 1.0f)
+		{
+			ImguiNative.ImDrawList_AddLineV(self, x, min_y, max_y, col, thickness);
+		}
+
 		public void AddNgon(Vector2 center, float radius, uint col, int num_segments, float thickness = 1.0f)
 		{
 			ImguiNative.ImDrawList_AddNgon(self, center, radius, col, num_segments, thickness);
@@ -194,9 +204,9 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddNgonFilled(self, center, radius, col, num_segments);
 		}
 
-		public void AddPolyline(Vector2* points, int num_points, uint col, ImDrawFlags flags, float thickness)
+		public void AddPolyline(Vector2* points, int num_points, uint col, float thickness, ImDrawFlags flags = 0)
 		{
-			ImguiNative.ImDrawList_AddPolyline(self, points, num_points, col, flags, thickness);
+			ImguiNative.ImDrawList_AddPolyline(self, points, num_points, col, thickness, flags);
 		}
 
 		public void AddQuad(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, uint col, float thickness = 1.0f)
@@ -209,9 +219,9 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddQuadFilled(self, p1, p2, p3, p4, col);
 		}
 
-		public void AddRect(Vector2 p_min, Vector2 p_max, uint col, float rounding = 0.0f, ImDrawFlags flags = 0, float thickness = 1.0f)
+		public void AddRect(Vector2 p_min, Vector2 p_max, uint col, float rounding = 0.0f, float thickness = 1.0f, ImDrawFlags flags = 0)
 		{
-			ImguiNative.ImDrawList_AddRect(self, p_min, p_max, col, rounding, flags, thickness);
+			ImguiNative.ImDrawList_AddRect(self, p_min, p_max, col, rounding, thickness, flags);
 		}
 
 		public void AddRectFilled(Vector2 p_min, Vector2 p_max, uint col, float rounding = 0.0f, ImDrawFlags flags = 0)
@@ -329,9 +339,9 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_PathRect(self, rect_min, rect_max, rounding, flags);
 		}
 
-		public void PathStroke(uint col, ImDrawFlags flags = 0, float thickness = 1.0f)
+		public void PathStroke(uint col, float thickness = 1.0f, ImDrawFlags flags = 0)
 		{
-			ImguiNative.ImDrawList_PathStroke(self, col, flags, thickness);
+			ImguiNative.ImDrawList_PathStroke(self, col, thickness, flags);
 		}
 
 		public void PopClipRect()
@@ -925,19 +935,24 @@ namespace Evergine.Bindings.Imgui
 		public byte ConfigViewportsPlatformFocusSetsImGuiFocus;
 		public byte ConfigDpiScaleFonts;
 		public byte ConfigDpiScaleViewports;
-		public byte MouseDrawCursor;
 		public byte ConfigMacOSXBehaviors;
 		public byte ConfigInputTrickleEventQueue;
 		public byte ConfigInputTextCursorBlink;
 		public byte ConfigInputTextEnterKeepActive;
+		public ImGuiColorEditFlags ConfigColorEditFlags;
 		public byte ConfigDragClickToInputText;
 		public byte ConfigWindowsResizeFromEdges;
 		public byte ConfigWindowsMoveFromTitleBarOnly;
 		public byte ConfigWindowsCopyContentsWithCtrlC;
 		public byte ConfigScrollbarScrollByPage;
+		public byte ConfigIniSettingsSaveLastUsedDate;
+		public int ConfigIniSettingsAutoDiscardMonths;
+		public byte ConfigDebugIniSettings;
+		public byte MouseDrawCursor;
 		public float ConfigMemoryCompactTimer;
 		public float MouseDoubleClickTime;
 		public float MouseDoubleClickMaxDist;
+		public float MouseSingleClickDelay;
 		public float MouseDragThreshold;
 		public float KeyRepeatDelay;
 		public float KeyRepeatRate;
@@ -951,7 +966,6 @@ namespace Evergine.Bindings.Imgui
 		public byte ConfigDebugBeginReturnValueOnce;
 		public byte ConfigDebugBeginReturnValueLoop;
 		public byte ConfigDebugIgnoreFocusLoss;
-		public byte ConfigDebugIniSettings;
 		public byte* BackendPlatformName;
 		public byte* BackendRendererName;
 		public void* BackendPlatformUserData;
@@ -1315,15 +1329,16 @@ namespace Evergine.Bindings.Imgui
 
 	public unsafe partial struct ImGuiListClipper
 	{
-		public IntPtr Ctx;
 		public int DisplayStart;
 		public int DisplayEnd;
+		public int UserIndex;
 		public int ItemsCount;
 		public float ItemsHeight;
+		public ImGuiListClipperFlags Flags;
 		public double StartPosY;
 		public double StartSeekOffsetY;
+		public IntPtr Ctx;
 		public void* TempData;
-		public ImGuiListClipperFlags Flags;
 
 		public void Begin(int items_count, float items_height = -1.0f)
 		{
@@ -1419,9 +1434,13 @@ namespace Evergine.Bindings.Imgui
 		public IntPtr Platform_SetImeDataFn;
 		public void* Platform_ImeUserData;
 		public ushort Platform_LocaleDecimalPoint;
+		public int Platform_SessionDate;
 		public int Renderer_TextureMaxWidth;
 		public int Renderer_TextureMaxHeight;
 		public void* Renderer_RenderState;
+		public IntPtr DrawCallback_ResetRenderState;
+		public IntPtr DrawCallback_SetSamplerLinear;
+		public IntPtr DrawCallback_SetSamplerNearest;
 		public IntPtr Platform_CreateWindow;
 		public IntPtr Platform_DestroyWindow;
 		public IntPtr Platform_ShowWindow;
@@ -1694,6 +1713,8 @@ namespace Evergine.Bindings.Imgui
 		public ImGuiTreeNodeFlags TreeLinesFlags;
 		public float TreeLinesSize;
 		public float TreeLinesRounding;
+		public float MenuItemRounding;
+		public float SelectableRounding;
 		public float DragDropTargetRounding;
 		public float DragDropTargetBorderSize;
 		public float DragDropTargetPadding;
@@ -1701,6 +1722,8 @@ namespace Evergine.Bindings.Imgui
 		public ImGuiDir ColorButtonPosition;
 		public Vector2 ButtonTextAlign;
 		public Vector2 SelectableTextAlign;
+		public float InputTextCursorSize;
+		public float SeparatorSize;
 		public float SeparatorTextBorderSize;
 		public Vector2 SeparatorTextAlign;
 		public Vector2 SeparatorTextPadding;
@@ -1776,6 +1799,7 @@ namespace Evergine.Bindings.Imgui
 		public Vector4 Colors_59;
 		public Vector4 Colors_60;
 		public Vector4 Colors_61;
+		public Vector4 Colors_62;
 		public float HoverStationaryDelay;
 		public float HoverDelayShort;
 		public float HoverDelayNormal;
@@ -1930,6 +1954,7 @@ namespace Evergine.Bindings.Imgui
 		public ImDrawData* DrawData;
 		public void* RendererUserData;
 		public void* PlatformUserData;
+		public void* PlatformIconData;
 		public void* PlatformHandle;
 		public void* PlatformHandleRaw;
 		public byte PlatformWindowCreated;
@@ -1940,6 +1965,11 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 GetCenter()
 		{
 			return ImguiNative.ImGuiViewport_GetCenter(self);
+		}
+
+		public string GetDebugName()
+		{
+			return ImguiNative.ImGuiViewport_GetDebugName(self);
 		}
 
 		public Vector2 GetWorkCenter()
@@ -1962,6 +1992,7 @@ namespace Evergine.Bindings.Imgui
 		public ImGuiDockNodeFlags DockNodeFlagsOverrideSet;
 		public byte DockingAlwaysTabBar;
 		public byte DockingAllowUnclassed;
+		public void* PlatformIconData;
 	}
 
 	public unsafe partial struct ImTextureData
@@ -1969,6 +2000,7 @@ namespace Evergine.Bindings.Imgui
 		public int UniqueID;
 		public ImTextureStatus Status;
 		public void* BackendUserData;
+		public void* QueueUserData;
 		public ulong TexID;
 		public ImTextureFormat Format;
 		public int Width;
@@ -2071,6 +2103,150 @@ namespace Evergine.Bindings.Imgui
 		public float y;
 		public float z;
 		public float w;
+	}
+
+	public unsafe partial struct STB_TexteditState
+	{
+		public int cursor;
+		public int select_start;
+		public int select_end;
+		public byte insert_mode;
+		public int row_count_per_page;
+		public byte cursor_at_end_of_line;
+		public byte initialized;
+		public byte has_preferred_x;
+		public byte single_line;
+		public byte padding1;
+		public byte padding2;
+		public byte padding3;
+		public float preferred_x;
+		public StbUndoState undostate;
+	}
+
+	public unsafe partial struct StbTexteditRow
+	{
+		public float x0;
+		public float x1;
+		public float baseline_y_delta;
+		public float ymin;
+		public float ymax;
+		public int num_chars;
+	}
+
+	public unsafe partial struct StbUndoRecord
+	{
+		public int where;
+		public int insert_length;
+		public int delete_length;
+		public int char_storage;
+	}
+
+	public unsafe partial struct StbUndoState
+	{
+		public StbUndoRecord undo_rec_0;
+		public StbUndoRecord undo_rec_1;
+		public StbUndoRecord undo_rec_2;
+		public StbUndoRecord undo_rec_3;
+		public StbUndoRecord undo_rec_4;
+		public StbUndoRecord undo_rec_5;
+		public StbUndoRecord undo_rec_6;
+		public StbUndoRecord undo_rec_7;
+		public StbUndoRecord undo_rec_8;
+		public StbUndoRecord undo_rec_9;
+		public StbUndoRecord undo_rec_10;
+		public StbUndoRecord undo_rec_11;
+		public StbUndoRecord undo_rec_12;
+		public StbUndoRecord undo_rec_13;
+		public StbUndoRecord undo_rec_14;
+		public StbUndoRecord undo_rec_15;
+		public StbUndoRecord undo_rec_16;
+		public StbUndoRecord undo_rec_17;
+		public StbUndoRecord undo_rec_18;
+		public StbUndoRecord undo_rec_19;
+		public StbUndoRecord undo_rec_20;
+		public StbUndoRecord undo_rec_21;
+		public StbUndoRecord undo_rec_22;
+		public StbUndoRecord undo_rec_23;
+		public StbUndoRecord undo_rec_24;
+		public StbUndoRecord undo_rec_25;
+		public StbUndoRecord undo_rec_26;
+		public StbUndoRecord undo_rec_27;
+		public StbUndoRecord undo_rec_28;
+		public StbUndoRecord undo_rec_29;
+		public StbUndoRecord undo_rec_30;
+		public StbUndoRecord undo_rec_31;
+		public StbUndoRecord undo_rec_32;
+		public StbUndoRecord undo_rec_33;
+		public StbUndoRecord undo_rec_34;
+		public StbUndoRecord undo_rec_35;
+		public StbUndoRecord undo_rec_36;
+		public StbUndoRecord undo_rec_37;
+		public StbUndoRecord undo_rec_38;
+		public StbUndoRecord undo_rec_39;
+		public StbUndoRecord undo_rec_40;
+		public StbUndoRecord undo_rec_41;
+		public StbUndoRecord undo_rec_42;
+		public StbUndoRecord undo_rec_43;
+		public StbUndoRecord undo_rec_44;
+		public StbUndoRecord undo_rec_45;
+		public StbUndoRecord undo_rec_46;
+		public StbUndoRecord undo_rec_47;
+		public StbUndoRecord undo_rec_48;
+		public StbUndoRecord undo_rec_49;
+		public StbUndoRecord undo_rec_50;
+		public StbUndoRecord undo_rec_51;
+		public StbUndoRecord undo_rec_52;
+		public StbUndoRecord undo_rec_53;
+		public StbUndoRecord undo_rec_54;
+		public StbUndoRecord undo_rec_55;
+		public StbUndoRecord undo_rec_56;
+		public StbUndoRecord undo_rec_57;
+		public StbUndoRecord undo_rec_58;
+		public StbUndoRecord undo_rec_59;
+		public StbUndoRecord undo_rec_60;
+		public StbUndoRecord undo_rec_61;
+		public StbUndoRecord undo_rec_62;
+		public StbUndoRecord undo_rec_63;
+		public StbUndoRecord undo_rec_64;
+		public StbUndoRecord undo_rec_65;
+		public StbUndoRecord undo_rec_66;
+		public StbUndoRecord undo_rec_67;
+		public StbUndoRecord undo_rec_68;
+		public StbUndoRecord undo_rec_69;
+		public StbUndoRecord undo_rec_70;
+		public StbUndoRecord undo_rec_71;
+		public StbUndoRecord undo_rec_72;
+		public StbUndoRecord undo_rec_73;
+		public StbUndoRecord undo_rec_74;
+		public StbUndoRecord undo_rec_75;
+		public StbUndoRecord undo_rec_76;
+		public StbUndoRecord undo_rec_77;
+		public StbUndoRecord undo_rec_78;
+		public StbUndoRecord undo_rec_79;
+		public StbUndoRecord undo_rec_80;
+		public StbUndoRecord undo_rec_81;
+		public StbUndoRecord undo_rec_82;
+		public StbUndoRecord undo_rec_83;
+		public StbUndoRecord undo_rec_84;
+		public StbUndoRecord undo_rec_85;
+		public StbUndoRecord undo_rec_86;
+		public StbUndoRecord undo_rec_87;
+		public StbUndoRecord undo_rec_88;
+		public StbUndoRecord undo_rec_89;
+		public StbUndoRecord undo_rec_90;
+		public StbUndoRecord undo_rec_91;
+		public StbUndoRecord undo_rec_92;
+		public StbUndoRecord undo_rec_93;
+		public StbUndoRecord undo_rec_94;
+		public StbUndoRecord undo_rec_95;
+		public StbUndoRecord undo_rec_96;
+		public StbUndoRecord undo_rec_97;
+		public StbUndoRecord undo_rec_98;
+		public fixed byte undo_char[999];
+		public short undo_point;
+		public short redo_point;
+		public int undo_char_point;
+		public int redo_char_point;
 	}
 
 }
