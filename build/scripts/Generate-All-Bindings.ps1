@@ -107,6 +107,25 @@ Write-Host "========================================" -ForegroundColor Cyan
 
 if ($failedGenerators.Count -eq 0) {
     Write-Host "All $totalGenerators generators completed successfully!" -ForegroundColor Green
+
+    # C# cannot safely call a C variadic function: on AArch64 variadic arguments use a
+    # different calling convention from named ones, so a fixed managed signature bound
+    # to a variadic native symbol is wrong at the ABI level even though it links and
+    # works on x64. cimgui emits a non-variadic companion for each of them, but those
+    # companions are absent from definitions.json, so the generators above cannot
+    # produce the mapping and would silently rebind ImGui.Text and friends.
+    #
+    # See cimgui/cimgui#323. When the definitions carry the companions this step
+    # becomes a no-op and can be deleted.
+    Write-Host ""
+    Write-Host "Binding variadic imports to their zero-argument entry points..." -ForegroundColor Cyan
+    $fixup = Join-Path $PSScriptRoot "Fix-VariadicEntryPoints.py"
+    python $fixup
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "ERROR: variadic entry point mapping failed" -ForegroundColor Red
+        exit 1
+    }
+
     exit 0
 }
 else {

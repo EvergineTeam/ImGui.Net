@@ -579,8 +579,6 @@ namespace Evergine.Bindings.Imgui
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImGuiTextBuffer_append(ImGuiTextBuffer* self, [MarshalAs(UnmanagedType.LPUTF8Str)] string str, [MarshalAs(UnmanagedType.LPUTF8Str)] string str_end);
 
-		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ImGuiTextBuffer_appendf0")]
-		public static extern void ImGuiTextBuffer_appendf(ImGuiTextBuffer* self,  char* fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.LPUTF8Str)]
