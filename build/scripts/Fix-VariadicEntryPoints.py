@@ -43,9 +43,23 @@ PROJECTS = [
 # functions that are already broken belong here: removing one that works is an API
 # break, and that is a decision for a human, not for this script.
 #
-# ImGuiTextBuffer_appendf currently names an entry point that does not exist, so every
-# call throws EntryPointNotFoundException. Removing it costs nothing.
-DROP = {"ImGuiTextBuffer_appendf"}
+# Empty, and that is the current answer rather than the permanent one.
+#
+# ImGuiTextBuffer_appendf was here because cimgui emitted no zero-argument companion for it:
+# the import named a symbol that did not exist, so every call threw
+# EntryPointNotFoundException and removing it cost nothing. Reported as cimgui/cimgui#323 and
+# fixed upstream in 22bc5447, so the companion now exists and the entry has to go -- it is
+# checked before the companion lookup below, so leaving it would drop the working symbol.
+#
+# It did more damage than that. Once the companion reached definitions.json the generator
+# began emitting ImGuiTextBuffer_appendf0 as a declaration of its own; this set matched its
+# base name and deleted it, while the struct wrapper that calls it stayed. main stopped
+# compiling with CS0117 on a symbol the generator had just produced correctly.
+#
+# Add to this set only for a function that is already broken -- one whose import names an
+# entry point that does not exist. Removing one that works is an API break, and that is a
+# decision for a human.
+DROP: set[str] = set()
 
 DLLIMPORT_LINE = re.compile(r'^(?P<indent>[ \t]*)\[DllImport\("(?P<lib>[^"]+)"(?P<args>[^)]*)\)\]')
 

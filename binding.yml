@@ -1,6 +1,6 @@
 # Binding manifest — see https://github.com/EvergineTeam/Evergine.Bindings
 # Schema: https://github.com/EvergineTeam/Evergine.Bindings/blob/main/binding.schema.json
-toolbox: 1.14.0
+toolbox: 1.22.0
 
 package:
   id: Evergine.Bindings.Imgui
