@@ -92,6 +92,9 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_Annotation_Str(double x, double y, Vector4 col, Vector2 pix_offset, [MarshalAs(UnmanagedType.I1)] bool clamp, [MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
+		public static extern void ImPlot_Annotation_Str0(double x, double y, Vector4 col, Vector2 pix_offset, [MarshalAs(UnmanagedType.I1)] bool clamp, [MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
+
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool ImPlot_BeginAlignedPlots([MarshalAs(UnmanagedType.LPUTF8Str)] string group_id, [MarshalAs(UnmanagedType.I1)] bool vertical);
 
@@ -1280,10 +1283,16 @@ namespace Evergine.Bindings.Implot
 		public static extern void ImPlot_TagX_Str(double x, Vector4 col, [MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
+		public static extern void ImPlot_TagX_Str0(double x, Vector4 col, [MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
+
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void ImPlot_TagY_Bool(double y, Vector4 col, [MarshalAs(UnmanagedType.I1)] bool round);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl, EntryPoint = "ImPlot_TagY_Str0")]
 		public static extern void ImPlot_TagY_Str(double y, Vector4 col, [MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
+
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
+		public static extern void ImPlot_TagY_Str0(double y, Vector4 col, [MarshalAs(UnmanagedType.LPUTF8Str)] string fmt);
 
 	}
 }

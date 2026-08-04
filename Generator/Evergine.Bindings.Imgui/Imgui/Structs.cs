@@ -1841,6 +1841,11 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImGuiTextBuffer_append(self, str, str_end);
 		}
 
+		public void appendf0([MarshalAs(UnmanagedType.LPUTF8Str)] string fmt)
+		{
+			ImguiNative.ImGuiTextBuffer_appendf0(self, fmt);
+		}
+
 		public string begin()
 		{
 			return ImguiNative.ImGuiTextBuffer_begin(self);
