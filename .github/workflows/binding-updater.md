@@ -66,7 +66,7 @@ safe-outputs:
     allowed-labels: [agent:needs-human, agent:upstream-break]
     deduplicate-by-title: true
     max: 1
-source: EvergineTeam/Evergine.Bindings@d70d06b5525a011b293f81d5de14fd329eb36832
+source: EvergineTeam/Evergine.Bindings@ff6a8091c7bc0923f326db5ccc33cbe517d318d7
 ---
 
 # Binding Updater
@@ -85,6 +85,8 @@ If you were triggered by a label that is not `agent:needs-regen`, call `noop` im
 `binding.yml` at the repository root is your only source of truth for where things live. It tells you the upstream sources and how to fetch them, which paths are generated output, where the generator project is, and what the package publishes.
 
 Do not infer paths from the directory layout. Do not hardcode a URL you saw in a workflow file. If `binding.yml` is missing or does not validate, stop and open an issue saying so — everything below depends on it.
+
+**If the manifest has no `generator` block, call `noop` and stop immediately.** Say nothing, open nothing. You regenerate a binding from a specification, and a repository with no generator has nothing for you to run — it is a hand-maintained C wrapper, and `cpp-wrapper-porter` looks after it. Agents install as a package, so you arrive everywhere the toolbox is consumed, and reporting on a repository you cannot act on produces one piece of noise per repository per month.
 
 Manifests carry a `NOTE` comment where the repository has a hazard: a pinned ref that must not move, native binaries that must be rebuilt alongside a header, an upstream we maintain ourselves. **Read those notes and obey them.** They exist because someone already thought about this repository and reached a conclusion you are not being asked to revisit.
 
