@@ -66,7 +66,7 @@ safe-outputs:
     allowed-labels: [agent:needs-human, agent:upstream-break]
     deduplicate-by-title: true
     max: 1
-source: EvergineTeam/Evergine.Bindings@ff6a8091c7bc0923f326db5ccc33cbe517d318d7
+source: EvergineTeam/Evergine.Bindings@0afb85d204706b58bb4b0aee8127be4a55ce460e
 ---
 
 # Binding Updater
@@ -101,6 +101,13 @@ Read that file. It is one screen long and it tells you which sources moved.
 If the report is missing, the step failed — say so and stop, rather than fetching by hand.
 
 **For `git-submodule` repositories the report only tells you the pointer is behind; nothing has been checked out.** That is deliberate. Bumping a submodule in KTX.NET means rebuilding native binaries, and in ImGui.Net it means moving four interdependent modules as a compatible set. Report the gap and stop unless the manifest explicitly says otherwise.
+
+**For `kind: vendored` the "nothing changed" rule above does not decide your answer, and what woke you does.** Nothing fetches these upstreams because nothing can: the sources are behind a sign-in and a licence acceptance, so they arrive by hand and are already in the tree before you start. The report will say so on every run.
+
+- **Woken on schedule or on demand**: `noop` and stop. You cannot chase a bump you cannot download, and a newer upstream is reported by a separate watcher that opens an issue for a human.
+- **Woken by `agent:needs-regen`**: this is your case. Somebody refreshed the sources, the regeneration that followed failed, and the CI doctor handed it to you. Everything you need is in the working tree. Read the failure, fix the **generator** so it produces correct output from the sources as they now stand, and open a pull request.
+
+Do not propose a URL, a script or an adapter that downloads the upstream. That download is gated on a person accepting a licence, and routing around it is not an improvement.
 
 ## Step 3 — regenerate and build
 
