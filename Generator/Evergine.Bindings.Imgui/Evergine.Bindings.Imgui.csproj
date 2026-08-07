@@ -8,6 +8,7 @@
 		<Description>Provides csharp bindings to ImGui library.</Description>
 		<RepositoryUrl>https://github.com/EvergineTeam/ImGui.Net</RepositoryUrl>
 		<PackageIcon>icon.png</PackageIcon>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<Platforms>AnyCPU;x86;x64</Platforms>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
