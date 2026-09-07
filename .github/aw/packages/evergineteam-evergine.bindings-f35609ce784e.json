@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "package": "EvergineTeam/Evergine.Bindings",
+  "source": "EvergineTeam/Evergine.Bindings@4c15efde1d1789d14befc9e2b5ca711a0aba1c4c",
+  "resolvedCommit": "4c15efde1d1789d14befc9e2b5ca711a0aba1c4c",
+  "installer": "gh-aw v0.88.2",
+  "files": [
+    {
+      "source": "workflows/binding-updater.md",
+      "destination": ".github/workflows/binding-updater.md",
+      "sha256": "1f6d3e13676fb64c784f416d88a41c84111dbf99eb68ac78f66cfbd30217d613"
+    },
+    {
+      "source": "workflows/ci-doctor.md",
+      "destination": ".github/workflows/ci-doctor.md",
+      "sha256": "0dc602160d1291f4c2f9ebb172ea90767f51932132bf01988f31198825d93471"
+    },
+    {
+      "source": "workflows/cpp-wrapper-porter.md",
+      "destination": ".github/workflows/cpp-wrapper-porter.md",
+      "sha256": "87a2a5a3473d5f76f46d06e4b087543461654be9b82a3ef6a7866d337143cbb8"
+    }
+  ]
+}
