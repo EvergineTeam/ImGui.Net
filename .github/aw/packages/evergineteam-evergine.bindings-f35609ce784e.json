@@ -3,7 +3,7 @@
   "package": "EvergineTeam/Evergine.Bindings",
   "source": "EvergineTeam/Evergine.Bindings@4c15efde1d1789d14befc9e2b5ca711a0aba1c4c",
   "resolvedCommit": "4c15efde1d1789d14befc9e2b5ca711a0aba1c4c",
-  "installer": "gh-aw v0.88.2",
+  "installer": "gh-aw v0.89.21",
   "files": [
     {
       "source": "workflows/binding-updater.md",
