@@ -107,6 +107,10 @@ namespace Evergine.Bindings.Imnodes
 		public static extern ImNodesStyle* imnodes_GetStyle();
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
+		[return:MarshalAs(UnmanagedType.LPUTF8Str)]
+		public static extern string imnodes_GetStyleColorName(ImNodesCol idx);
+
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool imnodes_IsAnyAttributeActive(int* attribute_id);
 

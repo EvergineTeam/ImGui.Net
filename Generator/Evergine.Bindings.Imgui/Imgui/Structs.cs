@@ -100,7 +100,7 @@ namespace Evergine.Bindings.Imgui
 		public ImVector CmdBuffer;
 		public ImVector IdxBuffer;
 		public ImVector VtxBuffer;
-		public ImDrawListFlags Flags;
+		public ImDrawFlags Flags;
 		public uint _VtxCurrentIdx;
 		public IntPtr _Data;
 		public ImDrawVert* _VtxWritePtr;
@@ -111,17 +111,20 @@ namespace Evergine.Bindings.Imgui
 		public ImVector _ClipRectStack;
 		public ImVector _TextureStack;
 		public ImVector _CallbacksDataBuf;
+		public ImSmallStack__ImDrawFlags__3 _DrawFlagsStack;
 		public float _FringeScale;
+		public float _InvFringeScale;
+		public byte _FringeScaleIsInteger;
 		public byte* _OwnerName;
 
-		public void AddBezierCubic(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, uint col, float thickness, int num_segments = 0)
+		public void AddBezierCubic(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, uint col, float thickness, int num_segments = 0, ImDrawFlags flags = 0)
 		{
-			ImguiNative.ImDrawList_AddBezierCubic(self, p1, p2, p3, p4, col, thickness, num_segments);
+			ImguiNative.ImDrawList_AddBezierCubic(self, p1, p2, p3, p4, col, thickness, num_segments, flags);
 		}
 
-		public void AddBezierQuadratic(Vector2 p1, Vector2 p2, Vector2 p3, uint col, float thickness, int num_segments = 0)
+		public void AddBezierQuadratic(Vector2 p1, Vector2 p2, Vector2 p3, uint col, float thickness, int num_segments = 0, ImDrawFlags flags = 0)
 		{
-			ImguiNative.ImDrawList_AddBezierQuadratic(self, p1, p2, p3, col, thickness, num_segments);
+			ImguiNative.ImDrawList_AddBezierQuadratic(self, p1, p2, p3, col, thickness, num_segments, flags);
 		}
 
 		public void AddCallback(IntPtr callback, void* userdata = null, uint userdata_size = 0)
@@ -129,9 +132,9 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddCallback(self, callback, userdata, userdata_size);
 		}
 
-		public void AddCircle(Vector2 center, float radius, uint col, int num_segments = 0, float thickness = 1.0f)
+		public void AddCircle(Vector2 center, float radius, uint col, int num_segments = 0, float thickness = 1.0f, ImDrawFlags flags = 0)
 		{
-			ImguiNative.ImDrawList_AddCircle(self, center, radius, col, num_segments, thickness);
+			ImguiNative.ImDrawList_AddCircle(self, center, radius, col, num_segments, thickness, flags);
 		}
 
 		public void AddCircleFilled(Vector2 center, float radius, uint col, int num_segments = 0)
@@ -144,9 +147,9 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddConcavePolyFilled(self, points, num_points, col);
 		}
 
-		public void AddConvexPolyFilled(Vector2* points, int num_points, uint col)
+		public void AddConvexPolyFilled(Vector2* points, int num_points, uint col, ImDrawFlags flags = 0)
 		{
-			ImguiNative.ImDrawList_AddConvexPolyFilled(self, points, num_points, col);
+			ImguiNative.ImDrawList_AddConvexPolyFilled(self, points, num_points, col, flags);
 		}
 
 		public void AddDrawCmd()
@@ -154,9 +157,9 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddDrawCmd(self);
 		}
 
-		public void AddEllipse(Vector2 center, Vector2 radius, uint col, float rot = 0.0f, int num_segments = 0, float thickness = 1.0f)
+		public void AddEllipse(Vector2 center, Vector2 radius, uint col, float rot = 0.0f, int num_segments = 0, float thickness = 1.0f, ImDrawFlags flags = 0)
 		{
-			ImguiNative.ImDrawList_AddEllipse(self, center, radius, col, rot, num_segments, thickness);
+			ImguiNative.ImDrawList_AddEllipse(self, center, radius, col, rot, num_segments, thickness, flags);
 		}
 
 		public void AddEllipseFilled(Vector2 center, Vector2 radius, uint col, float rot = 0.0f, int num_segments = 0)
@@ -179,24 +182,24 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddImageRounded(self, tex_ref, p_min, p_max, uv_min, uv_max, col, rounding, flags);
 		}
 
-		public void AddLine(Vector2 p1, Vector2 p2, uint col, float thickness = 1.0f)
+		public void AddLine(Vector2 p1, Vector2 p2, uint col, float thickness = 1.0f, ImDrawFlags flags = 0)
 		{
-			ImguiNative.ImDrawList_AddLine(self, p1, p2, col, thickness);
+			ImguiNative.ImDrawList_AddLine(self, p1, p2, col, thickness, flags);
 		}
 
-		public void AddLineH(float min_x, float max_x, float y, uint col, float thickness = 1.0f)
+		public void AddLineH(float min_x, float max_x, float y, uint col, float thickness = 1.0f, ImDrawFlags flags = 0)
 		{
-			ImguiNative.ImDrawList_AddLineH(self, min_x, max_x, y, col, thickness);
+			ImguiNative.ImDrawList_AddLineH(self, min_x, max_x, y, col, thickness, flags);
 		}
 
-		public void AddLineV(float x, float min_y, float max_y, uint col, float thickness = 1.0f)
+		public void AddLineV(float x, float min_y, float max_y, uint col, float thickness = 1.0f, ImDrawFlags flags = 0)
 		{
-			ImguiNative.ImDrawList_AddLineV(self, x, min_y, max_y, col, thickness);
+			ImguiNative.ImDrawList_AddLineV(self, x, min_y, max_y, col, thickness, flags);
 		}
 
-		public void AddNgon(Vector2 center, float radius, uint col, int num_segments, float thickness = 1.0f)
+		public void AddNgon(Vector2 center, float radius, uint col, int num_segments, float thickness = 1.0f, ImDrawFlags flags = 0)
 		{
-			ImguiNative.ImDrawList_AddNgon(self, center, radius, col, num_segments, thickness);
+			ImguiNative.ImDrawList_AddNgon(self, center, radius, col, num_segments, thickness, flags);
 		}
 
 		public void AddNgonFilled(Vector2 center, float radius, uint col, int num_segments)
@@ -209,9 +212,9 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddPolyline(self, points, num_points, col, thickness, flags);
 		}
 
-		public void AddQuad(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, uint col, float thickness = 1.0f)
+		public void AddQuad(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, uint col, float thickness = 1.0f, ImDrawFlags flags = 0)
 		{
-			ImguiNative.ImDrawList_AddQuad(self, p1, p2, p3, p4, col, thickness);
+			ImguiNative.ImDrawList_AddQuad(self, p1, p2, p3, p4, col, thickness, flags);
 		}
 
 		public void AddQuadFilled(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, uint col)
@@ -244,9 +247,9 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_AddText_FontPtr(self, font, font_size, pos, col, text_begin, text_end, wrap_width, cpu_fine_clip_rect);
 		}
 
-		public void AddTriangle(Vector2 p1, Vector2 p2, Vector2 p3, uint col, float thickness = 1.0f)
+		public void AddTriangle(Vector2 p1, Vector2 p2, Vector2 p3, uint col, float thickness = 1.0f, ImDrawFlags flags = 0)
 		{
-			ImguiNative.ImDrawList_AddTriangle(self, p1, p2, p3, col, thickness);
+			ImguiNative.ImDrawList_AddTriangle(self, p1, p2, p3, col, thickness, flags);
 		}
 
 		public void AddTriangleFilled(Vector2 p1, Vector2 p2, Vector2 p3, uint col)
@@ -319,9 +322,9 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_PathFillConcave(self, col);
 		}
 
-		public void PathFillConvex(uint col)
+		public void PathFillConvex(uint col, ImDrawFlags flags = 0)
 		{
-			ImguiNative.ImDrawList_PathFillConvex(self, col);
+			ImguiNative.ImDrawList_PathFillConvex(self, col, flags);
 		}
 
 		public void PathLineTo(Vector2 pos)
@@ -347,6 +350,11 @@ namespace Evergine.Bindings.Imgui
 		public void PopClipRect()
 		{
 			ImguiNative.ImDrawList_PopClipRect(self);
+		}
+
+		public void PopDrawFlag()
+		{
+			ImguiNative.ImDrawList_PopDrawFlag(self);
 		}
 
 		public void PopTexture()
@@ -404,14 +412,49 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList_PushClipRectFullScreen(self);
 		}
 
+		public void PushDrawFlag(ImDrawFlags flags, [MarshalAs(UnmanagedType.I1)] bool enabled)
+		{
+			ImguiNative.ImDrawList_PushDrawFlag(self, flags, enabled);
+		}
+
 		public void PushTexture(ImTextureRef tex_ref)
 		{
 			ImguiNative.ImDrawList_PushTexture(self, tex_ref);
 		}
 
+		public void _AddLine(Vector2 p1, Vector2 p2, uint col, float thickness, ImDrawFlags flags)
+		{
+			ImguiNative.ImDrawList__AddLine(self, p1, p2, col, thickness, flags);
+		}
+
+		public void _AddPolyline(Vector2* points, int num_points, uint col, float thickness, ImDrawFlags flags, float max_inner_offset)
+		{
+			ImguiNative.ImDrawList__AddPolyline(self, points, num_points, col, thickness, flags, max_inner_offset);
+		}
+
+		public void _AddRectBaked(Vector2 p_min, Vector2 p_max, uint col, float r, float t, Vector4 tex_uvs, ImDrawFlags flags)
+		{
+			ImguiNative.ImDrawList__AddRectBaked(self, p_min, p_max, col, r, t, tex_uvs, flags);
+		}
+
+		public void _AddRectFilledBaked(Vector2 p_min, Vector2 p_max, uint col, float r, Vector4 tex_uvs, ImDrawFlags flags)
+		{
+			ImguiNative.ImDrawList__AddRectFilledBaked(self, p_min, p_max, col, r, tex_uvs, flags);
+		}
+
+		public void _AddRectTinyRounding(Vector2 p_min, Vector2 p_max, uint col, float rounding, float thickness, ImDrawFlags flags)
+		{
+			ImguiNative.ImDrawList__AddRectTinyRounding(self, p_min, p_max, col, rounding, thickness, flags);
+		}
+
 		public int _CalcCircleAutoSegmentCount(float radius)
 		{
 			return ImguiNative.ImDrawList__CalcCircleAutoSegmentCount(self, radius);
+		}
+
+		public float _CalculateCenterBiasedOffset(float thickness)
+		{
+			return ImguiNative.ImDrawList__CalculateCenterBiasedOffset(self, thickness);
 		}
 
 		public void _ClearFreeMemory()
@@ -454,9 +497,19 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImDrawList__ResetForNewFrame(self);
 		}
 
+		public void _SelectLineTexture(float screen_thickness, Vector2* out_uv0, Vector2* out_uv1, float* out_fringe, ImDrawFlags flags)
+		{
+			ImguiNative.ImDrawList__SelectLineTexture(self, screen_thickness, out_uv0, out_uv1, out_fringe, flags);
+		}
+
 		public void _SetDrawListSharedData(IntPtr data)
 		{
 			ImguiNative.ImDrawList__SetDrawListSharedData(self, data);
+		}
+
+		public void _SetPixelDensity(float pixel_density)
+		{
+			ImguiNative.ImDrawList__SetPixelDensity(self, pixel_density);
 		}
 
 		public void _SetTexture(ImTextureRef tex_ref)
@@ -530,9 +583,14 @@ namespace Evergine.Bindings.Imgui
 		public byte EllipsisAutoBake;
 		public ImGuiStorage RemapPairs;
 
-		public void AddRemapChar(ushort from_codepoint, ushort to_codepoint)
+		public void AddRemapCodepoint(ushort from_codepoint, ushort to_codepoint)
 		{
-			ImguiNative.ImFont_AddRemapChar(self, from_codepoint, to_codepoint);
+			ImguiNative.ImFont_AddRemapCodepoint(self, from_codepoint, to_codepoint);
+		}
+
+		public void AddRemapCodepointToGlyphIndex(ushort from_codepoint, int font_src_idx, int glyph_idx)
+		{
+			ImguiNative.ImFont_AddRemapCodepointToGlyphIndex(self, from_codepoint, font_src_idx, glyph_idx);
 		}
 
 		public Vector2 CalcTextSizeA(float size, float max_width, float wrap_width, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_begin, [MarshalAs(UnmanagedType.LPUTF8Str)] string text_end = null, char** out_remaining = null)
@@ -610,39 +668,6 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 TexUvWhitePixel;
 		public ImVector Fonts;
 		public ImVector Sources;
-		public Vector4 TexUvLines_0;
-		public Vector4 TexUvLines_1;
-		public Vector4 TexUvLines_2;
-		public Vector4 TexUvLines_3;
-		public Vector4 TexUvLines_4;
-		public Vector4 TexUvLines_5;
-		public Vector4 TexUvLines_6;
-		public Vector4 TexUvLines_7;
-		public Vector4 TexUvLines_8;
-		public Vector4 TexUvLines_9;
-		public Vector4 TexUvLines_10;
-		public Vector4 TexUvLines_11;
-		public Vector4 TexUvLines_12;
-		public Vector4 TexUvLines_13;
-		public Vector4 TexUvLines_14;
-		public Vector4 TexUvLines_15;
-		public Vector4 TexUvLines_16;
-		public Vector4 TexUvLines_17;
-		public Vector4 TexUvLines_18;
-		public Vector4 TexUvLines_19;
-		public Vector4 TexUvLines_20;
-		public Vector4 TexUvLines_21;
-		public Vector4 TexUvLines_22;
-		public Vector4 TexUvLines_23;
-		public Vector4 TexUvLines_24;
-		public Vector4 TexUvLines_25;
-		public Vector4 TexUvLines_26;
-		public Vector4 TexUvLines_27;
-		public Vector4 TexUvLines_28;
-		public Vector4 TexUvLines_29;
-		public Vector4 TexUvLines_30;
-		public Vector4 TexUvLines_31;
-		public Vector4 TexUvLines_32;
 		public int TexNextUniqueID;
 		public int FontNextUniqueID;
 		public ImVector DrawListSharedDatas;
@@ -923,18 +948,6 @@ namespace Evergine.Bindings.Imgui
 		public byte ConfigNavEscapeClearFocusWindow;
 		public byte ConfigNavCursorVisibleAuto;
 		public byte ConfigNavCursorVisibleAlways;
-		public byte ConfigDockingNoSplit;
-		public byte ConfigDockingNoDockingOver;
-		public byte ConfigDockingWithShift;
-		public byte ConfigDockingAlwaysTabBar;
-		public byte ConfigDockingTransparentPayload;
-		public byte ConfigViewportsNoAutoMerge;
-		public byte ConfigViewportsNoTaskBarIcon;
-		public byte ConfigViewportsNoDecoration;
-		public byte ConfigViewportsNoDefaultParent;
-		public byte ConfigViewportsPlatformFocusSetsImGuiFocus;
-		public byte ConfigDpiScaleFonts;
-		public byte ConfigDpiScaleViewports;
 		public byte ConfigMacOSXBehaviors;
 		public byte ConfigInputTrickleEventQueue;
 		public byte ConfigInputTextCursorBlink;
@@ -966,6 +979,7 @@ namespace Evergine.Bindings.Imgui
 		public byte ConfigDebugBeginReturnValueOnce;
 		public byte ConfigDebugBeginReturnValueLoop;
 		public byte ConfigDebugIgnoreFocusLoss;
+		public byte ConfigDebugDrawListDefaultsToStrokeLegacy;
 		public byte* BackendPlatformName;
 		public byte* BackendRendererName;
 		public void* BackendPlatformUserData;
@@ -990,7 +1004,6 @@ namespace Evergine.Bindings.Imgui
 		public float MouseWheel;
 		public float MouseWheelH;
 		public ImGuiMouseSource MouseSource;
-		public uint MouseHoveredViewport;
 		public byte KeyCtrl;
 		public byte KeyShift;
 		public byte KeyAlt;
@@ -1171,11 +1184,6 @@ namespace Evergine.Bindings.Imgui
 		public byte MouseCtrlLeftAsRightClick;
 		public fixed float MouseDownDuration[5];
 		public fixed float MouseDownDurationPrev[5];
-		public Vector2 MouseDragMaxDistanceAbs_0;
-		public Vector2 MouseDragMaxDistanceAbs_1;
-		public Vector2 MouseDragMaxDistanceAbs_2;
-		public Vector2 MouseDragMaxDistanceAbs_3;
-		public Vector2 MouseDragMaxDistanceAbs_4;
 		public fixed float MouseDragMaxDistanceSqr[5];
 		public float PenPressure;
 		public byte AppFocusLost;
@@ -1226,11 +1234,6 @@ namespace Evergine.Bindings.Imgui
 		public void AddMouseSourceEvent(ImGuiMouseSource source)
 		{
 			ImguiNative.ImGuiIO_AddMouseSourceEvent(self, source);
-		}
-
-		public void AddMouseViewportEvent(uint id)
-		{
-			ImguiNative.ImGuiIO_AddMouseViewportEvent(self, id);
 		}
 
 		public void AddMouseWheelEvent(float wheel_x, float wheel_y)
@@ -1441,34 +1444,8 @@ namespace Evergine.Bindings.Imgui
 		public IntPtr DrawCallback_ResetRenderState;
 		public IntPtr DrawCallback_SetSamplerLinear;
 		public IntPtr DrawCallback_SetSamplerNearest;
-		public IntPtr Platform_CreateWindow;
-		public IntPtr Platform_DestroyWindow;
-		public IntPtr Platform_ShowWindow;
-		public IntPtr Platform_SetWindowPos;
-		public IntPtr Platform_GetWindowPos;
-		public IntPtr Platform_SetWindowSize;
-		public IntPtr Platform_GetWindowSize;
-		public IntPtr Platform_GetWindowFramebufferScale;
-		public IntPtr Platform_SetWindowFocus;
-		public IntPtr Platform_GetWindowFocus;
-		public IntPtr Platform_GetWindowMinimized;
-		public IntPtr Platform_SetWindowTitle;
-		public IntPtr Platform_SetWindowAlpha;
-		public IntPtr Platform_UpdateWindow;
-		public IntPtr Platform_RenderWindow;
-		public IntPtr Platform_SwapBuffers;
-		public IntPtr Platform_GetWindowDpiScale;
-		public IntPtr Platform_OnChangedViewport;
-		public IntPtr Platform_GetWindowWorkAreaInsets;
-		public IntPtr Platform_CreateVkSurface;
-		public IntPtr Renderer_CreateWindow;
-		public IntPtr Renderer_DestroyWindow;
-		public IntPtr Renderer_SetWindowSize;
-		public IntPtr Renderer_RenderWindow;
-		public IntPtr Renderer_SwapBuffers;
-		public ImVector Monitors;
+		public IntPtr DrawCallback_SetSamplerFromTex;
 		public ImVector Textures;
-		public ImVector Viewports;
 
 		public void ClearPlatformHandlers()
 		{
@@ -1491,16 +1468,6 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 InputPos;
 		public float InputLineHeight;
 		public uint ViewportId;
-	}
-
-	public unsafe partial struct ImGuiPlatformMonitor
-	{
-		public Vector2 MainPos;
-		public Vector2 MainSize;
-		public Vector2 WorkPos;
-		public Vector2 WorkSize;
-		public float DpiScale;
-		public void* PlatformHandle;
 	}
 
 	public unsafe partial struct ImGuiSelectionBasicStorage
@@ -1729,13 +1696,11 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 SeparatorTextPadding;
 		public Vector2 DisplayWindowPadding;
 		public Vector2 DisplaySafeAreaPadding;
-		public byte DockingNodeHasCloseButton;
-		public float DockingSeparatorSize;
 		public float MouseCursorScale;
 		public byte AntiAliasedLines;
-		public byte AntiAliasedLinesUseTex;
+		public byte AntiAliasedLineEnds;
 		public byte AntiAliasedFill;
-		public float CurveTessellationTol;
+		public float CurveTessellationMaxError;
 		public float CircleTessellationMaxError;
 		public Vector4 Colors_0;
 		public Vector4 Colors_1;
@@ -1798,8 +1763,6 @@ namespace Evergine.Bindings.Imgui
 		public Vector4 Colors_58;
 		public Vector4 Colors_59;
 		public Vector4 Colors_60;
-		public Vector4 Colors_61;
-		public Vector4 Colors_62;
 		public float HoverStationaryDelay;
 		public float HoverDelayShort;
 		public float HoverDelayNormal;
@@ -1898,8 +1861,8 @@ namespace Evergine.Bindings.Imgui
 	public unsafe partial struct ImGuiTextFilter
 	{
 		public fixed byte InputBuf[256];
-		public ImVector Filters;
-		public int CountGrep;
+		public int _CountExclude;
+		public ImVector_ImGuiTextFilterItem _Items;
 
 		public void Build()
 		{
@@ -1911,9 +1874,14 @@ namespace Evergine.Bindings.Imgui
 			ImguiNative.ImGuiTextFilter_Clear(self);
 		}
 
-		public bool Draw([MarshalAs(UnmanagedType.LPUTF8Str)] string label = "Filter(inc,-exc)", float width = 0.0f)
+		public bool Draw([MarshalAs(UnmanagedType.LPUTF8Str)] string label = "Filter")
 		{
-			return ImguiNative.ImGuiTextFilter_Draw(self, label, width);
+			return ImguiNative.ImGuiTextFilter_Draw(self, label);
+		}
+
+		public bool DrawWithHint([MarshalAs(UnmanagedType.LPUTF8Str)] string label = "Filter", [MarshalAs(UnmanagedType.LPUTF8Str)] string hint = "incl -excl")
+		{
+			return ImguiNative.ImGuiTextFilter_DrawWithHint(self, label, hint);
 		}
 
 		public bool IsActive()
@@ -1930,25 +1898,6 @@ namespace Evergine.Bindings.Imgui
 
 	}
 
-	public unsafe partial struct ImGuiTextRange
-	{
-		public byte* b;
-		public byte* e;
-
-		public bool empty()
-		{
-			return ImguiNative.ImGuiTextRange_empty(self);
-		}
-
-		public void split(byte separator, ImVector* @out)
-		{
-			ImguiNative.ImGuiTextRange_split(self, separator, @out);
-		}
-
-		public ImGuiTextRange* self => (ImGuiTextRange*)Unsafe.AsPointer(ref this);
-
-	}
-
 	public unsafe partial struct ImGuiViewport
 	{
 		public uint ID;
@@ -1958,28 +1907,12 @@ namespace Evergine.Bindings.Imgui
 		public Vector2 FramebufferScale;
 		public Vector2 WorkPos;
 		public Vector2 WorkSize;
-		public float DpiScale;
-		public uint ParentViewportId;
-		public ImGuiViewport* ParentViewport;
-		public ImDrawData* DrawData;
-		public void* RendererUserData;
-		public void* PlatformUserData;
-		public void* PlatformIconData;
 		public void* PlatformHandle;
 		public void* PlatformHandleRaw;
-		public byte PlatformWindowCreated;
-		public byte PlatformRequestMove;
-		public byte PlatformRequestResize;
-		public byte PlatformRequestClose;
 
 		public Vector2 GetCenter()
 		{
 			return ImguiNative.ImGuiViewport_GetCenter(self);
-		}
-
-		public string GetDebugName()
-		{
-			return ImguiNative.ImGuiViewport_GetDebugName(self);
 		}
 
 		public Vector2 GetWorkCenter()
@@ -1989,20 +1922,6 @@ namespace Evergine.Bindings.Imgui
 
 		public ImGuiViewport* self => (ImGuiViewport*)Unsafe.AsPointer(ref this);
 
-	}
-
-	public unsafe partial struct ImGuiWindowClass
-	{
-		public uint ClassId;
-		public uint ParentViewportId;
-		public uint FocusRouteParentWindowId;
-		public ImGuiViewportFlags ViewportFlagsOverrideSet;
-		public ImGuiViewportFlags ViewportFlagsOverrideClear;
-		public ImGuiTabItemFlags TabItemFlagsOverrideSet;
-		public ImGuiDockNodeFlags DockNodeFlagsOverrideSet;
-		public byte DockingAlwaysTabBar;
-		public byte DockingAllowUnclassed;
-		public void* PlatformIconData;
 	}
 
 	public unsafe partial struct ImTextureData

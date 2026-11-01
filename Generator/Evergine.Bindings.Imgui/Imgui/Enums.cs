@@ -8,31 +8,36 @@ namespace Evergine.Bindings.Imgui
 	public enum ImDrawFlags
 	{
 		None = 0,
-		RoundCornersTopLeft = 16,
-		RoundCornersTopRight = 32,
-		RoundCornersBottomLeft = 64,
-		RoundCornersBottomRight = 128,
-		RoundCornersNone = 256,
-		RoundCornersAll = 240,
-		RoundCornersDefault_ = 240,
-		RoundCornersTop = 48,
-		RoundCornersBottom = 192,
-		RoundCornersLeft = 80,
-		RoundCornersRight = 160,
-		RoundCornersMask_ = 496,
+		RoundTopLeft = 16,
+		RoundTopRight = 32,
+		RoundBottomLeft = 64,
+		RoundBottomRight = 128,
+		RoundNone = 256,
+		RoundAll = 240,
+		RoundTop = 48,
+		RoundBottom = 192,
+		RoundLeft = 80,
+		RoundRight = 160,
 		Closed = 512,
+		JoinMiter = 1024,
+		CapSquare = 2048,
+		AAFill = 4096,
+		AALines = 8192,
+		AALineEnds = 16384,
+		StrokeInside = 131072,
+		StrokeCenter = 262144,
+		StrokeCenterBiased = 393216,
+		StrokeOutside = 524288,
+		StrokeLegacy = 917504,
+		TextNoPixelSnap = 1048576,
+		UseTexForRoundCorners = 2097152,
+		UseVtxOffset = 4194304,
+		AllowTexForRoundCorners_ = 8388608,
+		RoundMask_ = 496,
+		AllowInPushScope_ = 8286704,
+		AllowInFrameScope_ = 16675312,
+		StrokeMask_ = 917504,
 		InvalidMask_ = -2147483633,
-	}
-
-	[Flags]
-	public enum ImDrawListFlags
-	{
-		None = 0,
-		AntiAliasedLines = 1,
-		AntiAliasedLinesUseTex = 2,
-		AntiAliasedFill = 4,
-		AllowVtxOffset = 8,
-		TextNoPixelSnap = 16,
 	}
 
 	[Flags]
@@ -51,6 +56,7 @@ namespace Evergine.Bindings.Imgui
 		NoPowerOfTwoHeight = 1,
 		NoMouseCursors = 2,
 		NoBakedLines = 4,
+		NoBakedRoundCorners = 8,
 	}
 
 	[Flags]
@@ -72,10 +78,6 @@ namespace Evergine.Bindings.Imgui
 		HasSetMousePos = 4,
 		RendererHasVtxOffset = 8,
 		RendererHasTextures = 16,
-		RendererHasViewports = 1024,
-		PlatformHasViewports = 2048,
-		HasMouseHoveredViewport = 4096,
-		HasParentViewport = 8192,
 	}
 
 	[Flags]
@@ -149,28 +151,26 @@ namespace Evergine.Bindings.Imgui
 		TabDimmed = 39,
 		TabDimmedSelected = 40,
 		TabDimmedSelectedOverline = 41,
-		DockingPreview = 42,
-		DockingEmptyBg = 43,
-		PlotLines = 44,
-		PlotLinesHovered = 45,
-		PlotHistogram = 46,
-		PlotHistogramHovered = 47,
-		TableHeaderBg = 48,
-		TableBorderStrong = 49,
-		TableBorderLight = 50,
-		TableRowBg = 51,
-		TableRowBgAlt = 52,
-		TextLink = 53,
-		TextSelectedBg = 54,
-		TreeLines = 55,
-		DragDropTarget = 56,
-		DragDropTargetBg = 57,
-		UnsavedMarker = 58,
-		NavCursor = 59,
-		NavWindowingHighlight = 60,
-		NavWindowingDimBg = 61,
-		ModalWindowDimBg = 62,
-		COUNT = 63,
+		PlotLines = 42,
+		PlotLinesHovered = 43,
+		PlotHistogram = 44,
+		PlotHistogramHovered = 45,
+		TableHeaderBg = 46,
+		TableBorderStrong = 47,
+		TableBorderLight = 48,
+		TableRowBg = 49,
+		TableRowBgAlt = 50,
+		TextLink = 51,
+		TextSelectedBg = 52,
+		TreeLines = 53,
+		DragDropTarget = 54,
+		DragDropTargetBg = 55,
+		UnsavedMarker = 56,
+		NavCursor = 57,
+		NavWindowingHighlight = 58,
+		NavWindowingDimBg = 59,
+		ModalWindowDimBg = 60,
+		COUNT = 61,
 	}
 
 	[Flags]
@@ -244,8 +244,6 @@ namespace Evergine.Bindings.Imgui
 		NoMouse = 16,
 		NoMouseCursorChange = 32,
 		NoKeyboard = 64,
-		DockingEnable = 128,
-		ViewportsEnable = 1024,
 		IsSRGB = 1048576,
 		IsTouchScreen = 2097152,
 	}
@@ -278,19 +276,6 @@ namespace Evergine.Bindings.Imgui
 	}
 
 	[Flags]
-	public enum ImGuiDockNodeFlags
-	{
-		None = 0,
-		KeepAliveOnly = 1,
-		NoDockingOverCentralNode = 4,
-		PassthruCentralNode = 8,
-		NoDockingSplit = 16,
-		NoResize = 32,
-		AutoHideTabBar = 64,
-		NoUndocking = 128,
-	}
-
-	[Flags]
 	public enum ImGuiDragDropFlags
 	{
 		None = 0,
@@ -317,7 +302,6 @@ namespace Evergine.Bindings.Imgui
 		RootWindow = 2,
 		AnyWindow = 4,
 		NoPopupHierarchy = 8,
-		DockHierarchy = 16,
 		RootAndChildWindows = 3,
 	}
 
@@ -345,7 +329,6 @@ namespace Evergine.Bindings.Imgui
 		RootWindow = 2,
 		AnyWindow = 4,
 		NoPopupHierarchy = 8,
-		DockHierarchy = 16,
 		AllowWhenBlockedByPopup = 32,
 		AllowWhenBlockedByActiveItem = 128,
 		AllowWhenOverlappedByItem = 256,
@@ -424,6 +407,7 @@ namespace Evergine.Bindings.Imgui
 		LiveEditOnInputText = 128,
 		LiveEditOnInputScalar = 256,
 		LiveEditOnInput = 384,
+		MixedValue = 512,
 	}
 
 	public enum ImGuiKey
@@ -768,8 +752,7 @@ namespace Evergine.Bindings.Imgui
 		SeparatorTextBorderSize = 41,
 		SeparatorTextAlign = 42,
 		SeparatorTextPadding = 43,
-		DockingSeparatorSize = 44,
-		COUNT = 45,
+		COUNT = 44,
 	}
 
 	[Flags]
@@ -929,17 +912,6 @@ namespace Evergine.Bindings.Imgui
 		IsPlatformWindow = 1,
 		IsPlatformMonitor = 2,
 		OwnedByApp = 4,
-		NoDecoration = 8,
-		NoTaskBarIcon = 16,
-		NoFocusOnAppearing = 32,
-		NoFocusOnClick = 64,
-		NoInputs = 128,
-		NoRendererClear = 256,
-		NoAutoMerge = 512,
-		TopMost = 1024,
-		CanHostOtherWindows = 2048,
-		IsMinimized = 4096,
-		IsFocused = 8192,
 	}
 
 	[Flags]
@@ -965,11 +937,9 @@ namespace Evergine.Bindings.Imgui
 		NoNavInputs = 65536,
 		NoNavFocus = 131072,
 		UnsavedDocument = 262144,
-		NoDocking = 524288,
 		NoNav = 196608,
 		NoDecoration = 43,
 		NoInputs = 197120,
-		DockNodeHost = 8388608,
 		ChildWindow = 16777216,
 		Tooltip = 33554432,
 		Popup = 67108864,

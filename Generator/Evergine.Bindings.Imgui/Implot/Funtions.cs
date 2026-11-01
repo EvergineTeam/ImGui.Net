@@ -257,6 +257,14 @@ namespace Evergine.Bindings.Implot
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
 		[return:MarshalAs(UnmanagedType.I1)]
+		public static extern bool ImPlot_IsItemHidden([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id);
+
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
+		[return:MarshalAs(UnmanagedType.I1)]
+		public static extern bool ImPlot_IsLastItemHidden();
+
+		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]
+		[return:MarshalAs(UnmanagedType.I1)]
 		public static extern bool ImPlot_IsLegendEntryHovered([MarshalAs(UnmanagedType.LPUTF8Str)] string label_id);
 
 		[DllImport("cimgui", CallingConvention = CallingConvention.Cdecl)]

@@ -35,6 +35,7 @@ namespace Evergine.Bindings.Implot
 		PanStretch = 8192,
 		LockMin = 16384,
 		LockMax = 32768,
+		TickLabelsInside = 65536,
 		Lock = 49152,
 		NoDecorations = 15,
 		AuxDefault = 258,
@@ -141,6 +142,8 @@ namespace Evergine.Bindings.Implot
 		NoFit = 2,
 		NoInputs = 4,
 		Delayed = 8,
+		NoMove = 16,
+		NoResize = 32,
 	}
 
 	[Flags]
@@ -263,7 +266,9 @@ namespace Evergine.Bindings.Implot
 		Cross = 7,
 		Plus = 8,
 		Asterisk = 9,
-		COUNT = 10,
+		Vertical = 10,
+		Horizontal = 11,
+		COUNT = 12,
 	}
 
 	[Flags]
