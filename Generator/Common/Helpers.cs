@@ -140,7 +140,7 @@ namespace Common
                 case "ImVector_ImFontConfig":
                 case "ImVector_ImWchar":
                 case "ImVector_ImGuiStoragePair":
-                case "ImVector_ImGuiTextRange":
+                case "ImVector_ImGuiTextFilterItem":
                 case "ImVector_char":
                 case "ImVector_float":
                 case "ImVector_ImFontGlyph":
@@ -158,7 +158,7 @@ namespace Common
                 case "ImVector_ImTextureRect":
                     return "ImVector";
                 case "ImVector_ImWchar*":
-                case "ImVector_ImGuiTextRange*":
+                case "ImVector_ImGuiTextFilterItem*":
                 case "ImVector_ImTextureDataPtr*":
                     return "ImVector*";
                 case "ImGuiContext*":

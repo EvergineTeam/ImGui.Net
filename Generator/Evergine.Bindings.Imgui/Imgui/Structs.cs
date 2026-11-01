@@ -1862,7 +1862,7 @@ namespace Evergine.Bindings.Imgui
 	{
 		public fixed byte InputBuf[256];
 		public int _CountExclude;
-		public ImVector_ImGuiTextFilterItem _Items;
+		public ImVector _Items;
 
 		public void Build()
 		{
