@@ -104,7 +104,9 @@ jobs:
   # and it has to belong to this repository, so the push cannot happen inside the reusable workflow.
   publish:
     needs: cd
-    if: needs.cd.outputs.publish == 'true'
+    # cd runs even when natives is skipped; without a status function here the skipped
+    # natives job would skip this one too.
+    if: ${{ !cancelled() && needs.cd.result == 'success' && needs.cd.outputs.publish == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       id-token: write
